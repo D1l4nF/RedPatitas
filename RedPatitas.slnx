@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="CapaDatos/CapaDatos.csproj" />
+  <Project Path="CapaNegocio/CapaNegocio.csproj" />
+  <Project Path="RedPatitas/RedPatitas.csproj" />
+</Solution>
