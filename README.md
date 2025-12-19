@@ -135,7 +135,7 @@ El sistema utiliza una **matriz de evaluación ponderada** con cursores para cal
 
 1. **Clonar el repositorio**
    ```bash
-   git clone https://github.com/usuario/RedPatitas.git
+   git clone https://github.com/D1l4nF/RedPatitas.git
    ```
 
 2. **Crear la base de datos**
