@@ -59,11 +59,26 @@ CREATE TABLE tbl_Usuarios (
     usu_IntentosFallidos INT DEFAULT 0,  -- Contador de intentos fallidos
     usu_Bloqueado BIT DEFAULT 0,  -- Cuenta bloqueada
     usu_FechaBloqueo DATETIME,  -- Cuándo se bloqueó
-    usu_FechaDesbloqueo DATETIME,  -- Cuándo se desbloqueará automáticamente (opcional)
-    -- Estado general
     usu_Estado BIT DEFAULT 1,  -- Activo/Inactivo
     usu_FechaRegistro DATETIME DEFAULT GETDATE(),
     usu_UltimoAcceso DATETIME
+);
+INSERT INTO tbl_Usuarios (
+    usu_IdRol, 
+    usu_Nombre, 
+    usu_Apellido, 
+    usu_Email, 
+    usu_Contrasena, 
+    usu_Estado, 
+    usu_EmailVerificado
+) VALUES (
+    4,                      -- Rol Adoptante
+    'Juan',
+    'Pérez',
+    'juan@test.com',
+    '123456',               -- Contraseña en texto plano (solo para pruebas)
+    1,                      -- Activo
+    1                       -- Verificado
 );
 
 -- Tokens para recuperación de contraseña
