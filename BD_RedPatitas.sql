@@ -609,17 +609,14 @@ BEGIN
     DECLARE @IdUsuario INT;
     DECLARE @ContrasenaDB VARCHAR(255);
     DECLARE @Bloqueado BIT;
-    DECLARE @FechaBloqueo DATETIME;
     DECLARE @IntentosFallidos INT;
     DECLARE @MaxIntentos INT = 3;
-    DECLARE @MinutosBloqueo INT = 30;
     
     -- Buscar usuario
     SELECT 
         @IdUsuario = usu_IdUsuario,
         @ContrasenaDB = usu_Contrasena,
         @Bloqueado = usu_Bloqueado,
-        @FechaBloqueo = usu_FechaBloqueo,
         @IntentosFallidos = usu_IntentosFallidos
     FROM tbl_Usuarios 
     WHERE usu_Email = @Email AND usu_Estado = 1;
@@ -631,28 +628,13 @@ BEGIN
         RETURN;
     END
     
-    -- Verificar si está bloqueado
+    -- Verificar si está bloqueado (solo el administrador puede desbloquear)
     IF @Bloqueado = 1
     BEGIN
-        -- Verificar si ya pasó el tiempo de bloqueo (desbloqueo automático)
-        IF @FechaBloqueo IS NOT NULL AND DATEDIFF(MINUTE, @FechaBloqueo, GETDATE()) >= @MinutosBloqueo
-        BEGIN
-            -- Desbloquear automáticamente
-            UPDATE tbl_Usuarios 
-            SET usu_Bloqueado = 0, usu_IntentosFallidos = 0, usu_FechaBloqueo = NULL 
-            WHERE usu_IdUsuario = @IdUsuario;
-            
-            SET @Bloqueado = 0;
-            SET @IntentosFallidos = 0;
-        END
-        ELSE
-        BEGIN
-            DECLARE @MinutosRestantes INT = @MinutosBloqueo - DATEDIFF(MINUTE, @FechaBloqueo, GETDATE());
-            SELECT 0 AS Exito, 
-                   'Cuenta bloqueada. Intente nuevamente en ' + CAST(@MinutosRestantes AS VARCHAR) + ' minutos o contacte al administrador.' AS Mensaje, 
-                   NULL AS IdUsuario;
-            RETURN;
-        END
+        SELECT 0 AS Exito, 
+               'Cuenta bloqueada. Contacte al administrador para desbloquear su cuenta.' AS Mensaje, 
+               NULL AS IdUsuario;
+        RETURN;
     END
     
     -- Validar contraseña
@@ -688,7 +670,7 @@ BEGIN
             VALUES (@IdUsuario, 'CUENTA_BLOQUEADA', @DireccionIP);
             
             SELECT 0 AS Exito, 
-                   'Cuenta bloqueada por múltiples intentos fallidos. Intente en ' + CAST(@MinutosBloqueo AS VARCHAR) + ' minutos.' AS Mensaje, 
+                   'Cuenta bloqueada por múltiples intentos fallidos. Contacte al administrador.' AS Mensaje, 
                    NULL AS IdUsuario;
         END
         ELSE
