@@ -63,23 +63,7 @@ CREATE TABLE tbl_Usuarios (
     usu_FechaRegistro DATETIME DEFAULT GETDATE(),
     usu_UltimoAcceso DATETIME
 );
-INSERT INTO tbl_Usuarios (
-    usu_IdRol, 
-    usu_Nombre, 
-    usu_Apellido, 
-    usu_Email, 
-    usu_Contrasena, 
-    usu_Estado, 
-    usu_EmailVerificado
-) VALUES (
-    4,                      -- Rol Adoptante
-    'Juan',
-    'Pérez',
-    'juan@test.com',
-    '123456',               -- Contraseña en texto plano (solo para pruebas)
-    1,                      -- Activo
-    1                       -- Verificado
-);
+
 
 -- Tokens para recuperación de contraseña
 CREATE TABLE tbl_TokensRecuperacion (
@@ -434,8 +418,23 @@ INSERT INTO tbl_CategoriasForo (cat_Nombre, cat_Descripcion, cat_Color, cat_Orde
 
 -- Usuario SuperAdmin inicial (contraseña: Admin123!)
 -- NOTA: En producción usar hash real
-INSERT INTO tbl_Usuarios (usu_IdRol, usu_Nombre, usu_Apellido, usu_Email, usu_Contrasena, usu_EmailVerificado, usu_Estado) VALUES 
-(1, 'Administrador', 'Sistema', 'admin@redpatitas.com', 'HASH_AQUI_Admin123!', 1, 1);
+INSERT INTO tbl_Usuarios (
+    usu_IdRol, 
+    usu_Nombre, 
+    usu_Apellido, 
+    usu_Email, 
+    usu_Contrasena, 
+    usu_Estado, 
+    usu_EmailVerificado
+) VALUES (
+    4,                      -- Rol Adoptante
+    'adoptante',
+    'test',
+    'adoptante@test.com',
+    '123456',               -- Contraseña en texto plano (solo para pruebas)
+    1,                      -- Activo
+    1                       -- Verificado
+);
 
 GO
 
@@ -681,8 +680,7 @@ BEGIN
             UPDATE tbl_Usuarios 
             SET usu_IntentosFallidos = @IntentosFallidos, 
                 usu_Bloqueado = 1, 
-                usu_FechaBloqueo = GETDATE(),
-                usu_FechaDesbloqueo = DATEADD(MINUTE, @MinutosBloqueo, GETDATE())
+                usu_FechaBloqueo = GETDATE()
             WHERE usu_IdUsuario = @IdUsuario;
             
             -- Registrar en auditoría
@@ -716,7 +714,7 @@ CREATE PROCEDURE sp_DesbloquearCuenta
 AS
 BEGIN
     UPDATE tbl_Usuarios 
-    SET usu_Bloqueado = 0, usu_IntentosFallidos = 0, usu_FechaBloqueo = NULL, usu_FechaDesbloqueo = NULL
+    SET usu_Bloqueado = 0, usu_IntentosFallidos = 0, usu_FechaBloqueo = NULL
     WHERE usu_IdUsuario = @IdUsuario;
     
     -- Registrar en auditoría
