@@ -43,36 +43,6 @@
       <Association Name="tbl_Refugios_tbl_Campanias" Member="tbl_Refugios" ThisKey="cam_IdRefugio" OtherKey="ref_IdRefugio" Type="tbl_Refugios" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.tbl_CategoriasForo" Member="tbl_CategoriasForo">
-    <Type Name="tbl_CategoriasForo">
-      <Column Name="cat_IdCategoria" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="cat_Nombre" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
-      <Column Name="cat_Descripcion" Type="System.String" DbType="VarChar(300)" CanBeNull="true" />
-      <Column Name="cat_IconoUrl" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
-      <Column Name="cat_Color" Type="System.String" DbType="VarChar(7)" CanBeNull="true" />
-      <Column Name="cat_Orden" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="cat_Estado" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Association Name="tbl_CategoriasForo_tbl_Publicaciones" Member="tbl_Publicaciones" ThisKey="cat_IdCategoria" OtherKey="pub_IdCategoria" Type="tbl_Publicaciones" />
-    </Type>
-  </Table>
-  <Table Name="dbo.tbl_Comentarios" Member="tbl_Comentarios">
-    <Type Name="tbl_Comentarios">
-      <Column Name="com_IdComentario" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="com_IdPublicacion" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="com_IdUsuario" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="com_IdComentarioPadre" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="com_Contenido" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
-      <Column Name="com_Estado" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
-      <Column Name="com_FechaComentario" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="com_FechaModificacion" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Association Name="tbl_Comentarios_tbl_Comentarios" Member="tbl_Comentarios2" ThisKey="com_IdComentario" OtherKey="com_IdComentarioPadre" Type="tbl_Comentarios" />
-      <Association Name="tbl_Comentarios_tbl_Likes" Member="tbl_Likes" ThisKey="com_IdComentario" OtherKey="lik_IdComentario" Type="tbl_Likes" />
-      <Association Name="tbl_Comentarios_tbl_ReportesContenido" Member="tbl_ReportesContenido" ThisKey="com_IdComentario" OtherKey="repc_IdComentario" Type="tbl_ReportesContenido" />
-      <Association Name="tbl_Comentarios_tbl_Comentarios" Member="tbl_Comentarios1" ThisKey="com_IdComentarioPadre" OtherKey="com_IdComentario" Type="tbl_Comentarios" IsForeignKey="true" />
-      <Association Name="tbl_Publicaciones_tbl_Comentarios" Member="tbl_Publicaciones" ThisKey="com_IdPublicacion" OtherKey="pub_IdPublicacion" Type="tbl_Publicaciones" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
-      <Association Name="tbl_Usuarios_tbl_Comentarios" Member="tbl_Usuarios" ThisKey="com_IdUsuario" OtherKey="usu_IdUsuario" Type="tbl_Usuarios" IsForeignKey="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.tbl_CriteriosEvaluacion" Member="tbl_CriteriosEvaluacion">
     <Type Name="tbl_CriteriosEvaluacion">
       <Column Name="cri_IdCriterio" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -108,6 +78,16 @@
       <Association Name="tbl_Especies_tbl_ReportesMascotas" Member="tbl_ReportesMascotas" ThisKey="esp_IdEspecie" OtherKey="rep_IdEspecie" Type="tbl_ReportesMascotas" />
     </Type>
   </Table>
+  <Table Name="dbo.tbl_Favoritos" Member="tbl_Favoritos">
+    <Type Name="tbl_Favoritos">
+      <Column Name="fav_IdFavorito" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="fav_IdUsuario" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="fav_IdMascota" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="fav_FechaAgregado" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="tbl_Mascotas_tbl_Favoritos" Member="tbl_Mascotas" ThisKey="fav_IdMascota" OtherKey="mas_IdMascota" Type="tbl_Mascotas" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="tbl_Usuarios_tbl_Favoritos" Member="tbl_Usuarios" ThisKey="fav_IdUsuario" OtherKey="usu_IdUsuario" Type="tbl_Usuarios" IsForeignKey="true" />
+    </Type>
+  </Table>
   <Table Name="dbo.tbl_FotosMascotas" Member="tbl_FotosMascotas">
     <Type Name="tbl_FotosMascotas">
       <Column Name="fot_IdFoto" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -127,19 +107,6 @@
       <Column Name="fore_Orden" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="fore_FechaSubida" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Association Name="tbl_ReportesMascotas_tbl_FotosReportes" Member="tbl_ReportesMascotas" ThisKey="fore_IdReporte" OtherKey="rep_IdReporte" Type="tbl_ReportesMascotas" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.tbl_Likes" Member="tbl_Likes">
-    <Type Name="tbl_Likes">
-      <Column Name="lik_IdLike" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="lik_IdUsuario" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="lik_IdPublicacion" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="lik_IdComentario" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="lik_TipoReaccion" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
-      <Column Name="lik_FechaReaccion" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Association Name="tbl_Comentarios_tbl_Likes" Member="tbl_Comentarios" ThisKey="lik_IdComentario" OtherKey="com_IdComentario" Type="tbl_Comentarios" IsForeignKey="true" />
-      <Association Name="tbl_Publicaciones_tbl_Likes" Member="tbl_Publicaciones" ThisKey="lik_IdPublicacion" OtherKey="pub_IdPublicacion" Type="tbl_Publicaciones" IsForeignKey="true" DeleteRule="CASCADE" />
-      <Association Name="tbl_Usuarios_tbl_Likes" Member="tbl_Usuarios" ThisKey="lik_IdUsuario" OtherKey="usu_IdUsuario" Type="tbl_Usuarios" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.tbl_Mascotas" Member="tbl_Mascotas">
@@ -165,6 +132,7 @@
       <Column Name="mas_Estado" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Column Name="mas_FechaRegistro" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="mas_FechaAdopcion" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="tbl_Mascotas_tbl_Favoritos" Member="tbl_Favoritos" ThisKey="mas_IdMascota" OtherKey="fav_IdMascota" Type="tbl_Favoritos" />
       <Association Name="tbl_Mascotas_tbl_FotosMascotas" Member="tbl_FotosMascotas" ThisKey="mas_IdMascota" OtherKey="fot_IdMascota" Type="tbl_FotosMascotas" />
       <Association Name="tbl_Mascotas_tbl_SolicitudesAdopcion" Member="tbl_SolicitudesAdopcion" ThisKey="mas_IdMascota" OtherKey="sol_IdMascota" Type="tbl_SolicitudesAdopcion" />
       <Association Name="tbl_Razas_tbl_Mascotas" Member="tbl_Razas" ThisKey="mas_IdRaza" OtherKey="raz_IdRaza" Type="tbl_Razas" IsForeignKey="true" />
@@ -185,26 +153,6 @@
       <Column Name="not_FechaCreacion" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="not_FechaLectura" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Association Name="tbl_Usuarios_tbl_Notificaciones" Member="tbl_Usuarios" ThisKey="not_IdUsuario" OtherKey="usu_IdUsuario" Type="tbl_Usuarios" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.tbl_Publicaciones" Member="tbl_Publicaciones">
-    <Type Name="tbl_Publicaciones">
-      <Column Name="pub_IdPublicacion" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="pub_IdUsuario" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="pub_IdCategoria" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="pub_Titulo" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
-      <Column Name="pub_Contenido" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
-      <Column Name="pub_ImagenUrl" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
-      <Column Name="pub_Fijada" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="pub_ContadorVistas" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="pub_Estado" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
-      <Column Name="pub_FechaPublicacion" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="pub_FechaModificacion" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Association Name="tbl_Publicaciones_tbl_Comentarios" Member="tbl_Comentarios" ThisKey="pub_IdPublicacion" OtherKey="com_IdPublicacion" Type="tbl_Comentarios" />
-      <Association Name="tbl_Publicaciones_tbl_Likes" Member="tbl_Likes" ThisKey="pub_IdPublicacion" OtherKey="lik_IdPublicacion" Type="tbl_Likes" />
-      <Association Name="tbl_Publicaciones_tbl_ReportesContenido" Member="tbl_ReportesContenido" ThisKey="pub_IdPublicacion" OtherKey="repc_IdPublicacion" Type="tbl_ReportesContenido" />
-      <Association Name="tbl_CategoriasForo_tbl_Publicaciones" Member="tbl_CategoriasForo" ThisKey="pub_IdCategoria" OtherKey="cat_IdCategoria" Type="tbl_CategoriasForo" IsForeignKey="true" />
-      <Association Name="tbl_Usuarios_tbl_Publicaciones" Member="tbl_Usuarios" ThisKey="pub_IdUsuario" OtherKey="usu_IdUsuario" Type="tbl_Usuarios" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.tbl_Razas" Member="tbl_Razas">
@@ -237,35 +185,6 @@
       <Association Name="tbl_Refugios_tbl_Usuarios" Member="tbl_Usuarios" ThisKey="ref_IdRefugio" OtherKey="usu_IdRefugio" Type="tbl_Usuarios" />
     </Type>
   </Table>
-  <Table Name="dbo.tbl_ReportesContenido" Member="tbl_ReportesContenido">
-    <Type Name="tbl_ReportesContenido">
-      <Column Name="repc_IdReporteContenido" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="repc_IdUsuario" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="repc_IdPublicacion" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="repc_IdComentario" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="repc_Motivo" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
-      <Column Name="repc_Descripcion" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
-      <Column Name="repc_Estado" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
-      <Column Name="repc_FechaReporte" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="repc_IdUsuarioRevision" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="repc_FechaRevision" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Association Name="tbl_Publicaciones_tbl_ReportesContenido" Member="tbl_Publicaciones" ThisKey="repc_IdPublicacion" OtherKey="pub_IdPublicacion" Type="tbl_Publicaciones" IsForeignKey="true" />
-      <Association Name="tbl_Comentarios_tbl_ReportesContenido" Member="tbl_Comentarios" ThisKey="repc_IdComentario" OtherKey="com_IdComentario" Type="tbl_Comentarios" IsForeignKey="true" />
-      <Association Name="tbl_Usuarios_tbl_ReportesContenido" Member="tbl_Usuarios" ThisKey="repc_IdUsuario" OtherKey="usu_IdUsuario" Type="tbl_Usuarios" IsForeignKey="true" />
-      <Association Name="tbl_Usuarios_tbl_ReportesContenido1" Member="tbl_Usuarios1" ThisKey="repc_IdUsuarioRevision" OtherKey="usu_IdUsuario" Type="tbl_Usuarios" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.tbl_Roles" Member="tbl_Roles">
-    <Type Name="tbl_Roles">
-      <Column Name="rol_IdRol" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="rol_Nombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="rol_Descripcion" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
-      <Column Name="rol_Nivel" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="rol_Estado" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="rol_FechaCreacion" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Association Name="tbl_Roles_tbl_Usuarios" Member="tbl_Usuarios" ThisKey="rol_IdRol" OtherKey="usu_IdRol" Type="tbl_Usuarios" />
-    </Type>
-  </Table>
   <Table Name="dbo.tbl_ReportesMascotas" Member="tbl_ReportesMascotas">
     <Type Name="tbl_ReportesMascotas">
       <Column Name="rep_IdReporte" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -294,6 +213,17 @@
       <Association Name="tbl_ReportesMascotas_tbl_FotosReportes" Member="tbl_FotosReportes" ThisKey="rep_IdReporte" OtherKey="fore_IdReporte" Type="tbl_FotosReportes" />
       <Association Name="tbl_Especies_tbl_ReportesMascotas" Member="tbl_Especies" ThisKey="rep_IdEspecie" OtherKey="esp_IdEspecie" Type="tbl_Especies" IsForeignKey="true" />
       <Association Name="tbl_Usuarios_tbl_ReportesMascotas" Member="tbl_Usuarios" ThisKey="rep_IdUsuario" OtherKey="usu_IdUsuario" Type="tbl_Usuarios" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_Roles" Member="tbl_Roles">
+    <Type Name="tbl_Roles">
+      <Column Name="rol_IdRol" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="rol_Nombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="rol_Descripcion" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="rol_Nivel" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="rol_Estado" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="rol_FechaCreacion" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="tbl_Roles_tbl_Usuarios" Member="tbl_Usuarios" ThisKey="rol_IdRol" OtherKey="usu_IdRol" Type="tbl_Usuarios" />
     </Type>
   </Table>
   <Table Name="dbo.tbl_SolicitudesAdopcion" Member="tbl_SolicitudesAdopcion">
@@ -359,13 +289,9 @@
       <Column Name="usu_UltimoAcceso" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Association Name="tbl_Usuarios_tbl_Auditoria" Member="tbl_Auditoria" ThisKey="usu_IdUsuario" OtherKey="aud_IdUsuario" Type="tbl_Auditoria" />
       <Association Name="tbl_Usuarios_tbl_Avistamientos" Member="tbl_Avistamientos" ThisKey="usu_IdUsuario" OtherKey="avi_IdUsuario" Type="tbl_Avistamientos" />
-      <Association Name="tbl_Usuarios_tbl_Comentarios" Member="tbl_Comentarios" ThisKey="usu_IdUsuario" OtherKey="com_IdUsuario" Type="tbl_Comentarios" />
-      <Association Name="tbl_Usuarios_tbl_Likes" Member="tbl_Likes" ThisKey="usu_IdUsuario" OtherKey="lik_IdUsuario" Type="tbl_Likes" />
+      <Association Name="tbl_Usuarios_tbl_Favoritos" Member="tbl_Favoritos" ThisKey="usu_IdUsuario" OtherKey="fav_IdUsuario" Type="tbl_Favoritos" />
       <Association Name="tbl_Usuarios_tbl_Mascotas" Member="tbl_Mascotas" ThisKey="usu_IdUsuario" OtherKey="mas_IdUsuarioRegistro" Type="tbl_Mascotas" />
       <Association Name="tbl_Usuarios_tbl_Notificaciones" Member="tbl_Notificaciones" ThisKey="usu_IdUsuario" OtherKey="not_IdUsuario" Type="tbl_Notificaciones" />
-      <Association Name="tbl_Usuarios_tbl_Publicaciones" Member="tbl_Publicaciones" ThisKey="usu_IdUsuario" OtherKey="pub_IdUsuario" Type="tbl_Publicaciones" />
-      <Association Name="tbl_Usuarios_tbl_ReportesContenido" Member="tbl_ReportesContenido" ThisKey="usu_IdUsuario" OtherKey="repc_IdUsuario" Type="tbl_ReportesContenido" />
-      <Association Name="tbl_Usuarios_tbl_ReportesContenido1" Member="tbl_ReportesContenido1" ThisKey="usu_IdUsuario" OtherKey="repc_IdUsuarioRevision" Type="tbl_ReportesContenido" />
       <Association Name="tbl_Usuarios_tbl_ReportesMascotas" Member="tbl_ReportesMascotas" ThisKey="usu_IdUsuario" OtherKey="rep_IdUsuario" Type="tbl_ReportesMascotas" />
       <Association Name="tbl_Usuarios_tbl_SolicitudesAdopcion" Member="tbl_SolicitudesAdopcion" ThisKey="usu_IdUsuario" OtherKey="sol_IdUsuario" Type="tbl_SolicitudesAdopcion" />
       <Association Name="tbl_Usuarios_tbl_SolicitudesAdopcion1" Member="tbl_SolicitudesAdopcion1" ThisKey="usu_IdUsuario" OtherKey="sol_IdUsuarioRevision" Type="tbl_SolicitudesAdopcion" />

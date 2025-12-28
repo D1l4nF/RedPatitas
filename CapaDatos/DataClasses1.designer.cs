@@ -39,12 +39,6 @@ namespace CapaDatos
     partial void Inserttbl_Campanias(tbl_Campanias instance);
     partial void Updatetbl_Campanias(tbl_Campanias instance);
     partial void Deletetbl_Campanias(tbl_Campanias instance);
-    partial void Inserttbl_CategoriasForo(tbl_CategoriasForo instance);
-    partial void Updatetbl_CategoriasForo(tbl_CategoriasForo instance);
-    partial void Deletetbl_CategoriasForo(tbl_CategoriasForo instance);
-    partial void Inserttbl_Comentarios(tbl_Comentarios instance);
-    partial void Updatetbl_Comentarios(tbl_Comentarios instance);
-    partial void Deletetbl_Comentarios(tbl_Comentarios instance);
     partial void Inserttbl_CriteriosEvaluacion(tbl_CriteriosEvaluacion instance);
     partial void Updatetbl_CriteriosEvaluacion(tbl_CriteriosEvaluacion instance);
     partial void Deletetbl_CriteriosEvaluacion(tbl_CriteriosEvaluacion instance);
@@ -54,39 +48,33 @@ namespace CapaDatos
     partial void Inserttbl_Especies(tbl_Especies instance);
     partial void Updatetbl_Especies(tbl_Especies instance);
     partial void Deletetbl_Especies(tbl_Especies instance);
+    partial void Inserttbl_Favoritos(tbl_Favoritos instance);
+    partial void Updatetbl_Favoritos(tbl_Favoritos instance);
+    partial void Deletetbl_Favoritos(tbl_Favoritos instance);
     partial void Inserttbl_FotosMascotas(tbl_FotosMascotas instance);
     partial void Updatetbl_FotosMascotas(tbl_FotosMascotas instance);
     partial void Deletetbl_FotosMascotas(tbl_FotosMascotas instance);
     partial void Inserttbl_FotosReportes(tbl_FotosReportes instance);
     partial void Updatetbl_FotosReportes(tbl_FotosReportes instance);
     partial void Deletetbl_FotosReportes(tbl_FotosReportes instance);
-    partial void Inserttbl_Likes(tbl_Likes instance);
-    partial void Updatetbl_Likes(tbl_Likes instance);
-    partial void Deletetbl_Likes(tbl_Likes instance);
     partial void Inserttbl_Mascotas(tbl_Mascotas instance);
     partial void Updatetbl_Mascotas(tbl_Mascotas instance);
     partial void Deletetbl_Mascotas(tbl_Mascotas instance);
     partial void Inserttbl_Notificaciones(tbl_Notificaciones instance);
     partial void Updatetbl_Notificaciones(tbl_Notificaciones instance);
     partial void Deletetbl_Notificaciones(tbl_Notificaciones instance);
-    partial void Inserttbl_Publicaciones(tbl_Publicaciones instance);
-    partial void Updatetbl_Publicaciones(tbl_Publicaciones instance);
-    partial void Deletetbl_Publicaciones(tbl_Publicaciones instance);
     partial void Inserttbl_Razas(tbl_Razas instance);
     partial void Updatetbl_Razas(tbl_Razas instance);
     partial void Deletetbl_Razas(tbl_Razas instance);
     partial void Inserttbl_Refugios(tbl_Refugios instance);
     partial void Updatetbl_Refugios(tbl_Refugios instance);
     partial void Deletetbl_Refugios(tbl_Refugios instance);
-    partial void Inserttbl_ReportesContenido(tbl_ReportesContenido instance);
-    partial void Updatetbl_ReportesContenido(tbl_ReportesContenido instance);
-    partial void Deletetbl_ReportesContenido(tbl_ReportesContenido instance);
-    partial void Inserttbl_Roles(tbl_Roles instance);
-    partial void Updatetbl_Roles(tbl_Roles instance);
-    partial void Deletetbl_Roles(tbl_Roles instance);
     partial void Inserttbl_ReportesMascotas(tbl_ReportesMascotas instance);
     partial void Updatetbl_ReportesMascotas(tbl_ReportesMascotas instance);
     partial void Deletetbl_ReportesMascotas(tbl_ReportesMascotas instance);
+    partial void Inserttbl_Roles(tbl_Roles instance);
+    partial void Updatetbl_Roles(tbl_Roles instance);
+    partial void Deletetbl_Roles(tbl_Roles instance);
     partial void Inserttbl_SolicitudesAdopcion(tbl_SolicitudesAdopcion instance);
     partial void Updatetbl_SolicitudesAdopcion(tbl_SolicitudesAdopcion instance);
     partial void Deletetbl_SolicitudesAdopcion(tbl_SolicitudesAdopcion instance);
@@ -152,22 +140,6 @@ namespace CapaDatos
 			}
 		}
 		
-		public System.Data.Linq.Table<tbl_CategoriasForo> tbl_CategoriasForo
-		{
-			get
-			{
-				return this.GetTable<tbl_CategoriasForo>();
-			}
-		}
-		
-		public System.Data.Linq.Table<tbl_Comentarios> tbl_Comentarios
-		{
-			get
-			{
-				return this.GetTable<tbl_Comentarios>();
-			}
-		}
-		
 		public System.Data.Linq.Table<tbl_CriteriosEvaluacion> tbl_CriteriosEvaluacion
 		{
 			get
@@ -192,6 +164,14 @@ namespace CapaDatos
 			}
 		}
 		
+		public System.Data.Linq.Table<tbl_Favoritos> tbl_Favoritos
+		{
+			get
+			{
+				return this.GetTable<tbl_Favoritos>();
+			}
+		}
+		
 		public System.Data.Linq.Table<tbl_FotosMascotas> tbl_FotosMascotas
 		{
 			get
@@ -205,14 +185,6 @@ namespace CapaDatos
 			get
 			{
 				return this.GetTable<tbl_FotosReportes>();
-			}
-		}
-		
-		public System.Data.Linq.Table<tbl_Likes> tbl_Likes
-		{
-			get
-			{
-				return this.GetTable<tbl_Likes>();
 			}
 		}
 		
@@ -232,14 +204,6 @@ namespace CapaDatos
 			}
 		}
 		
-		public System.Data.Linq.Table<tbl_Publicaciones> tbl_Publicaciones
-		{
-			get
-			{
-				return this.GetTable<tbl_Publicaciones>();
-			}
-		}
-		
 		public System.Data.Linq.Table<tbl_Razas> tbl_Razas
 		{
 			get
@@ -256,11 +220,11 @@ namespace CapaDatos
 			}
 		}
 		
-		public System.Data.Linq.Table<tbl_ReportesContenido> tbl_ReportesContenido
+		public System.Data.Linq.Table<tbl_ReportesMascotas> tbl_ReportesMascotas
 		{
 			get
 			{
-				return this.GetTable<tbl_ReportesContenido>();
+				return this.GetTable<tbl_ReportesMascotas>();
 			}
 		}
 		
@@ -269,14 +233,6 @@ namespace CapaDatos
 			get
 			{
 				return this.GetTable<tbl_Roles>();
-			}
-		}
-		
-		public System.Data.Linq.Table<tbl_ReportesMascotas> tbl_ReportesMascotas
-		{
-			get
-			{
-				return this.GetTable<tbl_ReportesMascotas>();
 			}
 		}
 		
@@ -1231,677 +1187,6 @@ namespace CapaDatos
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tbl_CategoriasForo")]
-	public partial class tbl_CategoriasForo : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _cat_IdCategoria;
-		
-		private string _cat_Nombre;
-		
-		private string _cat_Descripcion;
-		
-		private string _cat_IconoUrl;
-		
-		private string _cat_Color;
-		
-		private System.Nullable<int> _cat_Orden;
-		
-		private System.Nullable<bool> _cat_Estado;
-		
-		private EntitySet<tbl_Publicaciones> _tbl_Publicaciones;
-		
-    #region Definiciones de métodos de extensibilidad
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void Oncat_IdCategoriaChanging(int value);
-    partial void Oncat_IdCategoriaChanged();
-    partial void Oncat_NombreChanging(string value);
-    partial void Oncat_NombreChanged();
-    partial void Oncat_DescripcionChanging(string value);
-    partial void Oncat_DescripcionChanged();
-    partial void Oncat_IconoUrlChanging(string value);
-    partial void Oncat_IconoUrlChanged();
-    partial void Oncat_ColorChanging(string value);
-    partial void Oncat_ColorChanged();
-    partial void Oncat_OrdenChanging(System.Nullable<int> value);
-    partial void Oncat_OrdenChanged();
-    partial void Oncat_EstadoChanging(System.Nullable<bool> value);
-    partial void Oncat_EstadoChanged();
-    #endregion
-		
-		public tbl_CategoriasForo()
-		{
-			this._tbl_Publicaciones = new EntitySet<tbl_Publicaciones>(new Action<tbl_Publicaciones>(this.attach_tbl_Publicaciones), new Action<tbl_Publicaciones>(this.detach_tbl_Publicaciones));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_cat_IdCategoria", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int cat_IdCategoria
-		{
-			get
-			{
-				return this._cat_IdCategoria;
-			}
-			set
-			{
-				if ((this._cat_IdCategoria != value))
-				{
-					this.Oncat_IdCategoriaChanging(value);
-					this.SendPropertyChanging();
-					this._cat_IdCategoria = value;
-					this.SendPropertyChanged("cat_IdCategoria");
-					this.Oncat_IdCategoriaChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_cat_Nombre", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
-		public string cat_Nombre
-		{
-			get
-			{
-				return this._cat_Nombre;
-			}
-			set
-			{
-				if ((this._cat_Nombre != value))
-				{
-					this.Oncat_NombreChanging(value);
-					this.SendPropertyChanging();
-					this._cat_Nombre = value;
-					this.SendPropertyChanged("cat_Nombre");
-					this.Oncat_NombreChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_cat_Descripcion", DbType="VarChar(300)")]
-		public string cat_Descripcion
-		{
-			get
-			{
-				return this._cat_Descripcion;
-			}
-			set
-			{
-				if ((this._cat_Descripcion != value))
-				{
-					this.Oncat_DescripcionChanging(value);
-					this.SendPropertyChanging();
-					this._cat_Descripcion = value;
-					this.SendPropertyChanged("cat_Descripcion");
-					this.Oncat_DescripcionChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_cat_IconoUrl", DbType="VarChar(500)")]
-		public string cat_IconoUrl
-		{
-			get
-			{
-				return this._cat_IconoUrl;
-			}
-			set
-			{
-				if ((this._cat_IconoUrl != value))
-				{
-					this.Oncat_IconoUrlChanging(value);
-					this.SendPropertyChanging();
-					this._cat_IconoUrl = value;
-					this.SendPropertyChanged("cat_IconoUrl");
-					this.Oncat_IconoUrlChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_cat_Color", DbType="VarChar(7)")]
-		public string cat_Color
-		{
-			get
-			{
-				return this._cat_Color;
-			}
-			set
-			{
-				if ((this._cat_Color != value))
-				{
-					this.Oncat_ColorChanging(value);
-					this.SendPropertyChanging();
-					this._cat_Color = value;
-					this.SendPropertyChanged("cat_Color");
-					this.Oncat_ColorChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_cat_Orden", DbType="Int")]
-		public System.Nullable<int> cat_Orden
-		{
-			get
-			{
-				return this._cat_Orden;
-			}
-			set
-			{
-				if ((this._cat_Orden != value))
-				{
-					this.Oncat_OrdenChanging(value);
-					this.SendPropertyChanging();
-					this._cat_Orden = value;
-					this.SendPropertyChanged("cat_Orden");
-					this.Oncat_OrdenChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_cat_Estado", DbType="Bit")]
-		public System.Nullable<bool> cat_Estado
-		{
-			get
-			{
-				return this._cat_Estado;
-			}
-			set
-			{
-				if ((this._cat_Estado != value))
-				{
-					this.Oncat_EstadoChanging(value);
-					this.SendPropertyChanging();
-					this._cat_Estado = value;
-					this.SendPropertyChanged("cat_Estado");
-					this.Oncat_EstadoChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_CategoriasForo_tbl_Publicaciones", Storage="_tbl_Publicaciones", ThisKey="cat_IdCategoria", OtherKey="pub_IdCategoria")]
-		public EntitySet<tbl_Publicaciones> tbl_Publicaciones
-		{
-			get
-			{
-				return this._tbl_Publicaciones;
-			}
-			set
-			{
-				this._tbl_Publicaciones.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_tbl_Publicaciones(tbl_Publicaciones entity)
-		{
-			this.SendPropertyChanging();
-			entity.tbl_CategoriasForo = this;
-		}
-		
-		private void detach_tbl_Publicaciones(tbl_Publicaciones entity)
-		{
-			this.SendPropertyChanging();
-			entity.tbl_CategoriasForo = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tbl_Comentarios")]
-	public partial class tbl_Comentarios : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _com_IdComentario;
-		
-		private int _com_IdPublicacion;
-		
-		private int _com_IdUsuario;
-		
-		private System.Nullable<int> _com_IdComentarioPadre;
-		
-		private string _com_Contenido;
-		
-		private string _com_Estado;
-		
-		private System.Nullable<System.DateTime> _com_FechaComentario;
-		
-		private System.Nullable<System.DateTime> _com_FechaModificacion;
-		
-		private EntitySet<tbl_Comentarios> _tbl_Comentarios2;
-		
-		private EntitySet<tbl_Likes> _tbl_Likes;
-		
-		private EntitySet<tbl_ReportesContenido> _tbl_ReportesContenido;
-		
-		private EntityRef<tbl_Comentarios> _tbl_Comentarios1;
-		
-		private EntityRef<tbl_Publicaciones> _tbl_Publicaciones;
-		
-		private EntityRef<tbl_Usuarios> _tbl_Usuarios;
-		
-    #region Definiciones de métodos de extensibilidad
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void Oncom_IdComentarioChanging(int value);
-    partial void Oncom_IdComentarioChanged();
-    partial void Oncom_IdPublicacionChanging(int value);
-    partial void Oncom_IdPublicacionChanged();
-    partial void Oncom_IdUsuarioChanging(int value);
-    partial void Oncom_IdUsuarioChanged();
-    partial void Oncom_IdComentarioPadreChanging(System.Nullable<int> value);
-    partial void Oncom_IdComentarioPadreChanged();
-    partial void Oncom_ContenidoChanging(string value);
-    partial void Oncom_ContenidoChanged();
-    partial void Oncom_EstadoChanging(string value);
-    partial void Oncom_EstadoChanged();
-    partial void Oncom_FechaComentarioChanging(System.Nullable<System.DateTime> value);
-    partial void Oncom_FechaComentarioChanged();
-    partial void Oncom_FechaModificacionChanging(System.Nullable<System.DateTime> value);
-    partial void Oncom_FechaModificacionChanged();
-    #endregion
-		
-		public tbl_Comentarios()
-		{
-			this._tbl_Comentarios2 = new EntitySet<tbl_Comentarios>(new Action<tbl_Comentarios>(this.attach_tbl_Comentarios2), new Action<tbl_Comentarios>(this.detach_tbl_Comentarios2));
-			this._tbl_Likes = new EntitySet<tbl_Likes>(new Action<tbl_Likes>(this.attach_tbl_Likes), new Action<tbl_Likes>(this.detach_tbl_Likes));
-			this._tbl_ReportesContenido = new EntitySet<tbl_ReportesContenido>(new Action<tbl_ReportesContenido>(this.attach_tbl_ReportesContenido), new Action<tbl_ReportesContenido>(this.detach_tbl_ReportesContenido));
-			this._tbl_Comentarios1 = default(EntityRef<tbl_Comentarios>);
-			this._tbl_Publicaciones = default(EntityRef<tbl_Publicaciones>);
-			this._tbl_Usuarios = default(EntityRef<tbl_Usuarios>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_com_IdComentario", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int com_IdComentario
-		{
-			get
-			{
-				return this._com_IdComentario;
-			}
-			set
-			{
-				if ((this._com_IdComentario != value))
-				{
-					this.Oncom_IdComentarioChanging(value);
-					this.SendPropertyChanging();
-					this._com_IdComentario = value;
-					this.SendPropertyChanged("com_IdComentario");
-					this.Oncom_IdComentarioChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_com_IdPublicacion", DbType="Int NOT NULL")]
-		public int com_IdPublicacion
-		{
-			get
-			{
-				return this._com_IdPublicacion;
-			}
-			set
-			{
-				if ((this._com_IdPublicacion != value))
-				{
-					if (this._tbl_Publicaciones.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.Oncom_IdPublicacionChanging(value);
-					this.SendPropertyChanging();
-					this._com_IdPublicacion = value;
-					this.SendPropertyChanged("com_IdPublicacion");
-					this.Oncom_IdPublicacionChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_com_IdUsuario", DbType="Int NOT NULL")]
-		public int com_IdUsuario
-		{
-			get
-			{
-				return this._com_IdUsuario;
-			}
-			set
-			{
-				if ((this._com_IdUsuario != value))
-				{
-					if (this._tbl_Usuarios.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.Oncom_IdUsuarioChanging(value);
-					this.SendPropertyChanging();
-					this._com_IdUsuario = value;
-					this.SendPropertyChanged("com_IdUsuario");
-					this.Oncom_IdUsuarioChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_com_IdComentarioPadre", DbType="Int")]
-		public System.Nullable<int> com_IdComentarioPadre
-		{
-			get
-			{
-				return this._com_IdComentarioPadre;
-			}
-			set
-			{
-				if ((this._com_IdComentarioPadre != value))
-				{
-					if (this._tbl_Comentarios1.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.Oncom_IdComentarioPadreChanging(value);
-					this.SendPropertyChanging();
-					this._com_IdComentarioPadre = value;
-					this.SendPropertyChanged("com_IdComentarioPadre");
-					this.Oncom_IdComentarioPadreChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_com_Contenido", DbType="Text NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
-		public string com_Contenido
-		{
-			get
-			{
-				return this._com_Contenido;
-			}
-			set
-			{
-				if ((this._com_Contenido != value))
-				{
-					this.Oncom_ContenidoChanging(value);
-					this.SendPropertyChanging();
-					this._com_Contenido = value;
-					this.SendPropertyChanged("com_Contenido");
-					this.Oncom_ContenidoChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_com_Estado", DbType="VarChar(20)")]
-		public string com_Estado
-		{
-			get
-			{
-				return this._com_Estado;
-			}
-			set
-			{
-				if ((this._com_Estado != value))
-				{
-					this.Oncom_EstadoChanging(value);
-					this.SendPropertyChanging();
-					this._com_Estado = value;
-					this.SendPropertyChanged("com_Estado");
-					this.Oncom_EstadoChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_com_FechaComentario", DbType="DateTime")]
-		public System.Nullable<System.DateTime> com_FechaComentario
-		{
-			get
-			{
-				return this._com_FechaComentario;
-			}
-			set
-			{
-				if ((this._com_FechaComentario != value))
-				{
-					this.Oncom_FechaComentarioChanging(value);
-					this.SendPropertyChanging();
-					this._com_FechaComentario = value;
-					this.SendPropertyChanged("com_FechaComentario");
-					this.Oncom_FechaComentarioChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_com_FechaModificacion", DbType="DateTime")]
-		public System.Nullable<System.DateTime> com_FechaModificacion
-		{
-			get
-			{
-				return this._com_FechaModificacion;
-			}
-			set
-			{
-				if ((this._com_FechaModificacion != value))
-				{
-					this.Oncom_FechaModificacionChanging(value);
-					this.SendPropertyChanging();
-					this._com_FechaModificacion = value;
-					this.SendPropertyChanged("com_FechaModificacion");
-					this.Oncom_FechaModificacionChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Comentarios_tbl_Comentarios", Storage="_tbl_Comentarios2", ThisKey="com_IdComentario", OtherKey="com_IdComentarioPadre")]
-		public EntitySet<tbl_Comentarios> tbl_Comentarios2
-		{
-			get
-			{
-				return this._tbl_Comentarios2;
-			}
-			set
-			{
-				this._tbl_Comentarios2.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Comentarios_tbl_Likes", Storage="_tbl_Likes", ThisKey="com_IdComentario", OtherKey="lik_IdComentario")]
-		public EntitySet<tbl_Likes> tbl_Likes
-		{
-			get
-			{
-				return this._tbl_Likes;
-			}
-			set
-			{
-				this._tbl_Likes.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Comentarios_tbl_ReportesContenido", Storage="_tbl_ReportesContenido", ThisKey="com_IdComentario", OtherKey="repc_IdComentario")]
-		public EntitySet<tbl_ReportesContenido> tbl_ReportesContenido
-		{
-			get
-			{
-				return this._tbl_ReportesContenido;
-			}
-			set
-			{
-				this._tbl_ReportesContenido.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Comentarios_tbl_Comentarios", Storage="_tbl_Comentarios1", ThisKey="com_IdComentarioPadre", OtherKey="com_IdComentario", IsForeignKey=true)]
-		public tbl_Comentarios tbl_Comentarios1
-		{
-			get
-			{
-				return this._tbl_Comentarios1.Entity;
-			}
-			set
-			{
-				tbl_Comentarios previousValue = this._tbl_Comentarios1.Entity;
-				if (((previousValue != value) 
-							|| (this._tbl_Comentarios1.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._tbl_Comentarios1.Entity = null;
-						previousValue.tbl_Comentarios2.Remove(this);
-					}
-					this._tbl_Comentarios1.Entity = value;
-					if ((value != null))
-					{
-						value.tbl_Comentarios2.Add(this);
-						this._com_IdComentarioPadre = value.com_IdComentario;
-					}
-					else
-					{
-						this._com_IdComentarioPadre = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("tbl_Comentarios1");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Publicaciones_tbl_Comentarios", Storage="_tbl_Publicaciones", ThisKey="com_IdPublicacion", OtherKey="pub_IdPublicacion", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
-		public tbl_Publicaciones tbl_Publicaciones
-		{
-			get
-			{
-				return this._tbl_Publicaciones.Entity;
-			}
-			set
-			{
-				tbl_Publicaciones previousValue = this._tbl_Publicaciones.Entity;
-				if (((previousValue != value) 
-							|| (this._tbl_Publicaciones.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._tbl_Publicaciones.Entity = null;
-						previousValue.tbl_Comentarios.Remove(this);
-					}
-					this._tbl_Publicaciones.Entity = value;
-					if ((value != null))
-					{
-						value.tbl_Comentarios.Add(this);
-						this._com_IdPublicacion = value.pub_IdPublicacion;
-					}
-					else
-					{
-						this._com_IdPublicacion = default(int);
-					}
-					this.SendPropertyChanged("tbl_Publicaciones");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Usuarios_tbl_Comentarios", Storage="_tbl_Usuarios", ThisKey="com_IdUsuario", OtherKey="usu_IdUsuario", IsForeignKey=true)]
-		public tbl_Usuarios tbl_Usuarios
-		{
-			get
-			{
-				return this._tbl_Usuarios.Entity;
-			}
-			set
-			{
-				tbl_Usuarios previousValue = this._tbl_Usuarios.Entity;
-				if (((previousValue != value) 
-							|| (this._tbl_Usuarios.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._tbl_Usuarios.Entity = null;
-						previousValue.tbl_Comentarios.Remove(this);
-					}
-					this._tbl_Usuarios.Entity = value;
-					if ((value != null))
-					{
-						value.tbl_Comentarios.Add(this);
-						this._com_IdUsuario = value.usu_IdUsuario;
-					}
-					else
-					{
-						this._com_IdUsuario = default(int);
-					}
-					this.SendPropertyChanged("tbl_Usuarios");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_tbl_Comentarios2(tbl_Comentarios entity)
-		{
-			this.SendPropertyChanging();
-			entity.tbl_Comentarios1 = this;
-		}
-		
-		private void detach_tbl_Comentarios2(tbl_Comentarios entity)
-		{
-			this.SendPropertyChanging();
-			entity.tbl_Comentarios1 = null;
-		}
-		
-		private void attach_tbl_Likes(tbl_Likes entity)
-		{
-			this.SendPropertyChanging();
-			entity.tbl_Comentarios = this;
-		}
-		
-		private void detach_tbl_Likes(tbl_Likes entity)
-		{
-			this.SendPropertyChanging();
-			entity.tbl_Comentarios = null;
-		}
-		
-		private void attach_tbl_ReportesContenido(tbl_ReportesContenido entity)
-		{
-			this.SendPropertyChanging();
-			entity.tbl_Comentarios = this;
-		}
-		
-		private void detach_tbl_ReportesContenido(tbl_ReportesContenido entity)
-		{
-			this.SendPropertyChanging();
-			entity.tbl_Comentarios = null;
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tbl_CriteriosEvaluacion")]
 	public partial class tbl_CriteriosEvaluacion : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -2614,6 +1899,222 @@ namespace CapaDatos
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tbl_Favoritos")]
+	public partial class tbl_Favoritos : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _fav_IdFavorito;
+		
+		private int _fav_IdUsuario;
+		
+		private int _fav_IdMascota;
+		
+		private System.Nullable<System.DateTime> _fav_FechaAgregado;
+		
+		private EntityRef<tbl_Mascotas> _tbl_Mascotas;
+		
+		private EntityRef<tbl_Usuarios> _tbl_Usuarios;
+		
+    #region Definiciones de métodos de extensibilidad
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void Onfav_IdFavoritoChanging(int value);
+    partial void Onfav_IdFavoritoChanged();
+    partial void Onfav_IdUsuarioChanging(int value);
+    partial void Onfav_IdUsuarioChanged();
+    partial void Onfav_IdMascotaChanging(int value);
+    partial void Onfav_IdMascotaChanged();
+    partial void Onfav_FechaAgregadoChanging(System.Nullable<System.DateTime> value);
+    partial void Onfav_FechaAgregadoChanged();
+    #endregion
+		
+		public tbl_Favoritos()
+		{
+			this._tbl_Mascotas = default(EntityRef<tbl_Mascotas>);
+			this._tbl_Usuarios = default(EntityRef<tbl_Usuarios>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fav_IdFavorito", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int fav_IdFavorito
+		{
+			get
+			{
+				return this._fav_IdFavorito;
+			}
+			set
+			{
+				if ((this._fav_IdFavorito != value))
+				{
+					this.Onfav_IdFavoritoChanging(value);
+					this.SendPropertyChanging();
+					this._fav_IdFavorito = value;
+					this.SendPropertyChanged("fav_IdFavorito");
+					this.Onfav_IdFavoritoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fav_IdUsuario", DbType="Int NOT NULL")]
+		public int fav_IdUsuario
+		{
+			get
+			{
+				return this._fav_IdUsuario;
+			}
+			set
+			{
+				if ((this._fav_IdUsuario != value))
+				{
+					if (this._tbl_Usuarios.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onfav_IdUsuarioChanging(value);
+					this.SendPropertyChanging();
+					this._fav_IdUsuario = value;
+					this.SendPropertyChanged("fav_IdUsuario");
+					this.Onfav_IdUsuarioChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fav_IdMascota", DbType="Int NOT NULL")]
+		public int fav_IdMascota
+		{
+			get
+			{
+				return this._fav_IdMascota;
+			}
+			set
+			{
+				if ((this._fav_IdMascota != value))
+				{
+					if (this._tbl_Mascotas.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onfav_IdMascotaChanging(value);
+					this.SendPropertyChanging();
+					this._fav_IdMascota = value;
+					this.SendPropertyChanged("fav_IdMascota");
+					this.Onfav_IdMascotaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fav_FechaAgregado", DbType="DateTime")]
+		public System.Nullable<System.DateTime> fav_FechaAgregado
+		{
+			get
+			{
+				return this._fav_FechaAgregado;
+			}
+			set
+			{
+				if ((this._fav_FechaAgregado != value))
+				{
+					this.Onfav_FechaAgregadoChanging(value);
+					this.SendPropertyChanging();
+					this._fav_FechaAgregado = value;
+					this.SendPropertyChanged("fav_FechaAgregado");
+					this.Onfav_FechaAgregadoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Mascotas_tbl_Favoritos", Storage="_tbl_Mascotas", ThisKey="fav_IdMascota", OtherKey="mas_IdMascota", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
+		public tbl_Mascotas tbl_Mascotas
+		{
+			get
+			{
+				return this._tbl_Mascotas.Entity;
+			}
+			set
+			{
+				tbl_Mascotas previousValue = this._tbl_Mascotas.Entity;
+				if (((previousValue != value) 
+							|| (this._tbl_Mascotas.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._tbl_Mascotas.Entity = null;
+						previousValue.tbl_Favoritos.Remove(this);
+					}
+					this._tbl_Mascotas.Entity = value;
+					if ((value != null))
+					{
+						value.tbl_Favoritos.Add(this);
+						this._fav_IdMascota = value.mas_IdMascota;
+					}
+					else
+					{
+						this._fav_IdMascota = default(int);
+					}
+					this.SendPropertyChanged("tbl_Mascotas");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Usuarios_tbl_Favoritos", Storage="_tbl_Usuarios", ThisKey="fav_IdUsuario", OtherKey="usu_IdUsuario", IsForeignKey=true)]
+		public tbl_Usuarios tbl_Usuarios
+		{
+			get
+			{
+				return this._tbl_Usuarios.Entity;
+			}
+			set
+			{
+				tbl_Usuarios previousValue = this._tbl_Usuarios.Entity;
+				if (((previousValue != value) 
+							|| (this._tbl_Usuarios.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._tbl_Usuarios.Entity = null;
+						previousValue.tbl_Favoritos.Remove(this);
+					}
+					this._tbl_Usuarios.Entity = value;
+					if ((value != null))
+					{
+						value.tbl_Favoritos.Add(this);
+						this._fav_IdUsuario = value.usu_IdUsuario;
+					}
+					else
+					{
+						this._fav_IdUsuario = default(int);
+					}
+					this.SendPropertyChanged("tbl_Usuarios");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tbl_FotosMascotas")]
 	public partial class tbl_FotosMascotas : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -3036,311 +2537,6 @@ namespace CapaDatos
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tbl_Likes")]
-	public partial class tbl_Likes : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _lik_IdLike;
-		
-		private int _lik_IdUsuario;
-		
-		private System.Nullable<int> _lik_IdPublicacion;
-		
-		private System.Nullable<int> _lik_IdComentario;
-		
-		private string _lik_TipoReaccion;
-		
-		private System.Nullable<System.DateTime> _lik_FechaReaccion;
-		
-		private EntityRef<tbl_Comentarios> _tbl_Comentarios;
-		
-		private EntityRef<tbl_Publicaciones> _tbl_Publicaciones;
-		
-		private EntityRef<tbl_Usuarios> _tbl_Usuarios;
-		
-    #region Definiciones de métodos de extensibilidad
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void Onlik_IdLikeChanging(int value);
-    partial void Onlik_IdLikeChanged();
-    partial void Onlik_IdUsuarioChanging(int value);
-    partial void Onlik_IdUsuarioChanged();
-    partial void Onlik_IdPublicacionChanging(System.Nullable<int> value);
-    partial void Onlik_IdPublicacionChanged();
-    partial void Onlik_IdComentarioChanging(System.Nullable<int> value);
-    partial void Onlik_IdComentarioChanged();
-    partial void Onlik_TipoReaccionChanging(string value);
-    partial void Onlik_TipoReaccionChanged();
-    partial void Onlik_FechaReaccionChanging(System.Nullable<System.DateTime> value);
-    partial void Onlik_FechaReaccionChanged();
-    #endregion
-		
-		public tbl_Likes()
-		{
-			this._tbl_Comentarios = default(EntityRef<tbl_Comentarios>);
-			this._tbl_Publicaciones = default(EntityRef<tbl_Publicaciones>);
-			this._tbl_Usuarios = default(EntityRef<tbl_Usuarios>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_lik_IdLike", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int lik_IdLike
-		{
-			get
-			{
-				return this._lik_IdLike;
-			}
-			set
-			{
-				if ((this._lik_IdLike != value))
-				{
-					this.Onlik_IdLikeChanging(value);
-					this.SendPropertyChanging();
-					this._lik_IdLike = value;
-					this.SendPropertyChanged("lik_IdLike");
-					this.Onlik_IdLikeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_lik_IdUsuario", DbType="Int NOT NULL")]
-		public int lik_IdUsuario
-		{
-			get
-			{
-				return this._lik_IdUsuario;
-			}
-			set
-			{
-				if ((this._lik_IdUsuario != value))
-				{
-					if (this._tbl_Usuarios.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.Onlik_IdUsuarioChanging(value);
-					this.SendPropertyChanging();
-					this._lik_IdUsuario = value;
-					this.SendPropertyChanged("lik_IdUsuario");
-					this.Onlik_IdUsuarioChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_lik_IdPublicacion", DbType="Int")]
-		public System.Nullable<int> lik_IdPublicacion
-		{
-			get
-			{
-				return this._lik_IdPublicacion;
-			}
-			set
-			{
-				if ((this._lik_IdPublicacion != value))
-				{
-					if (this._tbl_Publicaciones.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.Onlik_IdPublicacionChanging(value);
-					this.SendPropertyChanging();
-					this._lik_IdPublicacion = value;
-					this.SendPropertyChanged("lik_IdPublicacion");
-					this.Onlik_IdPublicacionChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_lik_IdComentario", DbType="Int")]
-		public System.Nullable<int> lik_IdComentario
-		{
-			get
-			{
-				return this._lik_IdComentario;
-			}
-			set
-			{
-				if ((this._lik_IdComentario != value))
-				{
-					if (this._tbl_Comentarios.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.Onlik_IdComentarioChanging(value);
-					this.SendPropertyChanging();
-					this._lik_IdComentario = value;
-					this.SendPropertyChanged("lik_IdComentario");
-					this.Onlik_IdComentarioChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_lik_TipoReaccion", DbType="VarChar(20)")]
-		public string lik_TipoReaccion
-		{
-			get
-			{
-				return this._lik_TipoReaccion;
-			}
-			set
-			{
-				if ((this._lik_TipoReaccion != value))
-				{
-					this.Onlik_TipoReaccionChanging(value);
-					this.SendPropertyChanging();
-					this._lik_TipoReaccion = value;
-					this.SendPropertyChanged("lik_TipoReaccion");
-					this.Onlik_TipoReaccionChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_lik_FechaReaccion", DbType="DateTime")]
-		public System.Nullable<System.DateTime> lik_FechaReaccion
-		{
-			get
-			{
-				return this._lik_FechaReaccion;
-			}
-			set
-			{
-				if ((this._lik_FechaReaccion != value))
-				{
-					this.Onlik_FechaReaccionChanging(value);
-					this.SendPropertyChanging();
-					this._lik_FechaReaccion = value;
-					this.SendPropertyChanged("lik_FechaReaccion");
-					this.Onlik_FechaReaccionChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Comentarios_tbl_Likes", Storage="_tbl_Comentarios", ThisKey="lik_IdComentario", OtherKey="com_IdComentario", IsForeignKey=true)]
-		public tbl_Comentarios tbl_Comentarios
-		{
-			get
-			{
-				return this._tbl_Comentarios.Entity;
-			}
-			set
-			{
-				tbl_Comentarios previousValue = this._tbl_Comentarios.Entity;
-				if (((previousValue != value) 
-							|| (this._tbl_Comentarios.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._tbl_Comentarios.Entity = null;
-						previousValue.tbl_Likes.Remove(this);
-					}
-					this._tbl_Comentarios.Entity = value;
-					if ((value != null))
-					{
-						value.tbl_Likes.Add(this);
-						this._lik_IdComentario = value.com_IdComentario;
-					}
-					else
-					{
-						this._lik_IdComentario = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("tbl_Comentarios");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Publicaciones_tbl_Likes", Storage="_tbl_Publicaciones", ThisKey="lik_IdPublicacion", OtherKey="pub_IdPublicacion", IsForeignKey=true, DeleteRule="CASCADE")]
-		public tbl_Publicaciones tbl_Publicaciones
-		{
-			get
-			{
-				return this._tbl_Publicaciones.Entity;
-			}
-			set
-			{
-				tbl_Publicaciones previousValue = this._tbl_Publicaciones.Entity;
-				if (((previousValue != value) 
-							|| (this._tbl_Publicaciones.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._tbl_Publicaciones.Entity = null;
-						previousValue.tbl_Likes.Remove(this);
-					}
-					this._tbl_Publicaciones.Entity = value;
-					if ((value != null))
-					{
-						value.tbl_Likes.Add(this);
-						this._lik_IdPublicacion = value.pub_IdPublicacion;
-					}
-					else
-					{
-						this._lik_IdPublicacion = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("tbl_Publicaciones");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Usuarios_tbl_Likes", Storage="_tbl_Usuarios", ThisKey="lik_IdUsuario", OtherKey="usu_IdUsuario", IsForeignKey=true)]
-		public tbl_Usuarios tbl_Usuarios
-		{
-			get
-			{
-				return this._tbl_Usuarios.Entity;
-			}
-			set
-			{
-				tbl_Usuarios previousValue = this._tbl_Usuarios.Entity;
-				if (((previousValue != value) 
-							|| (this._tbl_Usuarios.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._tbl_Usuarios.Entity = null;
-						previousValue.tbl_Likes.Remove(this);
-					}
-					this._tbl_Usuarios.Entity = value;
-					if ((value != null))
-					{
-						value.tbl_Likes.Add(this);
-						this._lik_IdUsuario = value.usu_IdUsuario;
-					}
-					else
-					{
-						this._lik_IdUsuario = default(int);
-					}
-					this.SendPropertyChanged("tbl_Usuarios");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tbl_Mascotas")]
 	public partial class tbl_Mascotas : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -3388,6 +2584,8 @@ namespace CapaDatos
 		private System.Nullable<System.DateTime> _mas_FechaRegistro;
 		
 		private System.Nullable<System.DateTime> _mas_FechaAdopcion;
+		
+		private EntitySet<tbl_Favoritos> _tbl_Favoritos;
 		
 		private EntitySet<tbl_FotosMascotas> _tbl_FotosMascotas;
 		
@@ -3449,6 +2647,7 @@ namespace CapaDatos
 		
 		public tbl_Mascotas()
 		{
+			this._tbl_Favoritos = new EntitySet<tbl_Favoritos>(new Action<tbl_Favoritos>(this.attach_tbl_Favoritos), new Action<tbl_Favoritos>(this.detach_tbl_Favoritos));
 			this._tbl_FotosMascotas = new EntitySet<tbl_FotosMascotas>(new Action<tbl_FotosMascotas>(this.attach_tbl_FotosMascotas), new Action<tbl_FotosMascotas>(this.detach_tbl_FotosMascotas));
 			this._tbl_SolicitudesAdopcion = new EntitySet<tbl_SolicitudesAdopcion>(new Action<tbl_SolicitudesAdopcion>(this.attach_tbl_SolicitudesAdopcion), new Action<tbl_SolicitudesAdopcion>(this.detach_tbl_SolicitudesAdopcion));
 			this._tbl_Razas = default(EntityRef<tbl_Razas>);
@@ -3889,6 +3088,19 @@ namespace CapaDatos
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Mascotas_tbl_Favoritos", Storage="_tbl_Favoritos", ThisKey="mas_IdMascota", OtherKey="fav_IdMascota")]
+		public EntitySet<tbl_Favoritos> tbl_Favoritos
+		{
+			get
+			{
+				return this._tbl_Favoritos;
+			}
+			set
+			{
+				this._tbl_Favoritos.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Mascotas_tbl_FotosMascotas", Storage="_tbl_FotosMascotas", ThisKey="mas_IdMascota", OtherKey="fot_IdMascota")]
 		public EntitySet<tbl_FotosMascotas> tbl_FotosMascotas
 		{
@@ -4035,6 +3247,18 @@ namespace CapaDatos
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+		
+		private void attach_tbl_Favoritos(tbl_Favoritos entity)
+		{
+			this.SendPropertyChanging();
+			entity.tbl_Mascotas = this;
+		}
+		
+		private void detach_tbl_Favoritos(tbl_Favoritos entity)
+		{
+			this.SendPropertyChanging();
+			entity.tbl_Mascotas = null;
 		}
 		
 		private void attach_tbl_FotosMascotas(tbl_FotosMascotas entity)
@@ -4378,474 +3602,6 @@ namespace CapaDatos
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tbl_Publicaciones")]
-	public partial class tbl_Publicaciones : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _pub_IdPublicacion;
-		
-		private int _pub_IdUsuario;
-		
-		private System.Nullable<int> _pub_IdCategoria;
-		
-		private string _pub_Titulo;
-		
-		private string _pub_Contenido;
-		
-		private string _pub_ImagenUrl;
-		
-		private System.Nullable<bool> _pub_Fijada;
-		
-		private System.Nullable<int> _pub_ContadorVistas;
-		
-		private string _pub_Estado;
-		
-		private System.Nullable<System.DateTime> _pub_FechaPublicacion;
-		
-		private System.Nullable<System.DateTime> _pub_FechaModificacion;
-		
-		private EntitySet<tbl_Comentarios> _tbl_Comentarios;
-		
-		private EntitySet<tbl_Likes> _tbl_Likes;
-		
-		private EntitySet<tbl_ReportesContenido> _tbl_ReportesContenido;
-		
-		private EntityRef<tbl_CategoriasForo> _tbl_CategoriasForo;
-		
-		private EntityRef<tbl_Usuarios> _tbl_Usuarios;
-		
-    #region Definiciones de métodos de extensibilidad
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void Onpub_IdPublicacionChanging(int value);
-    partial void Onpub_IdPublicacionChanged();
-    partial void Onpub_IdUsuarioChanging(int value);
-    partial void Onpub_IdUsuarioChanged();
-    partial void Onpub_IdCategoriaChanging(System.Nullable<int> value);
-    partial void Onpub_IdCategoriaChanged();
-    partial void Onpub_TituloChanging(string value);
-    partial void Onpub_TituloChanged();
-    partial void Onpub_ContenidoChanging(string value);
-    partial void Onpub_ContenidoChanged();
-    partial void Onpub_ImagenUrlChanging(string value);
-    partial void Onpub_ImagenUrlChanged();
-    partial void Onpub_FijadaChanging(System.Nullable<bool> value);
-    partial void Onpub_FijadaChanged();
-    partial void Onpub_ContadorVistasChanging(System.Nullable<int> value);
-    partial void Onpub_ContadorVistasChanged();
-    partial void Onpub_EstadoChanging(string value);
-    partial void Onpub_EstadoChanged();
-    partial void Onpub_FechaPublicacionChanging(System.Nullable<System.DateTime> value);
-    partial void Onpub_FechaPublicacionChanged();
-    partial void Onpub_FechaModificacionChanging(System.Nullable<System.DateTime> value);
-    partial void Onpub_FechaModificacionChanged();
-    #endregion
-		
-		public tbl_Publicaciones()
-		{
-			this._tbl_Comentarios = new EntitySet<tbl_Comentarios>(new Action<tbl_Comentarios>(this.attach_tbl_Comentarios), new Action<tbl_Comentarios>(this.detach_tbl_Comentarios));
-			this._tbl_Likes = new EntitySet<tbl_Likes>(new Action<tbl_Likes>(this.attach_tbl_Likes), new Action<tbl_Likes>(this.detach_tbl_Likes));
-			this._tbl_ReportesContenido = new EntitySet<tbl_ReportesContenido>(new Action<tbl_ReportesContenido>(this.attach_tbl_ReportesContenido), new Action<tbl_ReportesContenido>(this.detach_tbl_ReportesContenido));
-			this._tbl_CategoriasForo = default(EntityRef<tbl_CategoriasForo>);
-			this._tbl_Usuarios = default(EntityRef<tbl_Usuarios>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pub_IdPublicacion", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int pub_IdPublicacion
-		{
-			get
-			{
-				return this._pub_IdPublicacion;
-			}
-			set
-			{
-				if ((this._pub_IdPublicacion != value))
-				{
-					this.Onpub_IdPublicacionChanging(value);
-					this.SendPropertyChanging();
-					this._pub_IdPublicacion = value;
-					this.SendPropertyChanged("pub_IdPublicacion");
-					this.Onpub_IdPublicacionChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pub_IdUsuario", DbType="Int NOT NULL")]
-		public int pub_IdUsuario
-		{
-			get
-			{
-				return this._pub_IdUsuario;
-			}
-			set
-			{
-				if ((this._pub_IdUsuario != value))
-				{
-					if (this._tbl_Usuarios.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.Onpub_IdUsuarioChanging(value);
-					this.SendPropertyChanging();
-					this._pub_IdUsuario = value;
-					this.SendPropertyChanged("pub_IdUsuario");
-					this.Onpub_IdUsuarioChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pub_IdCategoria", DbType="Int")]
-		public System.Nullable<int> pub_IdCategoria
-		{
-			get
-			{
-				return this._pub_IdCategoria;
-			}
-			set
-			{
-				if ((this._pub_IdCategoria != value))
-				{
-					if (this._tbl_CategoriasForo.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.Onpub_IdCategoriaChanging(value);
-					this.SendPropertyChanging();
-					this._pub_IdCategoria = value;
-					this.SendPropertyChanged("pub_IdCategoria");
-					this.Onpub_IdCategoriaChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pub_Titulo", DbType="VarChar(200) NOT NULL", CanBeNull=false)]
-		public string pub_Titulo
-		{
-			get
-			{
-				return this._pub_Titulo;
-			}
-			set
-			{
-				if ((this._pub_Titulo != value))
-				{
-					this.Onpub_TituloChanging(value);
-					this.SendPropertyChanging();
-					this._pub_Titulo = value;
-					this.SendPropertyChanged("pub_Titulo");
-					this.Onpub_TituloChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pub_Contenido", DbType="Text NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
-		public string pub_Contenido
-		{
-			get
-			{
-				return this._pub_Contenido;
-			}
-			set
-			{
-				if ((this._pub_Contenido != value))
-				{
-					this.Onpub_ContenidoChanging(value);
-					this.SendPropertyChanging();
-					this._pub_Contenido = value;
-					this.SendPropertyChanged("pub_Contenido");
-					this.Onpub_ContenidoChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pub_ImagenUrl", DbType="VarChar(500)")]
-		public string pub_ImagenUrl
-		{
-			get
-			{
-				return this._pub_ImagenUrl;
-			}
-			set
-			{
-				if ((this._pub_ImagenUrl != value))
-				{
-					this.Onpub_ImagenUrlChanging(value);
-					this.SendPropertyChanging();
-					this._pub_ImagenUrl = value;
-					this.SendPropertyChanged("pub_ImagenUrl");
-					this.Onpub_ImagenUrlChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pub_Fijada", DbType="Bit")]
-		public System.Nullable<bool> pub_Fijada
-		{
-			get
-			{
-				return this._pub_Fijada;
-			}
-			set
-			{
-				if ((this._pub_Fijada != value))
-				{
-					this.Onpub_FijadaChanging(value);
-					this.SendPropertyChanging();
-					this._pub_Fijada = value;
-					this.SendPropertyChanged("pub_Fijada");
-					this.Onpub_FijadaChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pub_ContadorVistas", DbType="Int")]
-		public System.Nullable<int> pub_ContadorVistas
-		{
-			get
-			{
-				return this._pub_ContadorVistas;
-			}
-			set
-			{
-				if ((this._pub_ContadorVistas != value))
-				{
-					this.Onpub_ContadorVistasChanging(value);
-					this.SendPropertyChanging();
-					this._pub_ContadorVistas = value;
-					this.SendPropertyChanged("pub_ContadorVistas");
-					this.Onpub_ContadorVistasChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pub_Estado", DbType="VarChar(20)")]
-		public string pub_Estado
-		{
-			get
-			{
-				return this._pub_Estado;
-			}
-			set
-			{
-				if ((this._pub_Estado != value))
-				{
-					this.Onpub_EstadoChanging(value);
-					this.SendPropertyChanging();
-					this._pub_Estado = value;
-					this.SendPropertyChanged("pub_Estado");
-					this.Onpub_EstadoChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pub_FechaPublicacion", DbType="DateTime")]
-		public System.Nullable<System.DateTime> pub_FechaPublicacion
-		{
-			get
-			{
-				return this._pub_FechaPublicacion;
-			}
-			set
-			{
-				if ((this._pub_FechaPublicacion != value))
-				{
-					this.Onpub_FechaPublicacionChanging(value);
-					this.SendPropertyChanging();
-					this._pub_FechaPublicacion = value;
-					this.SendPropertyChanged("pub_FechaPublicacion");
-					this.Onpub_FechaPublicacionChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pub_FechaModificacion", DbType="DateTime")]
-		public System.Nullable<System.DateTime> pub_FechaModificacion
-		{
-			get
-			{
-				return this._pub_FechaModificacion;
-			}
-			set
-			{
-				if ((this._pub_FechaModificacion != value))
-				{
-					this.Onpub_FechaModificacionChanging(value);
-					this.SendPropertyChanging();
-					this._pub_FechaModificacion = value;
-					this.SendPropertyChanged("pub_FechaModificacion");
-					this.Onpub_FechaModificacionChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Publicaciones_tbl_Comentarios", Storage="_tbl_Comentarios", ThisKey="pub_IdPublicacion", OtherKey="com_IdPublicacion")]
-		public EntitySet<tbl_Comentarios> tbl_Comentarios
-		{
-			get
-			{
-				return this._tbl_Comentarios;
-			}
-			set
-			{
-				this._tbl_Comentarios.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Publicaciones_tbl_Likes", Storage="_tbl_Likes", ThisKey="pub_IdPublicacion", OtherKey="lik_IdPublicacion")]
-		public EntitySet<tbl_Likes> tbl_Likes
-		{
-			get
-			{
-				return this._tbl_Likes;
-			}
-			set
-			{
-				this._tbl_Likes.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Publicaciones_tbl_ReportesContenido", Storage="_tbl_ReportesContenido", ThisKey="pub_IdPublicacion", OtherKey="repc_IdPublicacion")]
-		public EntitySet<tbl_ReportesContenido> tbl_ReportesContenido
-		{
-			get
-			{
-				return this._tbl_ReportesContenido;
-			}
-			set
-			{
-				this._tbl_ReportesContenido.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_CategoriasForo_tbl_Publicaciones", Storage="_tbl_CategoriasForo", ThisKey="pub_IdCategoria", OtherKey="cat_IdCategoria", IsForeignKey=true)]
-		public tbl_CategoriasForo tbl_CategoriasForo
-		{
-			get
-			{
-				return this._tbl_CategoriasForo.Entity;
-			}
-			set
-			{
-				tbl_CategoriasForo previousValue = this._tbl_CategoriasForo.Entity;
-				if (((previousValue != value) 
-							|| (this._tbl_CategoriasForo.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._tbl_CategoriasForo.Entity = null;
-						previousValue.tbl_Publicaciones.Remove(this);
-					}
-					this._tbl_CategoriasForo.Entity = value;
-					if ((value != null))
-					{
-						value.tbl_Publicaciones.Add(this);
-						this._pub_IdCategoria = value.cat_IdCategoria;
-					}
-					else
-					{
-						this._pub_IdCategoria = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("tbl_CategoriasForo");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Usuarios_tbl_Publicaciones", Storage="_tbl_Usuarios", ThisKey="pub_IdUsuario", OtherKey="usu_IdUsuario", IsForeignKey=true)]
-		public tbl_Usuarios tbl_Usuarios
-		{
-			get
-			{
-				return this._tbl_Usuarios.Entity;
-			}
-			set
-			{
-				tbl_Usuarios previousValue = this._tbl_Usuarios.Entity;
-				if (((previousValue != value) 
-							|| (this._tbl_Usuarios.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._tbl_Usuarios.Entity = null;
-						previousValue.tbl_Publicaciones.Remove(this);
-					}
-					this._tbl_Usuarios.Entity = value;
-					if ((value != null))
-					{
-						value.tbl_Publicaciones.Add(this);
-						this._pub_IdUsuario = value.usu_IdUsuario;
-					}
-					else
-					{
-						this._pub_IdUsuario = default(int);
-					}
-					this.SendPropertyChanged("tbl_Usuarios");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_tbl_Comentarios(tbl_Comentarios entity)
-		{
-			this.SendPropertyChanging();
-			entity.tbl_Publicaciones = this;
-		}
-		
-		private void detach_tbl_Comentarios(tbl_Comentarios entity)
-		{
-			this.SendPropertyChanging();
-			entity.tbl_Publicaciones = null;
-		}
-		
-		private void attach_tbl_Likes(tbl_Likes entity)
-		{
-			this.SendPropertyChanging();
-			entity.tbl_Publicaciones = this;
-		}
-		
-		private void detach_tbl_Likes(tbl_Likes entity)
-		{
-			this.SendPropertyChanging();
-			entity.tbl_Publicaciones = null;
-		}
-		
-		private void attach_tbl_ReportesContenido(tbl_ReportesContenido entity)
-		{
-			this.SendPropertyChanging();
-			entity.tbl_Publicaciones = this;
-		}
-		
-		private void detach_tbl_ReportesContenido(tbl_ReportesContenido entity)
-		{
-			this.SendPropertyChanging();
-			entity.tbl_Publicaciones = null;
 		}
 	}
 	
@@ -5483,658 +4239,6 @@ namespace CapaDatos
 		{
 			this.SendPropertyChanging();
 			entity.tbl_Refugios = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tbl_ReportesContenido")]
-	public partial class tbl_ReportesContenido : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _repc_IdReporteContenido;
-		
-		private int _repc_IdUsuario;
-		
-		private System.Nullable<int> _repc_IdPublicacion;
-		
-		private System.Nullable<int> _repc_IdComentario;
-		
-		private string _repc_Motivo;
-		
-		private string _repc_Descripcion;
-		
-		private string _repc_Estado;
-		
-		private System.Nullable<System.DateTime> _repc_FechaReporte;
-		
-		private System.Nullable<int> _repc_IdUsuarioRevision;
-		
-		private System.Nullable<System.DateTime> _repc_FechaRevision;
-		
-		private EntityRef<tbl_Publicaciones> _tbl_Publicaciones;
-		
-		private EntityRef<tbl_Comentarios> _tbl_Comentarios;
-		
-		private EntityRef<tbl_Usuarios> _tbl_Usuarios;
-		
-		private EntityRef<tbl_Usuarios> _tbl_Usuarios1;
-		
-    #region Definiciones de métodos de extensibilidad
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void Onrepc_IdReporteContenidoChanging(int value);
-    partial void Onrepc_IdReporteContenidoChanged();
-    partial void Onrepc_IdUsuarioChanging(int value);
-    partial void Onrepc_IdUsuarioChanged();
-    partial void Onrepc_IdPublicacionChanging(System.Nullable<int> value);
-    partial void Onrepc_IdPublicacionChanged();
-    partial void Onrepc_IdComentarioChanging(System.Nullable<int> value);
-    partial void Onrepc_IdComentarioChanged();
-    partial void Onrepc_MotivoChanging(string value);
-    partial void Onrepc_MotivoChanged();
-    partial void Onrepc_DescripcionChanging(string value);
-    partial void Onrepc_DescripcionChanged();
-    partial void Onrepc_EstadoChanging(string value);
-    partial void Onrepc_EstadoChanged();
-    partial void Onrepc_FechaReporteChanging(System.Nullable<System.DateTime> value);
-    partial void Onrepc_FechaReporteChanged();
-    partial void Onrepc_IdUsuarioRevisionChanging(System.Nullable<int> value);
-    partial void Onrepc_IdUsuarioRevisionChanged();
-    partial void Onrepc_FechaRevisionChanging(System.Nullable<System.DateTime> value);
-    partial void Onrepc_FechaRevisionChanged();
-    #endregion
-		
-		public tbl_ReportesContenido()
-		{
-			this._tbl_Publicaciones = default(EntityRef<tbl_Publicaciones>);
-			this._tbl_Comentarios = default(EntityRef<tbl_Comentarios>);
-			this._tbl_Usuarios = default(EntityRef<tbl_Usuarios>);
-			this._tbl_Usuarios1 = default(EntityRef<tbl_Usuarios>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_repc_IdReporteContenido", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int repc_IdReporteContenido
-		{
-			get
-			{
-				return this._repc_IdReporteContenido;
-			}
-			set
-			{
-				if ((this._repc_IdReporteContenido != value))
-				{
-					this.Onrepc_IdReporteContenidoChanging(value);
-					this.SendPropertyChanging();
-					this._repc_IdReporteContenido = value;
-					this.SendPropertyChanged("repc_IdReporteContenido");
-					this.Onrepc_IdReporteContenidoChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_repc_IdUsuario", DbType="Int NOT NULL")]
-		public int repc_IdUsuario
-		{
-			get
-			{
-				return this._repc_IdUsuario;
-			}
-			set
-			{
-				if ((this._repc_IdUsuario != value))
-				{
-					if (this._tbl_Usuarios.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.Onrepc_IdUsuarioChanging(value);
-					this.SendPropertyChanging();
-					this._repc_IdUsuario = value;
-					this.SendPropertyChanged("repc_IdUsuario");
-					this.Onrepc_IdUsuarioChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_repc_IdPublicacion", DbType="Int")]
-		public System.Nullable<int> repc_IdPublicacion
-		{
-			get
-			{
-				return this._repc_IdPublicacion;
-			}
-			set
-			{
-				if ((this._repc_IdPublicacion != value))
-				{
-					if (this._tbl_Publicaciones.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.Onrepc_IdPublicacionChanging(value);
-					this.SendPropertyChanging();
-					this._repc_IdPublicacion = value;
-					this.SendPropertyChanged("repc_IdPublicacion");
-					this.Onrepc_IdPublicacionChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_repc_IdComentario", DbType="Int")]
-		public System.Nullable<int> repc_IdComentario
-		{
-			get
-			{
-				return this._repc_IdComentario;
-			}
-			set
-			{
-				if ((this._repc_IdComentario != value))
-				{
-					if (this._tbl_Comentarios.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.Onrepc_IdComentarioChanging(value);
-					this.SendPropertyChanging();
-					this._repc_IdComentario = value;
-					this.SendPropertyChanged("repc_IdComentario");
-					this.Onrepc_IdComentarioChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_repc_Motivo", DbType="VarChar(100)")]
-		public string repc_Motivo
-		{
-			get
-			{
-				return this._repc_Motivo;
-			}
-			set
-			{
-				if ((this._repc_Motivo != value))
-				{
-					this.Onrepc_MotivoChanging(value);
-					this.SendPropertyChanging();
-					this._repc_Motivo = value;
-					this.SendPropertyChanged("repc_Motivo");
-					this.Onrepc_MotivoChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_repc_Descripcion", DbType="Text", UpdateCheck=UpdateCheck.Never)]
-		public string repc_Descripcion
-		{
-			get
-			{
-				return this._repc_Descripcion;
-			}
-			set
-			{
-				if ((this._repc_Descripcion != value))
-				{
-					this.Onrepc_DescripcionChanging(value);
-					this.SendPropertyChanging();
-					this._repc_Descripcion = value;
-					this.SendPropertyChanged("repc_Descripcion");
-					this.Onrepc_DescripcionChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_repc_Estado", DbType="VarChar(20)")]
-		public string repc_Estado
-		{
-			get
-			{
-				return this._repc_Estado;
-			}
-			set
-			{
-				if ((this._repc_Estado != value))
-				{
-					this.Onrepc_EstadoChanging(value);
-					this.SendPropertyChanging();
-					this._repc_Estado = value;
-					this.SendPropertyChanged("repc_Estado");
-					this.Onrepc_EstadoChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_repc_FechaReporte", DbType="DateTime")]
-		public System.Nullable<System.DateTime> repc_FechaReporte
-		{
-			get
-			{
-				return this._repc_FechaReporte;
-			}
-			set
-			{
-				if ((this._repc_FechaReporte != value))
-				{
-					this.Onrepc_FechaReporteChanging(value);
-					this.SendPropertyChanging();
-					this._repc_FechaReporte = value;
-					this.SendPropertyChanged("repc_FechaReporte");
-					this.Onrepc_FechaReporteChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_repc_IdUsuarioRevision", DbType="Int")]
-		public System.Nullable<int> repc_IdUsuarioRevision
-		{
-			get
-			{
-				return this._repc_IdUsuarioRevision;
-			}
-			set
-			{
-				if ((this._repc_IdUsuarioRevision != value))
-				{
-					if (this._tbl_Usuarios1.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.Onrepc_IdUsuarioRevisionChanging(value);
-					this.SendPropertyChanging();
-					this._repc_IdUsuarioRevision = value;
-					this.SendPropertyChanged("repc_IdUsuarioRevision");
-					this.Onrepc_IdUsuarioRevisionChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_repc_FechaRevision", DbType="DateTime")]
-		public System.Nullable<System.DateTime> repc_FechaRevision
-		{
-			get
-			{
-				return this._repc_FechaRevision;
-			}
-			set
-			{
-				if ((this._repc_FechaRevision != value))
-				{
-					this.Onrepc_FechaRevisionChanging(value);
-					this.SendPropertyChanging();
-					this._repc_FechaRevision = value;
-					this.SendPropertyChanged("repc_FechaRevision");
-					this.Onrepc_FechaRevisionChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Publicaciones_tbl_ReportesContenido", Storage="_tbl_Publicaciones", ThisKey="repc_IdPublicacion", OtherKey="pub_IdPublicacion", IsForeignKey=true)]
-		public tbl_Publicaciones tbl_Publicaciones
-		{
-			get
-			{
-				return this._tbl_Publicaciones.Entity;
-			}
-			set
-			{
-				tbl_Publicaciones previousValue = this._tbl_Publicaciones.Entity;
-				if (((previousValue != value) 
-							|| (this._tbl_Publicaciones.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._tbl_Publicaciones.Entity = null;
-						previousValue.tbl_ReportesContenido.Remove(this);
-					}
-					this._tbl_Publicaciones.Entity = value;
-					if ((value != null))
-					{
-						value.tbl_ReportesContenido.Add(this);
-						this._repc_IdPublicacion = value.pub_IdPublicacion;
-					}
-					else
-					{
-						this._repc_IdPublicacion = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("tbl_Publicaciones");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Comentarios_tbl_ReportesContenido", Storage="_tbl_Comentarios", ThisKey="repc_IdComentario", OtherKey="com_IdComentario", IsForeignKey=true)]
-		public tbl_Comentarios tbl_Comentarios
-		{
-			get
-			{
-				return this._tbl_Comentarios.Entity;
-			}
-			set
-			{
-				tbl_Comentarios previousValue = this._tbl_Comentarios.Entity;
-				if (((previousValue != value) 
-							|| (this._tbl_Comentarios.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._tbl_Comentarios.Entity = null;
-						previousValue.tbl_ReportesContenido.Remove(this);
-					}
-					this._tbl_Comentarios.Entity = value;
-					if ((value != null))
-					{
-						value.tbl_ReportesContenido.Add(this);
-						this._repc_IdComentario = value.com_IdComentario;
-					}
-					else
-					{
-						this._repc_IdComentario = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("tbl_Comentarios");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Usuarios_tbl_ReportesContenido", Storage="_tbl_Usuarios", ThisKey="repc_IdUsuario", OtherKey="usu_IdUsuario", IsForeignKey=true)]
-		public tbl_Usuarios tbl_Usuarios
-		{
-			get
-			{
-				return this._tbl_Usuarios.Entity;
-			}
-			set
-			{
-				tbl_Usuarios previousValue = this._tbl_Usuarios.Entity;
-				if (((previousValue != value) 
-							|| (this._tbl_Usuarios.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._tbl_Usuarios.Entity = null;
-						previousValue.tbl_ReportesContenido.Remove(this);
-					}
-					this._tbl_Usuarios.Entity = value;
-					if ((value != null))
-					{
-						value.tbl_ReportesContenido.Add(this);
-						this._repc_IdUsuario = value.usu_IdUsuario;
-					}
-					else
-					{
-						this._repc_IdUsuario = default(int);
-					}
-					this.SendPropertyChanged("tbl_Usuarios");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Usuarios_tbl_ReportesContenido1", Storage="_tbl_Usuarios1", ThisKey="repc_IdUsuarioRevision", OtherKey="usu_IdUsuario", IsForeignKey=true)]
-		public tbl_Usuarios tbl_Usuarios1
-		{
-			get
-			{
-				return this._tbl_Usuarios1.Entity;
-			}
-			set
-			{
-				tbl_Usuarios previousValue = this._tbl_Usuarios1.Entity;
-				if (((previousValue != value) 
-							|| (this._tbl_Usuarios1.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._tbl_Usuarios1.Entity = null;
-						previousValue.tbl_ReportesContenido1.Remove(this);
-					}
-					this._tbl_Usuarios1.Entity = value;
-					if ((value != null))
-					{
-						value.tbl_ReportesContenido1.Add(this);
-						this._repc_IdUsuarioRevision = value.usu_IdUsuario;
-					}
-					else
-					{
-						this._repc_IdUsuarioRevision = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("tbl_Usuarios1");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tbl_Roles")]
-	public partial class tbl_Roles : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _rol_IdRol;
-		
-		private string _rol_Nombre;
-		
-		private string _rol_Descripcion;
-		
-		private System.Nullable<int> _rol_Nivel;
-		
-		private System.Nullable<bool> _rol_Estado;
-		
-		private System.Nullable<System.DateTime> _rol_FechaCreacion;
-		
-		private EntitySet<tbl_Usuarios> _tbl_Usuarios;
-		
-    #region Definiciones de métodos de extensibilidad
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void Onrol_IdRolChanging(int value);
-    partial void Onrol_IdRolChanged();
-    partial void Onrol_NombreChanging(string value);
-    partial void Onrol_NombreChanged();
-    partial void Onrol_DescripcionChanging(string value);
-    partial void Onrol_DescripcionChanged();
-    partial void Onrol_NivelChanging(System.Nullable<int> value);
-    partial void Onrol_NivelChanged();
-    partial void Onrol_EstadoChanging(System.Nullable<bool> value);
-    partial void Onrol_EstadoChanged();
-    partial void Onrol_FechaCreacionChanging(System.Nullable<System.DateTime> value);
-    partial void Onrol_FechaCreacionChanged();
-    #endregion
-		
-		public tbl_Roles()
-		{
-			this._tbl_Usuarios = new EntitySet<tbl_Usuarios>(new Action<tbl_Usuarios>(this.attach_tbl_Usuarios), new Action<tbl_Usuarios>(this.detach_tbl_Usuarios));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_rol_IdRol", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int rol_IdRol
-		{
-			get
-			{
-				return this._rol_IdRol;
-			}
-			set
-			{
-				if ((this._rol_IdRol != value))
-				{
-					this.Onrol_IdRolChanging(value);
-					this.SendPropertyChanging();
-					this._rol_IdRol = value;
-					this.SendPropertyChanged("rol_IdRol");
-					this.Onrol_IdRolChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_rol_Nombre", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string rol_Nombre
-		{
-			get
-			{
-				return this._rol_Nombre;
-			}
-			set
-			{
-				if ((this._rol_Nombre != value))
-				{
-					this.Onrol_NombreChanging(value);
-					this.SendPropertyChanging();
-					this._rol_Nombre = value;
-					this.SendPropertyChanged("rol_Nombre");
-					this.Onrol_NombreChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_rol_Descripcion", DbType="VarChar(200)")]
-		public string rol_Descripcion
-		{
-			get
-			{
-				return this._rol_Descripcion;
-			}
-			set
-			{
-				if ((this._rol_Descripcion != value))
-				{
-					this.Onrol_DescripcionChanging(value);
-					this.SendPropertyChanging();
-					this._rol_Descripcion = value;
-					this.SendPropertyChanged("rol_Descripcion");
-					this.Onrol_DescripcionChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_rol_Nivel", DbType="Int")]
-		public System.Nullable<int> rol_Nivel
-		{
-			get
-			{
-				return this._rol_Nivel;
-			}
-			set
-			{
-				if ((this._rol_Nivel != value))
-				{
-					this.Onrol_NivelChanging(value);
-					this.SendPropertyChanging();
-					this._rol_Nivel = value;
-					this.SendPropertyChanged("rol_Nivel");
-					this.Onrol_NivelChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_rol_Estado", DbType="Bit")]
-		public System.Nullable<bool> rol_Estado
-		{
-			get
-			{
-				return this._rol_Estado;
-			}
-			set
-			{
-				if ((this._rol_Estado != value))
-				{
-					this.Onrol_EstadoChanging(value);
-					this.SendPropertyChanging();
-					this._rol_Estado = value;
-					this.SendPropertyChanged("rol_Estado");
-					this.Onrol_EstadoChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_rol_FechaCreacion", DbType="DateTime")]
-		public System.Nullable<System.DateTime> rol_FechaCreacion
-		{
-			get
-			{
-				return this._rol_FechaCreacion;
-			}
-			set
-			{
-				if ((this._rol_FechaCreacion != value))
-				{
-					this.Onrol_FechaCreacionChanging(value);
-					this.SendPropertyChanging();
-					this._rol_FechaCreacion = value;
-					this.SendPropertyChanged("rol_FechaCreacion");
-					this.Onrol_FechaCreacionChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Roles_tbl_Usuarios", Storage="_tbl_Usuarios", ThisKey="rol_IdRol", OtherKey="usu_IdRol")]
-		public EntitySet<tbl_Usuarios> tbl_Usuarios
-		{
-			get
-			{
-				return this._tbl_Usuarios;
-			}
-			set
-			{
-				this._tbl_Usuarios.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_tbl_Usuarios(tbl_Usuarios entity)
-		{
-			this.SendPropertyChanging();
-			entity.tbl_Roles = this;
-		}
-		
-		private void detach_tbl_Usuarios(tbl_Usuarios entity)
-		{
-			this.SendPropertyChanging();
-			entity.tbl_Roles = null;
 		}
 	}
 	
@@ -6839,6 +4943,216 @@ namespace CapaDatos
 		{
 			this.SendPropertyChanging();
 			entity.tbl_ReportesMascotas = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tbl_Roles")]
+	public partial class tbl_Roles : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _rol_IdRol;
+		
+		private string _rol_Nombre;
+		
+		private string _rol_Descripcion;
+		
+		private System.Nullable<int> _rol_Nivel;
+		
+		private System.Nullable<bool> _rol_Estado;
+		
+		private System.Nullable<System.DateTime> _rol_FechaCreacion;
+		
+		private EntitySet<tbl_Usuarios> _tbl_Usuarios;
+		
+    #region Definiciones de métodos de extensibilidad
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void Onrol_IdRolChanging(int value);
+    partial void Onrol_IdRolChanged();
+    partial void Onrol_NombreChanging(string value);
+    partial void Onrol_NombreChanged();
+    partial void Onrol_DescripcionChanging(string value);
+    partial void Onrol_DescripcionChanged();
+    partial void Onrol_NivelChanging(System.Nullable<int> value);
+    partial void Onrol_NivelChanged();
+    partial void Onrol_EstadoChanging(System.Nullable<bool> value);
+    partial void Onrol_EstadoChanged();
+    partial void Onrol_FechaCreacionChanging(System.Nullable<System.DateTime> value);
+    partial void Onrol_FechaCreacionChanged();
+    #endregion
+		
+		public tbl_Roles()
+		{
+			this._tbl_Usuarios = new EntitySet<tbl_Usuarios>(new Action<tbl_Usuarios>(this.attach_tbl_Usuarios), new Action<tbl_Usuarios>(this.detach_tbl_Usuarios));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_rol_IdRol", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int rol_IdRol
+		{
+			get
+			{
+				return this._rol_IdRol;
+			}
+			set
+			{
+				if ((this._rol_IdRol != value))
+				{
+					this.Onrol_IdRolChanging(value);
+					this.SendPropertyChanging();
+					this._rol_IdRol = value;
+					this.SendPropertyChanged("rol_IdRol");
+					this.Onrol_IdRolChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_rol_Nombre", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string rol_Nombre
+		{
+			get
+			{
+				return this._rol_Nombre;
+			}
+			set
+			{
+				if ((this._rol_Nombre != value))
+				{
+					this.Onrol_NombreChanging(value);
+					this.SendPropertyChanging();
+					this._rol_Nombre = value;
+					this.SendPropertyChanged("rol_Nombre");
+					this.Onrol_NombreChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_rol_Descripcion", DbType="VarChar(200)")]
+		public string rol_Descripcion
+		{
+			get
+			{
+				return this._rol_Descripcion;
+			}
+			set
+			{
+				if ((this._rol_Descripcion != value))
+				{
+					this.Onrol_DescripcionChanging(value);
+					this.SendPropertyChanging();
+					this._rol_Descripcion = value;
+					this.SendPropertyChanged("rol_Descripcion");
+					this.Onrol_DescripcionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_rol_Nivel", DbType="Int")]
+		public System.Nullable<int> rol_Nivel
+		{
+			get
+			{
+				return this._rol_Nivel;
+			}
+			set
+			{
+				if ((this._rol_Nivel != value))
+				{
+					this.Onrol_NivelChanging(value);
+					this.SendPropertyChanging();
+					this._rol_Nivel = value;
+					this.SendPropertyChanged("rol_Nivel");
+					this.Onrol_NivelChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_rol_Estado", DbType="Bit")]
+		public System.Nullable<bool> rol_Estado
+		{
+			get
+			{
+				return this._rol_Estado;
+			}
+			set
+			{
+				if ((this._rol_Estado != value))
+				{
+					this.Onrol_EstadoChanging(value);
+					this.SendPropertyChanging();
+					this._rol_Estado = value;
+					this.SendPropertyChanged("rol_Estado");
+					this.Onrol_EstadoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_rol_FechaCreacion", DbType="DateTime")]
+		public System.Nullable<System.DateTime> rol_FechaCreacion
+		{
+			get
+			{
+				return this._rol_FechaCreacion;
+			}
+			set
+			{
+				if ((this._rol_FechaCreacion != value))
+				{
+					this.Onrol_FechaCreacionChanging(value);
+					this.SendPropertyChanging();
+					this._rol_FechaCreacion = value;
+					this.SendPropertyChanged("rol_FechaCreacion");
+					this.Onrol_FechaCreacionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Roles_tbl_Usuarios", Storage="_tbl_Usuarios", ThisKey="rol_IdRol", OtherKey="usu_IdRol")]
+		public EntitySet<tbl_Usuarios> tbl_Usuarios
+		{
+			get
+			{
+				return this._tbl_Usuarios;
+			}
+			set
+			{
+				this._tbl_Usuarios.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_tbl_Usuarios(tbl_Usuarios entity)
+		{
+			this.SendPropertyChanging();
+			entity.tbl_Roles = this;
+		}
+		
+		private void detach_tbl_Usuarios(tbl_Usuarios entity)
+		{
+			this.SendPropertyChanging();
+			entity.tbl_Roles = null;
 		}
 	}
 	
@@ -7806,19 +6120,11 @@ namespace CapaDatos
 		
 		private EntitySet<tbl_Avistamientos> _tbl_Avistamientos;
 		
-		private EntitySet<tbl_Comentarios> _tbl_Comentarios;
-		
-		private EntitySet<tbl_Likes> _tbl_Likes;
+		private EntitySet<tbl_Favoritos> _tbl_Favoritos;
 		
 		private EntitySet<tbl_Mascotas> _tbl_Mascotas;
 		
 		private EntitySet<tbl_Notificaciones> _tbl_Notificaciones;
-		
-		private EntitySet<tbl_Publicaciones> _tbl_Publicaciones;
-		
-		private EntitySet<tbl_ReportesContenido> _tbl_ReportesContenido;
-		
-		private EntitySet<tbl_ReportesContenido> _tbl_ReportesContenido1;
 		
 		private EntitySet<tbl_ReportesMascotas> _tbl_ReportesMascotas;
 		
@@ -7880,13 +6186,9 @@ namespace CapaDatos
 		{
 			this._tbl_Auditoria = new EntitySet<tbl_Auditoria>(new Action<tbl_Auditoria>(this.attach_tbl_Auditoria), new Action<tbl_Auditoria>(this.detach_tbl_Auditoria));
 			this._tbl_Avistamientos = new EntitySet<tbl_Avistamientos>(new Action<tbl_Avistamientos>(this.attach_tbl_Avistamientos), new Action<tbl_Avistamientos>(this.detach_tbl_Avistamientos));
-			this._tbl_Comentarios = new EntitySet<tbl_Comentarios>(new Action<tbl_Comentarios>(this.attach_tbl_Comentarios), new Action<tbl_Comentarios>(this.detach_tbl_Comentarios));
-			this._tbl_Likes = new EntitySet<tbl_Likes>(new Action<tbl_Likes>(this.attach_tbl_Likes), new Action<tbl_Likes>(this.detach_tbl_Likes));
+			this._tbl_Favoritos = new EntitySet<tbl_Favoritos>(new Action<tbl_Favoritos>(this.attach_tbl_Favoritos), new Action<tbl_Favoritos>(this.detach_tbl_Favoritos));
 			this._tbl_Mascotas = new EntitySet<tbl_Mascotas>(new Action<tbl_Mascotas>(this.attach_tbl_Mascotas), new Action<tbl_Mascotas>(this.detach_tbl_Mascotas));
 			this._tbl_Notificaciones = new EntitySet<tbl_Notificaciones>(new Action<tbl_Notificaciones>(this.attach_tbl_Notificaciones), new Action<tbl_Notificaciones>(this.detach_tbl_Notificaciones));
-			this._tbl_Publicaciones = new EntitySet<tbl_Publicaciones>(new Action<tbl_Publicaciones>(this.attach_tbl_Publicaciones), new Action<tbl_Publicaciones>(this.detach_tbl_Publicaciones));
-			this._tbl_ReportesContenido = new EntitySet<tbl_ReportesContenido>(new Action<tbl_ReportesContenido>(this.attach_tbl_ReportesContenido), new Action<tbl_ReportesContenido>(this.detach_tbl_ReportesContenido));
-			this._tbl_ReportesContenido1 = new EntitySet<tbl_ReportesContenido>(new Action<tbl_ReportesContenido>(this.attach_tbl_ReportesContenido1), new Action<tbl_ReportesContenido>(this.detach_tbl_ReportesContenido1));
 			this._tbl_ReportesMascotas = new EntitySet<tbl_ReportesMascotas>(new Action<tbl_ReportesMascotas>(this.attach_tbl_ReportesMascotas), new Action<tbl_ReportesMascotas>(this.detach_tbl_ReportesMascotas));
 			this._tbl_SolicitudesAdopcion = new EntitySet<tbl_SolicitudesAdopcion>(new Action<tbl_SolicitudesAdopcion>(this.attach_tbl_SolicitudesAdopcion), new Action<tbl_SolicitudesAdopcion>(this.detach_tbl_SolicitudesAdopcion));
 			this._tbl_SolicitudesAdopcion1 = new EntitySet<tbl_SolicitudesAdopcion>(new Action<tbl_SolicitudesAdopcion>(this.attach_tbl_SolicitudesAdopcion1), new Action<tbl_SolicitudesAdopcion>(this.detach_tbl_SolicitudesAdopcion1));
@@ -8310,29 +6612,16 @@ namespace CapaDatos
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Usuarios_tbl_Comentarios", Storage="_tbl_Comentarios", ThisKey="usu_IdUsuario", OtherKey="com_IdUsuario")]
-		public EntitySet<tbl_Comentarios> tbl_Comentarios
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Usuarios_tbl_Favoritos", Storage="_tbl_Favoritos", ThisKey="usu_IdUsuario", OtherKey="fav_IdUsuario")]
+		public EntitySet<tbl_Favoritos> tbl_Favoritos
 		{
 			get
 			{
-				return this._tbl_Comentarios;
+				return this._tbl_Favoritos;
 			}
 			set
 			{
-				this._tbl_Comentarios.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Usuarios_tbl_Likes", Storage="_tbl_Likes", ThisKey="usu_IdUsuario", OtherKey="lik_IdUsuario")]
-		public EntitySet<tbl_Likes> tbl_Likes
-		{
-			get
-			{
-				return this._tbl_Likes;
-			}
-			set
-			{
-				this._tbl_Likes.Assign(value);
+				this._tbl_Favoritos.Assign(value);
 			}
 		}
 		
@@ -8359,45 +6648,6 @@ namespace CapaDatos
 			set
 			{
 				this._tbl_Notificaciones.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Usuarios_tbl_Publicaciones", Storage="_tbl_Publicaciones", ThisKey="usu_IdUsuario", OtherKey="pub_IdUsuario")]
-		public EntitySet<tbl_Publicaciones> tbl_Publicaciones
-		{
-			get
-			{
-				return this._tbl_Publicaciones;
-			}
-			set
-			{
-				this._tbl_Publicaciones.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Usuarios_tbl_ReportesContenido", Storage="_tbl_ReportesContenido", ThisKey="usu_IdUsuario", OtherKey="repc_IdUsuario")]
-		public EntitySet<tbl_ReportesContenido> tbl_ReportesContenido
-		{
-			get
-			{
-				return this._tbl_ReportesContenido;
-			}
-			set
-			{
-				this._tbl_ReportesContenido.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Usuarios_tbl_ReportesContenido1", Storage="_tbl_ReportesContenido1", ThisKey="usu_IdUsuario", OtherKey="repc_IdUsuarioRevision")]
-		public EntitySet<tbl_ReportesContenido> tbl_ReportesContenido1
-		{
-			get
-			{
-				return this._tbl_ReportesContenido1;
-			}
-			set
-			{
-				this._tbl_ReportesContenido1.Assign(value);
 			}
 		}
 		
@@ -8565,25 +6815,13 @@ namespace CapaDatos
 			entity.tbl_Usuarios = null;
 		}
 		
-		private void attach_tbl_Comentarios(tbl_Comentarios entity)
+		private void attach_tbl_Favoritos(tbl_Favoritos entity)
 		{
 			this.SendPropertyChanging();
 			entity.tbl_Usuarios = this;
 		}
 		
-		private void detach_tbl_Comentarios(tbl_Comentarios entity)
-		{
-			this.SendPropertyChanging();
-			entity.tbl_Usuarios = null;
-		}
-		
-		private void attach_tbl_Likes(tbl_Likes entity)
-		{
-			this.SendPropertyChanging();
-			entity.tbl_Usuarios = this;
-		}
-		
-		private void detach_tbl_Likes(tbl_Likes entity)
+		private void detach_tbl_Favoritos(tbl_Favoritos entity)
 		{
 			this.SendPropertyChanging();
 			entity.tbl_Usuarios = null;
@@ -8611,42 +6849,6 @@ namespace CapaDatos
 		{
 			this.SendPropertyChanging();
 			entity.tbl_Usuarios = null;
-		}
-		
-		private void attach_tbl_Publicaciones(tbl_Publicaciones entity)
-		{
-			this.SendPropertyChanging();
-			entity.tbl_Usuarios = this;
-		}
-		
-		private void detach_tbl_Publicaciones(tbl_Publicaciones entity)
-		{
-			this.SendPropertyChanging();
-			entity.tbl_Usuarios = null;
-		}
-		
-		private void attach_tbl_ReportesContenido(tbl_ReportesContenido entity)
-		{
-			this.SendPropertyChanging();
-			entity.tbl_Usuarios = this;
-		}
-		
-		private void detach_tbl_ReportesContenido(tbl_ReportesContenido entity)
-		{
-			this.SendPropertyChanging();
-			entity.tbl_Usuarios = null;
-		}
-		
-		private void attach_tbl_ReportesContenido1(tbl_ReportesContenido entity)
-		{
-			this.SendPropertyChanging();
-			entity.tbl_Usuarios1 = this;
-		}
-		
-		private void detach_tbl_ReportesContenido1(tbl_ReportesContenido entity)
-		{
-			this.SendPropertyChanging();
-			entity.tbl_Usuarios1 = null;
 		}
 		
 		private void attach_tbl_ReportesMascotas(tbl_ReportesMascotas entity)

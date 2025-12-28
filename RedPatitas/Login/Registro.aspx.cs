@@ -4,11 +4,13 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using CapaNegocios;
 
 namespace RedPatitas.Login
 {
     public partial class Registro : System.Web.UI.Page
     {
+        CN_UsuarioService objUsuario = new CN_UsuarioService();
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -73,7 +75,7 @@ namespace RedPatitas.Login
             {
                 if (esRefugio)
                 {
-                    // Datos del refugio (sin datos personales)
+                    // Datos del refugio
                     string nombreRefugio = txtNombreRefugio.Text.Trim();
                     string descripcionRefugio = txtDescripcionRefugio.Text.Trim();
                     string telefonoRefugio = txtTelefonoRefugio.Text.Trim();
@@ -82,23 +84,15 @@ namespace RedPatitas.Login
                     string emailRefugio = txtEmail.Text.Trim();
                     string password = txtPassword.Text;
 
-                    // TODO: Implementar registro de refugio
-                    // 1. Crear el refugio en tbl_Refugios:
-                    //    - ref_Nombre = nombreRefugio
-                    //    - ref_Descripcion = descripcionRefugio
-                    //    - ref_Telefono = telefonoRefugio
-                    //    - ref_Ciudad = ciudadRefugio
-                    //    - ref_Direccion = direccionRefugio
-                    //    - ref_Email = emailRefugio
-                    //    - ref_Verificado = 0 (pendiente de verificación)
-                    //
-                    // 2. Crear cuenta de usuario para el refugio:
-                    //    - usu_IdRol = 3 (Refugio) - o 2 (AdminRefugio) depende del flujo
-                    //    - usu_Nombre = nombreRefugio (usar nombre del refugio)
-                    //    - usu_Apellido = "" (vacío o null)
-                    //    - usu_Email = emailRefugio
-                    //    - usu_Contrasena = password (hasheado)
-                    //    - usu_IdRefugio = ID del refugio creado
+                    var resultado = objUsuario.RegistrarRefugio(
+                        nombreRefugio, descripcionRefugio, telefonoRefugio,
+                        ciudadRefugio, direccionRefugio, emailRefugio, password);
+
+                    if (!resultado.Exito)
+                    {
+                        MostrarAlerta("error", "Error", resultado.Mensaje);
+                        return;
+                    }
                     
                     string script = @"
                         Swal.fire({
@@ -121,8 +115,13 @@ namespace RedPatitas.Login
                     string email = txtEmail.Text.Trim();
                     string password = txtPassword.Text;
 
-                    // TODO: Implementar registro de adoptante
-                    // Crear usuario con usu_IdRol = 4 (Adoptante), usu_IdRefugio = NULL
+                    var resultado = objUsuario.RegistrarAdoptante(nombres, apellidos, email, password);
+
+                    if (!resultado.Exito)
+                    {
+                        MostrarAlerta("error", "Error", resultado.Mensaje);
+                        return;
+                    }
                     
                     string script = @"
                         Swal.fire({
@@ -137,9 +136,9 @@ namespace RedPatitas.Login
                     Page.ClientScript.RegisterStartupScript(this.GetType(), "alertSuccess", script, true);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                MostrarAlerta("error", "Error", "Ocurrió un error al crear la cuenta.");
+                MostrarAlerta("error", "Error", "Ocurrió un error al crear la cuenta: " + ex.Message);
             }
         }
 

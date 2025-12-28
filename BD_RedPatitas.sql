@@ -150,6 +150,15 @@ CREATE TABLE tbl_FotosMascotas (
     fot_FechaSubida DATETIME DEFAULT GETDATE()
 );
 
+-- Favoritos de Mascotas (para adoptantes)
+CREATE TABLE tbl_Favoritos (
+    fav_IdFavorito INT PRIMARY KEY IDENTITY(1,1),
+    fav_IdUsuario INT NOT NULL FOREIGN KEY REFERENCES tbl_Usuarios(usu_IdUsuario),
+    fav_IdMascota INT NOT NULL FOREIGN KEY REFERENCES tbl_Mascotas(mas_IdMascota) ON DELETE CASCADE,
+    fav_FechaAgregado DATETIME DEFAULT GETDATE(),
+    CONSTRAINT UQ_Favorito_Usuario_Mascota UNIQUE (fav_IdUsuario, fav_IdMascota)
+);
+
 -- ============================================================
 -- MÓDULO 4: ADOPCIONES Y EVALUACIÓN
 -- ============================================================
@@ -289,72 +298,7 @@ CREATE TABLE tbl_Campanias (
     cam_FechaCreacion DATETIME DEFAULT GETDATE()
 );
 
--- ============================================================
--- MÓDULO 7: COMUNIDAD (FORO)
--- ============================================================
 
--- Categorías de Publicaciones
-CREATE TABLE tbl_CategoriasForo (
-    cat_IdCategoria INT PRIMARY KEY IDENTITY(1,1),
-    cat_Nombre VARCHAR(100) NOT NULL,
-    cat_Descripcion VARCHAR(300),
-    cat_IconoUrl VARCHAR(500),
-    cat_Color VARCHAR(7),  -- Hex color
-    cat_Orden INT DEFAULT 0,
-    cat_Estado BIT DEFAULT 1
-);
-
--- Publicaciones
-CREATE TABLE tbl_Publicaciones (
-    pub_IdPublicacion INT PRIMARY KEY IDENTITY(1,1),
-    pub_IdUsuario INT NOT NULL FOREIGN KEY REFERENCES tbl_Usuarios(usu_IdUsuario),
-    pub_IdCategoria INT FOREIGN KEY REFERENCES tbl_CategoriasForo(cat_IdCategoria),
-    pub_Titulo VARCHAR(200) NOT NULL,
-    pub_Contenido TEXT NOT NULL,
-    pub_ImagenUrl VARCHAR(500),
-    pub_Fijada BIT DEFAULT 0,  -- Publicación fijada por admin
-    pub_ContadorVistas INT DEFAULT 0,
-    pub_Estado VARCHAR(20) DEFAULT 'Activo',  -- Activo, Oculto, Eliminado, Reportado
-    pub_FechaPublicacion DATETIME DEFAULT GETDATE(),
-    pub_FechaModificacion DATETIME
-);
-
--- Comentarios de Publicaciones
-CREATE TABLE tbl_Comentarios (
-    com_IdComentario INT PRIMARY KEY IDENTITY(1,1),
-    com_IdPublicacion INT NOT NULL FOREIGN KEY REFERENCES tbl_Publicaciones(pub_IdPublicacion) ON DELETE CASCADE,
-    com_IdUsuario INT NOT NULL FOREIGN KEY REFERENCES tbl_Usuarios(usu_IdUsuario),
-    com_IdComentarioPadre INT FOREIGN KEY REFERENCES tbl_Comentarios(com_IdComentario),  -- Para respuestas anidadas
-    com_Contenido TEXT NOT NULL,
-    com_Estado VARCHAR(20) DEFAULT 'Activo',
-    com_FechaComentario DATETIME DEFAULT GETDATE(),
-    com_FechaModificacion DATETIME
-);
-
--- Likes/Reacciones
-CREATE TABLE tbl_Likes (
-    lik_IdLike INT PRIMARY KEY IDENTITY(1,1),
-    lik_IdUsuario INT NOT NULL FOREIGN KEY REFERENCES tbl_Usuarios(usu_IdUsuario),
-    lik_IdPublicacion INT FOREIGN KEY REFERENCES tbl_Publicaciones(pub_IdPublicacion) ON DELETE CASCADE,
-    lik_IdComentario INT FOREIGN KEY REFERENCES tbl_Comentarios(com_IdComentario),
-    lik_TipoReaccion VARCHAR(20) DEFAULT 'Like',  -- Like, Love, etc.
-    lik_FechaReaccion DATETIME DEFAULT GETDATE(),
-    CONSTRAINT CK_Like_Target CHECK (lik_IdPublicacion IS NOT NULL OR lik_IdComentario IS NOT NULL)
-);
-
--- Reportes de contenido inapropiado
-CREATE TABLE tbl_ReportesContenido (
-    repc_IdReporteContenido INT PRIMARY KEY IDENTITY(1,1),
-    repc_IdUsuario INT NOT NULL FOREIGN KEY REFERENCES tbl_Usuarios(usu_IdUsuario),
-    repc_IdPublicacion INT FOREIGN KEY REFERENCES tbl_Publicaciones(pub_IdPublicacion),
-    repc_IdComentario INT FOREIGN KEY REFERENCES tbl_Comentarios(com_IdComentario),
-    repc_Motivo VARCHAR(100),
-    repc_Descripcion TEXT,
-    repc_Estado VARCHAR(20) DEFAULT 'Pendiente',  -- Pendiente, Revisado, Resuelto
-    repc_FechaReporte DATETIME DEFAULT GETDATE(),
-    repc_IdUsuarioRevision INT FOREIGN KEY REFERENCES tbl_Usuarios(usu_IdUsuario),
-    repc_FechaRevision DATETIME
-);
 
 -- ============================================================
 -- DATOS INICIALES

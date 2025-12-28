@@ -81,6 +81,12 @@ namespace RedPatitas.Login
             Session["UsuarioId"] = resultado.UsuarioId;
             Session["NombreUsuario"] = resultado.NombreUsuario;
             Session["RolId"] = resultado.RolId;
+
+            if(resultado.RolId == 2 && resultado.RefugioId != null ) 
+            {
+                Session["RefugioId"] = resultado.RefugioId;
+                Session["Ref_Verificado"] = resultado.Ref_Verificado;
+            }
             
             // Determinar URL de redirección según rol
             string redirectUrl = "";
