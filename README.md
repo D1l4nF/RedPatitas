@@ -26,11 +26,11 @@ RedPatitas es una plataforma web que centraliza y digitaliza el proceso de adopc
 
 | Capa | Tecnología |
 |------|------------|
-| **Frontend** | HTML5, CSS3, JavaScript, Bootstrap 5.3 |
+| **Frontend** | HTML5, CSS3, JavaScript |
 | **Backend** | C# (.NET Framework 4.8) |
-| **Arquitectura** | ASP.NET Web Forms - 3 Capas (DAL, BLL, UI) |
+| **Arquitectura** | ASP.NET Web Forms - 3 Capas |
 | **Base de Datos** | SQL Server 2019+ |
-| **ORM** | Linq to SQL |
+| **ORM** | LINQ to SQL |
 | **Mapas** | Leaflet.js + OpenStreetMap |
 
 ---
@@ -38,73 +38,91 @@ RedPatitas es una plataforma web que centraliza y digitaliza el proceso de adopc
 ## 📁 Estructura del Proyecto
 
 ```
-RedPatitas.Solution/
+RedPatitas/
 │
-├── 📂 RedPatitas.Entities/      # Clases de entidades
-├── 📂 RedPatitas.DAL/           # Capa de acceso a datos
-├── 📂 RedPatitas.BLL/           # Capa de lógica de negocio
-├── 📂 RedPatitas.Web/           # Interfaz Web Forms
-│   ├── Account/                  # Login, Registro
-│   ├── Mascotas/                 # CRUD de mascotas
-│   ├── Adopciones/               # Solicitudes y evaluación
-│   ├── Reportes/                 # Mascotas perdidas/encontradas
-│   ├── Admin/                    # Panel de administración
-│   └── Comunidad/                # Foro y campañas
+├── 📂 CapaDatos/                 # Capa de acceso a datos (LINQ to SQL)
+│   └── DataClasses1.dbml         # Modelo de datos
 │
-└── 📄 BD_RedPatitas.sql         # Script de base de datos
+├── 📂 CapaNegocios/              # Capa de lógica de negocio
+│   ├── CN_UsuarioService.cs      # Servicios de usuario
+│   ├── CN_LoginResultado.cs      # Resultado de login
+│   └── CN_RegistroResultado.cs   # Resultado de registro
+│
+├── 📂 RedPatitas/                # Interfaz Web Forms
+│   ├── Login/                    # Login, Registro
+│   ├── Admin/                    # Panel SuperAdmin
+│   ├── AdminRefugio/             # Panel Admin de Refugio
+│   ├── Refugio/                  # Panel Usuario Refugio
+│   ├── Adoptante/                # Panel Adoptante
+│   └── Style/                    # CSS (dashboard.css, forms.css)
+│
+└── 📄 BD_RedPatitas.sql          # Script de base de datos
 ```
 
 ---
 
 ## 👥 Roles del Sistema
 
-| Rol | Nivel | Descripción |
-|-----|-------|-------------|
-| 👑 **SuperAdmin** | 100 | Control total del sistema |
-| 🏥 **AdminRefugio** | 50 | Administra un refugio específico |
-| 🐕 **Refugio** | 30 | Registra mascotas, responde solicitudes |
-| 🐾 **Adoptante** | 10 | Solicita adopciones, reporta mascotas |
+| Rol | ID | Nivel | Descripción |
+|-----|:--:|:-----:|-------------|
+| 👑 **SuperAdmin** | 1 | 100 | Control total del sistema |
+| 🏥 **AdminRefugio** | 2 | 50 | Administra un refugio específico |
+| 🐕 **Refugio** | 3 | 30 | Usuario operativo de refugio |
+| 🐾 **Adoptante** | 4 | 10 | Solicita adopciones, reporta mascotas |
+
+### Permisos por Rol
+
+| Funcionalidad | SuperAdmin | AdminRefugio | Refugio | Adoptante |
+|---------------|:----------:|:------------:|:-------:|:---------:|
+| Gestión global de usuarios | ✅ | ❌ | ❌ | ❌ |
+| Aprobar refugios | ✅ | ❌ | ❌ | ❌ |
+| Gestionar mascotas del refugio | ❌ | ✅* | ✅ | ❌ |
+| Gestionar campañas | ❌ | ✅* | ❌ | ❌ |
+| Ver solicitudes de adopción | ❌ | ✅* | ✅ | ❌ |
+| Buscar mascotas | ❌ | ❌ | ❌ | ✅ |
+| Solicitar adopción | ❌ | ❌ | ❌ | ✅ |
+| Reportar mascota perdida | ❌ | ❌ | ❌ | ✅ |
+| Favoritos | ❌ | ❌ | ❌ | ✅ |
+
+**\* = Bloqueado si el refugio no está verificado**
 
 ---
 
 ## 🗄️ Base de Datos
 
-### Resumen
+### Módulos Implementados
 
-| Elemento | Cantidad |
-|----------|----------|
-| Tablas | 23 |
-| Vistas | 5 |
-| Procedimientos Almacenados | 7 |
-| Índices | 14 |
+| Módulo | Tablas | Descripción |
+|--------|:------:|-------------|
+| 🔐 Seguridad | 4 | Usuarios, Roles, Tokens, Auditoría |
+| 🏠 Refugios | 1 | Gestión de organizaciones |
+| 🐾 Mascotas | 4 | Mascotas, Especies, Razas, Fotos |
+| ⭐ Favoritos | 1 | Mascotas favoritas de adoptantes |
+| 📝 Adopciones | 3 | Solicitudes, Criterios, Evaluación |
+| 🚨 Reportes | 3 | Mascotas perdidas/encontradas, Avistamientos, Fotos |
+| 🔔 Notificaciones | 1 | Alertas in-app |
+| 📢 Campañas | 1 | Eventos de refugios |
 
-### Módulos
-
-- 🔐 **Seguridad**: Usuarios, Roles, Tokens, Auditoría, Bloqueo de cuentas
-- 🏠 **Refugios**: Gestión de organizaciones con múltiples usuarios
-- 🐾 **Mascotas**: Especies, Razas, Galería de fotos
-- 📝 **Adopciones**: Solicitudes, Evaluación con matriz ponderada
-- 🚨 **Reportes**: Mascotas perdidas/encontradas con geolocalización
-- 🔔 **Notificaciones**: Alertas in-app y campañas
-- 💬 **Comunidad**: Foro con categorías, comentarios y likes
+**Total: 18 tablas**
 
 ---
 
 ## 🔐 Características de Seguridad
 
-- ✅ Contraseñas hasheadas con SHA-256 + Salt
-- ✅ Bloqueo automático después de 3 intentos fallidos
-- ✅ Desbloqueo automático después de 30 minutos
+- ✅ Protección de páginas por rol (Master Pages)
+- ✅ Sesiones de usuario (UsuarioId, RolId, RefugioId)
+- ✅ Verificación de refugios pendientes de aprobación
+- ✅ Bloqueo de funciones para refugios no verificados
 - ✅ Recuperación de contraseña por token
-- ✅ Auditoría de todas las acciones del sistema
-- ✅ Protección contra SQL Injection (Linq to SQL)
-- ✅ Validación de entradas con Data Annotations
+- ✅ Auditoría de acciones del sistema
+- ✅ Protección contra SQL Injection (LINQ to SQL)
+- ⚠️ Hashing de contraseñas (pendiente de implementar)
 
 ---
 
 ## 📊 Sistema de Evaluación de Adoptantes
 
-El sistema utiliza una **matriz de evaluación ponderada** con cursores para calcular la aptitud de cada solicitante:
+El sistema utiliza una **matriz de evaluación ponderada** para calcular la aptitud de cada solicitante:
 
 | Criterio | Peso |
 |----------|------|
@@ -140,7 +158,6 @@ El sistema utiliza una **matriz de evaluación ponderada** con cursores para cal
 
 2. **Crear la base de datos**
    ```sql
-   -- Ejecutar en SQL Server Management Studio
    CREATE DATABASE RedPatitas;
    GO
    USE RedPatitas;
@@ -148,14 +165,7 @@ El sistema utiliza una **matriz de evaluación ponderada** con cursores para cal
    -- Ejecutar el script BD_RedPatitas.sql
    ```
 
-3. **Configurar conexión**
-   ```xml
-   <!-- Web.config -->
-   <connectionStrings>
-     <add name="RedPatitasConnection" 
-          connectionString="Data Source=.;Initial Catalog=RedPatitas;Integrated Security=True" />
-   </connectionStrings>
-   ```
+3. **Configurar conexión** en `CapaDatos/App.config`
 
 4. **Ejecutar el proyecto**
    - Abrir `RedPatitas.sln` en Visual Studio
@@ -163,19 +173,19 @@ El sistema utiliza una **matriz de evaluación ponderada** con cursores para cal
 
 ---
 
-## 📸 Capturas de Pantalla
-
-*Próximamente...*
-
----
-
 ## 📅 Roadmap
 
-- [x] Sprint 1: Módulo de Seguridad y Autenticación *(En progreso)*
-- [x] Sprint 1: CRUD de Mascotas *(En progreso)*
-- [ ] Sprint 2: Módulo de Adopciones y Evaluación
-- [ ] Sprint 3: Geolocalización y Reportes
-- [ ] Sprint 4: Panel Admin y Comunidad
+- [x] Módulo de Seguridad y Autenticación
+- [x] Protección de páginas por rol
+- [x] Sistema de registro (Adoptante y Refugio)
+- [x] Verificación de refugios
+- [x] Perfil de usuario
+- [x] Estructura de Master Pages con menús dinámicos
+- [ ] CRUD de Mascotas
+- [ ] Módulo de Adopciones y Evaluación
+- [ ] Geolocalización y Reportes
+- [ ] Panel Admin completo
+- [ ] Integración final
 
 ---
 
@@ -190,7 +200,6 @@ El sistema utiliza una **matriz de evaluación ponderada** con cursores para cal
 **Tutora:** Jessica Reyes
 
 ---
-
 
 ## 📝 Licencia
 

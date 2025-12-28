@@ -48,7 +48,7 @@ CREATE TABLE tbl_Usuarios (
     usu_Nombre VARCHAR(100) NOT NULL,
     usu_Apellido VARCHAR(100),
     usu_Email VARCHAR(100) NOT NULL UNIQUE,
-    usu_Contrasena VARCHAR(255) NOT NULL,  -- Hash SHA256 o BCrypt
+    usu_Contrasena VARCHAR(255) NOT NULL,  -- SHA-256 + Salt
     usu_Cedula VARCHAR(20),  -- Para adoptantes (requerido para adoptar)
     usu_Telefono VARCHAR(20),
     usu_Direccion VARCHAR(300),
@@ -61,7 +61,8 @@ CREATE TABLE tbl_Usuarios (
     usu_FechaBloqueo DATETIME,  -- Cuándo se bloqueó
     usu_Estado BIT DEFAULT 1,  -- Activo/Inactivo
     usu_FechaRegistro DATETIME DEFAULT GETDATE(),
-    usu_UltimoAcceso DATETIME
+    usu_UltimoAcceso DATETIME,
+    usu_Salt VARCHAR(32) NULL
 );
 
 
