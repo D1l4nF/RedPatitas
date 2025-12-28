@@ -71,11 +71,12 @@
     <Content Include="AdminRefugio\Perfil.aspx" />
     <Content Include="Admin\Dashboard.aspx" />
     <Content Include="Adoptante\Dashboard.aspx" />
-    <Content Include="Adoptante\Perfil.aspx" />
+    <Content Include="Adoptante\MisSolicitudes.aspx" />
+    <Content Include="Adoptante\SolicitarAdopcion.aspx" />
     <Content Include="Login\Login.aspx" />
     <Content Include="Login\Registro.aspx" />
     <Content Include="Public\Home.aspx" />
-    <Content Include="Refugio\Dashboard.aspx" />
+    <Content Include="Refugio\SolicitudesRecibidas.aspx" />
     <Content Include="Style\auth.css" />
     <Content Include="Style\dashboard-admin-refugio.css" />
     <Content Include="Style\dashboard-admin.css" />
@@ -136,12 +137,19 @@
     <Compile Include="Adoptante\Dashboard.aspx.designer.cs">
       <DependentUpon>Dashboard.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Adoptante\Perfil.aspx.cs">
-      <DependentUpon>Perfil.aspx</DependentUpon>
+    <Compile Include="Adoptante\MisSolicitudes.aspx.cs">
+      <DependentUpon>MisSolicitudes.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Adoptante\Perfil.aspx.designer.cs">
-      <DependentUpon>Perfil.aspx</DependentUpon>
+    <Compile Include="Adoptante\MisSolicitudes.aspx.designer.cs">
+      <DependentUpon>MisSolicitudes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Adoptante\SolicitarAdopcion.aspx.cs">
+      <DependentUpon>SolicitarAdopcion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Adoptante\SolicitarAdopcion.aspx.designer.cs">
+      <DependentUpon>SolicitarAdopcion.aspx</DependentUpon>
     </Compile>
     <Compile Include="Login\Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
@@ -185,6 +193,13 @@
     </Compile>
     <Compile Include="Refugio\Refugio.Master.designer.cs">
       <DependentUpon>Refugio.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Refugio\SolicitudesRecibidas.aspx.cs">
+      <DependentUpon>SolicitudesRecibidas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Refugio\SolicitudesRecibidas.aspx.designer.cs">
+      <DependentUpon>SolicitudesRecibidas.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
