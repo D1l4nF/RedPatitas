@@ -11,7 +11,17 @@ namespace RedPatitas.Adoptante
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            /*if (Session["UsuarioId"] == null || Session["RolId"] == null)
+            {
+                Response.Redirect("~/Login/Login.aspx");
+                return;
+            }
+            int rolId = Convert.ToInt32(Session["RolId"]);
+            if (rolId != 4) 
+            {
+                Response.Redirect("~/Login/Login.aspx");
+                return;
+            }*/
         }
         protected void btnLogout_Click(object sender, EventArgs e)
         {

@@ -46,10 +46,9 @@ namespace CapaNegocios
                         RolId = usuario.usu_IdRol,
                         Correo = usuario.usu_Email,
                         RefugioId = usuario.usu_IdRefugio,
-                        FotoUrl = usuario.usu_FotoUrl
-                        
+                        FotoUrl = usuario.usu_FotoUrl,
+                        Ref_Verificado = usuario.usu_IdRefugio != null ? usuario.tbl_Refugios.ref_Verificado : null
                     };
-
                 }
                 else
                 {
@@ -76,6 +75,119 @@ namespace CapaNegocios
                     };
                     
                 }
+            }
+        }
+
+        /// <summary>
+        /// Registra un nuevo usuario adoptante (rol 4)
+        /// </summary>
+        public CN_RegistroResultado RegistrarAdoptante(string nombre, string apellido, string email, string contrasena)
+        {
+            using (DataClasses1DataContext dc = new DataClasses1DataContext())
+            {
+                // Verificar si el email ya existe
+                var usuarioExistente = dc.tbl_Usuarios.FirstOrDefault(u => u.usu_Email == email);
+                if (usuarioExistente != null)
+                {
+                    return new CN_RegistroResultado
+                    {
+                        Exito = false,
+                        Mensaje = "El correo electrónico ya está registrado."
+                    };
+                }
+
+                // Crear nuevo usuario adoptante
+                var nuevoUsuario = new tbl_Usuarios
+                {
+                    usu_IdRol = 4, // Rol Adoptante
+                    usu_IdRefugio = null,
+                    usu_Nombre = nombre,
+                    usu_Apellido = apellido,
+                    usu_Email = email,
+                    usu_Contrasena = contrasena, // TODO: En producción usar hash
+                    usu_EmailVerificado = false,
+                    usu_IntentosFallidos = 0,
+                    usu_Bloqueado = false,
+                    usu_Estado = true,
+                    usu_FechaRegistro = DateTime.Now
+                };
+
+                dc.tbl_Usuarios.InsertOnSubmit(nuevoUsuario);
+                dc.SubmitChanges();
+
+                return new CN_RegistroResultado
+                {
+                    Exito = true,
+                    Mensaje = "Cuenta creada exitosamente.",
+                    UsuarioId = nuevoUsuario.usu_IdUsuario
+                };
+            }
+        }
+
+        /// <summary>
+        /// Registra un nuevo refugio con su cuenta de usuario (rol 3)
+        /// </summary>
+        public CN_RegistroResultado RegistrarRefugio(string nombreRefugio, string descripcion, string telefono, 
+            string ciudad, string direccion, string email, string contrasena)
+        {
+            using (DataClasses1DataContext dc = new DataClasses1DataContext())
+            {
+                // Verificar si el email ya existe
+                var usuarioExistente = dc.tbl_Usuarios.FirstOrDefault(u => u.usu_Email == email);
+                if (usuarioExistente != null)
+                {
+                    return new CN_RegistroResultado
+                    {
+                        Exito = false,
+                        Mensaje = "El correo electrónico ya está registrado."
+                    };
+                }
+
+                // Crear el refugio primero
+                var nuevoRefugio = new tbl_Refugios
+                {
+                    ref_Nombre = nombreRefugio,
+                    ref_Descripcion = descripcion,
+                    ref_Telefono = telefono,
+                    ref_Ciudad = ciudad,
+                    ref_Direccion = direccion,
+                    ref_Email = email,
+                    ref_Verificado = false, // Pendiente de verificación por admin
+                    ref_Estado = true,
+                    ref_FechaRegistro = DateTime.Now
+                };
+
+                dc.tbl_Refugios.InsertOnSubmit(nuevoRefugio);
+                dc.SubmitChanges(); // Guardar para obtener el ID
+
+                // Crear usuario vinculado al refugio
+                var nuevoUsuario = new tbl_Usuarios
+                {
+                    usu_IdRol = 2, // Rol Refugio
+                    usu_IdRefugio = nuevoRefugio.ref_IdRefugio,
+                    usu_Nombre = nombreRefugio, // Usar nombre del refugio
+                    usu_Apellido = null,
+                    usu_Email = email,
+                    usu_Contrasena = contrasena, // TODO: En producción usar hash
+                    usu_Telefono = telefono,
+                    usu_Ciudad = ciudad,
+                    usu_Direccion = direccion,
+                    usu_EmailVerificado = false,
+                    usu_IntentosFallidos = 0,
+                    usu_Bloqueado = false,
+                    usu_Estado = true,
+                    usu_FechaRegistro = DateTime.Now
+                };
+
+                dc.tbl_Usuarios.InsertOnSubmit(nuevoUsuario);
+                dc.SubmitChanges();
+
+                return new CN_RegistroResultado
+                {
+                    Exito = true,
+                    Mensaje = "Solicitud de registro enviada. Un administrador verificará tu información.",
+                    UsuarioId = nuevoUsuario.usu_IdUsuario
+                };
             }
         }
     }

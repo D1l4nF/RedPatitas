@@ -724,3 +724,8 @@ form#form1 {
     margin: 0;
     padding: 0;
 }
+.nav-link.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+    cursor: not-allowed;
+}

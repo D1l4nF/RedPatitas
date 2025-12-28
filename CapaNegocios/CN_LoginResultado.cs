@@ -16,5 +16,6 @@ namespace CapaNegocios
         public string Correo { get; set; }
         public int? RefugioId { get; set; }
         public string FotoUrl { get; set; }
+        public bool? Ref_Verificado { get; set; }
     }
 }

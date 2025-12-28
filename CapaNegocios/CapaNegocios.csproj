@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="CN_AdopcionesService.cs" />
     <Compile Include="CN_LoginResultado.cs" />
+    <Compile Include="CN_RegistroResultado.cs" />
     <Compile Include="CN_UsuarioService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
