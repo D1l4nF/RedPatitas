@@ -131,6 +131,7 @@
         <classShapeMoniker Id="b5a4d14c-9b60-4ae6-8ddd-9375a2325de3" />
       </nodes>
     </associationConnector>
+
     <associationConnector edgePoints="[(5.5 : 18.7027498372396); (5.82291666666667 : 18.7027498372396 : JumpStart); (5.98958333333333 : 18.7027498372396 : JumpEnd); (6 : 18.7027498372396); (6 : 10.8381168619792); (6.91666666666667 : 10.8381168619792 : JumpStart); (7.08333333333333 : 10.8381168619792 : JumpEnd); (8 : 10.8381168619792); (8 : 4.17470540364583); (7.25 : 4.17470540364583); (7.25 : 3.79970540364583)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/DataClasses1DataContext/tbl_CategoriasForo/tbl_CategoriasForo_tbl_Publicaciones" />
       <nodes>
@@ -229,6 +230,7 @@
         <classShapeMoniker Id="2a748e21-814a-42d6-ad0b-c23f630f47dc" />
       </nodes>
     </associationConnector>
+
     <associationConnector edgePoints="[(7.75 : 7.7816796875); (7.91666666666667 : 7.7816796875 : JumpStart); (8.08333333333333 : 7.7816796875 : JumpEnd); (10.1666666666667 : 7.7816796875 : JumpStart); (10.3333333333333 : 7.7816796875 : JumpEnd); (11.6666666666667 : 7.7816796875 : JumpStart); (11.8333333333333 : 7.7816796875 : JumpEnd); (12 : 7.7816796875); (12 : 3.625); (12.0416666666667 : 3.625 : JumpStart); (12.2083333333333 : 3.625 : JumpEnd); (13 : 3.625); (13 : 2.7131982421875)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/DataClasses1DataContext/tbl_Usuarios/tbl_Usuarios_tbl_Likes" />
       <nodes>
