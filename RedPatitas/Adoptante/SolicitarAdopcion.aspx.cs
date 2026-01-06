@@ -20,18 +20,10 @@ namespace RedPatitas.Adoptante
         protected void btnSolicitar_Click(object sender, EventArgs e)
         {
             int idMascota = int.Parse(Request.QueryString["idMascota"]);
-            int idUsuario = 1; // luego Session
-            string comentario = txtMotivo.Text;
+            int idUsuario = 1;
 
-            try
-            {
-                servicio.SolicitarAdopcion(idMascota, idUsuario, comentario);
-                Response.Redirect("MisSolicitudes.aspx");
-            }
-            catch (Exception ex)
-            {
-                lblMensaje.Text = ex.Message;
-            }
+            servicio.SolicitarAdopcion(idMascota, idUsuario);
+            Response.Redirect("MisSolicitudes.aspx");
         }
 
     }
