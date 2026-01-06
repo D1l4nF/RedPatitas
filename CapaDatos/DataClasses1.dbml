@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="RedPatitas" Class="DataClasses1DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=redmibook;Initial Catalog=RedPatitas;Integrated Security=True;Encrypt=False" SettingsObjectName="CapaDatos.Properties.Settings" SettingsPropertyName="RedPatitasConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=DESKTOP-34VIA8T;Initial Catalog=RedPatitas;Integrated Security=True;Encrypt=False" SettingsObjectName="CapaDatos.Properties.Settings" SettingsPropertyName="RedPatitasConnectionString1" Provider="System.Data.SqlClient" />
   <Table Name="dbo.tbl_Auditoria" Member="tbl_Auditoria">
     <Type Name="tbl_Auditoria">
       <Column Name="aud_IdAuditoria" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -14,6 +14,20 @@
       <Association Name="tbl_Usuarios_tbl_Auditoria" Member="tbl_Usuarios" ThisKey="aud_IdUsuario" OtherKey="usu_IdUsuario" Type="tbl_Usuarios" IsForeignKey="true" />
     </Type>
   </Table>
+  <Table Name="dbo.tbl_Auditoria" Member="tbl_Auditoria1">
+    <Type Name="tbl_Auditoria1">
+      <Column Name="aud_IdAuditoria" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="aud_IdUsuario" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="aud_Accion" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="aud_Tabla" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="aud_IdRegistro" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="aud_ValorAnterior" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="aud_ValorNuevo" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="aud_DireccionIP" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="aud_Fecha" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="tbl_Usuarios_tbl_Auditoria1" Member="tbl_Usuarios" ThisKey="aud_IdUsuario" OtherKey="usu_IdUsuario" Type="tbl_Usuarios" IsForeignKey="true" />
+    </Type>
+  </Table>
   <Table Name="dbo.tbl_Avistamientos" Member="tbl_Avistamientos">
     <Type Name="tbl_Avistamientos">
       <Column Name="avi_IdAvistamiento" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -23,8 +37,8 @@
       <Column Name="avi_Descripcion" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="avi_FechaAvistamiento" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="avi_FechaReporte" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Association Name="tbl_ReportesMascotas_tbl_Avistamientos" Member="tbl_ReportesMascotas" ThisKey="avi_IdReporte" OtherKey="rep_IdReporte" Type="tbl_ReportesMascotas" IsForeignKey="true" />
       <Association Name="tbl_Usuarios_tbl_Avistamientos" Member="tbl_Usuarios" ThisKey="avi_IdUsuario" OtherKey="usu_IdUsuario" Type="tbl_Usuarios" IsForeignKey="true" />
+      <Association Name="tbl_ReportesMascotas_tbl_Avistamientos" Member="tbl_ReportesMascotas" ThisKey="avi_IdReporte" OtherKey="rep_IdReporte" Type="tbl_ReportesMascotas" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.tbl_Campanias" Member="tbl_Campanias">
@@ -78,37 +92,6 @@
       <Association Name="tbl_Especies_tbl_ReportesMascotas" Member="tbl_ReportesMascotas" ThisKey="esp_IdEspecie" OtherKey="rep_IdEspecie" Type="tbl_ReportesMascotas" />
     </Type>
   </Table>
-  <Table Name="dbo.tbl_Favoritos" Member="tbl_Favoritos">
-    <Type Name="tbl_Favoritos">
-      <Column Name="fav_IdFavorito" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="fav_IdUsuario" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="fav_IdMascota" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="fav_FechaAgregado" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Association Name="tbl_Mascotas_tbl_Favoritos" Member="tbl_Mascotas" ThisKey="fav_IdMascota" OtherKey="mas_IdMascota" Type="tbl_Mascotas" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
-      <Association Name="tbl_Usuarios_tbl_Favoritos" Member="tbl_Usuarios" ThisKey="fav_IdUsuario" OtherKey="usu_IdUsuario" Type="tbl_Usuarios" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.tbl_FotosMascotas" Member="tbl_FotosMascotas">
-    <Type Name="tbl_FotosMascotas">
-      <Column Name="fot_IdFoto" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="fot_IdMascota" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="fot_Url" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" />
-      <Column Name="fot_EsPrincipal" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="fot_Orden" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="fot_FechaSubida" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Association Name="tbl_Mascotas_tbl_FotosMascotas" Member="tbl_Mascotas" ThisKey="fot_IdMascota" OtherKey="mas_IdMascota" Type="tbl_Mascotas" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.tbl_FotosReportes" Member="tbl_FotosReportes">
-    <Type Name="tbl_FotosReportes">
-      <Column Name="fore_IdFoto" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="fore_IdReporte" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="fore_Url" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" />
-      <Column Name="fore_Orden" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="fore_FechaSubida" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Association Name="tbl_ReportesMascotas_tbl_FotosReportes" Member="tbl_ReportesMascotas" ThisKey="fore_IdReporte" OtherKey="rep_IdReporte" Type="tbl_ReportesMascotas" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.tbl_Mascotas" Member="tbl_Mascotas">
     <Type Name="tbl_Mascotas">
       <Column Name="mas_IdMascota" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -132,12 +115,43 @@
       <Column Name="mas_Estado" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Column Name="mas_FechaRegistro" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="mas_FechaAdopcion" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Association Name="tbl_Mascotas_tbl_Favoritos" Member="tbl_Favoritos" ThisKey="mas_IdMascota" OtherKey="fav_IdMascota" Type="tbl_Favoritos" />
       <Association Name="tbl_Mascotas_tbl_FotosMascotas" Member="tbl_FotosMascotas" ThisKey="mas_IdMascota" OtherKey="fot_IdMascota" Type="tbl_FotosMascotas" />
       <Association Name="tbl_Mascotas_tbl_SolicitudesAdopcion" Member="tbl_SolicitudesAdopcion" ThisKey="mas_IdMascota" OtherKey="sol_IdMascota" Type="tbl_SolicitudesAdopcion" />
       <Association Name="tbl_Razas_tbl_Mascotas" Member="tbl_Razas" ThisKey="mas_IdRaza" OtherKey="raz_IdRaza" Type="tbl_Razas" IsForeignKey="true" />
-      <Association Name="tbl_Refugios_tbl_Mascotas" Member="tbl_Refugios" ThisKey="mas_IdRefugio" OtherKey="ref_IdRefugio" Type="tbl_Refugios" IsForeignKey="true" />
       <Association Name="tbl_Usuarios_tbl_Mascotas" Member="tbl_Usuarios" ThisKey="mas_IdUsuarioRegistro" OtherKey="usu_IdUsuario" Type="tbl_Usuarios" IsForeignKey="true" />
+      <Association Name="tbl_Refugios_tbl_Mascotas" Member="tbl_Refugios" ThisKey="mas_IdRefugio" OtherKey="ref_IdRefugio" Type="tbl_Refugios" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_Razas" Member="tbl_Razas">
+    <Type Name="tbl_Razas">
+      <Column Name="raz_IdRaza" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="raz_IdEspecie" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="raz_Nombre" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="raz_Descripcion" Type="System.String" DbType="VarChar(300)" CanBeNull="true" />
+      <Column Name="raz_Estado" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="tbl_Razas_tbl_Mascotas" Member="tbl_Mascotas" ThisKey="raz_IdRaza" OtherKey="mas_IdRaza" Type="tbl_Mascotas" />
+      <Association Name="tbl_Especies_tbl_Razas" Member="tbl_Especies" ThisKey="raz_IdEspecie" OtherKey="esp_IdEspecie" Type="tbl_Especies" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_FotosMascotas" Member="tbl_FotosMascotas">
+    <Type Name="tbl_FotosMascotas">
+      <Column Name="fot_IdFoto" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="fot_IdMascota" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="fot_Url" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="fot_EsPrincipal" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="fot_Orden" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="fot_FechaSubida" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="tbl_Mascotas_tbl_FotosMascotas" Member="tbl_Mascotas" ThisKey="fot_IdMascota" OtherKey="mas_IdMascota" Type="tbl_Mascotas" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_FotosReportes" Member="tbl_FotosReportes">
+    <Type Name="tbl_FotosReportes">
+      <Column Name="fore_IdFoto" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="fore_IdReporte" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="fore_Url" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="fore_Orden" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="fore_FechaSubida" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="tbl_ReportesMascotas_tbl_FotosReportes" Member="tbl_ReportesMascotas" ThisKey="fore_IdReporte" OtherKey="rep_IdReporte" Type="tbl_ReportesMascotas" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.tbl_Notificaciones" Member="tbl_Notificaciones">
@@ -155,75 +169,49 @@
       <Association Name="tbl_Usuarios_tbl_Notificaciones" Member="tbl_Usuarios" ThisKey="not_IdUsuario" OtherKey="usu_IdUsuario" Type="tbl_Usuarios" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.tbl_Razas" Member="tbl_Razas">
-    <Type Name="tbl_Razas">
-      <Column Name="raz_IdRaza" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="raz_IdEspecie" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="raz_Nombre" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
-      <Column Name="raz_Descripcion" Type="System.String" DbType="VarChar(300)" CanBeNull="true" />
-      <Column Name="raz_Estado" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Association Name="tbl_Razas_tbl_Mascotas" Member="tbl_Mascotas" ThisKey="raz_IdRaza" OtherKey="mas_IdRaza" Type="tbl_Mascotas" />
-      <Association Name="tbl_Especies_tbl_Razas" Member="tbl_Especies" ThisKey="raz_IdEspecie" OtherKey="esp_IdEspecie" Type="tbl_Especies" IsForeignKey="true" />
+  <Table Name="dbo.tbl_Usuarios" Member="tbl_Usuarios">
+    <Type Name="tbl_Usuarios">
+      <Column Name="usu_IdUsuario" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="usu_IdRol" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="usu_IdRefugio" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="usu_Nombre" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="usu_Apellido" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="usu_Email" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="usu_Contrasena" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="usu_Cedula" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="usu_Telefono" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="usu_Direccion" Type="System.String" DbType="VarChar(300)" CanBeNull="true" />
+      <Column Name="usu_Ciudad" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="usu_FotoUrl" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="usu_EmailVerificado" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="usu_IntentosFallidos" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="usu_Bloqueado" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="usu_FechaBloqueo" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="usu_Estado" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="usu_FechaRegistro" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="usu_UltimoAcceso" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="tbl_Usuarios_tbl_Auditoria" Member="tbl_Auditoria" ThisKey="usu_IdUsuario" OtherKey="aud_IdUsuario" Type="tbl_Auditoria" />
+      <Association Name="tbl_Usuarios_tbl_Auditoria1" Member="tbl_Auditoria1" ThisKey="usu_IdUsuario" OtherKey="aud_IdUsuario" Type="tbl_Auditoria1" />
+      <Association Name="tbl_Usuarios_tbl_Avistamientos" Member="tbl_Avistamientos" ThisKey="usu_IdUsuario" OtherKey="avi_IdUsuario" Type="tbl_Avistamientos" />
+      <Association Name="tbl_Usuarios_tbl_Mascotas" Member="tbl_Mascotas" ThisKey="usu_IdUsuario" OtherKey="mas_IdUsuarioRegistro" Type="tbl_Mascotas" />
+      <Association Name="tbl_Usuarios_tbl_Notificaciones" Member="tbl_Notificaciones" ThisKey="usu_IdUsuario" OtherKey="not_IdUsuario" Type="tbl_Notificaciones" />
+      <Association Name="tbl_Usuarios_tbl_TokensRecuperacion" Member="tbl_TokensRecuperacion" ThisKey="usu_IdUsuario" OtherKey="tok_IdUsuario" Type="tbl_TokensRecuperacion" />
+      <Association Name="tbl_Usuarios_tbl_SolicitudesAdopcion" Member="tbl_SolicitudesAdopcion" ThisKey="usu_IdUsuario" OtherKey="sol_IdUsuario" Type="tbl_SolicitudesAdopcion" />
+      <Association Name="tbl_Usuarios_tbl_SolicitudesAdopcion1" Member="tbl_SolicitudesAdopcion1" ThisKey="usu_IdUsuario" OtherKey="sol_IdUsuarioRevision" Type="tbl_SolicitudesAdopcion" />
+      <Association Name="tbl_Usuarios_tbl_ReportesMascotas" Member="tbl_ReportesMascotas" ThisKey="usu_IdUsuario" OtherKey="rep_IdUsuario" Type="tbl_ReportesMascotas" />
+      <Association Name="tbl_Roles_tbl_Usuarios" Member="tbl_Roles" ThisKey="usu_IdRol" OtherKey="rol_IdRol" Type="tbl_Roles" IsForeignKey="true" />
+      <Association Name="tbl_Refugios_tbl_Usuarios" Member="tbl_Refugios" ThisKey="usu_IdRefugio" OtherKey="ref_IdRefugio" Type="tbl_Refugios" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.tbl_Refugios" Member="tbl_Refugios">
-    <Type Name="tbl_Refugios">
-      <Column Name="ref_IdRefugio" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="ref_Nombre" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
-      <Column Name="ref_Descripcion" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
-      <Column Name="ref_Direccion" Type="System.String" DbType="VarChar(300)" CanBeNull="true" />
-      <Column Name="ref_Ciudad" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
-      <Column Name="ref_Telefono" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
-      <Column Name="ref_Email" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
-      <Column Name="ref_LogoUrl" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
-      <Column Name="ref_Verificado" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="ref_FechaVerificacion" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="ref_Estado" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="ref_FechaRegistro" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Association Name="tbl_Refugios_tbl_Campanias" Member="tbl_Campanias" ThisKey="ref_IdRefugio" OtherKey="cam_IdRefugio" Type="tbl_Campanias" />
-      <Association Name="tbl_Refugios_tbl_Mascotas" Member="tbl_Mascotas" ThisKey="ref_IdRefugio" OtherKey="mas_IdRefugio" Type="tbl_Mascotas" />
-      <Association Name="tbl_Refugios_tbl_Usuarios" Member="tbl_Usuarios" ThisKey="ref_IdRefugio" OtherKey="usu_IdRefugio" Type="tbl_Usuarios" />
-    </Type>
-  </Table>
-  <Table Name="dbo.tbl_ReportesMascotas" Member="tbl_ReportesMascotas">
-    <Type Name="tbl_ReportesMascotas">
-      <Column Name="rep_IdReporte" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="rep_IdUsuario" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="rep_TipoReporte" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
-      <Column Name="rep_NombreMascota" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
-      <Column Name="rep_IdEspecie" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="rep_Raza" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
-      <Column Name="rep_Color" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
-      <Column Name="rep_Tamano" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
-      <Column Name="rep_Sexo" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
-      <Column Name="rep_EdadAproximada" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="rep_Descripcion" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
-      <Column Name="rep_CaracteristicasDistintivas" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
-      <Column Name="rep_UbicacionUltima" Type="System.String" DbType="VarChar(300)" CanBeNull="true" />
-      <Column Name="rep_Ciudad" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
-      <Column Name="rep_Latitud" Type="System.Decimal" DbType="Decimal(10,8)" CanBeNull="true" />
-      <Column Name="rep_Longitud" Type="System.Decimal" DbType="Decimal(11,8)" CanBeNull="true" />
-      <Column Name="rep_TelefonoContacto" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
-      <Column Name="rep_EmailContacto" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
-      <Column Name="rep_FechaEvento" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="rep_Estado" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
-      <Column Name="rep_FechaReporte" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="rep_FechaCierre" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Association Name="tbl_ReportesMascotas_tbl_Avistamientos" Member="tbl_Avistamientos" ThisKey="rep_IdReporte" OtherKey="avi_IdReporte" Type="tbl_Avistamientos" />
-      <Association Name="tbl_ReportesMascotas_tbl_FotosReportes" Member="tbl_FotosReportes" ThisKey="rep_IdReporte" OtherKey="fore_IdReporte" Type="tbl_FotosReportes" />
-      <Association Name="tbl_Especies_tbl_ReportesMascotas" Member="tbl_Especies" ThisKey="rep_IdEspecie" OtherKey="esp_IdEspecie" Type="tbl_Especies" IsForeignKey="true" />
-      <Association Name="tbl_Usuarios_tbl_ReportesMascotas" Member="tbl_Usuarios" ThisKey="rep_IdUsuario" OtherKey="usu_IdUsuario" Type="tbl_Usuarios" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.tbl_Roles" Member="tbl_Roles">
-    <Type Name="tbl_Roles">
-      <Column Name="rol_IdRol" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="rol_Nombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="rol_Descripcion" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
-      <Column Name="rol_Nivel" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="rol_Estado" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="rol_FechaCreacion" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Association Name="tbl_Roles_tbl_Usuarios" Member="tbl_Usuarios" ThisKey="rol_IdRol" OtherKey="usu_IdRol" Type="tbl_Usuarios" />
+  <Table Name="dbo.tbl_TokensRecuperacion" Member="tbl_TokensRecuperacion">
+    <Type Name="tbl_TokensRecuperacion">
+      <Column Name="tok_IdToken" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="tok_IdUsuario" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="tok_Token" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="tok_FechaCreacion" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="tok_FechaExpiracion" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="tok_Usado" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="tbl_Usuarios_tbl_TokensRecuperacion" Member="tbl_Usuarios" ThisKey="tok_IdUsuario" OtherKey="usu_IdUsuario" Type="tbl_Usuarios" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.tbl_SolicitudesAdopcion" Member="tbl_SolicitudesAdopcion">
@@ -255,49 +243,98 @@
       <Association Name="tbl_Usuarios_tbl_SolicitudesAdopcion1" Member="tbl_Usuarios1" ThisKey="sol_IdUsuarioRevision" OtherKey="usu_IdUsuario" Type="tbl_Usuarios" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.tbl_TokensRecuperacion" Member="tbl_TokensRecuperacion">
-    <Type Name="tbl_TokensRecuperacion">
-      <Column Name="tok_IdToken" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="tok_IdUsuario" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="tok_Token" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
-      <Column Name="tok_FechaCreacion" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="tok_FechaExpiracion" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="tok_Usado" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Association Name="tbl_Usuarios_tbl_TokensRecuperacion" Member="tbl_Usuarios" ThisKey="tok_IdUsuario" OtherKey="usu_IdUsuario" Type="tbl_Usuarios" IsForeignKey="true" />
+  <Table Name="dbo.tbl_Roles" Member="tbl_Roles">
+    <Type Name="tbl_Roles">
+      <Column Name="rol_IdRol" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="rol_Nombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="rol_Descripcion" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="rol_Nivel" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="rol_Estado" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="rol_FechaCreacion" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="tbl_Roles_tbl_Usuarios" Member="tbl_Usuarios" ThisKey="rol_IdRol" OtherKey="usu_IdRol" Type="tbl_Usuarios" />
     </Type>
   </Table>
-  <Table Name="dbo.tbl_Usuarios" Member="tbl_Usuarios">
-    <Type Name="tbl_Usuarios">
-      <Column Name="usu_IdUsuario" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="usu_IdRol" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="usu_IdRefugio" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="usu_Nombre" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
-      <Column Name="usu_Apellido" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
-      <Column Name="usu_Email" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
-      <Column Name="usu_Contrasena" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+  <Table Name="dbo.tbl_ReportesMascotas" Member="tbl_ReportesMascotas">
+    <Type Name="tbl_ReportesMascotas">
+      <Column Name="rep_IdReporte" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="rep_IdUsuario" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="rep_TipoReporte" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="rep_NombreMascota" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="rep_IdEspecie" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="rep_Raza" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="rep_Color" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="rep_Tamano" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="rep_Sexo" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="rep_EdadAproximada" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="rep_Descripcion" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="rep_CaracteristicasDistintivas" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="rep_UbicacionUltima" Type="System.String" DbType="VarChar(300)" CanBeNull="true" />
+      <Column Name="rep_Ciudad" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="rep_Latitud" Type="System.Decimal" DbType="Decimal(10,8)" CanBeNull="true" />
+      <Column Name="rep_Longitud" Type="System.Decimal" DbType="Decimal(11,8)" CanBeNull="true" />
+      <Column Name="rep_TelefonoContacto" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="rep_EmailContacto" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="rep_FechaEvento" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="rep_Estado" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="rep_FechaReporte" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="rep_FechaCierre" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="tbl_ReportesMascotas_tbl_Avistamientos" Member="tbl_Avistamientos" ThisKey="rep_IdReporte" OtherKey="avi_IdReporte" Type="tbl_Avistamientos" />
+      <Association Name="tbl_ReportesMascotas_tbl_FotosReportes" Member="tbl_FotosReportes" ThisKey="rep_IdReporte" OtherKey="fore_IdReporte" Type="tbl_FotosReportes" />
+      <Association Name="tbl_Usuarios_tbl_ReportesMascotas" Member="tbl_Usuarios" ThisKey="rep_IdUsuario" OtherKey="usu_IdUsuario" Type="tbl_Usuarios" IsForeignKey="true" />
+      <Association Name="tbl_Especies_tbl_ReportesMascotas" Member="tbl_Especies" ThisKey="rep_IdEspecie" OtherKey="esp_IdEspecie" Type="tbl_Especies" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_Refugios" Member="tbl_Refugios">
+    <Type Name="tbl_Refugios">
+      <Column Name="ref_IdRefugio" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ref_Nombre" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="ref_Descripcion" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ref_Direccion" Type="System.String" DbType="VarChar(300)" CanBeNull="true" />
+      <Column Name="ref_Ciudad" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="ref_Telefono" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="ref_Email" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="ref_LogoUrl" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="ref_Verificado" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="ref_FechaVerificacion" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ref_Estado" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="ref_FechaRegistro" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="tbl_Refugios_tbl_Campanias" Member="tbl_Campanias" ThisKey="ref_IdRefugio" OtherKey="cam_IdRefugio" Type="tbl_Campanias" />
+      <Association Name="tbl_Refugios_tbl_Mascotas" Member="tbl_Mascotas" ThisKey="ref_IdRefugio" OtherKey="mas_IdRefugio" Type="tbl_Mascotas" />
+      <Association Name="tbl_Refugios_tbl_Usuarios" Member="tbl_Usuarios" ThisKey="ref_IdRefugio" OtherKey="usu_IdRefugio" Type="tbl_Usuarios" />
+    </Type>
+  </Table>
+  <Table Name="dbo.vw_SolicitudesCompleta" Member="vw_SolicitudesCompleta">
+    <Type Name="vw_SolicitudesCompleta">
+      <Column Name="sol_IdSolicitud" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="sol_FechaSolicitud" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="sol_Estado" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="sol_PuntajeTotal" Type="System.Decimal" DbType="Decimal(5,2)" CanBeNull="true" />
+      <Column Name="IdAdoptante" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="NombreAdoptante" Type="System.String" DbType="VarChar(201) NOT NULL" CanBeNull="false" />
+      <Column Name="EmailAdoptante" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
       <Column Name="usu_Cedula" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
-      <Column Name="usu_Telefono" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
-      <Column Name="usu_Direccion" Type="System.String" DbType="VarChar(300)" CanBeNull="true" />
-      <Column Name="usu_Ciudad" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
-      <Column Name="usu_FotoUrl" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
-      <Column Name="usu_EmailVerificado" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="usu_IntentosFallidos" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="usu_Bloqueado" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="usu_FechaBloqueo" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="usu_Estado" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="usu_FechaRegistro" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="usu_UltimoAcceso" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Association Name="tbl_Usuarios_tbl_Auditoria" Member="tbl_Auditoria" ThisKey="usu_IdUsuario" OtherKey="aud_IdUsuario" Type="tbl_Auditoria" />
-      <Association Name="tbl_Usuarios_tbl_Avistamientos" Member="tbl_Avistamientos" ThisKey="usu_IdUsuario" OtherKey="avi_IdUsuario" Type="tbl_Avistamientos" />
-      <Association Name="tbl_Usuarios_tbl_Favoritos" Member="tbl_Favoritos" ThisKey="usu_IdUsuario" OtherKey="fav_IdUsuario" Type="tbl_Favoritos" />
-      <Association Name="tbl_Usuarios_tbl_Mascotas" Member="tbl_Mascotas" ThisKey="usu_IdUsuario" OtherKey="mas_IdUsuarioRegistro" Type="tbl_Mascotas" />
-      <Association Name="tbl_Usuarios_tbl_Notificaciones" Member="tbl_Notificaciones" ThisKey="usu_IdUsuario" OtherKey="not_IdUsuario" Type="tbl_Notificaciones" />
-      <Association Name="tbl_Usuarios_tbl_ReportesMascotas" Member="tbl_ReportesMascotas" ThisKey="usu_IdUsuario" OtherKey="rep_IdUsuario" Type="tbl_ReportesMascotas" />
-      <Association Name="tbl_Usuarios_tbl_SolicitudesAdopcion" Member="tbl_SolicitudesAdopcion" ThisKey="usu_IdUsuario" OtherKey="sol_IdUsuario" Type="tbl_SolicitudesAdopcion" />
-      <Association Name="tbl_Usuarios_tbl_SolicitudesAdopcion1" Member="tbl_SolicitudesAdopcion1" ThisKey="usu_IdUsuario" OtherKey="sol_IdUsuarioRevision" Type="tbl_SolicitudesAdopcion" />
-      <Association Name="tbl_Usuarios_tbl_TokensRecuperacion" Member="tbl_TokensRecuperacion" ThisKey="usu_IdUsuario" OtherKey="tok_IdUsuario" Type="tbl_TokensRecuperacion" />
-      <Association Name="tbl_Roles_tbl_Usuarios" Member="tbl_Roles" ThisKey="usu_IdRol" OtherKey="rol_IdRol" Type="tbl_Roles" IsForeignKey="true" />
-      <Association Name="tbl_Refugios_tbl_Usuarios" Member="tbl_Refugios" ThisKey="usu_IdRefugio" OtherKey="ref_IdRefugio" Type="tbl_Refugios" IsForeignKey="true" />
+      <Column Name="TelefonoAdoptante" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="mas_IdMascota" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="NombreMascota" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="ref_IdRefugio" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="NombreRefugio" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.vw_SolicitudesCompleta" Member="vw_SolicitudesCompleta1">
+    <Type Name="vw_SolicitudesCompleta1">
+      <Column Name="sol_IdSolicitud" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="sol_FechaSolicitud" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="sol_Estado" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="sol_PuntajeTotal" Type="System.Decimal" DbType="Decimal(5,2)" CanBeNull="true" />
+      <Column Name="IdAdoptante" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="NombreAdoptante" Type="System.String" DbType="VarChar(201) NOT NULL" CanBeNull="false" />
+      <Column Name="EmailAdoptante" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="usu_Cedula" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="TelefonoAdoptante" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="mas_IdMascota" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="NombreMascota" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="ref_IdRefugio" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="NombreRefugio" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
 </Database>

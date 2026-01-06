@@ -42,9 +42,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CN_AdopcionesService.cs" />
     <Compile Include="CN_LoginResultado.cs" />
     <Compile Include="CN_RegistroResultado.cs" />
     <Compile Include="CN_UsuarioService.cs" />
+    <Compile Include="obj\Debug\.NETFramework,Version=v4.8.1.AssemblyAttributes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -52,6 +54,26 @@
       <Project>{07e40dfc-ef95-4290-988b-94071153190f}</Project>
       <Name>CapaDatos</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bin\Debug\CapaDatos.dll" />
+    <Content Include="bin\Debug\CapaDatos.pdb" />
+    <Content Include="bin\Debug\CapaNegocios.dll" />
+    <Content Include="bin\Debug\CapaNegocios.pdb" />
+    <Content Include="obj\Debug\CapaNegocios.csproj.FileListAbsolute.txt" />
+    <Content Include="obj\Debug\CapaNegocios.dll" />
+    <Content Include="obj\Debug\CapaNegocios.pdb" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\CapaDatos.dll.config" />
+    <None Include="obj\Debug\CapaNego.1D246B3C.Up2Date" />
+    <None Include="obj\Debug\CapaNegocios.csproj.AssemblyReference.cache" />
+    <None Include="obj\Debug\CapaNegocios.csproj.CoreCompileInputs.cache" />
+    <None Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\Release\" />
+    <Folder Include="obj\Debug\TempPE\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

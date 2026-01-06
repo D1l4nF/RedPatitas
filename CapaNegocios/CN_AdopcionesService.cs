@@ -46,6 +46,17 @@ namespace CapaNegocios
         {
             datos.RechazarSolicitud(idSolicitud, comentario, idUsuarioRevision);
         }
+        public void CancelarSolicitud(int idSolicitud)
+        {
+            datos.CancelarSolicitud(idSolicitud);
+        }
+        public List<vw_SolicitudesCompleta> HistorialSolicitudes(int idUsuario)
+        {
+            return datos.ObtenerHistorialUsuario(idUsuario);
+        }
+
+
+
 
 
     }

@@ -123,9 +123,31 @@ namespace CapaDatos
                 mascota.mas_EstadoAdopcion = "EnProceso";
 
                 db.SubmitChanges();
+        }
+        public void CancelarSolicitud(int idSolicitud)
+        {
+            var solicitud = db.tbl_SolicitudesAdopcion
+                .FirstOrDefault(s => s.sol_IdSolicitud == idSolicitud);
+
+            if (solicitud != null && solicitud.sol_Estado == "Pendiente")
+            {
+                solicitud.sol_Estado = "Cancelada";
+
+                var mascota = db.tbl_Mascotas
+                    .FirstOrDefault(m => m.mas_IdMascota == solicitud.sol_IdMascota);
+
+                if (mascota != null)
+                    mascota.mas_EstadoAdopcion = "Disponible";
+
+                db.SubmitChanges();
             }
-
-
+        }
+        public List<vw_SolicitudesCompleta> ObtenerHistorialUsuario(int idUsuario)
+        {
+            return db.vw_SolicitudesCompleta
+                     .Where(s => s.IdAdoptante == idUsuario)
+                     .ToList();
+        }
     }
 
 }

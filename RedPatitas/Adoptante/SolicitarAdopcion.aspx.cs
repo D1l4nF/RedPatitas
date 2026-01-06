@@ -19,12 +19,21 @@ namespace RedPatitas.Adoptante
 
         protected void btnSolicitar_Click(object sender, EventArgs e)
         {
-            int idMascota = int.Parse(Request.QueryString["idMascota"]);
-            int idUsuario = 1;
+            if (Request.QueryString["idMascota"] == null)
+            {
+                lblMensaje.Text = "Error: no se encontró la mascota.";
+                return;
+            }
 
-            servicio.SolicitarAdopcion(idMascota, idUsuario);
+            int idMascota = int.Parse(Request.QueryString["idMascota"]);
+            int idUsuario = 1; // luego sesión
+            string comentario = txtMotivo.Text.Trim();
+
+            servicio.SolicitarAdopcion(idMascota, idUsuario, comentario);
             Response.Redirect("MisSolicitudes.aspx");
         }
+
+
 
     }
 }

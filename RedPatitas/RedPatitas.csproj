@@ -71,9 +71,65 @@
     <Content Include="AdminRefugio\Perfil.aspx" />
     <Content Include="Admin\Dashboard.aspx" />
     <Content Include="Adoptante\Dashboard.aspx" />
+    <Content Include="Adoptante\MascotasDisponibles.aspx" />
+    <Content Include="Adoptante\MisSolicitudes.aspx" />
+    <Content Include="Adoptante\Perfil.aspx" />
+    <Content Include="Adoptante\SolicitarAdopcion.aspx" />
+    <Content Include="bin\CapaDatos.dll" />
+    <Content Include="bin\CapaDatos.pdb" />
+    <Content Include="bin\CapaNegocios.dll" />
+    <Content Include="bin\CapaNegocios.pdb" />
+    <Content Include="bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll" />
+    <Content Include="bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml" />
+    <Content Include="bin\RedPatitas.dll" />
+    <Content Include="bin\RedPatitas.pdb" />
+    <Content Include="bin\roslyn\csc.exe" />
+    <Content Include="bin\roslyn\csi.exe" />
+    <Content Include="bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll" />
+    <Content Include="bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll" />
+    <Content Include="bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll" />
+    <Content Include="bin\roslyn\Microsoft.CodeAnalysis.dll" />
+    <Content Include="bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll" />
+    <Content Include="bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll" />
+    <Content Include="bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll" />
+    <Content Include="bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll" />
+    <Content Include="bin\roslyn\Microsoft.Win32.Primitives.dll" />
+    <Content Include="bin\roslyn\System.AppContext.dll" />
+    <Content Include="bin\roslyn\System.Collections.Immutable.dll" />
+    <Content Include="bin\roslyn\System.Console.dll" />
+    <Content Include="bin\roslyn\System.Diagnostics.DiagnosticSource.dll" />
+    <Content Include="bin\roslyn\System.Diagnostics.FileVersionInfo.dll" />
+    <Content Include="bin\roslyn\System.Diagnostics.StackTrace.dll" />
+    <Content Include="bin\roslyn\System.Globalization.Calendars.dll" />
+    <Content Include="bin\roslyn\System.IO.Compression.dll" />
+    <Content Include="bin\roslyn\System.IO.Compression.ZipFile.dll" />
+    <Content Include="bin\roslyn\System.IO.FileSystem.dll" />
+    <Content Include="bin\roslyn\System.IO.FileSystem.Primitives.dll" />
+    <Content Include="bin\roslyn\System.Net.Http.dll" />
+    <Content Include="bin\roslyn\System.Net.Sockets.dll" />
+    <Content Include="bin\roslyn\System.Reflection.Metadata.dll" />
+    <Content Include="bin\roslyn\System.Runtime.InteropServices.RuntimeInformation.dll" />
+    <Content Include="bin\roslyn\System.Security.Cryptography.Algorithms.dll" />
+    <Content Include="bin\roslyn\System.Security.Cryptography.Encoding.dll" />
+    <Content Include="bin\roslyn\System.Security.Cryptography.Primitives.dll" />
+    <Content Include="bin\roslyn\System.Security.Cryptography.X509Certificates.dll" />
+    <Content Include="bin\roslyn\System.Text.Encoding.CodePages.dll" />
+    <Content Include="bin\roslyn\System.Threading.Tasks.Extensions.dll" />
+    <Content Include="bin\roslyn\System.ValueTuple.dll" />
+    <Content Include="bin\roslyn\System.Xml.ReaderWriter.dll" />
+    <Content Include="bin\roslyn\System.Xml.XmlDocument.dll" />
+    <Content Include="bin\roslyn\System.Xml.XPath.dll" />
+    <Content Include="bin\roslyn\System.Xml.XPath.XDocument.dll" />
+    <Content Include="bin\roslyn\vbc.exe" />
+    <Content Include="bin\roslyn\VBCSCompiler.exe" />
     <Content Include="Login\Login.aspx" />
     <Content Include="Login\Registro.aspx" />
+    <Content Include="obj\Debug\RedPatitas.csproj.FileListAbsolute.txt" />
+    <Content Include="obj\Debug\RedPatitas.dll" />
+    <Content Include="obj\Debug\RedPatitas.pdb" />
     <Content Include="Public\Home.aspx" />
+    <Content Include="Refugio\Dashboard.aspx" />
+    <Content Include="Refugio\SolicitudesRecibidas.aspx" />
     <Content Include="Style\auth.css" />
     <Content Include="Style\dashboard-admin-refugio.css" />
     <Content Include="Style\dashboard-admin.css" />
@@ -134,6 +190,34 @@
     <Compile Include="Adoptante\Dashboard.aspx.designer.cs">
       <DependentUpon>Dashboard.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Adoptante\MascotasDisponibles.aspx.cs">
+      <DependentUpon>MascotasDisponibles.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Adoptante\MascotasDisponibles.aspx.designer.cs">
+      <DependentUpon>MascotasDisponibles.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Adoptante\MisSolicitudes.aspx.cs">
+      <DependentUpon>MisSolicitudes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Adoptante\MisSolicitudes.aspx.designer.cs">
+      <DependentUpon>MisSolicitudes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Adoptante\Perfil.aspx.cs">
+      <DependentUpon>Perfil.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Adoptante\Perfil.aspx.designer.cs">
+      <DependentUpon>Perfil.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Adoptante\SolicitarAdopcion.aspx.cs">
+      <DependentUpon>SolicitarAdopcion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Adoptante\SolicitarAdopcion.aspx.designer.cs">
+      <DependentUpon>SolicitarAdopcion.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Login\Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -148,6 +232,7 @@
     <Compile Include="Login\Registro.aspx.designer.cs">
       <DependentUpon>Registro.aspx</DependentUpon>
     </Compile>
+    <Compile Include="obj\Debug\.NETFramework,Version=v4.8.1.AssemblyAttributes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Public\Home.aspx.cs">
       <DependentUpon>Home.aspx</DependentUpon>
@@ -177,11 +262,35 @@
     <Compile Include="Refugio\Refugio.Master.designer.cs">
       <DependentUpon>Refugio.Master</DependentUpon>
     </Compile>
+    <Compile Include="Refugio\SolicitudesRecibidas.aspx.cs">
+      <DependentUpon>SolicitudesRecibidas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Refugio\SolicitudesRecibidas.aspx.designer.cs">
+      <DependentUpon>SolicitudesRecibidas.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Admin\Admin.Master" />
     <Content Include="AdminRefugio\AdminRefugio.Master" />
     <Content Include="Adoptante\Adoptante.Master" />
+    <Content Include="bin\CapaDatos.dll.config" />
+    <Content Include="bin\RedPatitas.dll.config" />
+    <Content Include="bin\roslyn\csc.exe.config" />
+    <Content Include="bin\roslyn\csc.rsp" />
+    <Content Include="bin\roslyn\csi.exe.config" />
+    <Content Include="bin\roslyn\csi.rsp" />
+    <Content Include="bin\roslyn\Microsoft.CSharp.Core.targets" />
+    <Content Include="bin\roslyn\Microsoft.Managed.Core.targets" />
+    <Content Include="bin\roslyn\Microsoft.VisualBasic.Core.targets" />
+    <Content Include="bin\roslyn\vbc.exe.config" />
+    <Content Include="bin\roslyn\vbc.rsp" />
+    <Content Include="bin\roslyn\VBCSCompiler.exe.config" />
+    <Content Include="obj\Debug\DesignTimeResolveAssemblyReferences.cache" />
+    <Content Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <Content Include="obj\Debug\RedPatitas.csproj.AssemblyReference.cache" />
+    <Content Include="obj\Debug\RedPatitas.csproj.CoreCompileInputs.cache" />
+    <Content Include="obj\Debug\RedPatitas.csproj.Up2Date" />
     <None Include="packages.config" />
     <Content Include="Refugio\Refugio.Master" />
     <Content Include="Public\Public.Master" />
@@ -202,7 +311,9 @@
       <Name>CapaNegocios</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="obj\Debug\TempPE\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
