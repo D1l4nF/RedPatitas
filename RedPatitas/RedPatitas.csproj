@@ -74,6 +74,7 @@
     <Content Include="Login\Login.aspx" />
     <Content Include="Login\Registro.aspx" />
     <Content Include="Public\Home.aspx" />
+    <Content Include="Refugio\Dashboard.aspx" />
     <Content Include="Style\auth.css" />
     <Content Include="Style\dashboard-admin-refugio.css" />
     <Content Include="Style\dashboard-admin.css" />

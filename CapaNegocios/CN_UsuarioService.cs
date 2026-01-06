@@ -33,7 +33,7 @@ namespace CapaNegocios
                         Mensaje = "Usuario bloqueado. Contacte al administrador."
                     };
                 }
-                if (usuario.usu_Contrasena == clave)
+                if (CN_CryptoService.VerifyPassword(clave, usuario.usu_Contrasena, usuario.usu_Salt))
                 {
                     usuario.usu_IntentosFallidos = 0;
                     dc.SubmitChanges();
@@ -96,6 +96,10 @@ namespace CapaNegocios
                     };
                 }
 
+                // Generar salt y hash para la contraseña
+                string salt = CN_CryptoService.GenerarSalt();
+                string hash = CN_CryptoService.HashPassword(contrasena, salt);
+
                 // Crear nuevo usuario adoptante
                 var nuevoUsuario = new tbl_Usuarios
                 {
@@ -104,7 +108,8 @@ namespace CapaNegocios
                     usu_Nombre = nombre,
                     usu_Apellido = apellido,
                     usu_Email = email,
-                    usu_Contrasena = contrasena, // TODO: En producción usar hash
+                    usu_Contrasena = hash,
+                    usu_Salt = salt,
                     usu_EmailVerificado = false,
                     usu_IntentosFallidos = 0,
                     usu_Bloqueado = false,
@@ -160,6 +165,10 @@ namespace CapaNegocios
                 dc.tbl_Refugios.InsertOnSubmit(nuevoRefugio);
                 dc.SubmitChanges(); // Guardar para obtener el ID
 
+                // Generar salt y hash para la contraseña
+                string salt = CN_CryptoService.GenerarSalt();
+                string hash = CN_CryptoService.HashPassword(contrasena, salt);
+
                 // Crear usuario vinculado al refugio
                 var nuevoUsuario = new tbl_Usuarios
                 {
@@ -168,7 +177,8 @@ namespace CapaNegocios
                     usu_Nombre = nombreRefugio, // Usar nombre del refugio
                     usu_Apellido = null,
                     usu_Email = email,
-                    usu_Contrasena = contrasena, // TODO: En producción usar hash
+                    usu_Contrasena = hash,
+                    usu_Salt = salt,
                     usu_Telefono = telefono,
                     usu_Ciudad = ciudad,
                     usu_Direccion = direccion,
