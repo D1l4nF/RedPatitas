@@ -100,10 +100,18 @@
 
             <div class="sidebar-footer">
                 <div class="user-profile">
-                    <div class="avatar">AD</div>
+                    <asp:Image ID="imgPerfilUsuario" runat="server"
+                        ImageUrl="~/Images/img_jaime.jpg"
+                        CssClass="avatar"
+                        Width="40px" Height="40px"
+                        Style="border-radius: 50%; object-fit: cover;" />
+
                     <div class="user-info">
-                        <span class="user-name">Administrador</span>
-                        <span class="user-role">Super Admin</span>
+                        <asp:Label ID="lblNombreUsuario" runat="server"
+                            CssClass="user-name"
+                            Text="Cargando..."></asp:Label>
+
+                        <span class="user-role">Administrador</span>
                     </div>
                 </div>
             </div>

@@ -114,6 +114,24 @@ namespace RedPatitas.Admin
         protected global::System.Web.UI.WebControls.HyperLink lnkConfiguracion;
 
         /// <summary>
+        /// Control imgPerfilUsuario.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image imgPerfilUsuario;
+
+        /// <summary>
+        /// Control lblNombreUsuario.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblNombreUsuario;
+
+        /// <summary>
         /// Control btnLogout.
         /// </summary>
         /// <remarks>
