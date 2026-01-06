@@ -729,3 +729,173 @@ form#form1 {
     pointer-events: none;
     cursor: not-allowed;
 }
+
+/* =========================================
+   ESTILOS DEL DASHBOARD ADOPTANTE
+   ========================================= */
+
+.dashboard-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* --- Banner de Bienvenida --- */
+.welcome-banner {
+    /* Usamos un color fijo (naranja) por si falla la variable */
+    background: #FF8C42;
+    /* Y le ponemos el degradado encima como mejora */
+    background: linear-gradient(135deg, #FF8C42 0%, #FFB75E 100%);
+    border-radius: 12px;
+    padding: 3rem;
+    color: white;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(255, 140, 66, 0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* Tu corrección de altura */
+    min-height: 220px;
+    margin-bottom: 2rem;
+}
+
+.welcome-content {
+    z-index: 2;
+    position: relative;
+    max-width: 600px;
+}
+
+    .welcome-content h1 {
+        margin: 0 0 0.5rem 0;
+        font-size: 2.2rem;
+        font-weight: 700;
+    }
+
+    .welcome-content p {
+        margin: 0 0 1.5rem 0;
+        opacity: 0.95;
+        font-size: 1.1rem;
+        line-height: 1.5;
+    }
+
+/* Botón blanco específico del banner */
+.btn-white {
+    background: white;
+    color: var(--primary-color, #FF8C42);
+    padding: 0.8rem 1.8rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 700;
+    display: inline-block;
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: none;
+}
+
+    .btn-white:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+.banner-decoration {
+    position: absolute;
+    right: -20px;
+    bottom: -40px;
+    opacity: 0.15;
+    color: white;
+    transform: rotate(-10deg);
+}
+
+/* --- Tarjetas de Estado (KPIs) --- */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 200px;
+}
+
+.stat-card {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05); /* Similar a form-container */
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    border-left: 5px solid transparent;
+    transition: transform 0.2s;
+}
+
+    .stat-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+    }
+
+    /* Colores de estado */
+    .stat-card.orange {
+        border-left-color: #FF8C42;
+    }
+
+        .stat-card.orange .stat-icon {
+            color: #FF8C42;
+            background: #FFF3E0;
+        }
+
+    .stat-card.green {
+        border-left-color: #27AE60;
+    }
+
+        .stat-card.green .stat-icon {
+            color: #27AE60;
+            background: #E8F5E9;
+        }
+
+    .stat-card.blue {
+        border-left-color: #3498DB;
+    }
+
+        .stat-card.blue .stat-icon {
+            color: #3498DB;
+            background: #E3F2FD;
+        }
+
+.stat-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    flex-shrink: 0;
+}
+
+.stat-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.stat-number {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #333;
+    line-height: 1;
+    margin-bottom: 0.2rem;
+}
+
+.stat-label {
+    color: #666;
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+/* Títulos de sección */
+.section-title {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+}
