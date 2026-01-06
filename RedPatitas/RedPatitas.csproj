@@ -44,6 +44,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -71,9 +72,11 @@
     <Content Include="AdminRefugio\Perfil.aspx" />
     <Content Include="Admin\Dashboard.aspx" />
     <Content Include="Adoptante\Dashboard.aspx" />
+    <Content Include="Images\img_jaime.jpg" />
     <Content Include="Login\Login.aspx" />
     <Content Include="Login\Registro.aspx" />
     <Content Include="Public\Home.aspx" />
+    <Content Include="Refugio\Dashboard.aspx" />
     <Content Include="Style\auth.css" />
     <Content Include="Style\dashboard-admin-refugio.css" />
     <Content Include="Style\dashboard-admin.css" />
@@ -202,7 +205,9 @@
       <Name>CapaNegocios</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Js\App_LocalResources\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
