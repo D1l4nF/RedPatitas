@@ -361,24 +361,27 @@ INSERT INTO tbl_CategoriasForo (cat_Nombre, cat_Descripcion, cat_Color, cat_Orde
 ('Adopciones', 'Experiencias y consultas sobre adopción', '#8E44AD', 4),
 ('Perdidos y Encontrados', 'Ayuda para reunir mascotas con sus dueños', '#3498DB', 5);
 
--- Usuario SuperAdmin inicial (contraseña: Admin123!)
--- NOTA: En producción usar hash real
+-- Usuario SuperAdmin inicial
+-- Contraseña: admin123
+-- El hash y salt fueron generados por CN_CryptoService
 INSERT INTO tbl_Usuarios (
     usu_IdRol, 
     usu_Nombre, 
     usu_Apellido, 
     usu_Email, 
-    usu_Contrasena, 
+    usu_Contrasena,
+    usu_Salt,
     usu_Estado, 
     usu_EmailVerificado
 ) VALUES (
-    4,                      -- Rol Adoptante
-    'adoptante',
-    'test',
-    'adoptante@test.com',
-    '123456',               -- Contraseña en texto plano (solo para pruebas)
+    1,                      -- Rol SuperAdmin
+    'Admin',
+    'Test',
+    'admin@test.com',
+    '4dfc2fdb1f2a4e6e912d467da6bec325d5c2d97c0a0e9eb48c1b76fb3783d72b',  -- Hash SHA256 de 'admin123'
+    '789c3e1d13b5fc0e28998407654a90a6',  -- Salt
     1,                      -- Activo
-    1                       -- Verificado
+    1                       -- Email Verificado
 );
 
 GO

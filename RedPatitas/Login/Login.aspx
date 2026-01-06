@@ -37,67 +37,71 @@
                         <p class="subtitle">Ingresa tus datos para acceder al sistema</p>
                     </div>
 
-                    <div class="form-group">
-                        <label for="email">Correo Electrónico</label>
-                        <div class="input-wrapper">
-                            <!-- Email Icon -->
-                            <svg class="input-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4Z"
-                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round" />
-                                <path d="M22 6L12 13L2 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round" />
-                            </svg>
-                            <asp:TextBox ID="txtEmail" runat="server" TextMode="Email" placeholder="tu@email.com"
-                                CssClass="form-control" ClientIDMode="Static" required></asp:TextBox>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="password">Contraseña</label>
-                        <div class="input-wrapper has-toggle">
-                            <!-- Lock Icon -->
-                            <svg class="input-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2" stroke="currentColor"
-                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                <path
-                                    d="M7 11V7C7 5.67392 7.52678 4.40215 8.46447 3.46447C9.40215 2.52678 10.6739 2 12 2C13.3261 2 14.5979 2.52678 15.5355 3.46447C16.4732 4.40215 17 5.67392 17 7V11"
-                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round" />
-                            </svg>
-                            <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" placeholder="••••••••"
-                                CssClass="form-control" ClientIDMode="Static" required></asp:TextBox>
-                            <button type="button" class="password-toggle" data-target="txtPassword"
-                                aria-label="Mostrar contraseña">
-                                <svg class="icon-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2">
-                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                                    <circle cx="12" cy="12" r="3"></circle>
-                                </svg>
-                                <svg class="icon-eye-off" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2" style="display: none;">
+                    <asp:Panel ID="pnlLogin" runat="server" DefaultButton="btnLogin">
+                        <div class="form-group">
+                            <label for="email">Correo Electrónico</label>
+                            <div class="input-wrapper">
+                                <!-- Email Icon -->
+                                <svg class="input-icon" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
                                     <path
-                                        d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24">
-                                    </path>
-                                    <line x1="1" y1="1" x2="23" y2="23"></line>
+                                        d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4Z"
+                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                    <path d="M22 6L12 13L2 6" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" />
                                 </svg>
-                            </button>
+                                <asp:TextBox ID="txtEmail" runat="server" TextMode="Email" placeholder="tu@email.com"
+                                    CssClass="form-control" ClientIDMode="Static" required></asp:TextBox>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="form-options">
-                        <label class="checkbox-container">
-                            <input type="checkbox" id="remember" name="remember">
-                            <span class="checkmark"></span>
-                            <span class="checkbox-label">Recordarme</span>
-                        </label>
-                        <a href="forgot-password.html" class="forgot-password">¿Olvidaste tu contraseña?</a>
-                    </div>
+                        <div class="form-group">
+                            <label for="password">Contraseña</label>
+                            <div class="input-wrapper has-toggle">
+                                <!-- Lock Icon -->
+                                <svg class="input-icon" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2" stroke="currentColor"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                    <path
+                                        d="M7 11V7C7 5.67392 7.52678 4.40215 8.46447 3.46447C9.40215 2.52678 10.6739 2 12 2C13.3261 2 14.5979 2.52678 15.5355 3.46447C16.4732 4.40215 17 5.67392 17 7V11"
+                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                </svg>
+                                <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" placeholder="••••••••"
+                                    CssClass="form-control" ClientIDMode="Static" required></asp:TextBox>
+                                <button type="button" class="password-toggle" data-target="txtPassword"
+                                    aria-label="Mostrar contraseña">
+                                    <svg class="icon-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                        <circle cx="12" cy="12" r="3"></circle>
+                                    </svg>
+                                    <svg class="icon-eye-off" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2" style="display: none;">
+                                        <path
+                                            d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24">
+                                        </path>
+                                        <line x1="1" y1="1" x2="23" y2="23"></line>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
 
-                    <asp:LinkButton ID="btnLogin" runat="server" CssClass="btn-primary" OnClick="btnLogin_Click">
-                        <span class="btn-text">Ingresar</span>
-                    </asp:LinkButton>
+                        <div class="form-options">
+                            <label class="checkbox-container">
+                                <input type="checkbox" id="remember" name="remember">
+                                <span class="checkmark"></span>
+                                <span class="checkbox-label">Recordarme</span>
+                            </label>
+                            <a href="forgot-password.html" class="forgot-password">¿Olvidaste tu contraseña?</a>
+                        </div>
+
+                        <asp:LinkButton ID="btnLogin" runat="server" CssClass="btn-primary" OnClick="btnLogin_Click">
+                            <span class="btn-text">Ingresar</span>
+                        </asp:LinkButton>
+                    </asp:Panel>
                     <p class="signup-link">
                         ¿Aún no tienes cuenta? <a href="~/Login/Registro.aspx" runat="server">Regístrate aquí</a>
                     </p>

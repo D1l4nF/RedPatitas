@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="RedPatitas" Class="DataClasses1DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=DESKTOP-34VIA8T;Initial Catalog=RedPatitas;Integrated Security=True;Encrypt=False" SettingsObjectName="CapaDatos.Properties.Settings" SettingsPropertyName="RedPatitasConnectionString1" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=localhost;Initial Catalog=RedPatitas;Integrated Security=True" SettingsObjectName="CapaDatos.Properties.Settings" SettingsPropertyName="RedPatitasConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.tbl_Auditoria" Member="tbl_Auditoria">
     <Type Name="tbl_Auditoria">
       <Column Name="aud_IdAuditoria" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -330,11 +330,29 @@
       <Column Name="NombreAdoptante" Type="System.String" DbType="VarChar(201) NOT NULL" CanBeNull="false" />
       <Column Name="EmailAdoptante" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
       <Column Name="usu_Cedula" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
-      <Column Name="TelefonoAdoptante" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
-      <Column Name="mas_IdMascota" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="NombreMascota" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
-      <Column Name="ref_IdRefugio" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="NombreRefugio" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="usu_Telefono" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="usu_Direccion" Type="System.String" DbType="VarChar(300)" CanBeNull="true" />
+      <Column Name="usu_Ciudad" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="usu_FotoUrl" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="usu_EmailVerificado" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="usu_IntentosFallidos" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="usu_Bloqueado" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="usu_FechaBloqueo" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="usu_Estado" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="usu_FechaRegistro" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="usu_UltimoAcceso" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="usu_Salt" Type="System.String" DbType="VarChar(32)" CanBeNull="true" />
+      <Association Name="tbl_Usuarios_tbl_Auditoria" Member="tbl_Auditoria" ThisKey="usu_IdUsuario" OtherKey="aud_IdUsuario" Type="tbl_Auditoria" />
+      <Association Name="tbl_Usuarios_tbl_Avistamientos" Member="tbl_Avistamientos" ThisKey="usu_IdUsuario" OtherKey="avi_IdUsuario" Type="tbl_Avistamientos" />
+      <Association Name="tbl_Usuarios_tbl_Favoritos" Member="tbl_Favoritos" ThisKey="usu_IdUsuario" OtherKey="fav_IdUsuario" Type="tbl_Favoritos" />
+      <Association Name="tbl_Usuarios_tbl_Mascotas" Member="tbl_Mascotas" ThisKey="usu_IdUsuario" OtherKey="mas_IdUsuarioRegistro" Type="tbl_Mascotas" />
+      <Association Name="tbl_Usuarios_tbl_Notificaciones" Member="tbl_Notificaciones" ThisKey="usu_IdUsuario" OtherKey="not_IdUsuario" Type="tbl_Notificaciones" />
+      <Association Name="tbl_Usuarios_tbl_ReportesMascotas" Member="tbl_ReportesMascotas" ThisKey="usu_IdUsuario" OtherKey="rep_IdUsuario" Type="tbl_ReportesMascotas" />
+      <Association Name="tbl_Usuarios_tbl_SolicitudesAdopcion" Member="tbl_SolicitudesAdopcion" ThisKey="usu_IdUsuario" OtherKey="sol_IdUsuario" Type="tbl_SolicitudesAdopcion" />
+      <Association Name="tbl_Usuarios_tbl_SolicitudesAdopcion1" Member="tbl_SolicitudesAdopcion1" ThisKey="usu_IdUsuario" OtherKey="sol_IdUsuarioRevision" Type="tbl_SolicitudesAdopcion" />
+      <Association Name="tbl_Usuarios_tbl_TokensRecuperacion" Member="tbl_TokensRecuperacion" ThisKey="usu_IdUsuario" OtherKey="tok_IdUsuario" Type="tbl_TokensRecuperacion" />
+      <Association Name="tbl_Roles_tbl_Usuarios" Member="tbl_Roles" ThisKey="usu_IdRol" OtherKey="rol_IdRol" Type="tbl_Roles" IsForeignKey="true" />
+      <Association Name="tbl_Refugios_tbl_Usuarios" Member="tbl_Refugios" ThisKey="usu_IdRefugio" OtherKey="ref_IdRefugio" Type="tbl_Refugios" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

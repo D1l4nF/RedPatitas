@@ -129,7 +129,6 @@
     <Content Include="obj\Debug\RedPatitas.pdb" />
     <Content Include="Public\Home.aspx" />
     <Content Include="Refugio\Dashboard.aspx" />
-    <Content Include="Refugio\SolicitudesRecibidas.aspx" />
     <Content Include="Style\auth.css" />
     <Content Include="Style\dashboard-admin-refugio.css" />
     <Content Include="Style\dashboard-admin.css" />

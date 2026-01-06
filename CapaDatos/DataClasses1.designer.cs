@@ -6798,18 +6798,122 @@ namespace CapaDatos
 			{
 				return this._ref_Verificado;
 			}
-			set
-			{
-				if ((this._ref_Verificado != value))
-				{
-					this.Onref_VerificadoChanging(value);
-					this.SendPropertyChanging();
-					this._ref_Verificado = value;
-					this.SendPropertyChanged("ref_Verificado");
-					this.Onref_VerificadoChanged();
-				}
-			}
 		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tbl_Usuarios")]
+	public partial class tbl_Usuarios : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _usu_IdUsuario;
+		
+		private int _usu_IdRol;
+		
+		private System.Nullable<int> _usu_IdRefugio;
+		
+		private string _usu_Nombre;
+		
+		private string _usu_Apellido;
+		
+		private string _usu_Email;
+		
+		private string _usu_Contrasena;
+		
+		private string _usu_Cedula;
+		
+		private string _usu_Telefono;
+		
+		private string _usu_Direccion;
+		
+		private string _usu_Ciudad;
+		
+		private string _usu_FotoUrl;
+		
+		private System.Nullable<bool> _usu_EmailVerificado;
+		
+		private System.Nullable<int> _usu_IntentosFallidos;
+		
+		private System.Nullable<bool> _usu_Bloqueado;
+		
+		private System.Nullable<System.DateTime> _usu_FechaBloqueo;
+		
+		private System.Nullable<bool> _usu_Estado;
+		
+		private System.Nullable<System.DateTime> _usu_FechaRegistro;
+		
+		private System.Nullable<System.DateTime> _usu_UltimoAcceso;
+		
+		private string _usu_Salt;
+		
+		private EntitySet<tbl_Auditoria> _tbl_Auditoria;
+		
+		private EntitySet<tbl_Avistamientos> _tbl_Avistamientos;
+		
+		private EntitySet<tbl_Favoritos> _tbl_Favoritos;
+		
+		private EntitySet<tbl_Mascotas> _tbl_Mascotas;
+		
+		private EntitySet<tbl_Notificaciones> _tbl_Notificaciones;
+		
+		private EntitySet<tbl_ReportesMascotas> _tbl_ReportesMascotas;
+		
+		private EntitySet<tbl_SolicitudesAdopcion> _tbl_SolicitudesAdopcion;
+		
+		private EntitySet<tbl_SolicitudesAdopcion> _tbl_SolicitudesAdopcion1;
+		
+		private EntitySet<tbl_TokensRecuperacion> _tbl_TokensRecuperacion;
+		
+		private EntityRef<tbl_Roles> _tbl_Roles;
+		
+		private EntityRef<tbl_Refugios> _tbl_Refugios;
+		
+    #region Definiciones de métodos de extensibilidad
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void Onusu_IdUsuarioChanging(int value);
+    partial void Onusu_IdUsuarioChanged();
+    partial void Onusu_IdRolChanging(int value);
+    partial void Onusu_IdRolChanged();
+    partial void Onusu_IdRefugioChanging(System.Nullable<int> value);
+    partial void Onusu_IdRefugioChanged();
+    partial void Onusu_NombreChanging(string value);
+    partial void Onusu_NombreChanged();
+    partial void Onusu_ApellidoChanging(string value);
+    partial void Onusu_ApellidoChanged();
+    partial void Onusu_EmailChanging(string value);
+    partial void Onusu_EmailChanged();
+    partial void Onusu_ContrasenaChanging(string value);
+    partial void Onusu_ContrasenaChanged();
+    partial void Onusu_CedulaChanging(string value);
+    partial void Onusu_CedulaChanged();
+    partial void Onusu_TelefonoChanging(string value);
+    partial void Onusu_TelefonoChanged();
+    partial void Onusu_DireccionChanging(string value);
+    partial void Onusu_DireccionChanged();
+    partial void Onusu_CiudadChanging(string value);
+    partial void Onusu_CiudadChanged();
+    partial void Onusu_FotoUrlChanging(string value);
+    partial void Onusu_FotoUrlChanged();
+    partial void Onusu_EmailVerificadoChanging(System.Nullable<bool> value);
+    partial void Onusu_EmailVerificadoChanged();
+    partial void Onusu_IntentosFallidosChanging(System.Nullable<int> value);
+    partial void Onusu_IntentosFallidosChanged();
+    partial void Onusu_BloqueadoChanging(System.Nullable<bool> value);
+    partial void Onusu_BloqueadoChanged();
+    partial void Onusu_FechaBloqueoChanging(System.Nullable<System.DateTime> value);
+    partial void Onusu_FechaBloqueoChanged();
+    partial void Onusu_EstadoChanging(System.Nullable<bool> value);
+    partial void Onusu_EstadoChanged();
+    partial void Onusu_FechaRegistroChanging(System.Nullable<System.DateTime> value);
+    partial void Onusu_FechaRegistroChanged();
+    partial void Onusu_UltimoAccesoChanging(System.Nullable<System.DateTime> value);
+    partial void Onusu_UltimoAccesoChanged();
+    partial void Onusu_SaltChanging(string value);
+    partial void Onusu_SaltChanged();
+    #endregion
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ref_FechaVerificacion", DbType="DateTime")]
 		public System.Nullable<System.DateTime> ref_FechaVerificacion
@@ -7260,8 +7364,28 @@ namespace CapaDatos
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_sol_FechaSolicitud", DbType="DateTime")]
-		public System.Nullable<System.DateTime> sol_FechaSolicitud
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_usu_Salt", DbType="VarChar(32)")]
+		public string usu_Salt
+		{
+			get
+			{
+				return this._usu_Salt;
+			}
+			set
+			{
+				if ((this._usu_Salt != value))
+				{
+					this.Onusu_SaltChanging(value);
+					this.SendPropertyChanging();
+					this._usu_Salt = value;
+					this.SendPropertyChanged("usu_Salt");
+					this.Onusu_SaltChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Usuarios_tbl_Auditoria", Storage="_tbl_Auditoria", ThisKey="usu_IdUsuario", OtherKey="aud_IdUsuario")]
+		public EntitySet<tbl_Auditoria> tbl_Auditoria
 		{
 			get
 			{

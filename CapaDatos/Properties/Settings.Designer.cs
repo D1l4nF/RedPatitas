@@ -26,8 +26,7 @@ namespace CapaDatos.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=redmibook;Initial Catalog=RedPatitas;Integrated Security=True;Encrypt" +
-            "=False")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=localhost;Initial Catalog=RedPatitas;Integrated Security=True")]
         public string RedPatitasConnectionString {
             get {
                 return ((string)(this["RedPatitasConnectionString"]));
