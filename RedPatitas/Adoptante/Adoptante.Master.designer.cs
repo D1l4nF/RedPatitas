@@ -60,6 +60,15 @@ namespace RedPatitas.Adoptante
         protected global::System.Web.UI.WebControls.HyperLink lnkBuscarMascotas;
 
         /// <summary>
+        /// Control lnkReportar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink lnkReportar;
+
+        /// <summary>
         /// Control lnkFavoritos.
         /// </summary>
         /// <remarks>
@@ -85,6 +94,24 @@ namespace RedPatitas.Adoptante
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink lnkPerfil;
+
+        /// <summary>
+        /// Control imgPerfilUsuario.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image imgPerfilUsuario;
+
+        /// <summary>
+        /// Control lblNombreUsuario.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblNombreUsuario;
 
         /// <summary>
         /// Control btnLogout.
