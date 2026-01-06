@@ -6116,6 +6116,8 @@ namespace CapaDatos
 		
 		private System.Nullable<System.DateTime> _usu_UltimoAcceso;
 		
+		private string _usu_Salt;
+		
 		private EntitySet<tbl_Auditoria> _tbl_Auditoria;
 		
 		private EntitySet<tbl_Avistamientos> _tbl_Avistamientos;
@@ -6180,6 +6182,8 @@ namespace CapaDatos
     partial void Onusu_FechaRegistroChanged();
     partial void Onusu_UltimoAccesoChanging(System.Nullable<System.DateTime> value);
     partial void Onusu_UltimoAccesoChanged();
+    partial void Onusu_SaltChanging(string value);
+    partial void Onusu_SaltChanged();
     #endregion
 		
 		public tbl_Usuarios()
@@ -6582,6 +6586,26 @@ namespace CapaDatos
 					this._usu_UltimoAcceso = value;
 					this.SendPropertyChanged("usu_UltimoAcceso");
 					this.Onusu_UltimoAccesoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_usu_Salt", DbType="VarChar(32)")]
+		public string usu_Salt
+		{
+			get
+			{
+				return this._usu_Salt;
+			}
+			set
+			{
+				if ((this._usu_Salt != value))
+				{
+					this.Onusu_SaltChanging(value);
+					this.SendPropertyChanging();
+					this._usu_Salt = value;
+					this.SendPropertyChanged("usu_Salt");
+					this.Onusu_SaltChanged();
 				}
 			}
 		}

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="RedPatitas" Class="DataClasses1DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=redmibook;Initial Catalog=RedPatitas;Integrated Security=True;Encrypt=False" SettingsObjectName="CapaDatos.Properties.Settings" SettingsPropertyName="RedPatitasConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=localhost;Initial Catalog=RedPatitas;Integrated Security=True" SettingsObjectName="CapaDatos.Properties.Settings" SettingsPropertyName="RedPatitasConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.tbl_Auditoria" Member="tbl_Auditoria">
     <Type Name="tbl_Auditoria">
       <Column Name="aud_IdAuditoria" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -287,6 +287,7 @@
       <Column Name="usu_Estado" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Column Name="usu_FechaRegistro" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="usu_UltimoAcceso" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="usu_Salt" Type="System.String" DbType="VarChar(32)" CanBeNull="true" />
       <Association Name="tbl_Usuarios_tbl_Auditoria" Member="tbl_Auditoria" ThisKey="usu_IdUsuario" OtherKey="aud_IdUsuario" Type="tbl_Auditoria" />
       <Association Name="tbl_Usuarios_tbl_Avistamientos" Member="tbl_Avistamientos" ThisKey="usu_IdUsuario" OtherKey="avi_IdUsuario" Type="tbl_Avistamientos" />
       <Association Name="tbl_Usuarios_tbl_Favoritos" Member="tbl_Favoritos" ThisKey="usu_IdUsuario" OtherKey="fav_IdUsuario" Type="tbl_Favoritos" />
