@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CapaNegocios;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -13,23 +14,28 @@ namespace RedPatitas.Refugio
         {
             if (!IsPostBack)
             {
-                gvSolicitudes.DataSource = new[]
-                {
-            new { Adoptante = "Ana Díaz", Mascota = "Firulais", Estado = "Pendiente" },
-            new { Adoptante = "Carlos Pérez", Mascota = "Luna", Estado = "Pendiente" }
-        };
+                int idRefugio = (int)Session["idRefugio"];
 
+                CN_AdopcionesService servicio = new CN_AdopcionesService();
+                gvSolicitudes.DataSource = servicio.SolicitudesRecibidas(idRefugio);
                 gvSolicitudes.DataBind();
             }
         }
 
         protected void gvSolicitudes_RowCommand(object sender, GridViewCommandEventArgs e)
         {
+            int idSolicitud = int.Parse(e.CommandArgument.ToString());
+            int idUsuario = (int)Session["idUsuario"];
+
+            CN_AdopcionesService servicio = new CN_AdopcionesService();
+
             if (e.CommandName == "Aprobar")
-                lblResultado.Text = "Solicitud APROBADA correctamente.";
+                servicio.Aprobar(idSolicitud, idUsuario);
 
             if (e.CommandName == "Rechazar")
-                lblResultado.Text = "Solicitud RECHAZADA.";
+                servicio.Rechazar(idSolicitud, "Rechazado por refugio", idUsuario);
+
+            Response.Redirect(Request.RawUrl);
         }
 
     }
