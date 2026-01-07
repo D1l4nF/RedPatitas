@@ -74,6 +74,8 @@
     <Content Include="Adoptante\Dashboard.aspx" />
     <Content Include="Images\img_jaime.jpg" />
     <Content Include="Login\Login.aspx" />
+    <Content Include="Login\RecuperarContrasena.aspx" />
+    <Content Include="Login\CambiarContrasena.aspx" />
     <Content Include="Login\Registro.aspx" />
     <Content Include="Public\Home.aspx" />
     <Content Include="Refugio\Dashboard.aspx" />
@@ -143,6 +145,20 @@
     </Compile>
     <Compile Include="Login\Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Login\RecuperarContrasena.aspx.cs">
+      <DependentUpon>RecuperarContrasena.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login\RecuperarContrasena.aspx.designer.cs">
+      <DependentUpon>RecuperarContrasena.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Login\CambiarContrasena.aspx.cs">
+      <DependentUpon>CambiarContrasena.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login\CambiarContrasena.aspx.designer.cs">
+      <DependentUpon>CambiarContrasena.aspx</DependentUpon>
     </Compile>
     <Compile Include="Login\Registro.aspx.cs">
       <DependentUpon>Registro.aspx</DependentUpon>
