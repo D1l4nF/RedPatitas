@@ -11,7 +11,7 @@ namespace RedPatitas.AdminRefugio
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            /*if (Session["UsuarioId"] == null || Session["RolId"] == null)
+            if (Session["UsuarioId"] == null || Session["RolId"] == null)
             {
                 Response.Redirect("~/Login/Login.aspx");
                 return;
@@ -21,7 +21,7 @@ namespace RedPatitas.AdminRefugio
             {
                 Response.Redirect("~/Login/Login.aspx");
                 return;
-            }*/
+            }
             if (Session["Ref_Verificado"] != null)
             {
                 bool? verificado = (bool?)Session["Ref_Verificado"];

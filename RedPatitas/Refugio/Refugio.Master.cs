@@ -11,7 +11,7 @@ namespace RedPatitas.Refugio
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            /*if (Session["UsuarioId"] == null || Session["RolId"] == null)
+            if (Session["UsuarioId"] == null || Session["RolId"] == null)
             {
                 Response.Redirect("~/Login/Login.aspx");
                 return;
@@ -21,7 +21,7 @@ namespace RedPatitas.Refugio
             {
                 Response.Redirect("~/Login/Login.aspx");
                 return;
-            }*/
+            }
         }
         protected void btnLogout_Click(object sender, EventArgs e)
         {
