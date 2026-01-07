@@ -77,8 +77,11 @@
     <Content Include="Login\RecuperarContrasena.aspx" />
     <Content Include="Login\CambiarContrasena.aspx" />
     <Content Include="Login\Registro.aspx" />
-    <Content Include="Public\Home.aspx" />
     <Content Include="Public\404.aspx" />
+    <Content Include="Public\Adopta.aspx" />
+    <Content Include="Public\Home.aspx" />
+    <Content Include="Public\PerfilMascota.aspx" />
+    <Content Include="Public\Reportar.aspx" />
     <Content Include="Refugio\Dashboard.aspx" />
     <Content Include="Style\auth.css" />
     <Content Include="Style\dashboard-admin-refugio.css" />
@@ -86,6 +89,7 @@
     <Content Include="Style\dashboard.css" />
     <Content Include="Style\forms.css" />
     <Content Include="Style\landing.css" />
+    <Content Include="Style\public-pages.css" />
     <Content Include="Style\ux-components.css" />
     <Content Include="Js\ux-components.js" />
     <Content Include="Web.config" />
@@ -169,6 +173,20 @@
       <DependentUpon>Registro.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Public\404.aspx.cs">
+      <DependentUpon>404.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Public\404.aspx.designer.cs">
+      <DependentUpon>404.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Public\Adopta.aspx.cs">
+      <DependentUpon>Adopta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Public\Adopta.aspx.designer.cs">
+      <DependentUpon>Adopta.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Public\Home.aspx.cs">
       <DependentUpon>Home.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -176,12 +194,26 @@
     <Compile Include="Public\Home.aspx.designer.cs">
       <DependentUpon>Home.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Public\PerfilMascota.aspx.cs">
+      <DependentUpon>PerfilMascota.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Public\PerfilMascota.aspx.designer.cs">
+      <DependentUpon>PerfilMascota.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Public\Public.Master.cs">
       <DependentUpon>Public.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Public\Public.Master.designer.cs">
       <DependentUpon>Public.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Public\Reportar.aspx.cs">
+      <DependentUpon>Reportar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Public\Reportar.aspx.designer.cs">
+      <DependentUpon>Reportar.aspx</DependentUpon>
     </Compile>
     <Compile Include="Refugio\Dashboard.aspx.cs">
       <DependentUpon>Dashboard.aspx</DependentUpon>

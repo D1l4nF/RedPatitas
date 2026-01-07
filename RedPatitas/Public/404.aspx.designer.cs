@@ -9,16 +9,9 @@
 
 namespace RedPatitas.Public
 {
-    public partial class Home
-    {
-        /// <summary>
-        /// Control rptMascotasDestacadas.
-        /// </summary>
-        protected global::System.Web.UI.WebControls.Repeater rptMascotasDestacadas;
 
-        /// <summary>
-        /// Control pnlSinMascotasHome.
-        /// </summary>
-        protected global::System.Web.UI.WebControls.Panel pnlSinMascotasHome;
+
+    public partial class _404
+    {
     }
 }
