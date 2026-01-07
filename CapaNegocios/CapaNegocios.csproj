@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CN_CryptoService.cs" />
+    <Compile Include="CN_EmailService.cs" />
     <Compile Include="CN_LoginResultado.cs" />
     <Compile Include="CN_RegistroResultado.cs" />
     <Compile Include="CN_UsuarioService.cs" />

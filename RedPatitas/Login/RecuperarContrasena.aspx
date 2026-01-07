@@ -1,14 +1,16 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="RedPatitas.Login.Login" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="RecuperarContrasena.aspx.cs"
+    Inherits="RedPatitas.Login.RecuperarContrasena" %>
 
     <!DOCTYPE html>
 
     <html lang="es">
 
     <head runat="server">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="Ingreso al Sistema de Adopción de Mascotas">
-        <title>Iniciar Sesión - RedPatitas</title>
+        <meta name="description" content="Recuperar contraseña del Sistema de Adopción de Mascotas">
+        <title>Recuperar Contraseña - RedPatitas</title>
         <link rel="stylesheet" href="~/Style/auth.css">
         <link rel="stylesheet" href="~/Style/ux-components.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -33,13 +35,13 @@
                                 </svg>
                             </div>
                         </div>
-                        <h1>Bienvenido de nuevo</h1>
-                        <p class="subtitle">Ingresa tus datos para acceder al sistema</p>
+                        <h1>Recuperar Contraseña</h1>
+                        <p class="subtitle">Ingresa tu correo electrónico para restablecer tu contraseña</p>
                     </div>
 
-                    <asp:Panel ID="pnlLogin" runat="server" DefaultButton="btnLogin">
+                    <asp:Panel ID="pnlRecuperar" runat="server" DefaultButton="btnEnviar">
                         <div class="form-group">
-                            <label for="email">Correo Electrónico</label>
+                            <label for="txtEmail">Correo Electrónico</label>
                             <div class="input-wrapper">
                                 <!-- Email Icon -->
                                 <svg class="input-icon" viewBox="0 0 24 24" fill="none"
@@ -52,64 +54,21 @@
                                         stroke-linecap="round" stroke-linejoin="round" />
                                 </svg>
                                 <asp:TextBox ID="txtEmail" runat="server" TextMode="Email" placeholder="tu@email.com"
-                                    CssClass="form-control" ClientIDMode="Static" required></asp:TextBox>
+                                    CssClass="form-control" ClientIDMode="Static"></asp:TextBox>
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <label for="password">Contraseña</label>
-                            <div class="input-wrapper has-toggle">
-                                <!-- Lock Icon -->
-                                <svg class="input-icon" viewBox="0 0 24 24" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2" stroke="currentColor"
-                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                    <path
-                                        d="M7 11V7C7 5.67392 7.52678 4.40215 8.46447 3.46447C9.40215 2.52678 10.6739 2 12 2C13.3261 2 14.5979 2.52678 15.5355 3.46447C16.4732 4.40215 17 5.67392 17 7V11"
-                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                        stroke-linejoin="round" />
-                                </svg>
-                                <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" placeholder="••••••••"
-                                    CssClass="form-control" ClientIDMode="Static" required></asp:TextBox>
-                                <button type="button" class="password-toggle" data-target="txtPassword"
-                                    aria-label="Mostrar contraseña">
-                                    <svg class="icon-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                        stroke-width="2">
-                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                                        <circle cx="12" cy="12" r="3"></circle>
-                                    </svg>
-                                    <svg class="icon-eye-off" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                        stroke-width="2" style="display: none;">
-                                        <path
-                                            d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24">
-                                        </path>
-                                        <line x1="1" y1="1" x2="23" y2="23"></line>
-                                    </svg>
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="form-options">
-                            <label class="checkbox-container">
-                                <input type="checkbox" id="remember" name="remember">
-                                <span class="checkmark"></span>
-                                <span class="checkbox-label">Recordarme</span>
-                            </label>
-                            <a href="~/Login/RecuperarContrasena.aspx" runat="server" class="forgot-password">¿Olvidaste
-                                tu contraseña?</a>
-                        </div>
-
-                        <asp:LinkButton ID="btnLogin" runat="server" CssClass="btn-primary" OnClick="btnLogin_Click">
-                            <span class="btn-text">Ingresar</span>
+                        <asp:LinkButton ID="btnEnviar" runat="server" CssClass="btn-primary" OnClick="btnEnviar_Click">
+                            <span class="btn-text">Enviar Instrucciones</span>
                         </asp:LinkButton>
                     </asp:Panel>
+
                     <p class="signup-link">
-                        ¿Aún no tienes cuenta? <a href="~/Login/Registro.aspx" runat="server">Regístrate aquí</a>
+                        <a href="~/Login/Login.aspx" runat="server">Volver al Inicio de Sesión</a>
                     </p>
                 </div>
 
                 <div class="background-decoration">
-                    <!-- Decorative Paw Prints -->
                     <svg class="paw-print" style="left: 10%; top: 10%; width: 60px;" viewBox="0 0 24 24"
                         fill="currentColor">
                         <path
@@ -124,47 +83,25 @@
             </div>
         </form>
         <script>
-            // Password toggle functionality
-            document.querySelectorAll('.password-toggle').forEach(btn => {
-                btn.addEventListener('click', function () {
-                    const targetId = this.getAttribute('data-target');
-                    const input = document.getElementById(targetId);
-                    const eyeIcon = this.querySelector('.icon-eye');
-                    const eyeOffIcon = this.querySelector('.icon-eye-off');
-
-                    if (input.type === 'password') {
-                        input.type = 'text';
-                        eyeIcon.style.display = 'none';
-                        eyeOffIcon.style.display = 'block';
-                    } else {
-                        input.type = 'password';
-                        eyeIcon.style.display = 'block';
-                        eyeOffIcon.style.display = 'none';
-                    }
-                });
-            });
-
             // Form validation with SweetAlert2
-            function validarLogin() {
+            function validarRecuperacion() {
                 var email = document.getElementById('txtEmail').value.trim();
-                var password = document.getElementById('txtPassword').value.trim();
-                var errores = [];
 
                 if (email === '') {
-                    errores.push('Ingresa tu correo electrónico');
-                } else if (!isValidEmail(email)) {
-                    errores.push('Ingresa un correo electrónico válido');
-                }
-
-                if (password === '') {
-                    errores.push('Ingresa tu contraseña');
-                }
-
-                if (errores.length > 0) {
                     Swal.fire({
                         icon: 'warning',
-                        title: 'Campos incompletos',
-                        html: errores.map(e => '• ' + e).join('<br>'),
+                        title: 'Campo requerido',
+                        text: 'Ingresa tu correo electrónico',
+                        confirmButtonColor: '#FF8C42'
+                    });
+                    return false;
+                }
+
+                if (!isValidEmail(email)) {
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Correo inválido',
+                        text: 'Ingresa un correo electrónico válido',
                         confirmButtonColor: '#FF8C42'
                     });
                     return false;
@@ -178,12 +115,12 @@
                 return regex.test(email);
             }
 
-            // Attach validation to login button
+            // Attach validation to submit button
             document.addEventListener('DOMContentLoaded', function () {
-                var btnLogin = document.getElementById('<%= btnLogin.ClientID %>');
-                if (btnLogin) {
-                    btnLogin.addEventListener('click', function (e) {
-                        if (!validarLogin()) {
+                var btnEnviar = document.getElementById('<%= btnEnviar.ClientID %>');
+                if (btnEnviar) {
+                    btnEnviar.addEventListener('click', function (e) {
+                        if (!validarRecuperacion()) {
                             e.preventDefault();
                             return false;
                         }

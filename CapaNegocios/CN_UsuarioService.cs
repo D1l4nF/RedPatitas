@@ -200,5 +200,145 @@ namespace CapaNegocios
                 };
             }
         }
+
+        /// <summary>
+        /// Genera un token de recuperación de contraseña para el email especificado
+        /// </summary>
+        /// <returns>El token generado si el email existe, null si no existe</returns>
+        public string GenerarTokenRecuperacion(string email)
+        {
+            using (DataClasses1DataContext dc = new DataClasses1DataContext())
+            {
+                var usuario = dc.tbl_Usuarios.FirstOrDefault(u => u.usu_Email == email && u.usu_Estado == true);
+                
+                if (usuario == null)
+                {
+                    return null; // No revelar si el email existe o no por seguridad
+                }
+
+                // Invalidar tokens anteriores del usuario
+                var tokensAnteriores = dc.tbl_TokensRecuperacion
+                    .Where(t => t.tok_IdUsuario == usuario.usu_IdUsuario && t.tok_Usado == false);
+                
+                foreach (var token in tokensAnteriores)
+                {
+                    token.tok_Usado = true;
+                }
+
+                // Generar nuevo token (GUID)
+                string nuevoToken = Guid.NewGuid().ToString("N");
+
+                // Crear registro de token (válido por 24 horas)
+                var tokenRecuperacion = new tbl_TokensRecuperacion
+                {
+                    tok_IdUsuario = usuario.usu_IdUsuario,
+                    tok_Token = nuevoToken,
+                    tok_FechaCreacion = DateTime.Now,
+                    tok_FechaExpiracion = DateTime.Now.AddHours(24),
+                    tok_Usado = false
+                };
+
+                dc.tbl_TokensRecuperacion.InsertOnSubmit(tokenRecuperacion);
+                dc.SubmitChanges();
+
+                return nuevoToken;
+            }
+        }
+
+        /// <summary>
+        /// Valida si un token de recuperación es válido (existe, no usado, no expirado)
+        /// </summary>
+        public bool ValidarToken(string token)
+        {
+            using (DataClasses1DataContext dc = new DataClasses1DataContext())
+            {
+                var tokenDb = dc.tbl_TokensRecuperacion.FirstOrDefault(t =>
+                    t.tok_Token == token &&
+                    t.tok_Usado == false &&
+                    t.tok_FechaExpiracion > DateTime.Now);
+
+                return tokenDb != null;
+            }
+        }
+
+        /// <summary>
+        /// Cambia la contraseña usando un token de recuperación válido
+        /// </summary>
+        public CN_RegistroResultado CambiarContrasenaConToken(string token, string nuevaContrasena)
+        {
+            using (DataClasses1DataContext dc = new DataClasses1DataContext())
+            {
+                var tokenDb = dc.tbl_TokensRecuperacion.FirstOrDefault(t =>
+                    t.tok_Token == token &&
+                    t.tok_Usado == false &&
+                    t.tok_FechaExpiracion > DateTime.Now);
+
+                if (tokenDb == null)
+                {
+                    return new CN_RegistroResultado
+                    {
+                        Exito = false,
+                        Mensaje = "El enlace ha expirado o ya fue utilizado. Solicita uno nuevo."
+                    };
+                }
+
+                // Obtener usuario
+                var usuario = dc.tbl_Usuarios.FirstOrDefault(u => u.usu_IdUsuario == tokenDb.tok_IdUsuario);
+                
+                if (usuario == null)
+                {
+                    return new CN_RegistroResultado
+                    {
+                        Exito = false,
+                        Mensaje = "Usuario no encontrado."
+                    };
+                }
+
+                // Generar nuevo salt y hash
+                string salt = CN_CryptoService.GenerarSalt();
+                string hash = CN_CryptoService.HashPassword(nuevaContrasena, salt);
+
+                // Actualizar contraseña
+                usuario.usu_Contrasena = hash;
+                usuario.usu_Salt = salt;
+                
+                // Desbloquear cuenta si estaba bloqueada
+                usuario.usu_Bloqueado = false;
+                usuario.usu_IntentosFallidos = 0;
+                usuario.usu_FechaBloqueo = null;
+
+                // Marcar token como usado
+                tokenDb.tok_Usado = true;
+
+                dc.SubmitChanges();
+
+                return new CN_RegistroResultado
+                {
+                    Exito = true,
+                    Mensaje = "Contraseña actualizada correctamente.",
+                    UsuarioId = usuario.usu_IdUsuario
+                };
+            }
+        }
+
+        /// <summary>
+        /// Obtiene el email del usuario asociado a un token válido
+        /// </summary>
+        public string ObtenerEmailPorToken(string token)
+        {
+            using (DataClasses1DataContext dc = new DataClasses1DataContext())
+            {
+                var tokenDb = dc.tbl_TokensRecuperacion.FirstOrDefault(t =>
+                    t.tok_Token == token &&
+                    t.tok_Usado == false &&
+                    t.tok_FechaExpiracion > DateTime.Now);
+
+                if (tokenDb != null)
+                {
+                    return tokenDb.tbl_Usuarios.usu_Email;
+                }
+                return null;
+            }
+        }
     }
 }
