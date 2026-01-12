@@ -72,6 +72,7 @@
     <Content Include="AdminRefugio\Perfil.aspx" />
     <Content Include="Admin\Dashboard.aspx" />
     <Content Include="Adoptante\Dashboard.aspx" />
+    <Content Include="Adoptante\Perfil.aspx" />
     <Content Include="Images\img_jaime.jpg" />
     <Content Include="Login\Login.aspx" />
     <Content Include="Login\RecuperarContrasena.aspx" />
@@ -143,6 +144,13 @@
     </Compile>
     <Compile Include="Adoptante\Dashboard.aspx.designer.cs">
       <DependentUpon>Dashboard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Adoptante\Perfil.aspx.cs">
+      <DependentUpon>Perfil.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Adoptante\Perfil.aspx.designer.cs">
+      <DependentUpon>Perfil.aspx</DependentUpon>
     </Compile>
     <Compile Include="Login\Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>

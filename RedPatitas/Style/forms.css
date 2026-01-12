@@ -296,3 +296,41 @@
         grid-template-columns: repeat(2, 1fr);
     }
 }
+
+
+/* =========================================
+   ESTILOS ESPECÍFICOS DE PERFIL
+   ========================================= */
+
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid #eee;
+}
+
+.current-photo-container {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    flex-shrink: 0; /* Evita que la foto se aplaste */
+}
+
+.current-photo {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid white;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* Ajuste responsive para móviles */
+@media (max-width: 600px) {
+    .profile-header {
+        flex-direction: column;
+        text-align: center;
+    }
+}
