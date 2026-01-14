@@ -32,5 +32,16 @@ namespace CapaDatos.Properties {
                 return ((string)(this["RedPatitasConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=localhost;Initial Catalog=RedPatitas;Integrated Security=True;Encrypt" +
+            "=True;TrustServerCertificate=True")]
+        public string RedPatitasConnectionString1 {
+            get {
+                return ((string)(this["RedPatitasConnectionString1"]));
+            }
+        }
     }
 }

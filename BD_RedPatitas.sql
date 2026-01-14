@@ -30,6 +30,8 @@ CREATE TABLE tbl_Refugios (
     ref_Nombre VARCHAR(150) NOT NULL,
     ref_Descripcion TEXT,
     ref_Direccion VARCHAR(300),
+    ref_Latitud DECIMAL(10,8),   -- Coordenada de ubicación del refugio
+    ref_Longitud DECIMAL(11,8),  -- Coordenada de ubicación del refugio
     ref_Ciudad VARCHAR(100),
     ref_Telefono VARCHAR(20),
     ref_Email VARCHAR(100),
@@ -51,7 +53,8 @@ CREATE TABLE tbl_Usuarios (
     usu_Contrasena VARCHAR(255) NOT NULL,  -- SHA-256 + Salt
     usu_Cedula VARCHAR(20),  -- Para adoptantes (requerido para adoptar)
     usu_Telefono VARCHAR(20),
-    usu_Direccion VARCHAR(300),
+    usu_Latitud DECIMAL(10,8),   -- Coordenada de ubicación del usuario
+    usu_Longitud DECIMAL(11,8),  -- Coordenada de ubicación del usuario
     usu_Ciudad VARCHAR(100),
     usu_FotoUrl VARCHAR(500),
     usu_EmailVerificado BIT DEFAULT 0,
@@ -867,4 +870,33 @@ GO
 
 PRINT '¡Base de datos RedPatitas creada exitosamente!';
 GO
-```
+
+-- ============================================================
+-- SCRIPTS DE MIGRACIÓN
+-- (Para bases de datos existentes que necesitan actualizarse)
+-- ============================================================
+
+-- Migración: Reemplazar campo usu_Direccion por coordenadas geográficas
+-- Fecha: 2026-01-14
+-- Descripción: Agrega campos de latitud y longitud para geolocalización
+--              y elimina el campo de dirección de texto
+
+-- Paso 1: Agregar nuevos campos de coordenadas
+ALTER TABLE tbl_Usuarios ADD usu_Latitud DECIMAL(10,8) NULL;
+GO
+ALTER TABLE tbl_Usuarios ADD usu_Longitud DECIMAL(11,8) NULL;
+GO
+
+-- Paso 2: Eliminar campo de dirección de usuarios (ya no se usa)
+-- NOTA: Ejecutar solo después de verificar que no hay datos importantes en usu_Direccion
+ALTER TABLE tbl_Usuarios DROP COLUMN usu_Direccion;
+GO
+
+-- Paso 3: Agregar coordenadas a tabla de refugios (conservando ref_Direccion)
+ALTER TABLE tbl_Refugios ADD ref_Latitud DECIMAL(10,8) NULL;
+GO
+ALTER TABLE tbl_Refugios ADD ref_Longitud DECIMAL(11,8) NULL;
+GO
+
+PRINT 'Migración completada: Campos de geolocalización agregados a tbl_Usuarios y tbl_Refugios';
+GO

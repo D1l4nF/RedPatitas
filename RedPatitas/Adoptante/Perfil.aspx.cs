@@ -34,13 +34,18 @@ namespace RedPatitas.Adoptante
 
                     if (usuario != null)
                     {
-                        // Mapeo de datos (IDs corregidos)
+                        // Mapeo de datos
                         txtNombre.Text = usuario.usu_Nombre;
                         txtApellido.Text = usuario.usu_Apellido;
                         txtEmail.Text = usuario.usu_Email;
                         txtTelefono.Text = usuario.usu_Telefono;
-                        txtCedula.Text = usuario.usu_Cedula; // Agregado campo Cédula
-                        txtDireccion.Text = usuario.usu_Direccion;
+                        txtCedula.Text = usuario.usu_Cedula;
+
+                        // Cargar coordenadas del mapa
+                        if (usuario.usu_Latitud.HasValue)
+                            hfLatitud.Value = usuario.usu_Latitud.Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
+                        if (usuario.usu_Longitud.HasValue)
+                            hfLongitud.Value = usuario.usu_Longitud.Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
                         // Cargar foto
                         if (!string.IsNullOrEmpty(usuario.usu_FotoUrl))
@@ -82,23 +87,65 @@ namespace RedPatitas.Adoptante
                         usuario.usu_Nombre = txtNombre.Text.Trim();
                         usuario.usu_Apellido = txtApellido.Text.Trim();
                         usuario.usu_Telefono = txtTelefono.Text.Trim();
-                        usuario.usu_Cedula = txtCedula.Text.Trim(); // Guardamos Cédula
-                        usuario.usu_Direccion = txtDireccion.Text.Trim();
+                        usuario.usu_Cedula = txtCedula.Text.Trim();
+
+                        // Guardar coordenadas del mapa
+                        if (!string.IsNullOrEmpty(hfLatitud.Value))
+                            usuario.usu_Latitud = decimal.Parse(hfLatitud.Value, System.Globalization.CultureInfo.InvariantCulture);
+                        if (!string.IsNullOrEmpty(hfLongitud.Value))
+                            usuario.usu_Longitud = decimal.Parse(hfLongitud.Value, System.Globalization.CultureInfo.InvariantCulture);
 
                         // 3. Actualizar contraseña SOLO si escribió algo
                         if (!string.IsNullOrEmpty(txtNuevaClave.Text))
                         {
-                            // AQUÍ DEBERÍAS ENCRIPTAR LA CLAVE ANTES DE GUARDAR
-                            // Por ahora lo guardamos directo como ejemplo:
-                            usuario.usu_Contrasena = txtNuevaClave.Text.Trim();
+                            // Verificar que ingresó la contraseña actual
+                            if (string.IsNullOrEmpty(txtClaveActual.Text))
+                            {
+                                lblErrorClave.Text = "Debes ingresar tu contraseña actual para cambiarla.";
+                                lblErrorClave.Visible = true;
+                                return;
+                            }
+
+                            // Verificar que la contraseña actual sea correcta
+                            if (!CapaNegocios.CN_CryptoService.VerifyPassword(txtClaveActual.Text, usuario.usu_Contrasena, usuario.usu_Salt))
+                            {
+                                lblErrorClave.Text = "La contraseña actual es incorrecta.";
+                                lblErrorClave.Visible = true;
+                                return;
+                            }
+
+                            // Verificar que las nuevas contraseñas coincidan
+                            if (txtNuevaClave.Text != txtConfirmarClave.Text)
+                            {
+                                lblErrorClave.Text = "Las contraseñas nuevas no coinciden.";
+                                lblErrorClave.Visible = true;
+                                return;
+                            }
+
+                            // Generar nuevo salt y hash
+                            string nuevoSalt = CapaNegocios.CN_CryptoService.GenerarSalt();
+                            string nuevoHash = CapaNegocios.CN_CryptoService.HashPassword(txtNuevaClave.Text, nuevoSalt);
+                            usuario.usu_Contrasena = nuevoHash;
+                            usuario.usu_Salt = nuevoSalt;
+                            lblErrorClave.Visible = false;
                         }
 
                         // 4. Actualizar foto
                         if (seSubioFoto)
                         {
+                            // Eliminar foto anterior del servidor si existe
+                            EliminarFotoAnterior(usuario.usu_FotoUrl);
+
                             usuario.usu_FotoUrl = nuevaUrlFoto;
                             imgFotoActual.ImageUrl = nuevaUrlFoto;
                             Session["FotoUrl"] = nuevaUrlFoto;
+
+                            // Actualizar también la imagen del sidebar en el Master page
+                            var imgSidebar = Master.FindControl("imgPerfilUsuario") as System.Web.UI.WebControls.Image;
+                            if (imgSidebar != null)
+                            {
+                                imgSidebar.ImageUrl = nuevaUrlFoto;
+                            }
                         }
 
                         dc.SubmitChanges();
@@ -139,6 +186,26 @@ namespace RedPatitas.Adoptante
             {
                 MostrarMensaje("Error al subir imagen.", false);
                 return "";
+            }
+        }
+
+        private void EliminarFotoAnterior(string fotoUrl)
+        {
+            try
+            {
+                // No eliminar si no hay foto anterior o si es una imagen por defecto
+                if (string.IsNullOrEmpty(fotoUrl)) return;
+                if (!fotoUrl.Contains("~/Images/user_")) return; // Solo eliminamos fotos de usuarios
+
+                string rutaFisica = Server.MapPath(fotoUrl);
+                if (File.Exists(rutaFisica))
+                {
+                    File.Delete(rutaFisica);
+                }
+            }
+            catch
+            {
+                // Si falla la eliminación, no interrumpimos el proceso
             }
         }
 
