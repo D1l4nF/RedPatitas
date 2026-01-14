@@ -78,19 +78,31 @@
             </div>
 
             <div class="sidebar-footer">
-                <div class="user-profile">
-                    <div class="avatar">RF</div>
-                    <div class="user-info">
-                        <span class="user-name">Refugio Esperanza</span>
-                        <span class="user-role">Organización</span>
+                <a href="Perfil.aspx" class="user-profile-link">
+                    <div class="user-profile">
+                        <div class="avatar">RF</div>
+                        <div class="user-info">
+                            <span class="user-name">Refugio Esperanza</span>
+                            <span class="user-role">Organización</span>
+                        </div>
                     </div>
-                </div>
+                </a>
             </div>
         </aside>
+        <!-- Overlay para cerrar sidebar en móvil -->
+        <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
         <!-- Main Content -->
         <main class="main-content">
             <!-- Header -->
             <header class="top-header">
+                <!-- Botón hamburguesa para móvil -->
+                <button type="button" class="mobile-menu-btn" onclick="toggleSidebar()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
                 <div class="header-search">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <circle cx="11" cy="11" r="8"></circle>
@@ -121,5 +133,13 @@
             </div>
         </main>
     </form>
+    <script type="text/javascript">
+        function toggleSidebar() {
+            var sidebar = document.querySelector('.sidebar');
+            var overlay = document.getElementById('sidebarOverlay');
+            sidebar.classList.toggle('active');
+            overlay.classList.toggle('active');
+        }
+    </script>
 </body>
 </html>

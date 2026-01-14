@@ -87,7 +87,7 @@ namespace CapaDatos
     #endregion
 		
 		public DataClasses1DataContext() : 
-				base(global::CapaDatos.Properties.Settings.Default.RedPatitasConnectionString, mappingSource)
+				base(global::CapaDatos.Properties.Settings.Default.RedPatitasConnectionString1, mappingSource)
 		{
 			OnCreated();
 		}
@@ -3862,6 +3862,10 @@ namespace CapaDatos
 		
 		private System.Nullable<System.DateTime> _ref_FechaRegistro;
 		
+		private System.Nullable<decimal> _ref_Latitud;
+		
+		private System.Nullable<decimal> _ref_Longitud;
+		
 		private EntitySet<tbl_Campanias> _tbl_Campanias;
 		
 		private EntitySet<tbl_Mascotas> _tbl_Mascotas;
@@ -3896,6 +3900,10 @@ namespace CapaDatos
     partial void Onref_EstadoChanged();
     partial void Onref_FechaRegistroChanging(System.Nullable<System.DateTime> value);
     partial void Onref_FechaRegistroChanged();
+    partial void Onref_LatitudChanging(System.Nullable<decimal> value);
+    partial void Onref_LatitudChanged();
+    partial void Onref_LongitudChanging(System.Nullable<decimal> value);
+    partial void Onref_LongitudChanged();
     #endregion
 		
 		public tbl_Refugios()
@@ -4142,6 +4150,46 @@ namespace CapaDatos
 					this._ref_FechaRegistro = value;
 					this.SendPropertyChanged("ref_FechaRegistro");
 					this.Onref_FechaRegistroChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ref_Latitud", DbType="Decimal(10,8)")]
+		public System.Nullable<decimal> ref_Latitud
+		{
+			get
+			{
+				return this._ref_Latitud;
+			}
+			set
+			{
+				if ((this._ref_Latitud != value))
+				{
+					this.Onref_LatitudChanging(value);
+					this.SendPropertyChanging();
+					this._ref_Latitud = value;
+					this.SendPropertyChanged("ref_Latitud");
+					this.Onref_LatitudChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ref_Longitud", DbType="Decimal(11,8)")]
+		public System.Nullable<decimal> ref_Longitud
+		{
+			get
+			{
+				return this._ref_Longitud;
+			}
+			set
+			{
+				if ((this._ref_Longitud != value))
+				{
+					this.Onref_LongitudChanging(value);
+					this.SendPropertyChanging();
+					this._ref_Longitud = value;
+					this.SendPropertyChanged("ref_Longitud");
+					this.Onref_LongitudChanged();
 				}
 			}
 		}
@@ -6096,8 +6144,6 @@ namespace CapaDatos
 		
 		private string _usu_Telefono;
 		
-		private string _usu_Direccion;
-		
 		private string _usu_Ciudad;
 		
 		private string _usu_FotoUrl;
@@ -6117,6 +6163,10 @@ namespace CapaDatos
 		private System.Nullable<System.DateTime> _usu_UltimoAcceso;
 		
 		private string _usu_Salt;
+		
+		private System.Nullable<decimal> _usu_Latitud;
+		
+		private System.Nullable<decimal> _usu_Longitud;
 		
 		private EntitySet<tbl_Auditoria> _tbl_Auditoria;
 		
@@ -6162,8 +6212,6 @@ namespace CapaDatos
     partial void Onusu_CedulaChanged();
     partial void Onusu_TelefonoChanging(string value);
     partial void Onusu_TelefonoChanged();
-    partial void Onusu_DireccionChanging(string value);
-    partial void Onusu_DireccionChanged();
     partial void Onusu_CiudadChanging(string value);
     partial void Onusu_CiudadChanged();
     partial void Onusu_FotoUrlChanging(string value);
@@ -6184,6 +6232,10 @@ namespace CapaDatos
     partial void Onusu_UltimoAccesoChanged();
     partial void Onusu_SaltChanging(string value);
     partial void Onusu_SaltChanged();
+    partial void Onusu_LatitudChanging(System.Nullable<decimal> value);
+    partial void Onusu_LatitudChanged();
+    partial void Onusu_LongitudChanging(System.Nullable<decimal> value);
+    partial void Onusu_LongitudChanged();
     #endregion
 		
 		public tbl_Usuarios()
@@ -6390,26 +6442,6 @@ namespace CapaDatos
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_usu_Direccion", DbType="VarChar(300)")]
-		public string usu_Direccion
-		{
-			get
-			{
-				return this._usu_Direccion;
-			}
-			set
-			{
-				if ((this._usu_Direccion != value))
-				{
-					this.Onusu_DireccionChanging(value);
-					this.SendPropertyChanging();
-					this._usu_Direccion = value;
-					this.SendPropertyChanged("usu_Direccion");
-					this.Onusu_DireccionChanged();
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_usu_Ciudad", DbType="VarChar(100)")]
 		public string usu_Ciudad
 		{
@@ -6606,6 +6638,46 @@ namespace CapaDatos
 					this._usu_Salt = value;
 					this.SendPropertyChanged("usu_Salt");
 					this.Onusu_SaltChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_usu_Latitud", DbType="Decimal(10,8)")]
+		public System.Nullable<decimal> usu_Latitud
+		{
+			get
+			{
+				return this._usu_Latitud;
+			}
+			set
+			{
+				if ((this._usu_Latitud != value))
+				{
+					this.Onusu_LatitudChanging(value);
+					this.SendPropertyChanging();
+					this._usu_Latitud = value;
+					this.SendPropertyChanged("usu_Latitud");
+					this.Onusu_LatitudChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_usu_Longitud", DbType="Decimal(11,8)")]
+		public System.Nullable<decimal> usu_Longitud
+		{
+			get
+			{
+				return this._usu_Longitud;
+			}
+			set
+			{
+				if ((this._usu_Longitud != value))
+				{
+					this.Onusu_LongitudChanging(value);
+					this.SendPropertyChanging();
+					this._usu_Longitud = value;
+					this.SendPropertyChanged("usu_Longitud");
+					this.Onusu_LongitudChanged();
 				}
 			}
 		}

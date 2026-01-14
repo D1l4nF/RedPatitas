@@ -181,7 +181,6 @@ namespace CapaNegocios
                     usu_Salt = salt,
                     usu_Telefono = telefono,
                     usu_Ciudad = ciudad,
-                    usu_Direccion = direccion,
                     usu_EmailVerificado = false,
                     usu_IntentosFallidos = 0,
                     usu_Bloqueado = false,
