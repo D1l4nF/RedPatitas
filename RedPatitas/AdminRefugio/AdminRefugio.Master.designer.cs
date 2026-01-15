@@ -130,5 +130,9 @@ namespace RedPatitas.AdminRefugio
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ContentPlaceHolder MainContent;
+
+        protected global::System.Web.UI.WebControls.Image imgPerfilUsuario;
+
+        protected global::System.Web.UI.WebControls.Label lblNombreUsuario;
     }
 }

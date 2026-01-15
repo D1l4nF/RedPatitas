@@ -9,9 +9,21 @@
 
 namespace RedPatitas.Admin
 {
-
-
     public partial class Perfil
     {
+        protected global::System.Web.UI.WebControls.Panel pnlMensaje;
+        protected global::System.Web.UI.WebControls.Label lblMensaje;
+        protected global::System.Web.UI.WebControls.Image imgFotoActual;
+        protected global::System.Web.UI.WebControls.FileUpload fuFotoPerfil;
+        protected global::System.Web.UI.WebControls.TextBox txtNombre;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvNombre;
+        protected global::System.Web.UI.WebControls.TextBox txtApellido;
+        protected global::System.Web.UI.WebControls.TextBox txtEmail;
+        protected global::System.Web.UI.WebControls.TextBox txtTelefono;
+        protected global::System.Web.UI.WebControls.TextBox txtClaveActual;
+        protected global::System.Web.UI.WebControls.TextBox txtNuevaClave;
+        protected global::System.Web.UI.WebControls.TextBox txtConfirmarClave;
+        protected global::System.Web.UI.WebControls.Label lblErrorClave;
+        protected global::System.Web.UI.WebControls.Button btnGuardar;
     }
 }
