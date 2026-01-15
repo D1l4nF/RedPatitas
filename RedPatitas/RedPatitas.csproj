@@ -239,19 +239,19 @@
     <Compile Include="Refugio\Dashboard.aspx.designer.cs">
       <DependentUpon>Dashboard.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Refugio\Perfil.aspx.cs">
-      <DependentUpon>Perfil.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Refugio\Perfil.aspx.designer.cs">
-      <DependentUpon>Perfil.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Refugio\Refugio.Master.cs">
       <DependentUpon>Refugio.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Refugio\Refugio.Master.designer.cs">
       <DependentUpon>Refugio.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Refugio\Perfil.aspx.cs">
+      <DependentUpon>Perfil.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Refugio\Perfil.aspx.designer.cs">
+      <DependentUpon>Perfil.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

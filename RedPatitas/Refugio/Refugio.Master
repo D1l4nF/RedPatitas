@@ -12,6 +12,7 @@
         </asp:ContentPlaceHolder>
     </title>
     <link rel="stylesheet" href="~/Style/dashboard.css">
+    <link rel="stylesheet" href="~/Style/forms.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -20,7 +21,7 @@
     </asp:ContentPlaceHolder>
 </head>
 <body class="theme-refugio">
-    <form id="form1" runat="server">
+    <form id="form1" runat="server" enctype="multipart/form-data">
         <aside class="sidebar">
             <div class="sidebar-header">
                 <a href="#" class="logo">
@@ -80,10 +81,18 @@
             <div class="sidebar-footer">
                 <a href="Perfil.aspx" class="user-profile-link">
                     <div class="user-profile">
-                        <div class="avatar">RF</div>
+                        <asp:Image ID="imgPerfilUsuario" runat="server"
+                            ImageUrl="~/Images/default-refugio.png"
+                            CssClass="avatar"
+                            Width="40px" Height="40px"
+                            Style="border-radius: 50%; object-fit: cover;" />
+
                         <div class="user-info">
-                            <span class="user-name">Refugio Esperanza</span>
-                            <span class="user-role">Organización</span>
+                            <asp:Label ID="lblNombreUsuario" runat="server"
+                                CssClass="user-name"
+                                Text="Cargando..."></asp:Label>
+
+                            <span class="user-role">Refugio</span>
                         </div>
                     </div>
                 </a>
@@ -124,10 +133,7 @@
                 <asp:ContentPlaceHolder ID="PageHeader" runat="server">
                 </asp:ContentPlaceHolder>
 
-            </div>
-
-            <!-- Content Area -->
-            <div class="content-wrapper">
+                <!-- Content Area -->
                 <asp:ContentPlaceHolder ID="MainContent" runat="server">
                 </asp:ContentPlaceHolder>
             </div>

@@ -13,32 +13,6 @@
     </asp:Content>
 
 <asp:Content ID="Content4" ContentPlaceHolderID="MainContent" runat="server">
-    
-    <header class="top-header">
-        <div class="header-search">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="11" cy="11" r="8"></circle>
-                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-            </svg>
-            <input type="text" placeholder="Buscar raza, tamaño...">
-        </div>
-
-        <div class="header-actions">
-            <button type="button" class="action-btn">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
-                    <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
-                </svg>
-                <span class="badge">1</span>
-            </button>
-            <button type="button" class="action-btn">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                    <circle cx="12" cy="7" r="4"></circle>
-                </svg>
-            </button>
-        </div>
-    </header>
 
     <div class="content-wrapper">
         <div class="page-header-internal">

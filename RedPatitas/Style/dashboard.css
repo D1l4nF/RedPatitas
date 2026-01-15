@@ -265,7 +265,7 @@ body {
 
 /* Content Area */
 .content-wrapper {
-    padding: 2rem;
+    padding: 0.6rem 2rem 2rem 2rem;
 }
 
 .page-header {
@@ -894,7 +894,7 @@ form#form1 {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 1.5rem;
-    margin-top: 200px;
+    margin-top: 1.5rem;
 }
 
 .stat-card {

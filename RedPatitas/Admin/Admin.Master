@@ -20,7 +20,7 @@
     </asp:ContentPlaceHolder>
 </head>
 <body>
-    <form id="form1" runat="server">
+    <form id="form1" runat="server" enctype="multipart/form-data">
         <!-- Sidebar -->
         <aside class="sidebar">
             <div class="sidebar-header">
@@ -153,10 +153,8 @@
             <div class="content-wrapper">
                 <asp:ContentPlaceHolder ID="PageHeader" runat="server">                      
                 </asp:ContentPlaceHolder>
-            </div>
 
-            <!-- Content Area -->
-            <div class="content-wrapper">
+                <!-- Content Area -->
                 <asp:ContentPlaceHolder ID="MainContent" runat="server">
                 </asp:ContentPlaceHolder>
             </div>
