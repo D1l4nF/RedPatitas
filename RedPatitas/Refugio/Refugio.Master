@@ -12,6 +12,7 @@
         </asp:ContentPlaceHolder>
     </title>
     <link rel="stylesheet" href="~/Style/dashboard.css">
+    <link rel="stylesheet" href="~/Style/forms.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -20,7 +21,7 @@
     </asp:ContentPlaceHolder>
 </head>
 <body class="theme-refugio">
-    <form id="form1" runat="server">
+    <form id="form1" runat="server" enctype="multipart/form-data">
         <aside class="sidebar">
             <div class="sidebar-header">
                 <a href="#" class="logo">
@@ -78,19 +79,39 @@
             </div>
 
             <div class="sidebar-footer">
-                <div class="user-profile">
-                    <div class="avatar">RF</div>
-                    <div class="user-info">
-                        <span class="user-name">Refugio Esperanza</span>
-                        <span class="user-role">Organización</span>
+                <a href="Perfil.aspx" class="user-profile-link">
+                    <div class="user-profile">
+                        <asp:Image ID="imgPerfilUsuario" runat="server"
+                            ImageUrl="~/Images/default-refugio.png"
+                            CssClass="avatar"
+                            Width="40px" Height="40px"
+                            Style="border-radius: 50%; object-fit: cover;" />
+
+                        <div class="user-info">
+                            <asp:Label ID="lblNombreUsuario" runat="server"
+                                CssClass="user-name"
+                                Text="Cargando..."></asp:Label>
+
+                            <span class="user-role">Refugio</span>
+                        </div>
                     </div>
-                </div>
+                </a>
             </div>
         </aside>
+        <!-- Overlay para cerrar sidebar en móvil -->
+        <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
         <!-- Main Content -->
         <main class="main-content">
             <!-- Header -->
             <header class="top-header">
+                <!-- Botón hamburguesa para móvil -->
+                <button type="button" class="mobile-menu-btn" onclick="toggleSidebar()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
                 <div class="header-search">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <circle cx="11" cy="11" r="8"></circle>
@@ -112,14 +133,19 @@
                 <asp:ContentPlaceHolder ID="PageHeader" runat="server">
                 </asp:ContentPlaceHolder>
 
-            </div>
-
-            <!-- Content Area -->
-            <div class="content-wrapper">
+                <!-- Content Area -->
                 <asp:ContentPlaceHolder ID="MainContent" runat="server">
                 </asp:ContentPlaceHolder>
             </div>
         </main>
     </form>
+    <script type="text/javascript">
+        function toggleSidebar() {
+            var sidebar = document.querySelector('.sidebar');
+            var overlay = document.getElementById('sidebarOverlay');
+            sidebar.classList.toggle('active');
+            overlay.classList.toggle('active');
+        }
+    </script>
 </body>
 </html>

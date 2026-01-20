@@ -1,13 +1,12 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AdminRefugio/AdminRefugio.Master" AutoEventWireup="true"
-    CodeBehind="Perfil.aspx.cs" Inherits="RedPatitas.AdminRefugio.Perfil" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin/Admin.Master" AutoEventWireup="true" CodeBehind="Perfil.aspx.cs"
+    Inherits="RedPatitas.Admin.Perfil" %>
 
     <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-        Perfil Refugio | RedPatitas
+        Mi Perfil
     </asp:Content>
 
     <asp:Content ID="Content2" ContentPlaceHolderID="head" runat="server">
         <link rel="stylesheet" href="~/Style/forms.css" />
-        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
         <style>
             .avatar-img {
                 width: 100px;
@@ -33,79 +32,54 @@
         </script>
     </asp:Content>
 
-    <asp:Content ID="Content4" ContentPlaceHolderID="PageHeader" runat="server">
+    <asp:Content ID="Content3" ContentPlaceHolderID="PageHeader" runat="server">
         <div class="page-header">
             <h1 class="page-title">Mi Perfil</h1>
             <div class="breadcrumb">Cuenta / Mi Perfil</div>
         </div>
     </asp:Content>
 
-    <asp:Content ID="Content3" ContentPlaceHolderID="MainContent" runat="server">
+    <asp:Content ID="Content4" ContentPlaceHolderID="MainContent" runat="server">
         <div class="form-container">
             <asp:Panel ID="pnlMensaje" runat="server" Visible="false" CssClass="form-group">
                 <asp:Label ID="lblMensaje" runat="server" Text=""></asp:Label>
             </asp:Panel>
 
-            <!-- Sección de Logo del Refugio -->
             <div class="avatar-section">
                 <asp:Image ID="imgFotoActual" runat="server" CssClass="avatar-img"
-                    ImageUrl="~/Images/default-refugio.png" />
+                    ImageUrl="~/Images/default-user.png" />
                 <div class="avatar-actions">
                     <asp:FileUpload ID="fuFotoPerfil" runat="server" CssClass="btn-secondary" accept=".jpg,.png,.jpeg"
                         onchange="previewImage(this)" />
-                    <span class="avatar-hint">Logo del refugio. JPG, PNG. Máximo 2MB</span>
+                    <span class="avatar-hint">JPG, PNG. Máximo 2MB</span>
                 </div>
-            </div>
-
-            <!-- Datos del Refugio -->
-            <h3 class="form-section-title">Datos del Refugio</h3>
-
-            <div class="form-group">
-                <label for="txtNombreRefugio">Nombre del Refugio</label>
-                <asp:TextBox ID="txtNombreRefugio" runat="server" CssClass="form-control"
-                    placeholder="Ej: Refugio Esperanza"></asp:TextBox>
-                <asp:RequiredFieldValidator ID="rfvNombreRefugio" runat="server" ControlToValidate="txtNombreRefugio"
-                    ErrorMessage="*" ForeColor="Red"></asp:RequiredFieldValidator>
-            </div>
-
-            <div class="form-group">
-                <label for="txtDescripcion">Descripción</label>
-                <asp:TextBox ID="txtDescripcion" runat="server" TextMode="MultiLine" Rows="3" CssClass="form-control"
-                    placeholder="Describe brevemente tu refugio..."></asp:TextBox>
             </div>
 
             <div class="form-grid">
                 <div class="form-group">
-                    <label for="txtTelefono">Teléfono</label>
-                    <asp:TextBox ID="txtTelefono" runat="server" CssClass="form-control" TextMode="Phone"></asp:TextBox>
+                    <label for="txtNombre">Nombre</label>
+                    <asp:TextBox ID="txtNombre" runat="server" CssClass="form-control" placeholder="Ej: Juan">
+                    </asp:TextBox>
+                    <asp:RequiredFieldValidator ID="rfvNombre" runat="server" ControlToValidate="txtNombre"
+                        ErrorMessage="*" ForeColor="Red"></asp:RequiredFieldValidator>
                 </div>
                 <div class="form-group">
-                    <label for="txtCiudad">Ciudad</label>
-                    <asp:TextBox ID="txtCiudad" runat="server" CssClass="form-control" placeholder="Ej: Quito">
+                    <label for="txtApellido">Apellido</label>
+                    <asp:TextBox ID="txtApellido" runat="server" CssClass="form-control" placeholder="Ej: Pérez">
                     </asp:TextBox>
                 </div>
             </div>
 
             <div class="form-group">
-                <label for="txtDireccion">Dirección</label>
-                <asp:TextBox ID="txtDireccion" runat="server" CssClass="form-control"
-                    placeholder="Ej: Av. Principal 123"></asp:TextBox>
-            </div>
-
-            <div class="form-group">
-                <label>Ubicación en el Mapa</label>
-                <div id="mapPerfil"
-                    style="height: 250px; border-radius: 8px; margin-bottom: 10px; border: 1px solid #ddd;"></div>
-                <asp:HiddenField ID="hfLatitud" runat="server" />
-                <asp:HiddenField ID="hfLongitud" runat="server" />
-                <p style="font-size: 0.85rem; color: #666; margin-bottom: 10px;">📍 Haz clic en el mapa para marcar la
-                    ubicación del refugio</p>
-            </div>
-
-            <div class="form-group">
                 <label for="txtEmail">Correo Electrónico</label>
-                <asp:TextBox ID="txtEmail" runat="server" Enabled="false" CssClass="form-control"></asp:TextBox>
+                <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" TextMode="Email" Enabled="false">
+                </asp:TextBox>
                 <small class="input-hint">El correo electrónico no puede ser modificado</small>
+            </div>
+
+            <div class="form-group">
+                <label for="txtTelefono">Teléfono</label>
+                <asp:TextBox ID="txtTelefono" runat="server" CssClass="form-control" TextMode="Phone"></asp:TextBox>
             </div>
 
             <div class="form-divider"></div>
@@ -209,7 +183,6 @@
             }
         </style>
 
-        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
         <script type="text/javascript">
             function togglePassword(btn) {
                 var input = btn.parentElement.querySelector('.password-input');
@@ -257,13 +230,9 @@
 
             function guardarValoresOriginales() {
                 valoresOriginales = {
-                    nombreRefugio: document.getElementById('<%= txtNombreRefugio.ClientID %>').value,
-                    descripcion: document.getElementById('<%= txtDescripcion.ClientID %>').value,
-                    telefono: document.getElementById('<%= txtTelefono.ClientID %>').value,
-                    ciudad: document.getElementById('<%= txtCiudad.ClientID %>').value,
-                    direccion: document.getElementById('<%= txtDireccion.ClientID %>').value,
-                    latitud: document.getElementById('<%= hfLatitud.ClientID %>').value,
-                    longitud: document.getElementById('<%= hfLongitud.ClientID %>').value
+                    nombre: document.getElementById('<%= txtNombre.ClientID %>').value,
+                    apellido: document.getElementById('<%= txtApellido.ClientID %>').value,
+                    telefono: document.getElementById('<%= txtTelefono.ClientID %>').value
                 };
             }
 
@@ -278,13 +247,9 @@
                 }
 
                 var hayCambios =
-                    document.getElementById('<%= txtNombreRefugio.ClientID %>').value !== valoresOriginales.nombreRefugio ||
-                    document.getElementById('<%= txtDescripcion.ClientID %>').value !== valoresOriginales.descripcion ||
+                    document.getElementById('<%= txtNombre.ClientID %>').value !== valoresOriginales.nombre ||
+                    document.getElementById('<%= txtApellido.ClientID %>').value !== valoresOriginales.apellido ||
                     document.getElementById('<%= txtTelefono.ClientID %>').value !== valoresOriginales.telefono ||
-                    document.getElementById('<%= txtCiudad.ClientID %>').value !== valoresOriginales.ciudad ||
-                    document.getElementById('<%= txtDireccion.ClientID %>').value !== valoresOriginales.direccion ||
-                    document.getElementById('<%= hfLatitud.ClientID %>').value !== valoresOriginales.latitud ||
-                    document.getElementById('<%= hfLongitud.ClientID %>').value !== valoresOriginales.longitud ||
                     nueva !== '';
 
                 var fotoInput = document.getElementById('<%= fuFotoPerfil.ClientID %>');
@@ -299,8 +264,7 @@
                 document.getElementById('<%= btnGuardar.ClientID %>').disabled = true;
                 guardarValoresOriginales();
 
-                var campos = ['<%= txtNombreRefugio.ClientID %>', '<%= txtDescripcion.ClientID %>',
-                    '<%= txtTelefono.ClientID %>', '<%= txtCiudad.ClientID %>', '<%= txtDireccion.ClientID %>'];
+                var campos = ['<%= txtNombre.ClientID %>', '<%= txtApellido.ClientID %>', '<%= txtTelefono.ClientID %>'];
                 campos.forEach(function (id) {
                     var campo = document.getElementById(id);
                     if (campo) {
@@ -312,35 +276,6 @@
                 if (fotoInput) {
                     fotoInput.addEventListener('change', verificarCambios);
                 }
-
-                // Mapa
-                var latGuardada = document.getElementById('<%= hfLatitud.ClientID %>').value;
-                var lngGuardada = document.getElementById('<%= hfLongitud.ClientID %>').value;
-
-                var lat = latGuardada ? parseFloat(latGuardada) : -0.1807;
-                var lng = lngGuardada ? parseFloat(lngGuardada) : -78.4678;
-                var zoom = latGuardada ? 15 : 13;
-
-                var map = L.map('mapPerfil').setView([lat, lng], zoom);
-
-                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                    attribution: '© OpenStreetMap'
-                }).addTo(map);
-
-                var marker;
-
-                if (latGuardada && lngGuardada) {
-                    marker = L.marker([lat, lng]).addTo(map);
-                }
-
-                map.on('click', function (e) {
-                    if (marker) map.removeLayer(marker);
-                    marker = L.marker(e.latlng).addTo(map);
-
-                    document.getElementById('<%= hfLatitud.ClientID %>').value = e.latlng.lat;
-                    document.getElementById('<%= hfLongitud.ClientID %>').value = e.latlng.lng;
-                    verificarCambios();
-                });
             });
         </script>
     </asp:Content>

@@ -82,7 +82,7 @@ namespace RedPatitas.Login
             Session["NombreUsuario"] = resultado.NombreUsuario;
             Session["RolId"] = resultado.RolId;
 
-            if(resultado.RolId == 2 && resultado.RefugioId != null ) 
+            if((resultado.RolId == 2 || resultado.RolId == 3) && resultado.RefugioId != null ) 
             {
                 Session["RefugioId"] = resultado.RefugioId;
                 Session["Ref_Verificado"] = resultado.Ref_Verificado;
@@ -100,7 +100,7 @@ namespace RedPatitas.Login
             }
             else if (resultado.RolId == 3) // Refugio
             {
-                redirectUrl = "../AdminRefugio/Dashboard.aspx";
+                redirectUrl = "../Refugio/Dashboard.aspx";
             }
             else if (resultado.RolId == 4) // Adoptante
             {

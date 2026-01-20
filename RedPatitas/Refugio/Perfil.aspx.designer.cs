@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace RedPatitas.AdminRefugio
+namespace RedPatitas.Refugio
 {
     public partial class Perfil
     {
@@ -15,15 +15,11 @@ namespace RedPatitas.AdminRefugio
         protected global::System.Web.UI.WebControls.Label lblMensaje;
         protected global::System.Web.UI.WebControls.Image imgFotoActual;
         protected global::System.Web.UI.WebControls.FileUpload fuFotoPerfil;
-        protected global::System.Web.UI.WebControls.TextBox txtNombreRefugio;
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvNombreRefugio;
-        protected global::System.Web.UI.WebControls.TextBox txtDescripcion;
-        protected global::System.Web.UI.WebControls.TextBox txtTelefono;
-        protected global::System.Web.UI.WebControls.TextBox txtCiudad;
-        protected global::System.Web.UI.WebControls.TextBox txtDireccion;
-        protected global::System.Web.UI.WebControls.HiddenField hfLatitud;
-        protected global::System.Web.UI.WebControls.HiddenField hfLongitud;
+        protected global::System.Web.UI.WebControls.TextBox txtNombre;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvNombre;
+        protected global::System.Web.UI.WebControls.TextBox txtApellido;
         protected global::System.Web.UI.WebControls.TextBox txtEmail;
+        protected global::System.Web.UI.WebControls.TextBox txtTelefono;
         protected global::System.Web.UI.WebControls.TextBox txtClaveActual;
         protected global::System.Web.UI.WebControls.TextBox txtNuevaClave;
         protected global::System.Web.UI.WebControls.TextBox txtConfirmarClave;
