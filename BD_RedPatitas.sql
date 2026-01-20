@@ -356,13 +356,6 @@ INSERT INTO tbl_CriteriosEvaluacion (cri_Nombre, cri_Descripcion, cri_Peso, cri_
 ('Estabilidad Económica', 'Capacidad para cubrir gastos veterinarios y alimentación', 15.00, 6),
 ('Motivación', 'Razones para adoptar y compromiso demostrado', 15.00, 7);
 
--- Categorías del Foro
-INSERT INTO tbl_CategoriasForo (cat_Nombre, cat_Descripcion, cat_Color, cat_Orden) VALUES 
-('General', 'Discusiones generales sobre mascotas', '#FF8C42', 1),
-('Consejos', 'Tips y consejos para el cuidado de mascotas', '#27AE60', 2),
-('Salud', 'Temas relacionados con la salud animal', '#E74C3C', 3),
-('Adopciones', 'Experiencias y consultas sobre adopción', '#8E44AD', 4),
-('Perdidos y Encontrados', 'Ayuda para reunir mascotas con sus dueños', '#3498DB', 5);
 
 -- Usuario SuperAdmin inicial
 -- Contraseña: admin123
@@ -864,7 +857,7 @@ CREATE INDEX IX_SolicitudesAdopcion_IdUsuario ON tbl_SolicitudesAdopcion(sol_IdU
 CREATE INDEX IX_Notificaciones_IdUsuario ON tbl_Notificaciones(not_IdUsuario);
 CREATE INDEX IX_Notificaciones_Leida ON tbl_Notificaciones(not_Leida);
 CREATE INDEX IX_ReportesMascotas_Estado ON tbl_ReportesMascotas(rep_Estado);
-CREATE INDEX IX_Publicaciones_IdCategoria ON tbl_Publicaciones(pub_IdCategoria);
+
 CREATE INDEX IX_Auditoria_Fecha ON tbl_Auditoria(aud_Fecha);
 GO
 
