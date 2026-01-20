@@ -143,7 +143,8 @@
                 <ItemTemplate>
                     <div class="solicitud-card">
                         <div class="solicitud-mascota">
-                            <%# GetEmojiEspecie(Eval("tbl_Mascotas.tbl_Razas.tbl_Especies.esp_Nombre")?.ToString()) %>
+                            <%# GetEmojiEspecie(Convert.ToString(Eval("tbl_Mascotas.tbl_Razas.tbl_Especies.esp_Nombre")))
+                                %>
                         </div>
                         <div class="solicitud-info">
                             <div class="solicitud-nombre">
@@ -154,11 +155,12 @@
                                     <%# Eval("tbl_Mascotas.tbl_Refugios.ref_Nombre") %>
                             </div>
                             <div class="solicitud-fecha">
-                                Solicitado el <%# ((DateTime?)Eval("sol_FechaSolicitud"))?.ToString("dd/MM/yyyy") %>
+                                Solicitado el <%# Eval("sol_FechaSolicitud") !=null ?
+                                    Convert.ToDateTime(Eval("sol_FechaSolicitud")).ToString("dd/MM/yyyy") : "" %>
                             </div>
                         </div>
-                        <div class="solicitud-estado <%# GetEstadoClass(Eval(" sol_Estado")?.ToString()) %>">
-                            <%# GetEstadoTexto(Eval("sol_Estado")?.ToString()) %>
+                        <div class="solicitud-estado <%# GetEstadoClass(Convert.ToString(Eval(" sol_Estado"))) %>">
+                            <%# GetEstadoTexto(Convert.ToString(Eval("sol_Estado"))) %>
                         </div>
                         <div class="solicitud-actions">
                             <a href='<%# ResolveUrl("~/Adoptante/PerfilMascota.aspx?id=" + Eval("sol_IdMascota")) %>'

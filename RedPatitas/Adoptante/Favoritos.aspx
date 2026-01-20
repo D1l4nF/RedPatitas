@@ -43,12 +43,12 @@
                     <article class="pet-card">
                         <div class="pet-card-image">
                             <asp:Panel ID="pnlFoto" runat="server"
-                                Visible='<%# !string.IsNullOrEmpty(Eval("FotoPrincipal")?.ToString()) %>'>
-                                <img src='<%# ResolveUrl(Eval("FotoPrincipal")?.ToString()) %>'
+                                Visible='<%# !string.IsNullOrEmpty(Convert.ToString(Eval("FotoPrincipal"))) %>'>
+                                <img src='<%# ResolveUrl(Convert.ToString(Eval("FotoPrincipal"))) %>'
                                     alt='<%# Eval("Nombre") %>' />
                             </asp:Panel>
                             <asp:Panel ID="pnlEmoji" runat="server" CssClass="pet-card-emoji"
-                                Visible='<%# string.IsNullOrEmpty(Eval("FotoPrincipal")?.ToString()) %>'>
+                                Visible='<%# string.IsNullOrEmpty(Convert.ToString(Eval("FotoPrincipal"))) %>'>
                                 <%# Eval("EmojiEspecie") %>
                             </asp:Panel>
 

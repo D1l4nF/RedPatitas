@@ -321,7 +321,7 @@
                     <asp:Repeater ID="rptFotos" runat="server">
                         <ItemTemplate>
                             <div class="modal-photo">
-                                <img src='<%# ResolveUrl(Eval("fot_Url")?.ToString()) %>' alt="Foto"
+                                <img src='<%# ResolveUrl(Convert.ToString(Eval("fot_Url"))) %>' alt="Foto"
                                     style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px;" />
                             </div>
                         </ItemTemplate>
