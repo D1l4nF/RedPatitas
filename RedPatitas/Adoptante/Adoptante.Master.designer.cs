@@ -132,13 +132,13 @@ namespace RedPatitas.Adoptante
         protected global::System.Web.UI.WebControls.ContentPlaceHolder PageHeader;
 
         /// <summary>
-        /// Control pnlVerificacion.
+        /// Control pnlPerfilIncompleto.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlVerificacion;
+        protected global::System.Web.UI.WebControls.Panel pnlPerfilIncompleto;
 
         /// <summary>
         /// Control MainContent.

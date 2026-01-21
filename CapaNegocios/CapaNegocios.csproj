@@ -42,7 +42,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CN_AdminRefugioService.cs" />
+    <Compile Include="CN_AdminUsuarioService.cs" />
     <Compile Include="CN_CryptoService.cs" />
+    <Compile Include="CN_DashboardService.cs" />
     <Compile Include="CN_EmailService.cs" />
     <Compile Include="CN_LoginResultado.cs" />
     <Compile Include="CN_MascotaService.cs" />

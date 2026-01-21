@@ -70,8 +70,15 @@
   <ItemGroup>
     <Content Include="AdminRefugio\Dashboard.aspx" />
     <Content Include="AdminRefugio\Perfil.aspx" />
+    <Content Include="Admin\Auditoria.aspx" />
+    <Content Include="Admin\Configuracion.aspx" />
     <Content Include="Admin\Dashboard.aspx" />
+    <Content Include="Admin\MascotasPerdidas.aspx" />
+    <Content Include="Admin\Notificaciones.aspx" />
     <Content Include="Admin\Perfil.aspx" />
+    <Content Include="Admin\Refugios.aspx" />
+    <Content Include="Admin\Reportes.aspx" />
+    <Content Include="Admin\Usuarios.aspx" />
     <Content Include="Adoptante\Dashboard.aspx" />
     <Content Include="Adoptante\Perfil.aspx" />
     <Content Include="Images\img_jaime.jpg" />
@@ -126,6 +133,20 @@
     <Compile Include="Admin\Admin.Master.designer.cs">
       <DependentUpon>Admin.Master</DependentUpon>
     </Compile>
+    <Compile Include="Admin\Auditoria.aspx.cs">
+      <DependentUpon>Auditoria.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Auditoria.aspx.designer.cs">
+      <DependentUpon>Auditoria.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Configuracion.aspx.cs">
+      <DependentUpon>Configuracion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Configuracion.aspx.designer.cs">
+      <DependentUpon>Configuracion.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Admin\Dashboard.aspx.cs">
       <DependentUpon>Dashboard.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -133,12 +154,47 @@
     <Compile Include="Admin\Dashboard.aspx.designer.cs">
       <DependentUpon>Dashboard.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Admin\Notificaciones.aspx.cs">
+      <DependentUpon>Notificaciones.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Notificaciones.aspx.designer.cs">
+      <DependentUpon>Notificaciones.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\MascotasPerdidas.aspx.cs">
+      <DependentUpon>MascotasPerdidas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\MascotasPerdidas.aspx.designer.cs">
+      <DependentUpon>MascotasPerdidas.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Admin\Perfil.aspx.cs">
       <DependentUpon>Perfil.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Admin\Perfil.aspx.designer.cs">
       <DependentUpon>Perfil.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Refugios.aspx.cs">
+      <DependentUpon>Refugios.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Refugios.aspx.designer.cs">
+      <DependentUpon>Refugios.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Reportes.aspx.cs">
+      <DependentUpon>Reportes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Reportes.aspx.designer.cs">
+      <DependentUpon>Reportes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Usuarios.aspx.cs">
+      <DependentUpon>Usuarios.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Usuarios.aspx.designer.cs">
+      <DependentUpon>Usuarios.aspx</DependentUpon>
     </Compile>
     <Compile Include="Adoptante\Adoptante.Master.cs">
       <DependentUpon>Adoptante.Master</DependentUpon>
