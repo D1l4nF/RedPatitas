@@ -73,8 +73,14 @@
     <Content Include="Admin\Dashboard.aspx" />
     <Content Include="Admin\Perfil.aspx" />
     <Content Include="Adoptante\Dashboard.aspx" />
+    <Content Include="Adoptante\Mascotas.aspx" />
+    <Content Include="Adoptante\PerfilMascota.aspx" />
+    <Content Include="Adoptante\Favoritos.aspx" />
+    <Content Include="Adoptante\Solicitudes.aspx" />
+    <Content Include="Adoptante\ReportarMascota.aspx" />
     <Content Include="Adoptante\Perfil.aspx" />
     <Content Include="Images\img_jaime.jpg" />
+    <Content Include="Images\jaime.png" />
     <Content Include="Login\Login.aspx" />
     <Content Include="Login\RecuperarContrasena.aspx" />
     <Content Include="Login\CambiarContrasena.aspx" />
@@ -93,6 +99,7 @@
     <Content Include="Style\forms.css" />
     <Content Include="Style\landing.css" />
     <Content Include="Style\public-pages.css" />
+    <Content Include="Style\pet-cards.css" />
     <Content Include="Style\ux-components.css" />
     <Content Include="Js\ux-components.js" />
     <Content Include="Web.config" />
@@ -160,6 +167,41 @@
     </Compile>
     <Compile Include="Adoptante\Perfil.aspx.designer.cs">
       <DependentUpon>Perfil.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Adoptante\Mascotas.aspx.cs">
+      <DependentUpon>Mascotas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Adoptante\Mascotas.aspx.designer.cs">
+      <DependentUpon>Mascotas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Adoptante\PerfilMascota.aspx.cs">
+      <DependentUpon>PerfilMascota.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Adoptante\PerfilMascota.aspx.designer.cs">
+      <DependentUpon>PerfilMascota.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Adoptante\Favoritos.aspx.cs">
+      <DependentUpon>Favoritos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Adoptante\Favoritos.aspx.designer.cs">
+      <DependentUpon>Favoritos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Adoptante\Solicitudes.aspx.cs">
+      <DependentUpon>Solicitudes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Adoptante\Solicitudes.aspx.designer.cs">
+      <DependentUpon>Solicitudes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Adoptante\ReportarMascota.aspx.cs">
+      <DependentUpon>ReportarMascota.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Adoptante\ReportarMascota.aspx.designer.cs">
+      <DependentUpon>ReportarMascota.aspx</DependentUpon>
     </Compile>
     <Compile Include="Login\Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
@@ -288,13 +330,6 @@
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
   <ProjectExtensions>
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
