@@ -592,14 +592,45 @@ td {
     white-space: nowrap;
 }
 
+/* Variante Warning para perfil incompleto */
+.verification-banner.warning {
+    background: linear-gradient(135deg, #FFF8E1, #FFECB3);
+    border-color: #FFD54F;
+}
+
+.verification-banner.warning svg {
+    color: #F9A825;
+}
+
+.btn-complete-profile {
+    padding: 0.6rem 1.25rem;
+    background: #F9A825;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    text-decoration: none;
+}
+
+.btn-complete-profile:hover {
+    background: #F57F17;
+    transform: translateY(-1px);
+}
+
 @media (max-width: 600px) {
     .verification-banner {
         flex-direction: column;
         align-items: flex-start;
     }
 
-    .btn-verify {
+    .btn-verify,
+    .btn-complete-profile {
         width: 100%;
+        text-align: center;
     }
 }
 

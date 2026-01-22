@@ -55,6 +55,17 @@ namespace RedPatitas.Adoptante
                             // Si no tiene foto, ponemos una por defecto
                             imgPerfilUsuario.ImageUrl = "https://cdn-icons-png.flaticon.com/512/149/149071.png";
                         }
+
+                        // Verificar si el perfil está completo
+                        bool perfilCompleto = !string.IsNullOrEmpty(usuario.usu_Cedula)
+                                           && !string.IsNullOrEmpty(usuario.usu_Telefono)
+                                           && !string.IsNullOrEmpty(usuario.usu_Ciudad);
+
+                        // Guardar estado en sesión para usar en otras páginas
+                        Session["PerfilCompleto"] = perfilCompleto;
+
+                        // Mostrar banner si perfil incompleto
+                        pnlPerfilIncompleto.Visible = !perfilCompleto;
                     }
                 }
             }

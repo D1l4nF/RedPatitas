@@ -42,25 +42,25 @@
     justify-content: center;
 }
 
-    .stat-icon.users {
-        background: rgba(255, 107, 53, 0.12);
-        color: #FF6B35;
-    }
+.stat-icon.users {
+    background: rgba(255, 107, 53, 0.12);
+    color: #FF6B35;
+}
 
-    .stat-icon.pets {
-        background: rgba(255, 138, 80, 0.12);
-        color: #FF8A50;
-    }
+.stat-icon.pets {
+    background: rgba(255, 138, 80, 0.12);
+    color: #FF8A50;
+}
 
-    .stat-icon.reports {
-        background: rgba(231, 76, 60, 0.12);
-        color: #E74C3C;
-    }
+.stat-icon.reports {
+    background: rgba(231, 76, 60, 0.12);
+    color: #E74C3C;
+}
 
-    .stat-icon.adoptions {
-        background: rgba(39, 174, 96, 0.12);
-        color: #27AE60;
-    }
+.stat-icon.adoptions {
+    background: rgba(39, 174, 96, 0.12);
+    color: #27AE60;
+}
 
 .stat-info h3 {
     font-size: 1.8rem;
@@ -79,9 +79,9 @@
     margin-top: 0.25rem;
 }
 
-    .stat-trend.down {
-        color: #E74C3C;
-    }
+.stat-trend.down {
+    color: #E74C3C;
+}
 
 /* Admin Grid Layout */
 .admin-grid {
@@ -130,23 +130,23 @@
     border-collapse: collapse;
 }
 
-    .admin-table th {
-        text-align: left;
-        padding: 0.75rem;
-        font-size: 0.85rem;
-        color: var(--text-light);
-        border-bottom: 1px solid #EEE;
-    }
+.admin-table th {
+    text-align: left;
+    padding: 0.75rem;
+    font-size: 0.85rem;
+    color: var(--text-light);
+    border-bottom: 1px solid #EEE;
+}
 
-    .admin-table td {
-        padding: 0.75rem;
-        font-size: 0.9rem;
-        border-bottom: 1px solid #F5F5F5;
-    }
+.admin-table td {
+    padding: 0.75rem;
+    font-size: 0.9rem;
+    border-bottom: 1px solid #F5F5F5;
+}
 
-    .admin-table tr:hover {
-        background: #FAFAFA;
-    }
+.admin-table tr:hover {
+    background: #FAFAFA;
+}
 
 .user-cell {
     display: flex;
@@ -185,20 +185,20 @@
     font-weight: 500;
 }
 
-    .status-badge.active {
-        background: rgba(39, 174, 96, 0.12);
-        color: #27AE60;
-    }
+.status-badge.active {
+    background: rgba(39, 174, 96, 0.12);
+    color: #27AE60;
+}
 
-    .status-badge.pending {
-        background: rgba(241, 196, 15, 0.12);
-        color: #D4A500;
-    }
+.status-badge.pending {
+    background: rgba(241, 196, 15, 0.12);
+    color: #D4A500;
+}
 
-    .status-badge.inactive {
-        background: rgba(189, 195, 199, 0.3);
-        color: #7F8C8D;
-    }
+.status-badge.inactive {
+    background: rgba(189, 195, 199, 0.3);
+    color: #7F8C8D;
+}
 
 /* Table Action Buttons - Separate from header action-btn */
 .table-action-btn {
@@ -210,23 +210,23 @@
     transition: all 0.2s;
 }
 
-    .table-action-btn.edit {
-        background: rgba(255, 107, 53, 0.1);
-        color: var(--primary-color);
-    }
+.table-action-btn.edit {
+    background: rgba(255, 107, 53, 0.1);
+    color: var(--primary-color);
+}
 
-        .table-action-btn.edit:hover {
-            background: rgba(255, 107, 53, 0.2);
-        }
+.table-action-btn.edit:hover {
+    background: rgba(255, 107, 53, 0.2);
+}
 
-    .table-action-btn.delete {
-        background: rgba(231, 76, 60, 0.1);
-        color: #E74C3C;
-    }
+.table-action-btn.delete {
+    background: rgba(231, 76, 60, 0.1);
+    color: #E74C3C;
+}
 
-        .table-action-btn.delete:hover {
-            background: rgba(231, 76, 60, 0.2);
-        }
+.table-action-btn.delete:hover {
+    background: rgba(231, 76, 60, 0.2);
+}
 
 /* Activity List */
 .activity-list {
@@ -242,10 +242,10 @@
     border-bottom: 1px solid #F5F5F5;
 }
 
-    .activity-item:last-child {
-        border-bottom: none;
-        padding-bottom: 0;
-    }
+.activity-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
 
 .activity-icon {
     width: 36px;
@@ -257,20 +257,20 @@
     flex-shrink: 0;
 }
 
-    .activity-icon.user {
-        background: rgba(255, 107, 53, 0.12);
-        color: #FF6B35;
-    }
+.activity-icon.user {
+    background: rgba(255, 107, 53, 0.12);
+    color: #FF6B35;
+}
 
-    .activity-icon.pet {
-        background: rgba(255, 138, 80, 0.12);
-        color: #FF8A50;
-    }
+.activity-icon.pet {
+    background: rgba(255, 138, 80, 0.12);
+    color: #FF8A50;
+}
 
-    .activity-icon.report {
-        background: rgba(231, 76, 60, 0.12);
-        color: #E74C3C;
-    }
+.activity-icon.report {
+    background: rgba(231, 76, 60, 0.12);
+    color: #E74C3C;
+}
 
 .activity-content p {
     font-size: 0.9rem;
@@ -280,4 +280,98 @@
 .activity-content span {
     font-size: 0.8rem;
     color: var(--text-light);
+}
+
+/* ===========================================
+   CONFIG TABS
+   =========================================== */
+.config-tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid #E0E0E0;
+}
+
+.config-tab {
+    padding: 0.75rem 1.5rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    color: #666;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -2px;
+    transition: all 0.2s;
+    text-decoration: none;
+}
+
+.config-tab:hover {
+    color: #FF6B35;
+}
+
+.config-tab.active {
+    color: #FF6B35;
+    border-bottom-color: #FF6B35;
+}
+
+.config-section {
+    display: none !important;
+}
+
+.config-section.active {
+    display: block !important;
+}
+
+/* ===========================================
+   FORM STYLES
+   =========================================== */
+.form-row {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.form-row .form-group {
+    flex: 1;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+    font-size: 0.9rem;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #DDD;
+    border-radius: 6px;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #FF6B35;
+}
+
+.btn-add {
+    background: #27AE60;
+    color: white;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.btn-add:hover {
+    background: #219A52;
 }

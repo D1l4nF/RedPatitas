@@ -148,8 +148,8 @@
                 <asp:ContentPlaceHolder ID="PageHeader" runat="server">
                 </asp:ContentPlaceHolder>
 
-                <!-- Banner de Verificación -->
-                <asp:Panel ID="pnlVerificacion" runat="server" Visible="false" CssClass="verification-banner">
+                <!-- Banner de Perfil Incompleto -->
+                <asp:Panel ID="pnlPerfilIncompleto" runat="server" Visible="false" CssClass="verification-banner warning">
                     <div class="verification-content">
                         <svg viewBox="0 0 24 24" fill="none" width="24" height="24">
                             <path d="M12 2L3 7V12C3 16.5 6.8 20.7 12 22C17.2 20.7 21 16.5 21 12V7L12 2Z"
@@ -157,11 +157,11 @@
                             <path d="M12 8V12M12 16H12.01" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
                         </svg>
                         <div class="verification-text">
-                            <strong>Tu cuenta está pendiente de aprobación</strong>
-                            <span>Un administrador revisará tu solicitud para verificar tu refugio.</span>
+                            <strong>¡Completa tu perfil para desbloquear todas las funciones!</strong>
+                            <span>Necesitas cédula, teléfono y ciudad para publicar mascotas y solicitar adopciones.</span>
                         </div>
                     </div>
-                    <span class="pending-status">En revisión</span>
+                    <a href="Perfil.aspx" class="btn-complete-profile">Completar Perfil</a>
                 </asp:Panel>
 
                 <!-- Content Area -->
