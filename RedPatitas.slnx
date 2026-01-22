@@ -1,4 +1,7 @@
 <Solution>
+  <Properties>
+    <StartupProject>f86ce2fc-bc83-457b-bf34-dbd86624c1ba</StartupProject>
+  </Properties>
   <Project Path="CapaDatos/CapaDatos.csproj" Id="07e40dfc-ef95-4290-988b-94071153190f" />
   <Project Path="CapaNegocios/CapaNegocios.csproj" Id="93044578-a878-4f9a-be10-43c3eaeedc9b" />
   <Project Path="RedPatitas/RedPatitas.csproj" Id="f86ce2fc-bc83-457b-bf34-dbd86624c1ba" />

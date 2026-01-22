@@ -137,6 +137,20 @@
             </div>
         </div>
 
+        <!-- Mensaje de éxito -->
+        <asp:Panel ID="pnlExito" runat="server" Visible="false"
+            style="background: linear-gradient(135deg, #D4EDDA, #C3E6CB); border: 1px solid #28A745; border-radius: 12px; padding: 1.25rem 1.5rem; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 1rem;">
+            <svg viewBox="0 0 24 24" fill="#155724" width="28" height="28">
+                <path
+                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+            </svg>
+            <div>
+                <strong style="color: #155724; font-size: 1.1rem;">¡Solicitud enviada con éxito! 🎉</strong><br />
+                <span style="color: #155724; font-size: 0.9rem;">El refugio revisará tu solicitud y te contactará
+                    pronto. ¡Gracias por adoptar!</span>
+            </div>
+        </asp:Panel>
+
         <!-- Solicitudes List -->
         <asp:Panel ID="pnlSolicitudes" runat="server">
             <asp:Repeater ID="rptSolicitudes" runat="server">
