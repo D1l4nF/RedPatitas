@@ -103,6 +103,48 @@ body {
     font-size: 0.95rem;
 }
 
+/* Back to Home Link */
+.back-to-home {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    position: absolute;
+    top: var(--spacing-md);
+    left: var(--spacing-md);
+    color: var(--secondary-color);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: var(--shadow-sm);
+    transition: all 0.3s ease;
+    z-index: 100;
+}
+
+.back-to-home:hover {
+    color: var(--primary-color);
+    background: var(--white);
+    box-shadow: var(--shadow-md);
+    transform: translateX(-2px);
+}
+
+/* Clickable Logo */
+a.logo-container {
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+a.logo-container:hover {
+    transform: scale(1.05);
+}
+
+a.logo-container:hover .logo-icon {
+    box-shadow: var(--shadow-lg);
+}
+
 /* Forms */
 .form-group {
     margin-bottom: 1.25rem;

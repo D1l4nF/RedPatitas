@@ -33,10 +33,10 @@
                 </div>
                 <div class="hero-image">
                     <div class="hero-pets-illustration">
-                        <span class="floating-pet" style="--delay: 0s; --x: 0; --y: 0;">🐕</span>
-                        <span class="floating-pet" style="--delay: 0.5s; --x: 60px; --y: -20px;">🐱</span>
-                        <span class="floating-pet" style="--delay: 1s; --x: -40px; --y: 30px;">🐰</span>
-                        <span class="floating-pet" style="--delay: 1.5s; --x: 80px; --y: 40px;">🐦</span>
+                        <span class="floating-pet" style="--delay: 0s; --x: 0; --y: -40px;">🐕</span>
+                        <span class="floating-pet" style="--delay: 0.5s; --x: 100px; --y: -20px;">🐱</span>
+                        <span class="floating-pet" style="--delay: 1s; --x: -20px; --y: 60px;">🐰</span>
+                        <span class="floating-pet" style="--delay: 1.5s; --x: 80px; --y: 80px;">🐦</span>
                     </div>
                 </div>
             </div>

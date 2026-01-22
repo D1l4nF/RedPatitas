@@ -429,21 +429,86 @@ namespace RedPatitas.Admin
 
         #region Seguridad
 
+        private string ConfigPath => Server.MapPath("~/App_Data/site_config.json");
+
+        private class SiteConfig
+        {
+            public int MaxIntentos { get; set; } = 3;
+            public int TokenExpiracionHoras { get; set; } = 24;
+            public int MinPasswordLength { get; set; } = 6;
+        }
+
+        private SiteConfig CargarConfigDesdeArchivo()
+        {
+            try
+            {
+                if (System.IO.File.Exists(ConfigPath))
+                {
+                    string json = System.IO.File.ReadAllText(ConfigPath);
+                    var serializer = new System.Web.Script.Serialization.JavaScriptSerializer();
+                    return serializer.Deserialize<SiteConfig>(json) ?? new SiteConfig();
+                }
+            }
+            catch { }
+            return new SiteConfig();
+        }
+
+        private void GuardarConfigEnArchivo(SiteConfig config)
+        {
+            try
+            {
+                var dir = System.IO.Path.GetDirectoryName(ConfigPath);
+                if (!System.IO.Directory.Exists(dir))
+                {
+                    System.IO.Directory.CreateDirectory(dir);
+                }
+
+                var serializer = new System.Web.Script.Serialization.JavaScriptSerializer();
+                string json = serializer.Serialize(config);
+                System.IO.File.WriteAllText(ConfigPath, json);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al guardar archivo de configuración: " + ex.Message);
+            }
+        }
+
         private void CargarConfiguracionSeguridad()
         {
-            // Por ahora valores por defecto - se podría guardar en BD
-            txtIntentosMaximos.Text = "3";
-            txtExpiracionToken.Text = "24";
-            txtLongitudPassword.Text = "6";
+            var config = CargarConfigDesdeArchivo();
+            txtIntentosMaximos.Text = config.MaxIntentos.ToString();
+            txtExpiracionToken.Text = config.TokenExpiracionHoras.ToString();
+            txtLongitudPassword.Text = config.MinPasswordLength.ToString();
         }
 
         protected void btnGuardarSeguridad_Click(object sender, EventArgs e)
         {
-            // Aquí se guardarían en BD o en Web.config
-            // Por ahora solo mostramos mensaje de éxito
-            lblMensajeSeguridad.Text = "✓ Configuración guardada";
-            lblMensajeSeguridad.ForeColor = System.Drawing.Color.Green;
-            lblMensajeSeguridad.Visible = true;
+            try 
+            {
+                var config = new SiteConfig();
+                
+                int intentos;
+                if (int.TryParse(txtIntentosMaximos.Text, out intentos)) config.MaxIntentos = intentos;
+                
+                int horas;
+                if (int.TryParse(txtExpiracionToken.Text, out horas)) config.TokenExpiracionHoras = horas;
+                
+                int lon;
+                if (int.TryParse(txtLongitudPassword.Text, out lon)) config.MinPasswordLength = lon;
+
+                GuardarConfigEnArchivo(config);
+
+                lblMensajeSeguridad.Text = "✓ Configuración guardada correctamente";
+                lblMensajeSeguridad.ForeColor = System.Drawing.Color.Green;
+                lblMensajeSeguridad.Visible = true;
+            }
+            catch (Exception ex)
+            {
+                lblMensajeSeguridad.Text = "✗ Error: " + ex.Message;
+                lblMensajeSeguridad.ForeColor = System.Drawing.Color.Red;
+                lblMensajeSeguridad.Visible = true;
+            }
+            ActivarTab("seguridad");
         }
 
         #endregion

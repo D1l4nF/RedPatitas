@@ -67,6 +67,12 @@ namespace RedPatitas.Admin
 
         protected void btnLogout_Click(object sender, EventArgs e)
         {
+            if (Session["UsuarioId"] != null)
+            {
+                int idUsuario = Convert.ToInt32(Session["UsuarioId"]);
+                CapaNegocios.CN_AuditoriaService.RegistrarAccion(idUsuario, "LOGOUT", "tbl_Usuarios");
+            }
+
             Session.Clear();
             Session.Abandon();
             Session.RemoveAll();

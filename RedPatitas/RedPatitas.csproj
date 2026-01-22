@@ -97,6 +97,7 @@
     <Content Include="Public\Home.aspx" />
     <Content Include="Public\PerfilMascota.aspx" />
     <Content Include="Public\Reportar.aspx" />
+    <Content Include="Public\MapaExtravios.aspx" />
     <Content Include="Refugio\Dashboard.aspx" />
     <Content Include="Refugio\Perfil.aspx" />
     <Content Include="Style\auth.css" />
@@ -329,6 +330,13 @@
     </Compile>
     <Compile Include="Public\Reportar.aspx.designer.cs">
       <DependentUpon>Reportar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Public\MapaExtravios.aspx.cs">
+      <DependentUpon>MapaExtravios.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Public\MapaExtravios.aspx.designer.cs">
+      <DependentUpon>MapaExtravios.aspx</DependentUpon>
     </Compile>
     <Compile Include="Refugio\Dashboard.aspx.cs">
       <DependentUpon>Dashboard.aspx</DependentUpon>

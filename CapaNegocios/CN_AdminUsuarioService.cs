@@ -32,6 +32,7 @@ namespace CapaNegocios
             public DateTime? FechaRegistro { get; set; }
             public DateTime? UltimoAcceso { get; set; }
             public bool EmailVerificado { get; set; }
+            public bool RefugioVerificado { get; set; }
             public string Iniciales { get; set; }
         }
 
@@ -52,6 +53,22 @@ namespace CapaNegocios
         {
             public int IdRol { get; set; }
             public string Nombre { get; set; }
+        }
+
+        public class DetalleRefugio
+        {
+            public int IdRefugio { get; set; }
+            public string Nombre { get; set; }
+            public string Descripcion { get; set; }
+            public string Telefono { get; set; }
+            public string Ciudad { get; set; }
+            public string Direccion { get; set; }
+            public bool Verificado { get; set; }
+            public DateTime? FechaRegistro { get; set; }
+            public string FotoUrl { get; set; }
+            public int CantidadMascotas { get; set; }
+            public decimal? Latitud { get; set; }
+            public decimal? Longitud { get; set; }
         }
 
         /// <summary>
@@ -104,7 +121,8 @@ namespace CapaNegocios
                         u.usu_FechaBloqueo,
                         u.usu_FechaRegistro,
                         u.usu_UltimoAcceso,
-                        u.usu_EmailVerificado
+                        u.usu_EmailVerificado,
+                        RefugioVerificado = u.tbl_Refugios != null ? u.tbl_Refugios.ref_Verificado : false
                     })
                     .ToList()
                     .Select(u => new UsuarioAdmin
@@ -125,6 +143,7 @@ namespace CapaNegocios
                         FechaRegistro = u.usu_FechaRegistro,
                         UltimoAcceso = u.usu_UltimoAcceso,
                         EmailVerificado = u.usu_EmailVerificado ?? false,
+                        RefugioVerificado = u.RefugioVerificado ?? false,
                         Iniciales = ObtenerIniciales(u.usu_Nombre, u.usu_Apellido)
                     })
                     .ToList();
@@ -166,6 +185,48 @@ namespace CapaNegocios
         }
 
         /// <summary>
+        /// Verifica el refugio asociado a un usuario
+        /// </summary>
+        public bool VerificarRefugioDeUsuario(int idRefugio, bool estado = true)
+        {
+            using (var db = new DataClasses1DataContext())
+            {
+                var refugio = db.tbl_Refugios.FirstOrDefault(r => r.ref_IdRefugio == idRefugio);
+                if (refugio == null) return false;
+
+                refugio.ref_Verificado = estado;
+                db.SubmitChanges();
+                return true;
+            }
+        }
+
+        public DetalleRefugio ObtenerDetalleRefugio(int idRefugio)
+        {
+            using (var db = new DataClasses1DataContext())
+            {
+                var refugio = db.tbl_Refugios.FirstOrDefault(r => r.ref_IdRefugio == idRefugio);
+                if (refugio == null) return null;
+
+                return new DetalleRefugio
+                {
+                    IdRefugio = refugio.ref_IdRefugio,
+                    Nombre = refugio.ref_Nombre,
+                    Descripcion = refugio.ref_Descripcion,
+                    Telefono = refugio.ref_Telefono ?? "No registrado",
+                    Ciudad = refugio.ref_Ciudad ?? "No registrado",
+                    Direccion = null,
+                    Verificado = refugio.ref_Verificado ?? false,
+                    FechaRegistro = refugio.ref_FechaRegistro,
+
+                    FotoUrl = refugio.ref_LogoUrl,
+                    CantidadMascotas = refugio.tbl_Mascotas.Count(m => m.mas_Estado == true),
+                    Latitud = refugio.ref_Latitud,
+                    Longitud = refugio.ref_Longitud
+                };
+            }
+        }
+
+        /// <summary>
         /// Asigna un usuario a un refugio (para roles AdminRefugio o Refugio)
         /// </summary>
         public bool AsignarUsuarioARefugio(int idUsuario, int? idRefugio)
@@ -175,13 +236,23 @@ namespace CapaNegocios
                 var usuario = db.tbl_Usuarios.FirstOrDefault(u => u.usu_IdUsuario == idUsuario);
                 if (usuario == null) return false;
 
-                // Solo permitir asignación para roles de refugio (AdminRefugio=2, Refugio=3)
-                if (usuario.usu_IdRol != 2 && usuario.usu_IdRol != 3)
+                // Permitir asignación para roles de refugio (AdminRefugio=2, Refugio=3) y Adoptantes (4) que pasarán a ser Refugio
+                if (usuario.usu_IdRol != 2 && usuario.usu_IdRol != 3 && usuario.usu_IdRol != 4)
                 {
                     return false;
                 }
 
                 usuario.usu_IdRefugio = idRefugio;
+
+                // Si es Adoptante (4) y se le asigna refugio, pasa a ser personal de Refugio (3)
+                if (usuario.usu_IdRol == 4 && idRefugio.HasValue)
+                {
+                    usuario.usu_IdRol = 3;
+                }
+                
+                // Si se le quita el refugio a un personal (3), vuelve a ser Adoptante (4)?
+                // Opcional: De momento solo manejamos la promoción.
+                
                 db.SubmitChanges();
                 return true;
             }

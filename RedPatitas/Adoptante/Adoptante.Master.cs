@@ -57,9 +57,11 @@ namespace RedPatitas.Adoptante
                         }
 
                         // Verificar si el perfil está completo
+                        // Usamos coordenadas porque el formulario usa mapa, no campo de ciudad
                         bool perfilCompleto = !string.IsNullOrEmpty(usuario.usu_Cedula)
                                            && !string.IsNullOrEmpty(usuario.usu_Telefono)
-                                           && !string.IsNullOrEmpty(usuario.usu_Ciudad);
+                                           && usuario.usu_Latitud.HasValue 
+                                           && usuario.usu_Longitud.HasValue;
 
                         // Guardar estado en sesión para usar en otras páginas
                         Session["PerfilCompleto"] = perfilCompleto;
@@ -77,6 +79,12 @@ namespace RedPatitas.Adoptante
 
         protected void btnLogout_Click(object sender, EventArgs e)
         {
+            if (Session["UsuarioId"] != null)
+            {
+                int idUsuario = Convert.ToInt32(Session["UsuarioId"]);
+                CapaNegocios.CN_AuditoriaService.RegistrarAccion(idUsuario, "LOGOUT", "tbl_Usuarios");
+            }
+
             Session.Clear();
             Session.Abandon();
             Session.RemoveAll();

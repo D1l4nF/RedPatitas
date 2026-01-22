@@ -42,6 +42,13 @@ namespace RedPatitas.Admin
                 litTendenciaMascotas.Text = stats.TendenciaMascotas;
                 litTendenciaReportes.Text = stats.TendenciaReportes;
                 litTendenciaAdopciones.Text = stats.TendenciaAdopciones;
+
+                // Desglose de usuarios (Oculto por solicitud)
+                /*
+                litAdminRefugioCount.Text = stats.UsuariosAdminRefugio.ToString();
+                litRefugioCount.Text = stats.UsuariosRefugio.ToString();
+                litAdoptanteCount.Text = stats.UsuariosAdoptante.ToString();
+                */
             }
             catch (Exception ex)
             {

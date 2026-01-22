@@ -67,6 +67,76 @@ namespace RedPatitas.Admin
         protected global::System.Web.UI.WebControls.Button btnConfirmarAsignar;
 
         /// <summary>
+        /// Control pnlModalVerificar.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.Panel pnlModalVerificar;
+
+        /// <summary>
+        /// Control hdnRefugioVerificarId.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.HiddenField hdnRefugioVerificarId;
+
+        /// <summary>
+        /// Control imgRefugioVerif.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.Image imgRefugioVerif;
+
+        /// <summary>
+        /// Control litNombreRefugioVerif.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.Literal litNombreRefugioVerif;
+
+        /// <summary>
+        /// Control litCiudadRefugioVerif.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.Literal litCiudadRefugioVerif;
+
+        /// <summary>
+        /// Control litDireccionRefugioVerif.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.Literal litDireccionRefugioVerif;
+
+        /// <summary>
+        /// Control litTelefonoRefugioVerif.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.Literal litTelefonoRefugioVerif;
+
+        /// <summary>
+        /// Control litDescripcionRefugioVerif.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.Literal litDescripcionRefugioVerif;
+
+        /// <summary>
+        /// Control litMascotasRefugioVerif.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.Literal litMascotasRefugioVerif;
+
+        /// <summary>
+        /// Control litFechaRefugioVerif.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.Literal litFechaRefugioVerif;
+
+        /// <summary>
+        /// Control pnlEstadoVerificado.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.Panel pnlEstadoVerificado;
+
+        /// <summary>
+        /// Control btnCerrarVerificar.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.Button btnCerrarVerificar;
+
+        /// <summary>
+        /// Control btnQuitarVerificacion.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.Button btnQuitarVerificacion;
+
+        /// <summary>
+        /// Control btnAprobarVerificacion.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.Button btnAprobarVerificacion;
+
+        /// <summary>
         /// Control lblMensaje.
         /// </summary>
         protected global::System.Web.UI.WebControls.Label lblMensaje;
