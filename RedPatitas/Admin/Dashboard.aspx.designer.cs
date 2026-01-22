@@ -23,6 +23,35 @@ namespace RedPatitas.Admin
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal litTotalUsuarios;
 
+
+
+        /// <summary>
+        /// Control litAdminRefugioCount.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal litAdminRefugioCount;
+
+        /// <summary>
+        /// Control litRefugioCount.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal litRefugioCount;
+
+        /// <summary>
+        /// Control litAdoptanteCount.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal litAdoptanteCount;
+
         /// <summary>
         /// Control litTendenciaUsuarios.
         /// </summary>

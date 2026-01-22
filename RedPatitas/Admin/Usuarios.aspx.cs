@@ -140,12 +140,110 @@ namespace RedPatitas.Admin
                         hdnUsuarioId.Value = argsRefugio[0];
                         pnlModalAsignar.CssClass = "modal-overlay active";
                         break;
+
+                    case "RevisarRefugio":
+                        if (!string.IsNullOrEmpty(e.CommandArgument.ToString()))
+                        {
+                            int idRefugioVerif = int.Parse(e.CommandArgument.ToString());
+                            CargarDetalleRefugioParaVerificar(idRefugioVerif);
+                        }
+                        break;
                 }
             }
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine("Error en comando: " + ex.Message);
             }
+        }
+
+        private void CargarDetalleRefugioParaVerificar(int idRefugio)
+        {
+            var detalle = _usuarioService.ObtenerDetalleRefugio(idRefugio);
+            if (detalle != null)
+            {
+                hdnRefugioVerificarId.Value = detalle.IdRefugio.ToString();
+                
+                // Cargar datos en controles
+                litNombreRefugioVerif.Text = detalle.Nombre;
+                
+                string ubicacion = detalle.Ciudad;
+                string direccionAdicional = detalle.Direccion;
+
+                // Si no hay dirección pero sí coordenadas, recuperar desde API (Nominatim)
+                if (string.IsNullOrEmpty(direccionAdicional) && detalle.Latitud.HasValue && detalle.Longitud.HasValue)
+                {
+                    direccionAdicional = ObtenerDireccionDesdeCoordenadas(detalle.Latitud.Value, detalle.Longitud.Value);
+                }
+
+                if (!string.IsNullOrEmpty(direccionAdicional))
+                {
+                    ubicacion += " - " + direccionAdicional;
+                    litDireccionRefugioVerif.Text = direccionAdicional;
+                    litDireccionRefugioVerif.Visible = true;
+                }
+                else
+                {
+                    litDireccionRefugioVerif.Visible = false; // Ocultar si no hay
+                }
+
+                litCiudadRefugioVerif.Text = ubicacion;
+                
+                litTelefonoRefugioVerif.Text = detalle.Telefono;
+                litDescripcionRefugioVerif.Text = detalle.Descripcion;
+                litMascotasRefugioVerif.Text = detalle.CantidadMascotas.ToString();
+                litFechaRefugioVerif.Text = detalle.FechaRegistro?.ToString("dd/MM/yyyy") ?? "Desconocido";
+                
+                if (!string.IsNullOrEmpty(detalle.FotoUrl))
+                    imgRefugioVerif.ImageUrl = detalle.FotoUrl;
+                else
+                    imgRefugioVerif.ImageUrl = "~/Images/default-shelter.png";
+
+                // Lógica de botones y estado
+                if (detalle.Verificado)
+                {
+                    pnlEstadoVerificado.Visible = true;
+                    btnAprobarVerificacion.Visible = false;
+                    btnQuitarVerificacion.Visible = true;
+                }
+                else
+                {
+                    pnlEstadoVerificado.Visible = false;
+                    btnAprobarVerificacion.Visible = true;
+                    btnQuitarVerificacion.Visible = false;
+                }
+
+                pnlModalVerificar.CssClass = "modal-overlay active";
+            }
+        }
+
+        private string ObtenerDireccionDesdeCoordenadas(decimal lat, decimal lon)
+        {
+            try
+            {
+                // Nominatim API (OpenStreetMap) - Requiere User-Agent
+                string url = $"https://nominatim.openstreetmap.org/reverse?format=json&lat={lat}&lon={lon}&zoom=18&addressdetails=1";
+                using (var client = new System.Net.WebClient())
+                {
+                    client.Headers.Add("User-Agent", "RedPatitasAdmin/1.0 (admin@redpatitas.com)");
+                    client.Encoding = System.Text.Encoding.UTF8;
+                    string json = client.DownloadString(url);
+                    
+                    var serializer = new System.Web.Script.Serialization.JavaScriptSerializer();
+                    var result = serializer.Deserialize<Dictionary<string, object>>(json);
+                    
+                    if (result != null && result.ContainsKey("display_name"))
+                    {
+                        // Limpiar un poco la dirección (tomar solo los primeros componentes relevantes si es muy larga)
+                        string fullAddress = result["display_name"].ToString();
+                        return fullAddress; 
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Error geocoding: " + ex.Message);
+            }
+            return null;
         }
 
         protected void rptUsuarios_ItemDataBound(object sender, RepeaterItemEventArgs e)
@@ -193,6 +291,32 @@ namespace RedPatitas.Admin
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine("Error asignando refugio: " + ex.Message);
+            }
+        }
+
+        protected void btnCerrarVerificar_Click(object sender, EventArgs e)
+        {
+            pnlModalVerificar.CssClass = "modal-overlay";
+            hdnRefugioVerificarId.Value = "";
+        }
+
+        protected void btnAprobarVerificacion_Click(object sender, EventArgs e)
+        {
+            if (int.TryParse(hdnRefugioVerificarId.Value, out int idRefugio))
+            {
+                _usuarioService.VerificarRefugioDeUsuario(idRefugio, true);
+                pnlModalVerificar.CssClass = "modal-overlay"; // Cerrar modal
+                CargarUsuarios(); // Recargar tabla
+            }
+        }
+
+        protected void btnQuitarVerificacion_Click(object sender, EventArgs e)
+        {
+            if (int.TryParse(hdnRefugioVerificarId.Value, out int idRefugio))
+            {
+                _usuarioService.VerificarRefugioDeUsuario(idRefugio, false); // false para quitar
+                pnlModalVerificar.CssClass = "modal-overlay"; // Cerrar modal
+                CargarUsuarios(); // Recargar tabla
             }
         }
 

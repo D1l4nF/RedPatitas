@@ -37,6 +37,7 @@
                     <ul class="nav-links">
                         <li><a href="~/Public/Home.aspx" runat="server" class="nav-link">Inicio</a></li>
                         <li><a href="~/Public/Adopta.aspx" runat="server" class="nav-link">Adopta</a></li>
+                        <li><a href="~/Public/MapaExtravios.aspx" runat="server" class="nav-link">Mapa</a></li>
                         <li><a href="~/Public/Reportar.aspx" runat="server" class="nav-link">Reportar</a></li>
                     </ul>
                     <a href="~/Login/Login.aspx" runat="server" class="btn-login">Ingresar</a>

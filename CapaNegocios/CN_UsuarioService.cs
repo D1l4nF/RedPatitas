@@ -37,7 +37,7 @@ namespace CapaNegocios
                 {
                     usuario.usu_IntentosFallidos = 0;
                     dc.SubmitChanges();
-                    return new CN_LoginResultado
+                    var resultado = new CN_LoginResultado
                     {
                         Exito = true,
                         Mensaje = "Login exitoso",
@@ -49,6 +49,11 @@ namespace CapaNegocios
                         FotoUrl = usuario.usu_FotoUrl,
                         Ref_Verificado = usuario.usu_IdRefugio != null ? usuario.tbl_Refugios.ref_Verificado : null
                     };
+
+                    // Registrar auditoría
+                    CN_AuditoriaService.RegistrarAccion(usuario.usu_IdUsuario, "LOGIN", "tbl_Usuarios");
+
+                    return resultado;
                 }
                 else
                 {
@@ -120,6 +125,9 @@ namespace CapaNegocios
                 dc.tbl_Usuarios.InsertOnSubmit(nuevoUsuario);
                 dc.SubmitChanges();
 
+                // Registrar auditoría
+                CN_AuditoriaService.RegistrarAccion(nuevoUsuario.usu_IdUsuario, "INSERT", "tbl_Usuarios", nuevoUsuario.usu_IdUsuario, null, $"Registro de adoptante: {email}");
+
                 return new CN_RegistroResultado
                 {
                     Exito = true,
@@ -190,6 +198,9 @@ namespace CapaNegocios
 
                 dc.tbl_Usuarios.InsertOnSubmit(nuevoUsuario);
                 dc.SubmitChanges();
+
+                // Registrar auditoría
+                CN_AuditoriaService.RegistrarAccion(nuevoUsuario.usu_IdUsuario, "INSERT", "tbl_Refugios", nuevoRefugio.ref_IdRefugio, null, $"Registro de refugio: {nombreRefugio}");
 
                 return new CN_RegistroResultado
                 {

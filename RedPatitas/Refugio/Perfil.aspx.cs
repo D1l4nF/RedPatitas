@@ -38,6 +38,12 @@ namespace RedPatitas.Refugio
                         txtApellido.Text = usuario.usu_Apellido;
                         txtEmail.Text = usuario.usu_Email;
                         txtTelefono.Text = usuario.usu_Telefono;
+                        txtCiudad.Text = usuario.usu_Ciudad;
+
+                        if (usuario.usu_Latitud.HasValue)
+                            hfLatitud.Value = usuario.usu_Latitud.Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
+                        if (usuario.usu_Longitud.HasValue)
+                            hfLongitud.Value = usuario.usu_Longitud.Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
                         if (!string.IsNullOrEmpty(usuario.usu_FotoUrl))
                         {
@@ -76,6 +82,12 @@ namespace RedPatitas.Refugio
                         usuario.usu_Nombre = txtNombre.Text.Trim();
                         usuario.usu_Apellido = txtApellido.Text.Trim();
                         usuario.usu_Telefono = txtTelefono.Text.Trim();
+                        usuario.usu_Ciudad = txtCiudad.Text.Trim();
+
+                        if (!string.IsNullOrEmpty(hfLatitud.Value))
+                            usuario.usu_Latitud = decimal.Parse(hfLatitud.Value, System.Globalization.CultureInfo.InvariantCulture);
+                        if (!string.IsNullOrEmpty(hfLongitud.Value))
+                            usuario.usu_Longitud = decimal.Parse(hfLongitud.Value, System.Globalization.CultureInfo.InvariantCulture);
 
                         // Actualizar contraseña si se proporcionó
                         if (!string.IsNullOrEmpty(txtNuevaClave.Text))

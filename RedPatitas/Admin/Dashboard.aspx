@@ -32,6 +32,7 @@
                         <span class="stat-trend">
                             <asp:Literal ID="litTendenciaUsuarios" runat="server" Text=""></asp:Literal>
                         </span>
+
                     </div>
                 </div>
                 <div class="admin-stat-card">

@@ -23,6 +23,11 @@ namespace CapaNegocios
             public string TendenciaMascotas { get; set; }
             public string TendenciaReportes { get; set; }
             public string TendenciaAdopciones { get; set; }
+
+            // Detalles de usuarios
+            public int UsuariosAdminRefugio { get; set; }
+            public int UsuariosRefugio { get; set; } // Staff
+            public int UsuariosAdoptante { get; set; }
         }
 
         /// <summary>
@@ -95,7 +100,13 @@ namespace CapaNegocios
                 var stats = new EstadisticasGenerales();
 
                 // Total de usuarios activos
-                stats.TotalUsuarios = db.tbl_Usuarios.Count(u => u.usu_Estado == true);
+                var usuariosActivos = db.tbl_Usuarios.Where(u => u.usu_Estado == true).ToList();
+                stats.TotalUsuarios = usuariosActivos.Count;
+                
+                // Desglose por roles
+                stats.UsuariosAdminRefugio = usuariosActivos.Count(u => u.usu_IdRol == 2);
+                stats.UsuariosRefugio = usuariosActivos.Count(u => u.usu_IdRol == 3);
+                stats.UsuariosAdoptante = usuariosActivos.Count(u => u.usu_IdRol == 4);
 
                 // Total de mascotas publicadas (activas)
                 stats.TotalMascotas = db.tbl_Mascotas.Count(m => m.mas_Estado == true);
@@ -224,17 +235,28 @@ namespace CapaNegocios
                                 actividad.Titulo = "Nueva solicitud de adopción";
                                 actividad.Descripcion = "Solicitud recibida";
                             }
+                            else if (aud.aud_Tabla == "tbl_Refugios")
+                            {
+                                actividad.Tipo = "user";
+                                actividad.Titulo = "Nuevo Refugio";
+                                actividad.Descripcion = "Refugio registrado";
+                            }
                             else
                             {
                                 actividad.Tipo = "user";
-                                actividad.Titulo = aud.aud_Accion;
-                                actividad.Descripcion = aud.aud_Tabla ?? "Sistema";
+                                actividad.Titulo = "Registro nuevo";
+                                actividad.Descripcion = ConstruirDescripcionAmigable(aud.aud_Tabla, "creado");
                             }
                             break;
                         case "UPDATE":
                             actividad.Tipo = "user";
                             actividad.Titulo = "Actualización";
-                            actividad.Descripcion = $"Registro modificado en {aud.aud_Tabla}";
+                            actividad.Descripcion = ConstruirDescripcionAmigable(aud.aud_Tabla, "actualizado");
+                            break;
+                        case "DELETE":
+                            actividad.Tipo = "report";
+                            actividad.Titulo = "Eliminación";
+                            actividad.Descripcion = ConstruirDescripcionAmigable(aud.aud_Tabla, "eliminado");
                             break;
                         case "CUENTA_BLOQUEADA":
                             actividad.Tipo = "report";
@@ -459,6 +481,19 @@ namespace CapaNegocios
             if (usuario == null) return "Usuario";
 
             return $"{usuario.usu_Nombre} {usuario.usu_Apellido}".Trim();
+        }
+
+        private string ConstruirDescripcionAmigable(string tabla, string accion)
+        {
+            string entidad = tabla;
+            if (tabla == "tbl_Mascotas") entidad = "Mascota";
+            else if (tabla == "tbl_Usuarios") entidad = "Usuario";
+            else if (tabla == "tbl_Refugios") entidad = "Refugio";
+            else if (tabla == "tbl_SolicitudesAdopcion") entidad = "Solicitud";
+            else if (tabla == "tbl_ReportesMascotas") entidad = "Reporte";
+            else if (tabla.StartsWith("tbl_")) entidad = tabla.Substring(4);
+
+            return $"{entidad} {accion}";
         }
 
         #endregion

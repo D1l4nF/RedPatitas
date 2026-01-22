@@ -1012,3 +1012,8 @@ form#form1 {
     margin-bottom: 1rem;
     margin-top: 1rem;
 }
+
+/* SweetAlert2 Z-Index Fix */
+.swal2-container {
+    z-index: 10000 !important;
+}

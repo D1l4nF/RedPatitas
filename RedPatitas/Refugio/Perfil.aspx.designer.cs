@@ -20,6 +20,10 @@ namespace RedPatitas.Refugio
         protected global::System.Web.UI.WebControls.TextBox txtApellido;
         protected global::System.Web.UI.WebControls.TextBox txtEmail;
         protected global::System.Web.UI.WebControls.TextBox txtTelefono;
+        protected global::System.Web.UI.WebControls.TextBox txtCiudad;
+        protected global::System.Web.UI.WebControls.TextBox txtDireccion;
+        protected global::System.Web.UI.WebControls.HiddenField hfLatitud;
+        protected global::System.Web.UI.WebControls.HiddenField hfLongitud;
         protected global::System.Web.UI.WebControls.TextBox txtClaveActual;
         protected global::System.Web.UI.WebControls.TextBox txtNuevaClave;
         protected global::System.Web.UI.WebControls.TextBox txtConfirmarClave;
