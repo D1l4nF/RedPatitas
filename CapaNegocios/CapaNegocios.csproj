@@ -39,11 +39,13 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CN_AdminRefugioService.cs" />
     <Compile Include="CN_AdminUsuarioService.cs" />
+    <Compile Include="CN_AuditoriaService.cs" />
     <Compile Include="CN_CryptoService.cs" />
     <Compile Include="CN_DashboardService.cs" />
     <Compile Include="CN_EmailService.cs" />

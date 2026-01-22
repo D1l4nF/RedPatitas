@@ -40,6 +40,7 @@ namespace RedPatitas.Adoptante
                         txtEmail.Text = usuario.usu_Email;
                         txtTelefono.Text = usuario.usu_Telefono;
                         txtCedula.Text = usuario.usu_Cedula;
+                        txtCiudad.Text = usuario.usu_Ciudad; // Cargar ciudad
 
                         // Cargar coordenadas del mapa
                         if (usuario.usu_Latitud.HasValue)
@@ -88,6 +89,7 @@ namespace RedPatitas.Adoptante
                         usuario.usu_Apellido = txtApellido.Text.Trim();
                         usuario.usu_Telefono = txtTelefono.Text.Trim();
                         usuario.usu_Cedula = txtCedula.Text.Trim();
+                        usuario.usu_Ciudad = txtCiudad.Text.Trim(); // Guardar ciudad
 
                         // Guardar coordenadas del mapa
                         if (!string.IsNullOrEmpty(hfLatitud.Value))
@@ -149,6 +151,10 @@ namespace RedPatitas.Adoptante
                         }
 
                         dc.SubmitChanges();
+                        
+                        // Registrar auditoría
+                        CapaNegocios.CN_AuditoriaService.RegistrarAccion(idUsuario, "UPDATE", "tbl_Usuarios", idUsuario, null, "Actualización de perfil");
+                        
                         MostrarMensaje("¡Perfil actualizado correctamente!", true);
                     }
                 }

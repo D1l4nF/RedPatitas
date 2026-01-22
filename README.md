@@ -31,7 +31,8 @@ RedPatitas es una plataforma web que centraliza y digitaliza el proceso de adopc
 | **Arquitectura** | ASP.NET Web Forms - 3 Capas |
 | **Base de Datos** | SQL Server 2019+ |
 | **ORM** | LINQ to SQL |
-| **Mapas** | Leaflet.js + OpenStreetMap |
+| **Mapas** | Leaflet.js + OpenStreetMap + Nominatim API |
+| **Persistencia Config** | JSON (Server-side) |
 
 ---
 
@@ -116,7 +117,8 @@ RedPatitas/
 - ✅ Recuperación de contraseña por token
 - ✅ Auditoría de acciones del sistema
 - ✅ Protección contra SQL Injection (LINQ to SQL)
-- ⚠️ Hashing de contraseñas (pendiente de implementar)
+- ✅ Hashing de contraseñas (SHA-256 + Salt)
+- ✅ Configuración de políticas de seguridad (JSON)
 
 ---
 
@@ -179,13 +181,17 @@ El sistema utiliza una **matriz de evaluación ponderada** para calcular la apti
 - [x] Protección de páginas por rol
 - [x] Sistema de registro (Adoptante y Refugio)
 - [x] Verificación de refugios
+- [x] Verificación automática de adoptantes (perfil completo)
 - [x] Perfil de usuario
 - [x] Estructura de Master Pages con menús dinámicos
-- [ ] CRUD de Mascotas
-- [ ] Módulo de Adopciones y Evaluación
-- [ ] Geolocalización y Reportes
-- [ ] Panel Admin completo
-- [ ] Integración final
+- [x] Panel SuperAdmin completo (Dashboard, Usuarios, Refugios, Reportes, Configuración, Auditoría, Notificaciones, MascotasPerdidas)
+- [x] CRUD de Mascotas (Adoptante)
+- [x] Sistema de Solicitudes de Adopción
+- [x] Reportar Mascotas Perdidas/Encontradas
+- [x] Sistema de Favoritos
+- [x] Mapa interactivo de extravíos con Leaflet.js
+- [ ] CRUD de Mascotas (Refugio - Panel completo)
+- [ ] Evaluación de Adopciones (UI de matriz de criterios)
 
 ---
 

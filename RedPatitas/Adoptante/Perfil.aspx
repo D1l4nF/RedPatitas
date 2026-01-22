@@ -99,12 +99,34 @@
 
             <div class="form-group">
                 <label>Ubicación</label>
+
+                <div class="form-grid" style="margin-bottom: 15px;">
+                    <div class="form-group">
+                        <label for="txtCiudad">Ciudad</label>
+                        <asp:TextBox ID="txtCiudad" runat="server" CssClass="form-control" placeholder="Ej: Quito">
+                        </asp:TextBox>
+                    </div>
+                    <div class="form-group">
+                        <label for="txtDireccion">Dirección / Calles</label>
+                        <div class="input-with-button" style="display: flex; gap: 10px;">
+                            <asp:TextBox ID="txtDireccion" runat="server" CssClass="form-control"
+                                placeholder="Ej: Av. Amazonas y Naciones Unidas"></asp:TextBox>
+                            <button type="button" class="btn-secondary" onclick="buscarDireccion()"
+                                style="padding: 0 15px; white-space: nowrap;">
+                                🔍 Buscar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
                 <div id="mapPerfil"
-                    style="height: 250px; border-radius: 8px; margin-bottom: 10px; border: 1px solid #ddd;"></div>
+                    style="height: 300px; border-radius: 8px; margin-bottom: 10px; border: 1px solid #ddd;"></div>
                 <asp:HiddenField ID="hfLatitud" runat="server" />
                 <asp:HiddenField ID="hfLongitud" runat="server" />
-                <p style="font-size: 0.85rem; color: #666; margin-bottom: 10px;">📍 Haz clic en el mapa para marcar tu
-                    ubicación</p>
+                <p style="font-size: 0.85rem; color: #666; margin-bottom: 10px;">
+                    📍 Haz clic en el mapa para obtener la dirección automáticamente, o escribe la dirección y pulsa
+                    "Buscar" para ubicarte en el mapa.
+                </p>
             </div>
 
             <div class="form-divider"></div>
@@ -268,6 +290,7 @@
                     apellido: document.getElementById('<%= txtApellido.ClientID %>').value,
                     telefono: document.getElementById('<%= txtTelefono.ClientID %>').value,
                     cedula: document.getElementById('<%= txtCedula.ClientID %>').value,
+                    ciudad: document.getElementById('<%= txtCiudad.ClientID %>').value,
                     latitud: document.getElementById('<%= hfLatitud.ClientID %>').value,
                     longitud: document.getElementById('<%= hfLongitud.ClientID %>').value
                 };
@@ -291,6 +314,7 @@
                     document.getElementById('<%= txtApellido.ClientID %>').value !== valoresOriginales.apellido ||
                     document.getElementById('<%= txtTelefono.ClientID %>').value !== valoresOriginales.telefono ||
                     document.getElementById('<%= txtCedula.ClientID %>').value !== valoresOriginales.cedula ||
+                    document.getElementById('<%= txtCiudad.ClientID %>').value !== valoresOriginales.ciudad ||
                     document.getElementById('<%= hfLatitud.ClientID %>').value !== valoresOriginales.latitud ||
                     document.getElementById('<%= hfLongitud.ClientID %>').value !== valoresOriginales.longitud ||
                     nueva !== ''; // También si hay nueva contraseña
@@ -314,7 +338,9 @@
 
                 // Agregar listeners a todos los campos editables
                 var campos = ['<%= txtNombre.ClientID %>', '<%= txtApellido.ClientID %>',
-                    '<%= txtTelefono.ClientID %>', '<%= txtCedula.ClientID %>'];
+                    '<%= txtTelefono.ClientID %>', '<%= txtCedula.ClientID %>',
+                    '<%= txtCiudad.ClientID %>', '<%= txtDireccion.ClientID %>'];
+
                 campos.forEach(function (id) {
                     var campo = document.getElementById(id);
                     if (campo) {
@@ -328,37 +354,128 @@
                     fotoInput.addEventListener('change', verificarCambios);
                 }
 
+                initMap();
+            });
+
+            var map, marker;
+
+            function initMap() {
                 // Coordenadas guardadas o por defecto (Quito)
                 var latGuardada = document.getElementById('<%= hfLatitud.ClientID %>').value;
                 var lngGuardada = document.getElementById('<%= hfLongitud.ClientID %>').value;
 
                 var lat = latGuardada ? parseFloat(latGuardada) : -0.1807;
                 var lng = lngGuardada ? parseFloat(lngGuardada) : -78.4678;
-                var zoom = latGuardada ? 15 : 13;
+                var zoom = latGuardada ? 16 : 13;
 
                 // Inicializar mapa
-                var map = L.map('mapPerfil').setView([lat, lng], zoom);
+                map = L.map('mapPerfil').setView([lat, lng], zoom);
 
                 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                     attribution: '© OpenStreetMap'
                 }).addTo(map);
 
-                var marker;
-
                 // Si hay coordenadas guardadas, mostrar marcador
                 if (latGuardada && lngGuardada) {
-                    marker = L.marker([lat, lng]).addTo(map);
+                    marker = L.marker([lat, lng], { draggable: true }).addTo(map);
+
+                    // Si se arrastra el marcador existente
+                    marker.on('dragend', function (e) {
+                        actualizarPosicion(e.target.getLatLng());
+                    });
                 }
 
                 // Click en el mapa para colocar marcador
                 map.on('click', function (e) {
-                    if (marker) map.removeLayer(marker);
-                    marker = L.marker(e.latlng).addTo(map);
-
-                    document.getElementById('<%= hfLatitud.ClientID %>').value = e.latlng.lat;
-                    document.getElementById('<%= hfLongitud.ClientID %>').value = e.latlng.lng;
-                    verificarCambios();
+                    actualizarPosicion(e.latlng);
                 });
-            });
+            }
+
+            function actualizarPosicion(latlng) {
+                if (marker) map.removeLayer(marker);
+                marker = L.marker(latlng, { draggable: true }).addTo(map);
+
+                // Actualizar HiddenFields
+                document.getElementById('<%= hfLatitud.ClientID %>').value = latlng.lat;
+                document.getElementById('<%= hfLongitud.ClientID %>').value = latlng.lng;
+
+                // Evento dragend para el nuevo marcador
+                marker.on('dragend', function (e) {
+                    actualizarPosicion(e.target.getLatLng());
+                });
+
+                // Reverse Geocoding (Obtener dirección desde coordenadas)
+                obtenerDireccion(latlng.lat, latlng.lng);
+
+                verificarCambios();
+            }
+
+            function obtenerDireccion(lat, lng) {
+                // Usar Nominatim API (OpenStreetMap)
+                var url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`;
+
+                fetch(url, {
+                    headers: {
+                        'User-Agent': 'RedPatitas/1.0' // Es buena práctica identificarse
+                    }
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data && data.address) {
+                            // Llenar ciudad
+                            var ciudad = data.address.city || data.address.town || data.address.village || data.address.county || "";
+                            document.getElementById('<%= txtCiudad.ClientID %>').value = ciudad;
+
+                            // Llenar dirección (calle)
+                            var calle = data.address.road || "";
+                            var numero = data.address.house_number || "";
+                            var barrio = data.address.suburb || "";
+
+                            var direccionCompleta = calle;
+                            if (numero) direccionCompleta += " " + numero;
+                            if (barrio && barrio !== ciudad) direccionCompleta += ", " + barrio;
+
+                            document.getElementById('<%= txtDireccion.ClientID %>').value = direccionCompleta;
+
+                            // Verificar cambios de nuevo porque cambiamos valores programáticamente
+                            verificarCambios();
+                        }
+                    })
+                    .catch(error => console.error('Error en geocoding:', error));
+            }
+
+            function buscarDireccion() {
+                var ciudad = document.getElementById('<%= txtCiudad.ClientID %>').value;
+                var direccion = document.getElementById('<%= txtDireccion.ClientID %>').value;
+
+                if (!direccion && !ciudad) return;
+
+                var query = direccion;
+                if (ciudad) query += ", " + ciudad;
+                // Preferir Ecuador si no se especifica
+                if (!query.toLowerCase().includes("ecuador")) query += ", Ecuador";
+
+                var url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}`;
+
+                fetch(url, {
+                    headers: {
+                        'User-Agent': 'RedPatitas/1.0'
+                    }
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data && data.length > 0) {
+                            var lat = parseFloat(data[0].lat);
+                            var lon = parseFloat(data[0].lon);
+                            var latlng = L.latLng(lat, lon);
+
+                            map.setView(latlng, 16);
+                            actualizarPosicion(latlng); // Esto pondrá el marcador y actualizará hidden fields
+                        } else {
+                            alert("No se encontró la dirección. Intenta ser más específico.");
+                        }
+                    })
+                    .catch(error => console.error('Error en búsqueda:', error));
+            }
         </script>
     </asp:Content>
