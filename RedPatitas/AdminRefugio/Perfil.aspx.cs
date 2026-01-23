@@ -234,9 +234,10 @@ namespace RedPatitas.AdminRefugio
 
         private void MostrarMensaje(string mensaje, bool esExito)
         {
-            pnlMensaje.Visible = true;
-            lblMensaje.Text = mensaje;
-            lblMensaje.ForeColor = esExito ? System.Drawing.Color.Green : System.Drawing.Color.Red;
+            string icon = esExito ? "success" : "error";
+            string title = esExito ? "¡Éxito!" : "Error";
+            string script = $"Swal.fire({{ title: '{title}', text: '{mensaje}', icon: '{icon}', confirmButtonColor: '#0D9488' }});";
+            ScriptManager.RegisterStartupScript(this, GetType(), "swal-perfil", script, true);
         }
     }
 }

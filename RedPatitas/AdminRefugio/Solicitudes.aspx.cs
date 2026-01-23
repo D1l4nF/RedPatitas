@@ -47,12 +47,14 @@ namespace RedPatitas.AdminRefugio
                 try
                 {
                     CN_AdopcionService.Aprobar(idSolicitud);
-                    ScriptManager.RegisterStartupScript(this, GetType(), "alert", "alert('Solicitud aprobada con éxito. La mascota ha sido marcada como Adoptada.');", true);
+                    string script = "Swal.fire({ title: '¡Aprobada!', text: 'Solicitud aprobada con éxito. La mascota ha sido marcada como Adoptada.', icon: 'success', confirmButtonColor: '#0D9488' });";
+                    ScriptManager.RegisterStartupScript(this, GetType(), "swal-apr", script, true);
                     CargarSolicitudes();
                 }
                 catch (Exception ex)
                 {
-                    ScriptManager.RegisterStartupScript(this, GetType(), "alert", "alert('Error al aprobar solicitud.');", true);
+                    string script = "Swal.fire({ title: 'Error', text: 'Error al aprobar solicitud.', icon: 'error', confirmButtonColor: '#0D9488' });";
+                    ScriptManager.RegisterStartupScript(this, GetType(), "swal-err-apr", script, true);
                     System.Diagnostics.Debug.WriteLine("Error Aprobar: " + ex.Message);
                 }
             }
@@ -81,7 +83,8 @@ namespace RedPatitas.AdminRefugio
                 CN_AdopcionService.Rechazar(idSolicitud, motivo);
 
                 pnlModalRechazo.Visible = false;
-                ScriptManager.RegisterStartupScript(this, GetType(), "alert", "alert('Solicitud rechazada.');", true);
+                string script = "Swal.fire({ title: 'Rechazada', text: 'Solicitud rechazada.', icon: 'info', confirmButtonColor: '#0D9488' });";
+                ScriptManager.RegisterStartupScript(this, GetType(), "swal-rej", script, true);
                 CargarSolicitudes();
             }
             catch (Exception ex)
