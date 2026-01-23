@@ -87,7 +87,7 @@ namespace CapaDatos
     #endregion
 		
 		public DataClasses1DataContext() : 
-				base(global::CapaDatos.Properties.Settings.Default.RedPatitasConnectionString1, mappingSource)
+				base(global::CapaDatos.Properties.Settings.Default.RedPatitasConnectionString2, mappingSource)
 		{
 			OnCreated();
 		}
@@ -257,6 +257,46 @@ namespace CapaDatos
 			get
 			{
 				return this.GetTable<tbl_Usuarios>();
+			}
+		}
+		
+		public System.Data.Linq.Table<vw_AdopcionesMensuales> vw_AdopcionesMensuales
+		{
+			get
+			{
+				return this.GetTable<vw_AdopcionesMensuales>();
+			}
+		}
+		
+		public System.Data.Linq.Table<vw_EstadisticasGenerales> vw_EstadisticasGenerales
+		{
+			get
+			{
+				return this.GetTable<vw_EstadisticasGenerales>();
+			}
+		}
+		
+		public System.Data.Linq.Table<vw_EstadisticasPorRefugio> vw_EstadisticasPorRefugio
+		{
+			get
+			{
+				return this.GetTable<vw_EstadisticasPorRefugio>();
+			}
+		}
+		
+		public System.Data.Linq.Table<vw_MascotasCompleta> vw_MascotasCompleta
+		{
+			get
+			{
+				return this.GetTable<vw_MascotasCompleta>();
+			}
+		}
+		
+		public System.Data.Linq.Table<vw_SolicitudesCompleta> vw_SolicitudesCompleta
+		{
+			get
+			{
+				return this.GetTable<vw_SolicitudesCompleta>();
 			}
 		}
 	}
@@ -6993,6 +7033,933 @@ namespace CapaDatos
 		{
 			this.SendPropertyChanging();
 			entity.tbl_Usuarios = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.vw_AdopcionesMensuales")]
+	public partial class vw_AdopcionesMensuales
+	{
+		
+		private System.Nullable<int> _Anio;
+		
+		private System.Nullable<int> _Mes;
+		
+		private System.Nullable<int> _TotalAdopciones;
+		
+		public vw_AdopcionesMensuales()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Anio", DbType="Int")]
+		public System.Nullable<int> Anio
+		{
+			get
+			{
+				return this._Anio;
+			}
+			set
+			{
+				if ((this._Anio != value))
+				{
+					this._Anio = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Mes", DbType="Int")]
+		public System.Nullable<int> Mes
+		{
+			get
+			{
+				return this._Mes;
+			}
+			set
+			{
+				if ((this._Mes != value))
+				{
+					this._Mes = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TotalAdopciones", DbType="Int")]
+		public System.Nullable<int> TotalAdopciones
+		{
+			get
+			{
+				return this._TotalAdopciones;
+			}
+			set
+			{
+				if ((this._TotalAdopciones != value))
+				{
+					this._TotalAdopciones = value;
+				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.vw_EstadisticasGenerales")]
+	public partial class vw_EstadisticasGenerales
+	{
+		
+		private System.Nullable<int> _TotalUsuarios;
+		
+		private System.Nullable<int> _TotalAdoptantes;
+		
+		private System.Nullable<int> _TotalRefugios;
+		
+		private System.Nullable<int> _RefugiosVerificados;
+		
+		private System.Nullable<int> _TotalMascotas;
+		
+		private System.Nullable<int> _MascotasDisponibles;
+		
+		private System.Nullable<int> _MascotasAdoptadas;
+		
+		private System.Nullable<int> _SolicitudesPendientes;
+		
+		private System.Nullable<int> _ReportesActivos;
+		
+		public vw_EstadisticasGenerales()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TotalUsuarios", DbType="Int")]
+		public System.Nullable<int> TotalUsuarios
+		{
+			get
+			{
+				return this._TotalUsuarios;
+			}
+			set
+			{
+				if ((this._TotalUsuarios != value))
+				{
+					this._TotalUsuarios = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TotalAdoptantes", DbType="Int")]
+		public System.Nullable<int> TotalAdoptantes
+		{
+			get
+			{
+				return this._TotalAdoptantes;
+			}
+			set
+			{
+				if ((this._TotalAdoptantes != value))
+				{
+					this._TotalAdoptantes = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TotalRefugios", DbType="Int")]
+		public System.Nullable<int> TotalRefugios
+		{
+			get
+			{
+				return this._TotalRefugios;
+			}
+			set
+			{
+				if ((this._TotalRefugios != value))
+				{
+					this._TotalRefugios = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RefugiosVerificados", DbType="Int")]
+		public System.Nullable<int> RefugiosVerificados
+		{
+			get
+			{
+				return this._RefugiosVerificados;
+			}
+			set
+			{
+				if ((this._RefugiosVerificados != value))
+				{
+					this._RefugiosVerificados = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TotalMascotas", DbType="Int")]
+		public System.Nullable<int> TotalMascotas
+		{
+			get
+			{
+				return this._TotalMascotas;
+			}
+			set
+			{
+				if ((this._TotalMascotas != value))
+				{
+					this._TotalMascotas = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MascotasDisponibles", DbType="Int")]
+		public System.Nullable<int> MascotasDisponibles
+		{
+			get
+			{
+				return this._MascotasDisponibles;
+			}
+			set
+			{
+				if ((this._MascotasDisponibles != value))
+				{
+					this._MascotasDisponibles = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MascotasAdoptadas", DbType="Int")]
+		public System.Nullable<int> MascotasAdoptadas
+		{
+			get
+			{
+				return this._MascotasAdoptadas;
+			}
+			set
+			{
+				if ((this._MascotasAdoptadas != value))
+				{
+					this._MascotasAdoptadas = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SolicitudesPendientes", DbType="Int")]
+		public System.Nullable<int> SolicitudesPendientes
+		{
+			get
+			{
+				return this._SolicitudesPendientes;
+			}
+			set
+			{
+				if ((this._SolicitudesPendientes != value))
+				{
+					this._SolicitudesPendientes = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ReportesActivos", DbType="Int")]
+		public System.Nullable<int> ReportesActivos
+		{
+			get
+			{
+				return this._ReportesActivos;
+			}
+			set
+			{
+				if ((this._ReportesActivos != value))
+				{
+					this._ReportesActivos = value;
+				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.vw_EstadisticasPorRefugio")]
+	public partial class vw_EstadisticasPorRefugio
+	{
+		
+		private int _ref_IdRefugio;
+		
+		private string _NombreRefugio;
+		
+		private System.Nullable<bool> _ref_Verificado;
+		
+		private System.Nullable<int> _TotalMascotas;
+		
+		private System.Nullable<int> _Disponibles;
+		
+		private System.Nullable<int> _Adoptadas;
+		
+		private System.Nullable<int> _EnProceso;
+		
+		private System.Nullable<int> _TotalUsuarios;
+		
+		public vw_EstadisticasPorRefugio()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ref_IdRefugio", DbType="Int NOT NULL")]
+		public int ref_IdRefugio
+		{
+			get
+			{
+				return this._ref_IdRefugio;
+			}
+			set
+			{
+				if ((this._ref_IdRefugio != value))
+				{
+					this._ref_IdRefugio = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NombreRefugio", DbType="VarChar(150) NOT NULL", CanBeNull=false)]
+		public string NombreRefugio
+		{
+			get
+			{
+				return this._NombreRefugio;
+			}
+			set
+			{
+				if ((this._NombreRefugio != value))
+				{
+					this._NombreRefugio = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ref_Verificado", DbType="Bit")]
+		public System.Nullable<bool> ref_Verificado
+		{
+			get
+			{
+				return this._ref_Verificado;
+			}
+			set
+			{
+				if ((this._ref_Verificado != value))
+				{
+					this._ref_Verificado = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TotalMascotas", DbType="Int")]
+		public System.Nullable<int> TotalMascotas
+		{
+			get
+			{
+				return this._TotalMascotas;
+			}
+			set
+			{
+				if ((this._TotalMascotas != value))
+				{
+					this._TotalMascotas = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Disponibles", DbType="Int")]
+		public System.Nullable<int> Disponibles
+		{
+			get
+			{
+				return this._Disponibles;
+			}
+			set
+			{
+				if ((this._Disponibles != value))
+				{
+					this._Disponibles = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Adoptadas", DbType="Int")]
+		public System.Nullable<int> Adoptadas
+		{
+			get
+			{
+				return this._Adoptadas;
+			}
+			set
+			{
+				if ((this._Adoptadas != value))
+				{
+					this._Adoptadas = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EnProceso", DbType="Int")]
+		public System.Nullable<int> EnProceso
+		{
+			get
+			{
+				return this._EnProceso;
+			}
+			set
+			{
+				if ((this._EnProceso != value))
+				{
+					this._EnProceso = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TotalUsuarios", DbType="Int")]
+		public System.Nullable<int> TotalUsuarios
+		{
+			get
+			{
+				return this._TotalUsuarios;
+			}
+			set
+			{
+				if ((this._TotalUsuarios != value))
+				{
+					this._TotalUsuarios = value;
+				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.vw_MascotasCompleta")]
+	public partial class vw_MascotasCompleta
+	{
+		
+		private int _mas_IdMascota;
+		
+		private string _mas_Nombre;
+		
+		private string _Especie;
+		
+		private string _Raza;
+		
+		private System.Nullable<int> _mas_Edad;
+		
+		private string _mas_EdadAproximada;
+		
+		private System.Nullable<char> _mas_Sexo;
+		
+		private string _mas_Tamano;
+		
+		private string _mas_Descripcion;
+		
+		private string _mas_EstadoAdopcion;
+		
+		private System.Nullable<bool> _mas_Esterilizado;
+		
+		private System.Nullable<bool> _mas_Vacunado;
+		
+		private string _Refugio;
+		
+		private string _CiudadRefugio;
+		
+		private string _FotoPrincipal;
+		
+		private System.Nullable<System.DateTime> _mas_FechaRegistro;
+		
+		public vw_MascotasCompleta()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_mas_IdMascota", DbType="Int NOT NULL")]
+		public int mas_IdMascota
+		{
+			get
+			{
+				return this._mas_IdMascota;
+			}
+			set
+			{
+				if ((this._mas_IdMascota != value))
+				{
+					this._mas_IdMascota = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_mas_Nombre", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
+		public string mas_Nombre
+		{
+			get
+			{
+				return this._mas_Nombre;
+			}
+			set
+			{
+				if ((this._mas_Nombre != value))
+				{
+					this._mas_Nombre = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Especie", DbType="VarChar(50)")]
+		public string Especie
+		{
+			get
+			{
+				return this._Especie;
+			}
+			set
+			{
+				if ((this._Especie != value))
+				{
+					this._Especie = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Raza", DbType="VarChar(100)")]
+		public string Raza
+		{
+			get
+			{
+				return this._Raza;
+			}
+			set
+			{
+				if ((this._Raza != value))
+				{
+					this._Raza = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_mas_Edad", DbType="Int")]
+		public System.Nullable<int> mas_Edad
+		{
+			get
+			{
+				return this._mas_Edad;
+			}
+			set
+			{
+				if ((this._mas_Edad != value))
+				{
+					this._mas_Edad = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_mas_EdadAproximada", DbType="VarChar(50)")]
+		public string mas_EdadAproximada
+		{
+			get
+			{
+				return this._mas_EdadAproximada;
+			}
+			set
+			{
+				if ((this._mas_EdadAproximada != value))
+				{
+					this._mas_EdadAproximada = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_mas_Sexo", DbType="Char(1)")]
+		public System.Nullable<char> mas_Sexo
+		{
+			get
+			{
+				return this._mas_Sexo;
+			}
+			set
+			{
+				if ((this._mas_Sexo != value))
+				{
+					this._mas_Sexo = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_mas_Tamano", DbType="VarChar(20)")]
+		public string mas_Tamano
+		{
+			get
+			{
+				return this._mas_Tamano;
+			}
+			set
+			{
+				if ((this._mas_Tamano != value))
+				{
+					this._mas_Tamano = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_mas_Descripcion", DbType="Text", UpdateCheck=UpdateCheck.Never)]
+		public string mas_Descripcion
+		{
+			get
+			{
+				return this._mas_Descripcion;
+			}
+			set
+			{
+				if ((this._mas_Descripcion != value))
+				{
+					this._mas_Descripcion = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_mas_EstadoAdopcion", DbType="VarChar(20)")]
+		public string mas_EstadoAdopcion
+		{
+			get
+			{
+				return this._mas_EstadoAdopcion;
+			}
+			set
+			{
+				if ((this._mas_EstadoAdopcion != value))
+				{
+					this._mas_EstadoAdopcion = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_mas_Esterilizado", DbType="Bit")]
+		public System.Nullable<bool> mas_Esterilizado
+		{
+			get
+			{
+				return this._mas_Esterilizado;
+			}
+			set
+			{
+				if ((this._mas_Esterilizado != value))
+				{
+					this._mas_Esterilizado = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_mas_Vacunado", DbType="Bit")]
+		public System.Nullable<bool> mas_Vacunado
+		{
+			get
+			{
+				return this._mas_Vacunado;
+			}
+			set
+			{
+				if ((this._mas_Vacunado != value))
+				{
+					this._mas_Vacunado = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Refugio", DbType="VarChar(150) NOT NULL", CanBeNull=false)]
+		public string Refugio
+		{
+			get
+			{
+				return this._Refugio;
+			}
+			set
+			{
+				if ((this._Refugio != value))
+				{
+					this._Refugio = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CiudadRefugio", DbType="VarChar(100)")]
+		public string CiudadRefugio
+		{
+			get
+			{
+				return this._CiudadRefugio;
+			}
+			set
+			{
+				if ((this._CiudadRefugio != value))
+				{
+					this._CiudadRefugio = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FotoPrincipal", DbType="VarChar(500)")]
+		public string FotoPrincipal
+		{
+			get
+			{
+				return this._FotoPrincipal;
+			}
+			set
+			{
+				if ((this._FotoPrincipal != value))
+				{
+					this._FotoPrincipal = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_mas_FechaRegistro", DbType="DateTime")]
+		public System.Nullable<System.DateTime> mas_FechaRegistro
+		{
+			get
+			{
+				return this._mas_FechaRegistro;
+			}
+			set
+			{
+				if ((this._mas_FechaRegistro != value))
+				{
+					this._mas_FechaRegistro = value;
+				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.vw_SolicitudesCompleta")]
+	public partial class vw_SolicitudesCompleta
+	{
+		
+		private int _sol_IdSolicitud;
+		
+		private System.Nullable<System.DateTime> _sol_FechaSolicitud;
+		
+		private string _sol_Estado;
+		
+		private System.Nullable<decimal> _sol_PuntajeTotal;
+		
+		private int _IdAdoptante;
+		
+		private string _NombreAdoptante;
+		
+		private string _EmailAdoptante;
+		
+		private string _usu_Cedula;
+		
+		private string _TelefonoAdoptante;
+		
+		private int _mas_IdMascota;
+		
+		private string _NombreMascota;
+		
+		private int _ref_IdRefugio;
+		
+		private string _NombreRefugio;
+		
+		public vw_SolicitudesCompleta()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_sol_IdSolicitud", DbType="Int NOT NULL")]
+		public int sol_IdSolicitud
+		{
+			get
+			{
+				return this._sol_IdSolicitud;
+			}
+			set
+			{
+				if ((this._sol_IdSolicitud != value))
+				{
+					this._sol_IdSolicitud = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_sol_FechaSolicitud", DbType="DateTime")]
+		public System.Nullable<System.DateTime> sol_FechaSolicitud
+		{
+			get
+			{
+				return this._sol_FechaSolicitud;
+			}
+			set
+			{
+				if ((this._sol_FechaSolicitud != value))
+				{
+					this._sol_FechaSolicitud = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_sol_Estado", DbType="VarChar(20)")]
+		public string sol_Estado
+		{
+			get
+			{
+				return this._sol_Estado;
+			}
+			set
+			{
+				if ((this._sol_Estado != value))
+				{
+					this._sol_Estado = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_sol_PuntajeTotal", DbType="Decimal(5,2)")]
+		public System.Nullable<decimal> sol_PuntajeTotal
+		{
+			get
+			{
+				return this._sol_PuntajeTotal;
+			}
+			set
+			{
+				if ((this._sol_PuntajeTotal != value))
+				{
+					this._sol_PuntajeTotal = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdAdoptante", DbType="Int NOT NULL")]
+		public int IdAdoptante
+		{
+			get
+			{
+				return this._IdAdoptante;
+			}
+			set
+			{
+				if ((this._IdAdoptante != value))
+				{
+					this._IdAdoptante = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NombreAdoptante", DbType="VarChar(201) NOT NULL", CanBeNull=false)]
+		public string NombreAdoptante
+		{
+			get
+			{
+				return this._NombreAdoptante;
+			}
+			set
+			{
+				if ((this._NombreAdoptante != value))
+				{
+					this._NombreAdoptante = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EmailAdoptante", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
+		public string EmailAdoptante
+		{
+			get
+			{
+				return this._EmailAdoptante;
+			}
+			set
+			{
+				if ((this._EmailAdoptante != value))
+				{
+					this._EmailAdoptante = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_usu_Cedula", DbType="VarChar(20)")]
+		public string usu_Cedula
+		{
+			get
+			{
+				return this._usu_Cedula;
+			}
+			set
+			{
+				if ((this._usu_Cedula != value))
+				{
+					this._usu_Cedula = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TelefonoAdoptante", DbType="VarChar(20)")]
+		public string TelefonoAdoptante
+		{
+			get
+			{
+				return this._TelefonoAdoptante;
+			}
+			set
+			{
+				if ((this._TelefonoAdoptante != value))
+				{
+					this._TelefonoAdoptante = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_mas_IdMascota", DbType="Int NOT NULL")]
+		public int mas_IdMascota
+		{
+			get
+			{
+				return this._mas_IdMascota;
+			}
+			set
+			{
+				if ((this._mas_IdMascota != value))
+				{
+					this._mas_IdMascota = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NombreMascota", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
+		public string NombreMascota
+		{
+			get
+			{
+				return this._NombreMascota;
+			}
+			set
+			{
+				if ((this._NombreMascota != value))
+				{
+					this._NombreMascota = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ref_IdRefugio", DbType="Int NOT NULL")]
+		public int ref_IdRefugio
+		{
+			get
+			{
+				return this._ref_IdRefugio;
+			}
+			set
+			{
+				if ((this._ref_IdRefugio != value))
+				{
+					this._ref_IdRefugio = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NombreRefugio", DbType="VarChar(150) NOT NULL", CanBeNull=false)]
+		public string NombreRefugio
+		{
+			get
+			{
+				return this._NombreRefugio;
+			}
+			set
+			{
+				if ((this._NombreRefugio != value))
+				{
+					this._NombreRefugio = value;
+				}
+			}
 		}
 	}
 }

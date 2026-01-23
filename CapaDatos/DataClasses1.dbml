@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="RedPatitas" Class="DataClasses1DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=localhost;Initial Catalog=RedPatitas;Integrated Security=True;Encrypt=True;Trust Server Certificate=True" SettingsObjectName="CapaDatos.Properties.Settings" SettingsPropertyName="RedPatitasConnectionString1" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=.;Initial Catalog=RedPatitas;Integrated Security=True;Encrypt=True;Trust Server Certificate=True" SettingsObjectName="CapaDatos.Properties.Settings" SettingsPropertyName="RedPatitasConnectionString2" Provider="System.Data.SqlClient" />
   <Table Name="dbo.tbl_Auditoria" Member="tbl_Auditoria">
     <Type Name="tbl_Auditoria">
       <Column Name="aud_IdAuditoria" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -302,6 +302,75 @@
       <Association Name="tbl_Usuarios_tbl_TokensRecuperacion" Member="tbl_TokensRecuperacion" ThisKey="usu_IdUsuario" OtherKey="tok_IdUsuario" Type="tbl_TokensRecuperacion" />
       <Association Name="tbl_Roles_tbl_Usuarios" Member="tbl_Roles" ThisKey="usu_IdRol" OtherKey="rol_IdRol" Type="tbl_Roles" IsForeignKey="true" />
       <Association Name="tbl_Refugios_tbl_Usuarios" Member="tbl_Refugios" ThisKey="usu_IdRefugio" OtherKey="ref_IdRefugio" Type="tbl_Refugios" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.vw_AdopcionesMensuales" Member="vw_AdopcionesMensuales">
+    <Type Name="vw_AdopcionesMensuales">
+      <Column Name="Anio" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Mes" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TotalAdopciones" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.vw_EstadisticasGenerales" Member="vw_EstadisticasGenerales">
+    <Type Name="vw_EstadisticasGenerales">
+      <Column Name="TotalUsuarios" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TotalAdoptantes" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TotalRefugios" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="RefugiosVerificados" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TotalMascotas" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="MascotasDisponibles" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="MascotasAdoptadas" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="SolicitudesPendientes" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ReportesActivos" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.vw_EstadisticasPorRefugio" Member="vw_EstadisticasPorRefugio">
+    <Type Name="vw_EstadisticasPorRefugio">
+      <Column Name="ref_IdRefugio" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="NombreRefugio" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="ref_Verificado" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="TotalMascotas" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Disponibles" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Adoptadas" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="EnProceso" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TotalUsuarios" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.vw_MascotasCompleta" Member="vw_MascotasCompleta">
+    <Type Name="vw_MascotasCompleta">
+      <Column Name="mas_IdMascota" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="mas_Nombre" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Especie" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Raza" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="mas_Edad" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="mas_EdadAproximada" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="mas_Sexo" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="mas_Tamano" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="mas_Descripcion" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="mas_EstadoAdopcion" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="mas_Esterilizado" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="mas_Vacunado" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Refugio" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="CiudadRefugio" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="FotoPrincipal" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="mas_FechaRegistro" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.vw_SolicitudesCompleta" Member="vw_SolicitudesCompleta">
+    <Type Name="vw_SolicitudesCompleta">
+      <Column Name="sol_IdSolicitud" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="sol_FechaSolicitud" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="sol_Estado" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="sol_PuntajeTotal" Type="System.Decimal" DbType="Decimal(5,2)" CanBeNull="true" />
+      <Column Name="IdAdoptante" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="NombreAdoptante" Type="System.String" DbType="VarChar(201) NOT NULL" CanBeNull="false" />
+      <Column Name="EmailAdoptante" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="usu_Cedula" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="TelefonoAdoptante" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="mas_IdMascota" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="NombreMascota" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="ref_IdRefugio" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="NombreRefugio" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
 </Database>

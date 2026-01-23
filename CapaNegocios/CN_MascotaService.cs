@@ -196,6 +196,144 @@ namespace CapaNegocios
             }
             return edadAproximada ?? "Desconocida";
         }
+
+        /// <summary>
+        /// Obtiene las mascotas de un refugio específico
+        /// </summary>
+        public List<MascotaDTO> ObtenerMascotasPorRefugio(int idRefugio)
+        {
+            using (var db = new DataClasses1DataContext())
+            {
+                var mascotas = (from m in db.tbl_Mascotas
+                               where m.mas_IdRefugio == idRefugio && m.mas_Estado == true
+                               let especie = m.tbl_Razas != null && m.tbl_Razas.tbl_Especies != null
+                                             ? m.tbl_Razas.tbl_Especies.esp_Nombre
+                                             : "Otro"
+                               let raza = m.tbl_Razas != null ? m.tbl_Razas.raz_Nombre : "Mestizo"
+                               let fotoPrincipal = m.tbl_FotosMascotas
+                                                    .Where(f => f.fot_EsPrincipal == true)
+                                                    .Select(f => f.fot_Url)
+                                                    .FirstOrDefault()
+                               select new MascotaDTO
+                               {
+                                   IdMascota = m.mas_IdMascota,
+                                   Nombre = m.mas_Nombre,
+                                   Especie = especie,
+                                   Raza = raza,
+                                   Edad = m.mas_Edad,
+                                   EdadAproximada = m.mas_EdadAproximada ?? "Adulto",
+                                   Sexo = m.mas_Sexo.HasValue ? (m.mas_Sexo.Value == 'M' ? "Macho" : "Hembra") : "Desconocido",
+                                   Tamano = m.mas_Tamano ?? "Mediano",
+                                   Color = m.mas_Color,
+                                   Descripcion = m.mas_Descripcion,
+                                   Vacunado = m.mas_Vacunado == true,
+                                   Esterilizado = m.mas_Esterilizado == true,
+                                   Desparasitado = m.mas_Desparasitado == true,
+                                   EstadoAdopcion = m.mas_EstadoAdopcion,
+                                   NombreRefugio = m.tbl_Refugios.ref_Nombre,
+                                   CiudadRefugio = m.tbl_Refugios.ref_Ciudad ?? "Ecuador",
+                                   FotoPrincipal = fotoPrincipal,
+                                   FechaRegistro = m.mas_FechaRegistro
+                               }).ToList();
+
+                return mascotas;
+            }
+        }
+
+        /// <summary>
+        /// Obtiene el conteo de mascotas por especie para un refugio
+        /// </summary>
+        public Dictionary<string, int> ObtenerConteoPorEspecie(int idRefugio)
+        {
+            using (var db = new DataClasses1DataContext())
+            {
+                var resultado = db.tbl_Mascotas
+                    .Where(m => m.mas_IdRefugio == idRefugio && m.mas_Estado == true)
+                    .GroupBy(m => m.tbl_Razas != null && m.tbl_Razas.tbl_Especies != null
+                                  ? m.tbl_Razas.tbl_Especies.esp_Nombre
+                                  : "Otro")
+                    .ToDictionary(g => g.Key, g => g.Count());
+
+                return resultado;
+            }
+        }
+
+        /// <summary>
+        /// Obtiene todas las especies disponibles
+        /// </summary>
+        public List<tbl_Especies> ObtenerEspecies()
+        {
+            using (var db = new DataClasses1DataContext())
+            {
+                return db.tbl_Especies.OrderBy(e => e.esp_Nombre).ToList();
+            }
+        }
+
+        /// <summary>
+        /// Obtiene las razas de una especie
+        /// </summary>
+        public List<tbl_Razas> ObtenerRazasPorEspecie(int idEspecie)
+        {
+            using (var db = new DataClasses1DataContext())
+            {
+                return db.tbl_Razas
+                    .Where(r => r.raz_IdEspecie == idEspecie)
+                    .OrderBy(r => r.raz_Nombre)
+                    .ToList();
+            }
+        }
+
+        /// <summary>
+        /// Registra una nueva mascota
+        /// </summary>
+        public int RegistrarMascota(tbl_Mascotas mascota)
+        {
+            using (var db = new DataClasses1DataContext())
+            {
+                mascota.mas_Estado = true;
+                mascota.mas_FechaRegistro = DateTime.Now;
+                db.tbl_Mascotas.InsertOnSubmit(mascota);
+                db.SubmitChanges();
+                return mascota.mas_IdMascota;
+            }
+        }
+
+        /// <summary>
+        /// Agrega una foto a una mascota
+        /// </summary>
+        public void AgregarFotoMascota(int idMascota, string url, bool esPrincipal)
+        {
+            using (var db = new DataClasses1DataContext())
+            {
+                var foto = new tbl_FotosMascotas
+                {
+                    fot_IdMascota = idMascota,
+                    fot_Url = url,
+                    fot_EsPrincipal = esPrincipal,
+                    fot_FechaSubida = DateTime.Now
+                };
+                db.tbl_FotosMascotas.InsertOnSubmit(foto);
+                db.SubmitChanges();
+            }
+        }
+
+        /// <summary>
+        /// Elimina lógicamente una mascota
+        /// </summary>
+        public bool EliminarMascota(int idMascota)
+        {
+            using (var db = new DataClasses1DataContext())
+            {
+                var mascota = db.tbl_Mascotas.FirstOrDefault(m => m.mas_IdMascota == idMascota);
+                if (mascota != null)
+                {
+                    mascota.mas_Estado = false; // Eliminación lógica
+                    db.SubmitChanges();
+                    return true;
+                }
+                return false;
+            }
+        }
     }
 
     /// <summary>

@@ -68,8 +68,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AdminRefugio\Campanias.aspx" />
     <Content Include="AdminRefugio\Dashboard.aspx" />
+    <Content Include="AdminRefugio\Estadisticas.aspx" />
+    <Content Include="AdminRefugio\Mascotas.aspx" />
     <Content Include="AdminRefugio\Perfil.aspx" />
+    <Content Include="AdminRefugio\Solicitudes.aspx" />
+    <Content Include="AdminRefugio\Usuarios.aspx" />
     <Content Include="Admin\Auditoria.aspx" />
     <Content Include="Admin\Configuracion.aspx" />
     <Content Include="Admin\Dashboard.aspx" />
@@ -83,6 +88,9 @@
     <Content Include="Adoptante\Mascotas.aspx" />
     <Content Include="Adoptante\PerfilMascota.aspx" />
     <Content Include="Adoptante\Favoritos.aspx" />
+    <Content Include="Adoptante\MascotasDisponible.aspx" />
+    <Content Include="Adoptante\MisSolicitudes.aspx" />
+    <Content Include="Adoptante\SolicitudAdopcion.aspx" />
     <Content Include="Adoptante\Solicitudes.aspx" />
     <Content Include="Adoptante\ReportarMascota.aspx" />
     <Content Include="Adoptante\Perfil.aspx" />
@@ -133,6 +141,41 @@
     </Compile>
     <Compile Include="AdminRefugio\Perfil.aspx.designer.cs">
       <DependentUpon>Perfil.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminRefugio\Campanias.aspx.cs">
+      <DependentUpon>Campanias.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminRefugio\Campanias.aspx.designer.cs">
+      <DependentUpon>Campanias.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminRefugio\Estadisticas.aspx.cs">
+      <DependentUpon>Estadisticas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminRefugio\Estadisticas.aspx.designer.cs">
+      <DependentUpon>Estadisticas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminRefugio\Mascotas.aspx.cs">
+      <DependentUpon>Mascotas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminRefugio\Mascotas.aspx.designer.cs">
+      <DependentUpon>Mascotas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminRefugio\Solicitudes.aspx.cs">
+      <DependentUpon>Solicitudes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminRefugio\Solicitudes.aspx.designer.cs">
+      <DependentUpon>Solicitudes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminRefugio\Usuarios.aspx.cs">
+      <DependentUpon>Usuarios.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminRefugio\Usuarios.aspx.designer.cs">
+      <DependentUpon>Usuarios.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\Admin.Master.cs">
       <DependentUpon>Admin.Master</DependentUpon>
@@ -259,6 +302,27 @@
     </Compile>
     <Compile Include="Adoptante\ReportarMascota.aspx.designer.cs">
       <DependentUpon>ReportarMascota.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Adoptante\SolicitudAdopcion.aspx.cs">
+      <DependentUpon>SolicitudAdopcion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Adoptante\SolicitudAdopcion.aspx.designer.cs">
+      <DependentUpon>SolicitudAdopcion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Adoptante\MascotasDisponible.aspx.cs">
+      <DependentUpon>MascotasDisponible.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Adoptante\MascotasDisponible.aspx.designer.cs">
+      <DependentUpon>MascotasDisponible.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Adoptante\MisSolicitudes.aspx.cs">
+      <DependentUpon>MisSolicitudes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Adoptante\MisSolicitudes.aspx.designer.cs">
+      <DependentUpon>MisSolicitudes.aspx</DependentUpon>
     </Compile>
     <Compile Include="Login\Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>

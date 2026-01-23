@@ -123,7 +123,7 @@ namespace RedPatitas.Adoptante
             }
         }
 
-        private Panel CrearCartaMascota(vw_MascotasCompleta mascota, int? idUsuario)
+        private Panel CrearCartaMascota(MascotaDisponibleDTO mascota, int? idUsuario)
         {
             // Panel principal de la carta
             Panel cardPanel = new Panel();
@@ -158,7 +158,7 @@ namespace RedPatitas.Adoptante
 
             // Nombre y especie
             string iconoEspecie = CN_AdopcionService.ObtenerIconoEspecie(mascota.Especie);
-            string sexoTexto = mascota.mas_Sexo.HasValue ? mascota.mas_Sexo.Value.ToString() : "";
+            string sexoTexto = !string.IsNullOrEmpty(mascota.mas_Sexo) ? mascota.mas_Sexo : "";
             string iconoSexo = CN_AdopcionService.ObtenerIconoSexo(sexoTexto);
             string edadTexto = CN_AdopcionService.ObtenerEdadTexto(mascota.mas_Edad);
 
