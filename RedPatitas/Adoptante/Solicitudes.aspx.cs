@@ -18,6 +18,12 @@ namespace RedPatitas.Adoptante
 
             if (!IsPostBack)
             {
+                // Verificar si viene de enviar una solicitud exitosa
+                if (Request.QueryString["success"] == "1")
+                {
+                    pnlExito.Visible = true;
+                }
+
                 CargarSolicitudes();
             }
         }

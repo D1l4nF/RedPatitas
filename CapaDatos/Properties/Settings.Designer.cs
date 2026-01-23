@@ -47,8 +47,8 @@ namespace CapaDatos.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=.;Initial Catalog=RedPatitas;Integrated Security=True;TrustServerCert" +
-            "ificate=True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=.;Initial Catalog=RedPatitas;Integrated Security=True;Encrypt=True;Tr" +
+            "ustServerCertificate=True")]
         public string RedPatitasConnectionString2 {
             get {
                 return ((string)(this["RedPatitasConnectionString2"]));

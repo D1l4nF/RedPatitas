@@ -9,216 +9,163 @@ namespace CapaNegocios
 {
     public static class CN_AdopcionService
     {
-        private static readonly DataClasses1DataContext db = new DataClasses1DataContext();
-
         // SOLICITAR ADOPCIÓN
        
         public static bool SolicitarAdopcion(int idMascota, int idUsuario)
         {
-            bool existeSolicitud = db.tbl_SolicitudesAdopcion
-                .Any(s => s.sol_IdMascota == idMascota
-                       && s.sol_Estado == "Pendiente");
-
-            if (existeSolicitud)
-                return false;
-
-            tbl_SolicitudesAdopcion solicitud = new tbl_SolicitudesAdopcion
+            using (var db = new DataClasses1DataContext())
             {
-                sol_IdMascota = idMascota,
-                sol_IdUsuario = idUsuario,
-                sol_FechaSolicitud = DateTime.Now,
-                sol_Estado = "Pendiente"
-            };
+                bool existeSolicitud = db.tbl_SolicitudesAdopcion
+                    .Any(s => s.sol_IdMascota == idMascota
+                           && s.sol_Estado == "Pendiente");
 
-            db.tbl_SolicitudesAdopcion.InsertOnSubmit(solicitud);
+                if (existeSolicitud)
+                    return false;
 
-            var mascota = db.tbl_Mascotas
-                .First(m => m.mas_IdMascota == idMascota);
+                tbl_SolicitudesAdopcion solicitud = new tbl_SolicitudesAdopcion
+                {
+                    sol_IdMascota = idMascota,
+                    sol_IdUsuario = idUsuario,
+                    sol_FechaSolicitud = DateTime.Now,
+                    sol_Estado = "Pendiente"
+                };
 
-            mascota.mas_EstadoAdopcion = "EnProceso";
+                db.tbl_SolicitudesAdopcion.InsertOnSubmit(solicitud);
 
-            db.SubmitChanges();
-            return true;
+                var mascota = db.tbl_Mascotas
+                    .First(m => m.mas_IdMascota == idMascota);
+
+                mascota.mas_EstadoAdopcion = "EnProceso";
+
+                db.SubmitChanges();
+                return true;
+            }
         }
+
         // MIS SOLICITUDES (USUARIO)
-        public static List<vw_SolicitudesCompleta> MisSolicitudes(int idUsuario)
+        public static List<SolicitudDTO> MisSolicitudes(int idUsuario)
         {
-            return db.vw_SolicitudesCompleta
-                .Where(s => s.IdAdoptante == idUsuario)
-                .OrderByDescending(s => s.sol_FechaSolicitud)
-                .ToList();
+            using (var db = new DataClasses1DataContext())
+            {
+                return (from s in db.tbl_SolicitudesAdopcion
+                        join m in db.tbl_Mascotas on s.sol_IdMascota equals m.mas_IdMascota
+                        where s.sol_IdUsuario == idUsuario
+                        orderby s.sol_FechaSolicitud descending
+                        select new SolicitudDTO
+                        {
+                            IdSolicitud = s.sol_IdSolicitud,
+                            IdMascota = s.sol_IdMascota,
+                            NombreMascota = m.mas_Nombre,
+                            IdAdoptante = s.sol_IdUsuario,
+                            sol_FechaSolicitud = s.sol_FechaSolicitud,
+                            Estado = s.sol_Estado,
+                            Comentarios = s.sol_ComentariosRevision
+                        }).ToList();
+            }
         }
+
         // SOLICITUDES RECIBIDAS (REFUGIO)
-
-        public static  List<vw_SolicitudesCompleta> SolicitudesRecibidas(int idRefugio)
+        public static List<SolicitudDTO> SolicitudesRecibidas(int idRefugio)
         {
-            return db.vw_SolicitudesCompleta
-                .Where(s => s.ref_IdRefugio == idRefugio
-                         && s.sol_Estado == "Pendiente")
-                .ToList();
+            using (var db = new DataClasses1DataContext())
+            {
+                return (from s in db.tbl_SolicitudesAdopcion
+                        join m in db.tbl_Mascotas on s.sol_IdMascota equals m.mas_IdMascota
+                        join u in db.tbl_Usuarios on s.sol_IdUsuario equals u.usu_IdUsuario
+                        where m.mas_IdRefugio == idRefugio && s.sol_Estado == "Pendiente"
+                        select new SolicitudDTO
+                        {
+                            IdSolicitud = s.sol_IdSolicitud,
+                            IdMascota = s.sol_IdMascota,
+                            NombreMascota = m.mas_Nombre,
+                            IdAdoptante = s.sol_IdUsuario,
+                            NombreAdoptante = u.usu_Nombre + " " + u.usu_Apellido,
+                            sol_FechaSolicitud = s.sol_FechaSolicitud,
+                            Estado = s.sol_Estado,
+                            ref_IdRefugio = idRefugio
+                        }).ToList();
+            }
         }
 
+        // OBTENER ADOPCIONES POR MES (para estadísticas)
+        public static Dictionary<string, int> ObtenerAdopcionesPorMes(int idRefugio)
+        {
+            using (var db = new DataClasses1DataContext())
+            {
+                var resultado = new Dictionary<string, int>();
+                var hoy = DateTime.Now;
+
+                // Obtener los últimos 6 meses
+                for (int i = 5; i >= 0; i--)
+                {
+                    var fecha = hoy.AddMonths(-i);
+                    var mes = fecha.ToString("MMM yyyy");
+                    
+                    var count = (from s in db.tbl_SolicitudesAdopcion
+                                join m in db.tbl_Mascotas on s.sol_IdMascota equals m.mas_IdMascota
+                                where m.mas_IdRefugio == idRefugio 
+                                      && s.sol_Estado == "Aprobada"
+                                      && s.sol_FechaSolicitud.HasValue
+                                      && s.sol_FechaSolicitud.Value.Month == fecha.Month
+                                      && s.sol_FechaSolicitud.Value.Year == fecha.Year
+                                select s).Count();
+
+                    resultado[mes] = count;
+                }
+
+                return resultado;
+            }
+        }
 
         // APROBAR
-
         public static void Aprobar(int idSolicitud)
         {
-            var solicitud = db.tbl_SolicitudesAdopcion
-                .First(s => s.sol_IdSolicitud == idSolicitud);
+            using (var db = new DataClasses1DataContext())
+            {
+                var solicitud = db.tbl_SolicitudesAdopcion
+                    .First(s => s.sol_IdSolicitud == idSolicitud);
 
-            solicitud.sol_Estado = "Aprobada";
+                solicitud.sol_Estado = "Aprobada";
 
-            var mascota = db.tbl_Mascotas
-                .First(m => m.mas_IdMascota == solicitud.sol_IdMascota);
+                var mascota = db.tbl_Mascotas
+                    .First(m => m.mas_IdMascota == solicitud.sol_IdMascota);
 
-            mascota.mas_EstadoAdopcion = "Adoptado";
+                mascota.mas_EstadoAdopcion = "Adoptado";
 
-            db.SubmitChanges();
+                db.SubmitChanges();
+            }
         }
 
         // RECHAZAR
-
         public static void Rechazar(int idSolicitud, string comentario)
         {
-            var solicitud = db.tbl_SolicitudesAdopcion
-                .First(s => s.sol_IdSolicitud == idSolicitud);
-
-            solicitud.sol_Estado = "Rechazada";
-            solicitud.sol_ComentariosRevision = comentario;
-
-            var mascota = db.tbl_Mascotas
-                .First(m => m.mas_IdMascota == solicitud.sol_IdMascota);
-
-            mascota.mas_EstadoAdopcion = "Disponible";
-
-            db.SubmitChanges();
-        }
-        // OBTENER MASCOTAS DISPONIBLES CON FILTROS
-        public static List<vw_MascotasCompleta> ObtenerMascotasDisponibles(
-            string especie = null,
-            string ubicacion = null,
-            string tamano = null,
-            string sexo = null,
-            string edadAproximada = null,
-            bool? esterilizado = null,
-            bool? vacunado = null)
-        {
-            var query = db.vw_MascotasCompleta
-                .Where(m => m.mas_EstadoAdopcion == "Disponible");
-
-            // Aplicar filtros si se especifican
-            if (!string.IsNullOrEmpty(especie) && especie != "todas")
+            using (var db = new DataClasses1DataContext())
             {
-                query = query.Where(m => m.Especie == especie);
+                var solicitud = db.tbl_SolicitudesAdopcion
+                    .First(s => s.sol_IdSolicitud == idSolicitud);
+
+                solicitud.sol_Estado = "Rechazada";
+                solicitud.sol_ComentariosRevision = comentario;
+
+                var mascota = db.tbl_Mascotas
+                    .First(m => m.mas_IdMascota == solicitud.sol_IdMascota);
+
+                mascota.mas_EstadoAdopcion = "Disponible";
+
+                db.SubmitChanges();
             }
-
-            if (!string.IsNullOrEmpty(ubicacion) && ubicacion != "todas")
-            {
-                query = query.Where(m => m.CiudadRefugio.Contains(ubicacion));
-            }
-
-            if (!string.IsNullOrEmpty(tamano) && tamano != "todos")
-            {
-                query = query.Where(m => m.mas_Tamano == tamano);
-            }
-
-            if (!string.IsNullOrEmpty(sexo) && sexo != "todos")
-            {
-                query = query.Where(m => m.mas_Sexo.HasValue && m.mas_Sexo.Value.ToString().Equals(sexo, StringComparison.OrdinalIgnoreCase));
-            }
-
-            if (!string.IsNullOrEmpty(edadAproximada) && edadAproximada != "todas")
-            {
-                query = query.Where(m => m.mas_EdadAproximada == edadAproximada);
-            }
-
-            if (esterilizado.HasValue)
-            {
-                query = query.Where(m => m.mas_Esterilizado == esterilizado.Value);
-            }
-
-            if (vacunado.HasValue)
-            {
-                query = query.Where(m => m.mas_Vacunado == vacunado.Value);
-            }
-
-            return query.OrderByDescending(m => m.mas_FechaRegistro).ToList();
-        }
-
-        // OBTENER ESPECIES DISPONIBLES
-        public static List<string> ObtenerEspeciesDisponibles()
-        {
-            return db.vw_MascotasCompleta
-                .Where(m => m.mas_EstadoAdopcion == "Disponible")
-                .Select(m => m.Especie)
-                .Distinct()
-                .Where(e => !string.IsNullOrEmpty(e))
-                .OrderBy(e => e)
-                .ToList();
-        }
-
-        // OBTENER UBICACIONES DISPONIBLES
-        public static List<string> ObtenerUbicacionesDisponibles()
-        {
-            return db.vw_MascotasCompleta
-                .Where(m => m.mas_EstadoAdopcion == "Disponible")
-                .Select(m => m.CiudadRefugio)
-                .Distinct()
-                .Where(u => !string.IsNullOrEmpty(u))
-                .OrderBy(u => u)
-                .ToList();
-        }
-
-        // OBTENER TAMAÑOS DISPONIBLES
-        public static List<string> ObtenerTamanosDisponibles()
-        {
-            return db.vw_MascotasCompleta
-                .Where(m => m.mas_EstadoAdopcion == "Disponible")
-                .Select(m => m.mas_Tamano)
-                .Distinct()
-                .Where(t => !string.IsNullOrEmpty(t))
-                .OrderBy(t => t)
-                .ToList();
-        }
-
-        // OBTENER EDADES APROXIMADAS DISPONIBLES
-        public static List<string> ObtenerEdadesAproximadasDisponibles()
-        {
-            return db.vw_MascotasCompleta
-                .Where(m => m.mas_EstadoAdopcion == "Disponible")
-                .Select(m => m.mas_EdadAproximada)
-                .Distinct()
-                .Where(e => !string.IsNullOrEmpty(e))
-                .OrderBy(e => e)
-                .ToList();
-        }
-
-        // OBTENER RAZAS DISPONIBLES POR ESPECIE
-        public static List<string> ObtenerRazasPorEspecie(string especie)
-        {
-            return db.vw_MascotasCompleta
-                .Where(m => m.mas_EstadoAdopcion == "Disponible" && m.Especie == especie)
-                .Select(m => m.Raza)
-                .Distinct()
-                .Where(r => !string.IsNullOrEmpty(r))
-                .OrderBy(r => r)
-                .ToList();
         }
 
         // VERIFICAR SI USUARIO YA TIENE SOLICITUD PENDIENTE
         public static bool TieneSolicitudPendiente(int idMascota, int idUsuario)
         {
-            return db.tbl_SolicitudesAdopcion
-                .Any(s => s.sol_IdMascota == idMascota
-                       && s.sol_IdUsuario == idUsuario
-                       && s.sol_Estado == "Pendiente");
-        }
-
-        // OBTENER DETALLE DE MASCOTA POR ID
-        public static vw_MascotasCompleta ObtenerMascotaPorId(int idMascota)
-        {
-            return db.vw_MascotasCompleta
-                .FirstOrDefault(m => m.mas_IdMascota == idMascota);
+            using (var db = new DataClasses1DataContext())
+            {
+                return db.tbl_SolicitudesAdopcion
+                    .Any(s => s.sol_IdMascota == idMascota
+                           && s.sol_IdUsuario == idUsuario
+                           && s.sol_Estado == "Pendiente");
+            }
         }
 
         // CONVERTIR EDAD EN MESES A TEXTO LEGIBLE
@@ -293,6 +240,173 @@ namespace CapaNegocios
                 return "Hembra";
             return "No especificado";
         }
+
+        // OBTENER ESPECIES DISPONIBLES
+        public static List<string> ObtenerEspeciesDisponibles()
+        {
+            using (var db = new DataClasses1DataContext())
+            {
+                // Como no existe vista, usamos query sobre mascotas disponibles
+                return db.tbl_Mascotas
+                    .Where(m => m.mas_EstadoAdopcion == "Disponible" && m.mas_Estado == true && m.tbl_Razas != null && m.tbl_Razas.tbl_Especies != null)
+                    .Select(m => m.tbl_Razas.tbl_Especies.esp_Nombre)
+                    .Distinct()
+                    .OrderBy(e => e)
+                    .ToList();
+            }
+        }
+
+        // OBTENER UBICACIONES DISPONIBLES
+        public static List<string> ObtenerUbicacionesDisponibles()
+        {
+            using (var db = new DataClasses1DataContext())
+            {
+                return db.tbl_Mascotas
+                    .Where(m => m.mas_EstadoAdopcion == "Disponible" && m.mas_Estado == true && m.tbl_Refugios != null)
+                    .Select(m => m.tbl_Refugios.ref_Ciudad)
+                    .Distinct()
+                    .Where(c => !string.IsNullOrEmpty(c))
+                    .OrderBy(c => c)
+                    .ToList();
+            }
+        }
+
+        // OBTENER TAMAÑOS DISPONIBLES
+        public static List<string> ObtenerTamanosDisponibles()
+        {
+            using (var db = new DataClasses1DataContext())
+            {
+                return db.tbl_Mascotas
+                    .Where(m => m.mas_EstadoAdopcion == "Disponible" && m.mas_Estado == true && m.mas_Tamano != null)
+                    .Select(m => m.mas_Tamano)
+                    .Distinct()
+                    .OrderBy(t => t)
+                    .ToList();
+            }
+        }
+
+        // OBTENER EDADES APROXIMADAS DISPONIBLES
+        public static List<string> ObtenerEdadesAproximadasDisponibles()
+        {
+            using (var db = new DataClasses1DataContext())
+            {
+                return db.tbl_Mascotas
+                    .Where(m => m.mas_EstadoAdopcion == "Disponible" && m.mas_Estado == true && m.mas_EdadAproximada != null)
+                    .Select(m => m.mas_EdadAproximada)
+                    .Distinct()
+                    .OrderBy(e => e)
+                    .ToList();
+            }
+        }
+        public static List<MascotaDisponibleDTO> ObtenerMascotasDisponibles(
+            string especie = null,
+            string ubicacion = null,
+            string tamano = null,
+            string sexo = null,
+            string edadAproximada = null,
+            bool? esterilizado = null,
+            bool? vacunado = null)
+        {
+            using (var db = new DataClasses1DataContext())
+            {
+                var query = from m in db.tbl_Mascotas
+                            where m.mas_EstadoAdopcion == "Disponible" && m.mas_Estado == true
+                            select new
+                            {
+                                Mascota = m,
+                                EspecieNombre = m.tbl_Razas != null && m.tbl_Razas.tbl_Especies != null ? m.tbl_Razas.tbl_Especies.esp_Nombre : "",
+                                RazaNombre = m.tbl_Razas != null ? m.tbl_Razas.raz_Nombre : "",
+                                RefugioNombre = m.tbl_Refugios != null ? m.tbl_Refugios.ref_Nombre : "",
+                                Ciudad = m.tbl_Refugios != null ? m.tbl_Refugios.ref_Ciudad : "",
+                                Foto = m.tbl_FotosMascotas.Where(f => f.fot_EsPrincipal == true).Select(f => f.fot_Url).FirstOrDefault()
+                            };
+
+                // Filtros
+                if (!string.IsNullOrEmpty(especie) && especie != "Todas")
+                    query = query.Where(x => x.EspecieNombre == especie);
+
+                if (!string.IsNullOrEmpty(ubicacion) && ubicacion != "Todas")
+                    query = query.Where(x => x.Ciudad == ubicacion);
+
+                if (!string.IsNullOrEmpty(tamano) && tamano != "Todos")
+                    query = query.Where(x => x.Mascota.mas_Tamano == tamano);
+
+                if (!string.IsNullOrEmpty(sexo) && sexo != "Todos")
+                {
+                    char sexoChar = ' ';
+                    if (sexo.Equals("Macho", StringComparison.OrdinalIgnoreCase) || sexo.Equals("M", StringComparison.OrdinalIgnoreCase))
+                        sexoChar = 'M';
+                    else if (sexo.Equals("Hembra", StringComparison.OrdinalIgnoreCase) || sexo.Equals("F", StringComparison.OrdinalIgnoreCase))
+                        sexoChar = 'F';
+                    
+                    if (sexoChar != ' ')
+                        query = query.Where(x => x.Mascota.mas_Sexo == sexoChar);
+                }
+
+                if (!string.IsNullOrEmpty(edadAproximada) && edadAproximada != "Todas")
+                    query = query.Where(x => x.Mascota.mas_EdadAproximada == edadAproximada);
+
+                if (esterilizado.HasValue)
+                    query = query.Where(x => x.Mascota.mas_Esterilizado == esterilizado.Value);
+
+                if (vacunado.HasValue)
+                    query = query.Where(x => x.Mascota.mas_Vacunado == vacunado.Value);
+
+                return query.Select(x => new MascotaDisponibleDTO
+                {
+                    mas_IdMascota = x.Mascota.mas_IdMascota,
+                    mas_Nombre = x.Mascota.mas_Nombre,
+                    Especie = x.EspecieNombre,
+                    Raza = x.RazaNombre,
+                    mas_Sexo = x.Mascota.mas_Sexo.HasValue ? x.Mascota.mas_Sexo.Value.ToString() : "",
+                    mas_Edad = x.Mascota.mas_Edad,
+                    mas_EdadAproximada = x.Mascota.mas_EdadAproximada,
+                    mas_Tamano = x.Mascota.mas_Tamano,
+                    mas_Esterilizado = x.Mascota.mas_Esterilizado,
+                    mas_Vacunado = x.Mascota.mas_Vacunado,
+                    mas_Descripcion = x.Mascota.mas_Descripcion,
+                    FotoPrincipal = x.Foto,
+                    Refugio = x.RefugioNombre,
+                    CiudadRefugio = x.Ciudad
+                }).ToList();
+            }
+        }
     }
 
+    /// <summary>
+    /// DTO para transferencia de datos de solicitudes
+    /// </summary>
+    public class SolicitudDTO
+    {
+        public int IdSolicitud { get; set; }
+        public int IdMascota { get; set; }
+        public string NombreMascota { get; set; }
+        public int IdAdoptante { get; set; }
+        public string NombreAdoptante { get; set; }
+        public DateTime? sol_FechaSolicitud { get; set; }
+        public string Estado { get; set; }
+        public string Comentarios { get; set; }
+        public int ref_IdRefugio { get; set; }
+    }
+
+    public class MascotaDisponibleDTO
+    {
+        public int mas_IdMascota { get; set; }
+        public string mas_Nombre { get; set; }
+        public string Especie { get; set; }
+        public string Raza { get; set; }
+        public string mas_Sexo { get; set; }
+        public int? mas_Edad { get; set; }
+        public string mas_EdadAproximada { get; set; }
+        public string mas_Tamano { get; set; }
+        public bool? mas_Esterilizado { get; set; }
+        public bool? mas_Vacunado { get; set; }
+        public string mas_Descripcion { get; set; }
+        public string FotoPrincipal { get; set; }
+        public string Refugio { get; set; }
+        public string CiudadRefugio { get; set; }
+    }
 }
+
+
+

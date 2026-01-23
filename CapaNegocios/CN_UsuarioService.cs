@@ -350,5 +350,101 @@ namespace CapaNegocios
                 return null;
             }
         }
+
+        // ==========================================
+        // MÉTODOS PARA GESTIÓN DE USUARIOS DE REFUGIO
+        // ==========================================
+
+        public List<UsuarioRefugioDTO> ObtenerUsuariosPorRefugio(int idRefugio)
+        {
+            using (DataClasses1DataContext dc = new DataClasses1DataContext())
+            {
+                // Roles: 2=RefugioAdmin, 3=Staff, 4=Adoptante, 1=SuperAdmin
+                // Queremos usuarios asociados a este refugio
+                var query = from u in dc.tbl_Usuarios
+                            join r in dc.tbl_Roles on u.usu_IdRol equals r.rol_IdRol
+                            where u.usu_IdRefugio == idRefugio && u.usu_Estado == true
+                            select new UsuarioRefugioDTO
+                            {
+                                usu_IdUsuario = u.usu_IdUsuario,
+                                usu_Nombre = u.usu_Nombre,
+                                usu_Apellido = u.usu_Apellido,
+                                usu_Email = u.usu_Email,
+                                Rol = r.rol_Nombre,
+                                usu_Bloqueado = u.usu_Bloqueado ?? false,
+                                usu_FechaRegistro = u.usu_FechaRegistro
+                            };
+
+                return query.ToList();
+            }
+        }
+
+        public ResultadoOperacion RegistrarUsuarioStaff(tbl_Usuarios usuario)
+        {
+            using (DataClasses1DataContext dc = new DataClasses1DataContext())
+            {
+                // Validar email
+                if (dc.tbl_Usuarios.Any(u => u.usu_Email == usuario.usu_Email))
+                {
+                    return new ResultadoOperacion { Exito = false, Mensaje = "El correo ya está registrado." };
+                }
+
+                string salt = CN_CryptoService.GenerarSalt();
+                string hash = CN_CryptoService.HashPassword(usuario.usu_Contrasena, salt);
+
+                usuario.usu_Contrasena = hash;
+                usuario.usu_Salt = salt;
+                usuario.usu_Estado = true;
+                usuario.usu_Bloqueado = false;
+                usuario.usu_FechaRegistro = DateTime.Now;
+                usuario.usu_EmailVerificado = true;
+                usuario.usu_IntentosFallidos = 0;
+
+                dc.tbl_Usuarios.InsertOnSubmit(usuario);
+                dc.SubmitChanges();
+                return new ResultadoOperacion { Exito = true, Mensaje = "Usuario registrado correctamente." };
+            }
+        }
+
+        public bool CambiarBloqueoUsuario(int idUsuario, bool bloquear)
+        {
+            using (DataClasses1DataContext dc = new DataClasses1DataContext())
+            {
+                var usuario = dc.tbl_Usuarios.FirstOrDefault(u => u.usu_IdUsuario == idUsuario);
+                if (usuario != null)
+                {
+                    usuario.usu_Bloqueado = bloquear;
+                    if (bloquear)
+                    {
+                        usuario.usu_FechaBloqueo = DateTime.Now;
+                    }
+                    else
+                    {
+                        usuario.usu_FechaBloqueo = null;
+                        usuario.usu_IntentosFallidos = 0;
+                    }
+                    dc.SubmitChanges();
+                    return true;
+                }
+                return false;
+            }
+        }
+    }
+
+    public class UsuarioRefugioDTO
+    {
+        public int usu_IdUsuario { get; set; }
+        public string usu_Nombre { get; set; } // Nombre completo o solo nombre
+        public string usu_Apellido { get; set; }
+        public string usu_Email { get; set; }
+        public string Rol { get; set; }
+        public bool usu_Bloqueado { get; set; }
+        public DateTime? usu_FechaRegistro { get; set; }
+    }
+
+    public class ResultadoOperacion
+    {
+        public bool Exito { get; set; }
+        public string Mensaje { get; set; }
     }
 }

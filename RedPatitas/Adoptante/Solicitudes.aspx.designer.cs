@@ -10,6 +10,7 @@ namespace RedPatitas.Adoptante
     {
         protected global::System.Web.UI.WebControls.Literal litPendientes;
         protected global::System.Web.UI.WebControls.Literal litAprobadas;
+        protected global::System.Web.UI.WebControls.Panel pnlExito;
         protected global::System.Web.UI.WebControls.Panel pnlSolicitudes;
         protected global::System.Web.UI.WebControls.Repeater rptSolicitudes;
         protected global::System.Web.UI.WebControls.Panel pnlVacio;
