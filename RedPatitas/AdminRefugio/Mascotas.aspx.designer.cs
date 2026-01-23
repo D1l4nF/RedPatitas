@@ -148,68 +148,29 @@ namespace RedPatitas.AdminRefugio
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtColor;
+        
+        // Foto 1 - Principal
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl previewFoto1;
+        protected global::System.Web.UI.WebControls.Image imgPreview1;
+        protected global::System.Web.UI.WebControls.FileUpload fuFoto1;
+        protected global::System.Web.UI.WebControls.HiddenField hfFotoUrl1;
+        
+        // Foto 2
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl previewFoto2;
+        protected global::System.Web.UI.WebControls.Image imgPreview2;
+        protected global::System.Web.UI.WebControls.FileUpload fuFoto2;
+        protected global::System.Web.UI.WebControls.HiddenField hfFotoUrl2;
+        
+        // Foto 3
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl previewFoto3;
+        protected global::System.Web.UI.WebControls.Image imgPreview3;
+        protected global::System.Web.UI.WebControls.FileUpload fuFoto3;
+        protected global::System.Web.UI.WebControls.HiddenField hfFotoUrl3;
 
-        /// <summary>
-        /// Control fuFoto.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload fuFoto;
-
-        /// <summary>
-        /// Control hfFotoUrl.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hfFotoUrl;
-
-        /// <summary>
-        /// Control txtDescripcion.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtDescripcion;
-
-        /// <summary>
-        /// Control chkVacunado.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
         protected global::System.Web.UI.WebControls.CheckBox chkVacunado;
-
-        /// <summary>
-        /// Control chkEsterilizado.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
         protected global::System.Web.UI.WebControls.CheckBox chkEsterilizado;
-
-        /// <summary>
-        /// Control chkDesparasitado.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
         protected global::System.Web.UI.WebControls.CheckBox chkDesparasitado;
-
-        /// <summary>
-        /// Control btnGuardar.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnGuardar;
     }
 }

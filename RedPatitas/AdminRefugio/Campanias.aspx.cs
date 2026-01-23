@@ -105,14 +105,16 @@ namespace RedPatitas.AdminRefugio
 
                     if (service.RegistrarCampania(nueva))
                     {
-                        ScriptManager.RegisterStartupScript(this, GetType(), "alert", "alert('Campaña creada correctamente');", true);
+                        string script = "Swal.fire({ title: '¡Éxito!', text: 'Campaña creada correctamente', icon: 'success', confirmButtonColor: '#0D9488' });";
+                        ScriptManager.RegisterStartupScript(this, GetType(), "swal-c-ok", script, true);
                         pnlFormulario.Visible = false;
                         pnlLista.Visible = true;
                         CargarCampanias();
                     }
                     else
                     {
-                         ScriptManager.RegisterStartupScript(this, GetType(), "alert", "alert('Error al crear campaña');", true);
+                         string script = "Swal.fire({ title: 'Error', text: 'Error al crear campaña', icon: 'error', confirmButtonColor: '#0D9488' });";
+                         ScriptManager.RegisterStartupScript(this, GetType(), "swal-c-err", script, true);
                     }
                 }
                 else
@@ -134,14 +136,16 @@ namespace RedPatitas.AdminRefugio
                     
                     if (service.ActualizarCampania(editada))
                     {
-                         ScriptManager.RegisterStartupScript(this, GetType(), "alert", "alert('Campaña actualizada correctamente');", true);
+                         string script = "Swal.fire({ title: '¡Actualizado!', text: 'Campaña actualizada correctamente', icon: 'success', confirmButtonColor: '#0D9488' });";
+                         ScriptManager.RegisterStartupScript(this, GetType(), "swal-c-upd", script, true);
                          pnlFormulario.Visible = false;
                          pnlLista.Visible = true;
                          CargarCampanias();
                     }
                     else
                     {
-                        ScriptManager.RegisterStartupScript(this, GetType(), "alert", "alert('Error al actualizar campaña');", true);
+                        string script = "Swal.fire({ title: 'Error', text: 'Error al actualizar campaña', icon: 'error', confirmButtonColor: '#0D9488' });";
+                        ScriptManager.RegisterStartupScript(this, GetType(), "swal-c-err-upd", script, true);
                     }
                 }
             }

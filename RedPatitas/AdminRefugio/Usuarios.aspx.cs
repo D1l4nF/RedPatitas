@@ -70,19 +70,22 @@ namespace RedPatitas.AdminRefugio
 
                 if (resultado.Exito)
                 {
-                    ScriptManager.RegisterStartupScript(this, GetType(), "alert", "alert('Usuario registrado correctamente');", true);
+                    string script = "Swal.fire({ title: '¡Éxito!', text: 'Usuario registrado correctamente', icon: 'success', confirmButtonColor: '#0D9488' });";
+                    ScriptManager.RegisterStartupScript(this, GetType(), "swal-reg", script, true);
                     LimpiarFormulario();
                     CargarUsuarios();
                 }
                 else
                 {
-                    ScriptManager.RegisterStartupScript(this, GetType(), "alert", $"alert('Error: {resultado.Mensaje}');", true);
+                    string script = $"Swal.fire({{ title: 'Error', text: 'Error: {resultado.Mensaje}', icon: 'error', confirmButtonColor: '#0D9488' }});";
+                    ScriptManager.RegisterStartupScript(this, GetType(), "swal-err-res", script, true);
                 }
             }
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine("Error Registrar: " + ex.Message);
-                ScriptManager.RegisterStartupScript(this, GetType(), "alert", "alert('Ocurrió un error inesperado');", true);
+                string script = "Swal.fire({ title: 'Error', text: 'Ocurrió un error inesperado', icon: 'error', confirmButtonColor: '#0D9488' });";
+                ScriptManager.RegisterStartupScript(this, GetType(), "swal-err-u", script, true);
             }
         }
 

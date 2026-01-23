@@ -420,3 +420,4 @@ FodyWeavers.xsd
 # User specific - Ignore uploaded images but keep folder
 RedPatitas/Images/*
 !RedPatitas/Images/.gitkeep
+*.png
