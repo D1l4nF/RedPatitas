@@ -288,6 +288,90 @@
                 margin-top: 0.35rem;
             }
 
+            /* Estilos para subida de fotos */
+            .photo-upload-box {
+                position: relative;
+                aspect-ratio: 1;
+                border: 2px dashed #ddd;
+                border-radius: 12px;
+                background: #fafafa;
+                cursor: pointer;
+                overflow: hidden;
+                transition: all 0.2s ease;
+            }
+
+            .photo-upload-box:hover {
+                border-color: var(--primary-color);
+                background: #f0f9f4;
+            }
+
+            .photo-placeholder {
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                color: #aaa;
+                font-size: 0.85rem;
+            }
+
+            .photo-placeholder i {
+                font-size: 2rem;
+                margin-bottom: 0.5rem;
+                color: #ccc;
+            }
+
+            .photo-input {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                opacity: 0;
+                cursor: pointer;
+            }
+
+            .photo-preview {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+            }
+
+            .photo-preview img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            .remove-photo {
+                position: absolute;
+                top: 8px;
+                right: 8px;
+                width: 28px;
+                height: 28px;
+                border-radius: 50%;
+                background: rgba(231, 76, 60, 0.9);
+                color: white;
+                border: none;
+                cursor: pointer;
+                font-size: 14px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: all 0.2s;
+            }
+
+            .remove-photo:hover {
+                background: #c0392b;
+                transform: scale(1.1);
+            }
+
             @media (max-width: 600px) {
                 .pet-summary-card {
                     flex-direction: column;
@@ -446,6 +530,61 @@
                             🌿 ¿Tienes patio o jardín?
                         </label>
                     </div>
+
+                    <!-- Subir fotos de vivienda -->
+                    <div class="form-group" style="margin-top: 1.5rem;">
+                        <label>📸 Fotos de tu vivienda <span style="color: #888; font-weight: 400;">(opcional, máx. 3
+                                fotos)</span></label>
+                        <div class="input-hint" style="margin-bottom: 0.75rem;">
+                            Sube fotos del espacio donde vivirá la mascota. Esto ayuda al refugio a evaluar mejor tu
+                            solicitud.
+                        </div>
+
+                        <div
+                            style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; margin-top: 0.75rem;">
+                            <!-- Foto 1 -->
+                            <div class="photo-upload-box" id="photoBox1">
+                                <div class="photo-preview" id="preview1" style="display: none;">
+                                    <img id="previewImg1" src="" alt="Preview" />
+                                    <button type="button" class="remove-photo" onclick="removePhoto(1)">✕</button>
+                                </div>
+                                <div class="photo-placeholder" id="placeholder1">
+                                    <i class="fas fa-camera"></i>
+                                    <span>Frontal</span>
+                                </div>
+                                <asp:FileUpload ID="fuFoto1" runat="server" CssClass="photo-input" accept="image/*"
+                                    onchange="previewImage(this, 1)" />
+                            </div>
+
+                            <!-- Foto 2 -->
+                            <div class="photo-upload-box" id="photoBox2">
+                                <div class="photo-preview" id="preview2" style="display: none;">
+                                    <img id="previewImg2" src="" alt="Preview" />
+                                    <button type="button" class="remove-photo" onclick="removePhoto(2)">✕</button>
+                                </div>
+                                <div class="photo-placeholder" id="placeholder2">
+                                    <i class="fas fa-home"></i>
+                                    <span>Interior</span>
+                                </div>
+                                <asp:FileUpload ID="fuFoto2" runat="server" CssClass="photo-input" accept="image/*"
+                                    onchange="previewImage(this, 2)" />
+                            </div>
+
+                            <!-- Foto 3 -->
+                            <div class="photo-upload-box" id="photoBox3">
+                                <div class="photo-preview" id="preview3" style="display: none;">
+                                    <img id="previewImg3" src="" alt="Preview" />
+                                    <button type="button" class="remove-photo" onclick="removePhoto(3)">✕</button>
+                                </div>
+                                <div class="photo-placeholder" id="placeholder3">
+                                    <i class="fas fa-tree"></i>
+                                    <span>Patio</span>
+                                </div>
+                                <asp:FileUpload ID="fuFoto3" runat="server" CssClass="photo-input" accept="image/*"
+                                    onchange="previewImage(this, 3)" />
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Sección 3: Situación familiar -->
@@ -589,5 +728,39 @@
                     }
                 });
             });
+
+            // Funciones para preview de fotos
+            function previewImage(input, num) {
+                var preview = document.getElementById('preview' + num);
+                var previewImg = document.getElementById('previewImg' + num);
+                var placeholder = document.getElementById('placeholder' + num);
+
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        previewImg.src = e.target.result;
+                        preview.style.display = 'block';
+                        placeholder.style.display = 'none';
+                    };
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+
+            function removePhoto(num) {
+                var preview = document.getElementById('preview' + num);
+                var previewImg = document.getElementById('previewImg' + num);
+                var placeholder = document.getElementById('placeholder' + num);
+                var input = document.getElementById('<%= fuFoto1.ClientID %>'.replace('fuFoto1', 'fuFoto' + num));
+
+                // Limpiar input
+                if (input) {
+                    input.value = '';
+                }
+
+                // Ocultar preview y mostrar placeholder
+                preview.style.display = 'none';
+                placeholder.style.display = 'flex';
+                previewImg.src = '';
+            }
         </script>
     </asp:Content>
