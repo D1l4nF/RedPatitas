@@ -10,7 +10,7 @@ namespace CapaNegocios
     public static class CN_AdopcionService
     {
         // SOLICITAR ADOPCIÓN
-       
+
         public static bool SolicitarAdopcion(int idMascota, int idUsuario)
         {
             using (var db = new DataClasses1DataContext())
@@ -75,11 +75,17 @@ namespace CapaNegocios
                         where m.mas_IdRefugio == idRefugio && s.sol_Estado == "Pendiente"
                         select new SolicitudDTO
                         {
+                            sol_IdSolicitud = s.sol_IdSolicitud,
                             IdSolicitud = s.sol_IdSolicitud,
                             IdMascota = s.sol_IdMascota,
                             NombreMascota = m.mas_Nombre,
+                            FotoMascota = m.tbl_FotosMascotas
+                                .Where(f => f.fot_EsPrincipal == true)
+                                .Select(f => f.fot_Url)
+                                .FirstOrDefault() ?? "https://via.placeholder.com/80?text=🐾",
                             IdAdoptante = s.sol_IdUsuario,
-                            NombreAdoptante = u.usu_Nombre + " " + u.usu_Apellido,
+                            NombreAdoptante = u.usu_Nombre,
+                            ApellidoAdoptante = u.usu_Apellido ?? "",
                             sol_FechaSolicitud = s.sol_FechaSolicitud,
                             Estado = s.sol_Estado,
                             ref_IdRefugio = idRefugio
@@ -100,15 +106,15 @@ namespace CapaNegocios
                 {
                     var fecha = hoy.AddMonths(-i);
                     var mes = fecha.ToString("MMM yyyy");
-                    
+
                     var count = (from s in db.tbl_SolicitudesAdopcion
-                                join m in db.tbl_Mascotas on s.sol_IdMascota equals m.mas_IdMascota
-                                where m.mas_IdRefugio == idRefugio 
-                                      && s.sol_Estado == "Aprobada"
-                                      && s.sol_FechaSolicitud.HasValue
-                                      && s.sol_FechaSolicitud.Value.Month == fecha.Month
-                                      && s.sol_FechaSolicitud.Value.Year == fecha.Year
-                                select s).Count();
+                                 join m in db.tbl_Mascotas on s.sol_IdMascota equals m.mas_IdMascota
+                                 where m.mas_IdRefugio == idRefugio
+                                       && s.sol_Estado == "Aprobada"
+                                       && s.sol_FechaSolicitud.HasValue
+                                       && s.sol_FechaSolicitud.Value.Month == fecha.Month
+                                       && s.sol_FechaSolicitud.Value.Year == fecha.Year
+                                 select s).Count();
 
                     resultado[mes] = count;
                 }
@@ -338,7 +344,7 @@ namespace CapaNegocios
                         sexoChar = 'M';
                     else if (sexo.Equals("Hembra", StringComparison.OrdinalIgnoreCase) || sexo.Equals("F", StringComparison.OrdinalIgnoreCase))
                         sexoChar = 'F';
-                    
+
                     if (sexoChar != ' ')
                         query = query.Where(x => x.Mascota.mas_Sexo == sexoChar);
                 }
@@ -378,11 +384,14 @@ namespace CapaNegocios
     /// </summary>
     public class SolicitudDTO
     {
+        public int sol_IdSolicitud { get; set; }  // Para la vista ASPX
         public int IdSolicitud { get; set; }
         public int IdMascota { get; set; }
         public string NombreMascota { get; set; }
+        public string FotoMascota { get; set; }   // URL de la foto de la mascota
         public int IdAdoptante { get; set; }
         public string NombreAdoptante { get; set; }
+        public string ApellidoAdoptante { get; set; }  // Apellido separado
         public DateTime? sol_FechaSolicitud { get; set; }
         public string Estado { get; set; }
         public string Comentarios { get; set; }

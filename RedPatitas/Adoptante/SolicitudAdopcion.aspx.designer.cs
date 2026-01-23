@@ -170,5 +170,20 @@ namespace RedPatitas.Adoptante
         /// btnEnviar control.
         /// </summary>
         protected global::System.Web.UI.WebControls.Button btnEnviar;
+
+        /// <summary>
+        /// fuFoto1 control.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.FileUpload fuFoto1;
+
+        /// <summary>
+        /// fuFoto2 control.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.FileUpload fuFoto2;
+
+        /// <summary>
+        /// fuFoto3 control.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.FileUpload fuFoto3;
     }
 }

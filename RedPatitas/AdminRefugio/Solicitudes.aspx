@@ -111,10 +111,15 @@
                         </div>
 
                         <div class="action-buttons">
+                            <a href='RevisarSolicitud.aspx?id=<%# Eval("sol_IdSolicitud") %>'
+                                class="table-action-btn review" title="Revisar Solicitud"
+                                style="background: #E0F2FE; color: #0284C7; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 8px;">
+                                <i class="fas fa-search"></i>
+                            </a>
                             <asp:LinkButton ID="btnAprobar" runat="server" CommandName="Aprobar"
                                 CommandArgument='<%# Eval("sol_IdSolicitud") %>' CssClass="table-action-btn success"
-                                ToolTip="Aprobar"
-                                OnClientClick="return confirm('¿Aprobar esta solicitud? La mascota pasará a estado Adoptado.');">
+                                ToolTip="Aprobar rápido (sin revisar)"
+                                OnClientClick="return confirm('¿Aprobar sin revisar? Se recomienda revisar la solicitud primero.');">
                                 <i class="fas fa-check"></i>
                             </asp:LinkButton>
                             <asp:LinkButton ID="btnRechazar" runat="server" CommandName="Rechazar"

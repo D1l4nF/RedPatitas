@@ -224,6 +224,10 @@ namespace RedPatitas.Adoptante
 
                     db.SubmitChanges();
 
+                    // Guardar fotos de vivienda
+                    int idSolicitud = nuevaSolicitud.sol_IdSolicitud;
+                    GuardarFotosVivienda(db, idSolicitud);
+
                     // Redirigir a página de éxito o a mis solicitudes
                     Response.Redirect("~/Adoptante/Solicitudes.aspx?success=1");
                 }
@@ -242,6 +246,83 @@ namespace RedPatitas.Adoptante
         {
             pnlError.Visible = true;
             litError.Text = mensaje;
+        }
+
+        /// <summary>
+        /// Guarda las fotos de vivienda subidas por el adoptante
+        /// </summary>
+        private void GuardarFotosVivienda(DataClasses1DataContext db, int idSolicitud)
+        {
+            try
+            {
+                var tiposFoto = new[] { "Frontal", "Interior", "Patio" };
+                var fileUploads = new[] { fuFoto1, fuFoto2, fuFoto3 };
+
+                for (int i = 0; i < fileUploads.Length; i++)
+                {
+                    if (fileUploads[i].HasFile)
+                    {
+                        try
+                        {
+                            // Subir foto
+                            string urlFoto = SubirFoto(fileUploads[i], idSolicitud, tiposFoto[i]);
+
+                            if (!string.IsNullOrEmpty(urlFoto))
+                            {
+                                // Guardar en BD usando SQL directo (ya que la tabla puede no estar en LINQ)
+                                db.ExecuteCommand(
+                                    @"INSERT INTO tbl_FotosSolicitud (fos_IdSolicitud, fos_Url, fos_TipoFoto, fos_FechaSubida) 
+                                      VALUES ({0}, {1}, {2}, {3})",
+                                    idSolicitud, urlFoto, tiposFoto[i], DateTime.Now);
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            System.Diagnostics.Debug.WriteLine($"Error subiendo foto {i + 1}: {ex.Message}");
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Error en GuardarFotosVivienda: " + ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Sube una foto y retorna la URL (guarda localmente)
+        /// </summary>
+        private string SubirFoto(System.Web.UI.WebControls.FileUpload fileUpload, int idSolicitud, string tipo)
+        {
+            return GuardarFotoLocal(fileUpload, idSolicitud, tipo);
+        }
+
+        /// <summary>
+        /// Guarda la foto localmente como fallback
+        /// </summary>
+        private string GuardarFotoLocal(System.Web.UI.WebControls.FileUpload fileUpload, int idSolicitud, string tipo)
+        {
+            try
+            {
+                string carpeta = Server.MapPath("~/Uploads/Solicitudes/" + idSolicitud);
+                if (!System.IO.Directory.Exists(carpeta))
+                {
+                    System.IO.Directory.CreateDirectory(carpeta);
+                }
+
+                string extension = System.IO.Path.GetExtension(fileUpload.FileName);
+                string nombreArchivo = $"{tipo}_{DateTime.Now.Ticks}{extension}";
+                string rutaCompleta = System.IO.Path.Combine(carpeta, nombreArchivo);
+
+                fileUpload.SaveAs(rutaCompleta);
+
+                return $"~/Uploads/Solicitudes/{idSolicitud}/{nombreArchivo}";
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Error guardando local: " + ex.Message);
+                return null;
+            }
         }
     }
 }

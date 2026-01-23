@@ -126,7 +126,7 @@
                             data-horario='<%# HttpUtility.HtmlAttributeEncode(Convert.ToString(Eval("HorarioAtencion"))) %>'
                             data-donacion='<%# HttpUtility.HtmlAttributeEncode(Convert.ToString(Eval("CuentaDonacion"))) %>'
                             style="background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: transform 0.3s; width: 180px; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; cursor: pointer;">
-                            <img src='<%# ResolveUrl(Eval("LogoUrl").ToString()) %>' alt='<%# Eval("Nombre") %>'
+                            <img src='<%# ResolveUrl(Convert.ToString(Eval("LogoUrl"))) %>' alt='<%# Eval("Nombre") %>'
                                 style="width: 80px; height: 80px; object-fit: contain; border-radius: 50%; background: #f9f9f9;"
                                 onerror="this.src='../Images/default-shelter.png'" />
                             <h4 style="font-size: 0.9rem; color: #4A3B32; margin: 0;">
