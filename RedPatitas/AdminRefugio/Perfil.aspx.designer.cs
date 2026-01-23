@@ -19,6 +19,10 @@ namespace RedPatitas.AdminRefugio
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvNombreRefugio;
         protected global::System.Web.UI.WebControls.TextBox txtDescripcion;
         protected global::System.Web.UI.WebControls.TextBox txtTelefono;
+        protected global::System.Web.UI.WebControls.TextBox txtFacebook;
+        protected global::System.Web.UI.WebControls.TextBox txtInstagram;
+        protected global::System.Web.UI.WebControls.TextBox txtHorario;
+        protected global::System.Web.UI.WebControls.TextBox txtDonacion;
         protected global::System.Web.UI.WebControls.TextBox txtCiudad;
         protected global::System.Web.UI.WebControls.TextBox txtDireccion;
         protected global::System.Web.UI.WebControls.HiddenField hfLatitud;

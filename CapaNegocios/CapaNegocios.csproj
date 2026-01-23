@@ -51,6 +51,7 @@
     <Compile Include="CN_EmailService.cs" />
     <Compile Include="CN_LoginResultado.cs" />
     <Compile Include="CN_MascotaService.cs" />
+    <Compile Include="CN_RefugioService.cs" />
     <Compile Include="CN_RegistroResultado.cs" />
     <Compile Include="CN_UsuarioService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

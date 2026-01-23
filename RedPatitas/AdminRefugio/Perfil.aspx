@@ -81,6 +81,45 @@
                 </div>
             </div>
 
+            <!-- Nueva sección: Redes Sociales y Contacto -->
+            <h3 class="form-section-title" style="margin-top: 1.5rem;">Redes Sociales y Más</h3>
+
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="txtFacebook">Facebook (URL)</label>
+                    <asp:TextBox ID="txtFacebook" runat="server" CssClass="form-control"
+                        placeholder="https://facebook.com/turefugio"></asp:TextBox>
+                </div>
+                <div class="form-group">
+                    <label for="txtInstagram">Instagram (URL)</label>
+                    <asp:TextBox ID="txtInstagram" runat="server" CssClass="form-control"
+                        placeholder="https://instagram.com/turefugio"></asp:TextBox>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Horario de Atención</label>
+                <select id="ddlHorarioPlantilla" class="form-control" onchange="aplicarPlantillaHorario(this.value)"
+                    style="margin-bottom: 0.5rem;">
+                    <option value="">-- Selecciona una plantilla --</option>
+                    <option value="Lun-Vie: 9:00-18:00">Solo días laborables (9-18h)</option>
+                    <option value="Lun-Vie: 9:00-18:00, Sáb: 9:00-13:00">Lun-Sáb medio día</option>
+                    <option value="Lun-Sáb: 8:00-17:00">Lun-Sáb completo (8-17h)</option>
+                    <option value="Todos los días: 9:00-19:00">Todos los días</option>
+                    <option value="custom">✏️ Personalizado...</option>
+                </select>
+                <asp:TextBox ID="txtHorario" runat="server" CssClass="form-control"
+                    placeholder="Ej: Lun-Vie: 9:00-18:00, Sáb: 10:00-14:00" MaxLength="200"></asp:TextBox>
+                <small class="input-hint">💡 Selecciona una plantilla o escribe tu horario personalizado</small>
+            </div>
+
+            <div class="form-group">
+                <label for="txtDonacion">Enlace de Donación (opcional)</label>
+                <asp:TextBox ID="txtDonacion" runat="server" CssClass="form-control"
+                    placeholder="URL de PayPal, Yape, banco u otro medio de donación"></asp:TextBox>
+                <small class="input-hint">Si tienes un enlace donde la gente pueda donar a tu refugio</small>
+            </div>
+
             <div class="form-group">
                 <label>Ubicación en el Mapa</label>
 
@@ -223,6 +262,18 @@
 
         <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
         <script type="text/javascript">
+            // Función para aplicar plantilla de horario
+            function aplicarPlantillaHorario(valor) {
+                var txt = document.getElementById('<%= txtHorario.ClientID %>');
+                if (valor === 'custom') {
+                    txt.value = '';
+                    txt.focus();
+                } else if (valor && valor !== '') {
+                    txt.value = valor;
+                }
+                verificarCambios();
+            }
+
             function togglePassword(btn) {
                 var input = btn.parentElement.querySelector('.password-input');
                 if (input.type === 'password') {
@@ -275,7 +326,11 @@
                     ciudad: document.getElementById('<%= txtCiudad.ClientID %>').value,
                     direccion: document.getElementById('<%= txtDireccion.ClientID %>').value,
                     latitud: document.getElementById('<%= hfLatitud.ClientID %>').value,
-                    longitud: document.getElementById('<%= hfLongitud.ClientID %>').value
+                    longitud: document.getElementById('<%= hfLongitud.ClientID %>').value,
+                    facebook: document.getElementById('<%= txtFacebook.ClientID %>').value,
+                    instagram: document.getElementById('<%= txtInstagram.ClientID %>').value,
+                    horario: document.getElementById('<%= txtHorario.ClientID %>').value,
+                    donacion: document.getElementById('<%= txtDonacion.ClientID %>').value
                 };
             }
 
@@ -297,6 +352,10 @@
                     document.getElementById('<%= txtDireccion.ClientID %>').value !== valoresOriginales.direccion ||
                     document.getElementById('<%= hfLatitud.ClientID %>').value !== valoresOriginales.latitud ||
                     document.getElementById('<%= hfLongitud.ClientID %>').value !== valoresOriginales.longitud ||
+                    document.getElementById('<%= txtFacebook.ClientID %>').value !== valoresOriginales.facebook ||
+                    document.getElementById('<%= txtInstagram.ClientID %>').value !== valoresOriginales.instagram ||
+                    document.getElementById('<%= txtHorario.ClientID %>').value !== valoresOriginales.horario ||
+                    document.getElementById('<%= txtDonacion.ClientID %>').value !== valoresOriginales.donacion ||
                     nueva !== '';
 
                 var fotoInput = document.getElementById('<%= fuFotoPerfil.ClientID %>');
@@ -312,7 +371,8 @@
                 guardarValoresOriginales();
 
                 var campos = ['<%= txtNombreRefugio.ClientID %>', '<%= txtDescripcion.ClientID %>',
-                    '<%= txtTelefono.ClientID %>', '<%= txtCiudad.ClientID %>', '<%= txtDireccion.ClientID %>'];
+                    '<%= txtTelefono.ClientID %>', '<%= txtCiudad.ClientID %>', '<%= txtDireccion.ClientID %>',
+                    '<%= txtFacebook.ClientID %>', '<%= txtInstagram.ClientID %>', '<%= txtHorario.ClientID %>', '<%= txtDonacion.ClientID %>'];
 
                 campos.forEach(function (id) {
                     var campo = document.getElementById(id);

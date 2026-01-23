@@ -15,6 +15,7 @@ namespace RedPatitas.Public
             if (!IsPostBack)
             {
                 CargarMascotasDestacadas();
+                CargarRefugiosAliados();
             }
         }
 
@@ -47,6 +48,30 @@ namespace RedPatitas.Public
             {
                 System.Diagnostics.Debug.WriteLine("Error al cargar mascotas destacadas: " + ex.Message);
                 pnlSinMascotasHome.Visible = true;
+            }
+        }
+
+        private void CargarRefugiosAliados()
+        {
+            try
+            {
+                var refugioService = new CN_RefugioService();
+                var aliados = refugioService.ObtenerRefugiosAliados();
+
+                if (aliados != null && aliados.Count > 0)
+                {
+                    rptAliados.DataSource = aliados;
+                    rptAliados.DataBind();
+                    pnlSinAliados.Visible = false;
+                }
+                else
+                {
+                    pnlSinAliados.Visible = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Error al cargar aliados: " + ex.Message);
             }
         }
     }

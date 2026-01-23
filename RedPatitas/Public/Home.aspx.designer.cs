@@ -20,5 +20,15 @@ namespace RedPatitas.Public
         /// Control pnlSinMascotasHome.
         /// </summary>
         protected global::System.Web.UI.WebControls.Panel pnlSinMascotasHome;
+
+        /// <summary>
+        /// Control rptAliados.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.Repeater rptAliados;
+
+        /// <summary>
+        /// Control pnlSinAliados.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.Panel pnlSinAliados;
     }
 }
