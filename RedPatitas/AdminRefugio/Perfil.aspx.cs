@@ -53,6 +53,12 @@ namespace RedPatitas.AdminRefugio
                                 if (refugio.ref_Longitud.HasValue)
                                     hfLongitud.Value = refugio.ref_Longitud.Value.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
+                                // Nuevos campos de redes sociales y horario
+                                txtFacebook.Text = refugio.ref_FacebookUrl ?? "";
+                                txtInstagram.Text = refugio.ref_InstagramUrl ?? "";
+                                txtHorario.Text = refugio.ref_HorarioAtencion ?? "";
+                                txtDonacion.Text = refugio.ref_CuentaDonacion ?? "";
+
                                 if (!string.IsNullOrEmpty(refugio.ref_LogoUrl))
                                 {
                                     imgFotoActual.ImageUrl = refugio.ref_LogoUrl;
@@ -105,6 +111,12 @@ namespace RedPatitas.AdminRefugio
                                     refugio.ref_Latitud = decimal.Parse(hfLatitud.Value, System.Globalization.CultureInfo.InvariantCulture);
                                 if (!string.IsNullOrEmpty(hfLongitud.Value))
                                     refugio.ref_Longitud = decimal.Parse(hfLongitud.Value, System.Globalization.CultureInfo.InvariantCulture);
+
+                                // Nuevos campos de redes sociales y horario
+                                refugio.ref_FacebookUrl = txtFacebook.Text.Trim();
+                                refugio.ref_InstagramUrl = txtInstagram.Text.Trim();
+                                refugio.ref_HorarioAtencion = txtHorario.Text.Trim();
+                                refugio.ref_CuentaDonacion = txtDonacion.Text.Trim();
 
                                 if (seSubioFoto)
                                 {

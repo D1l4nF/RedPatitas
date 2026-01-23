@@ -3886,6 +3886,10 @@ namespace CapaDatos
 		
 		private string _ref_Direccion;
 		
+		private System.Nullable<decimal> _ref_Latitud;
+		
+		private System.Nullable<decimal> _ref_Longitud;
+		
 		private string _ref_Ciudad;
 		
 		private string _ref_Telefono;
@@ -3902,9 +3906,13 @@ namespace CapaDatos
 		
 		private System.Nullable<System.DateTime> _ref_FechaRegistro;
 		
-		private System.Nullable<decimal> _ref_Latitud;
+		private string _ref_FacebookUrl;
 		
-		private System.Nullable<decimal> _ref_Longitud;
+		private string _ref_InstagramUrl;
+		
+		private string _ref_HorarioAtencion;
+		
+		private string _ref_CuentaDonacion;
 		
 		private EntitySet<tbl_Campanias> _tbl_Campanias;
 		
@@ -3924,6 +3932,10 @@ namespace CapaDatos
     partial void Onref_DescripcionChanged();
     partial void Onref_DireccionChanging(string value);
     partial void Onref_DireccionChanged();
+    partial void Onref_LatitudChanging(System.Nullable<decimal> value);
+    partial void Onref_LatitudChanged();
+    partial void Onref_LongitudChanging(System.Nullable<decimal> value);
+    partial void Onref_LongitudChanged();
     partial void Onref_CiudadChanging(string value);
     partial void Onref_CiudadChanged();
     partial void Onref_TelefonoChanging(string value);
@@ -3940,10 +3952,14 @@ namespace CapaDatos
     partial void Onref_EstadoChanged();
     partial void Onref_FechaRegistroChanging(System.Nullable<System.DateTime> value);
     partial void Onref_FechaRegistroChanged();
-    partial void Onref_LatitudChanging(System.Nullable<decimal> value);
-    partial void Onref_LatitudChanged();
-    partial void Onref_LongitudChanging(System.Nullable<decimal> value);
-    partial void Onref_LongitudChanged();
+    partial void Onref_FacebookUrlChanging(string value);
+    partial void Onref_FacebookUrlChanged();
+    partial void Onref_InstagramUrlChanging(string value);
+    partial void Onref_InstagramUrlChanged();
+    partial void Onref_HorarioAtencionChanging(string value);
+    partial void Onref_HorarioAtencionChanged();
+    partial void Onref_CuentaDonacionChanging(string value);
+    partial void Onref_CuentaDonacionChanged();
     #endregion
 		
 		public tbl_Refugios()
@@ -4030,6 +4046,46 @@ namespace CapaDatos
 					this._ref_Direccion = value;
 					this.SendPropertyChanged("ref_Direccion");
 					this.Onref_DireccionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ref_Latitud", DbType="Decimal(10,8)")]
+		public System.Nullable<decimal> ref_Latitud
+		{
+			get
+			{
+				return this._ref_Latitud;
+			}
+			set
+			{
+				if ((this._ref_Latitud != value))
+				{
+					this.Onref_LatitudChanging(value);
+					this.SendPropertyChanging();
+					this._ref_Latitud = value;
+					this.SendPropertyChanged("ref_Latitud");
+					this.Onref_LatitudChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ref_Longitud", DbType="Decimal(11,8)")]
+		public System.Nullable<decimal> ref_Longitud
+		{
+			get
+			{
+				return this._ref_Longitud;
+			}
+			set
+			{
+				if ((this._ref_Longitud != value))
+				{
+					this.Onref_LongitudChanging(value);
+					this.SendPropertyChanging();
+					this._ref_Longitud = value;
+					this.SendPropertyChanged("ref_Longitud");
+					this.Onref_LongitudChanged();
 				}
 			}
 		}
@@ -4194,42 +4250,82 @@ namespace CapaDatos
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ref_Latitud", DbType="Decimal(10,8)")]
-		public System.Nullable<decimal> ref_Latitud
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ref_FacebookUrl", DbType="VarChar(300)")]
+		public string ref_FacebookUrl
 		{
 			get
 			{
-				return this._ref_Latitud;
+				return this._ref_FacebookUrl;
 			}
 			set
 			{
-				if ((this._ref_Latitud != value))
+				if ((this._ref_FacebookUrl != value))
 				{
-					this.Onref_LatitudChanging(value);
+					this.Onref_FacebookUrlChanging(value);
 					this.SendPropertyChanging();
-					this._ref_Latitud = value;
-					this.SendPropertyChanged("ref_Latitud");
-					this.Onref_LatitudChanged();
+					this._ref_FacebookUrl = value;
+					this.SendPropertyChanged("ref_FacebookUrl");
+					this.Onref_FacebookUrlChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ref_Longitud", DbType="Decimal(11,8)")]
-		public System.Nullable<decimal> ref_Longitud
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ref_InstagramUrl", DbType="VarChar(300)")]
+		public string ref_InstagramUrl
 		{
 			get
 			{
-				return this._ref_Longitud;
+				return this._ref_InstagramUrl;
 			}
 			set
 			{
-				if ((this._ref_Longitud != value))
+				if ((this._ref_InstagramUrl != value))
 				{
-					this.Onref_LongitudChanging(value);
+					this.Onref_InstagramUrlChanging(value);
 					this.SendPropertyChanging();
-					this._ref_Longitud = value;
-					this.SendPropertyChanged("ref_Longitud");
-					this.Onref_LongitudChanged();
+					this._ref_InstagramUrl = value;
+					this.SendPropertyChanged("ref_InstagramUrl");
+					this.Onref_InstagramUrlChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ref_HorarioAtencion", DbType="VarChar(200)")]
+		public string ref_HorarioAtencion
+		{
+			get
+			{
+				return this._ref_HorarioAtencion;
+			}
+			set
+			{
+				if ((this._ref_HorarioAtencion != value))
+				{
+					this.Onref_HorarioAtencionChanging(value);
+					this.SendPropertyChanging();
+					this._ref_HorarioAtencion = value;
+					this.SendPropertyChanged("ref_HorarioAtencion");
+					this.Onref_HorarioAtencionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ref_CuentaDonacion", DbType="VarChar(500)")]
+		public string ref_CuentaDonacion
+		{
+			get
+			{
+				return this._ref_CuentaDonacion;
+			}
+			set
+			{
+				if ((this._ref_CuentaDonacion != value))
+				{
+					this.Onref_CuentaDonacionChanging(value);
+					this.SendPropertyChanging();
+					this._ref_CuentaDonacion = value;
+					this.SendPropertyChanged("ref_CuentaDonacion");
+					this.Onref_CuentaDonacionChanged();
 				}
 			}
 		}
@@ -6184,6 +6280,10 @@ namespace CapaDatos
 		
 		private string _usu_Telefono;
 		
+		private System.Nullable<decimal> _usu_Latitud;
+		
+		private System.Nullable<decimal> _usu_Longitud;
+		
 		private string _usu_Ciudad;
 		
 		private string _usu_FotoUrl;
@@ -6203,10 +6303,6 @@ namespace CapaDatos
 		private System.Nullable<System.DateTime> _usu_UltimoAcceso;
 		
 		private string _usu_Salt;
-		
-		private System.Nullable<decimal> _usu_Latitud;
-		
-		private System.Nullable<decimal> _usu_Longitud;
 		
 		private EntitySet<tbl_Auditoria> _tbl_Auditoria;
 		
@@ -6252,6 +6348,10 @@ namespace CapaDatos
     partial void Onusu_CedulaChanged();
     partial void Onusu_TelefonoChanging(string value);
     partial void Onusu_TelefonoChanged();
+    partial void Onusu_LatitudChanging(System.Nullable<decimal> value);
+    partial void Onusu_LatitudChanged();
+    partial void Onusu_LongitudChanging(System.Nullable<decimal> value);
+    partial void Onusu_LongitudChanged();
     partial void Onusu_CiudadChanging(string value);
     partial void Onusu_CiudadChanged();
     partial void Onusu_FotoUrlChanging(string value);
@@ -6272,10 +6372,6 @@ namespace CapaDatos
     partial void Onusu_UltimoAccesoChanged();
     partial void Onusu_SaltChanging(string value);
     partial void Onusu_SaltChanged();
-    partial void Onusu_LatitudChanging(System.Nullable<decimal> value);
-    partial void Onusu_LatitudChanged();
-    partial void Onusu_LongitudChanging(System.Nullable<decimal> value);
-    partial void Onusu_LongitudChanged();
     #endregion
 		
 		public tbl_Usuarios()
@@ -6482,6 +6578,46 @@ namespace CapaDatos
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_usu_Latitud", DbType="Decimal(10,8)")]
+		public System.Nullable<decimal> usu_Latitud
+		{
+			get
+			{
+				return this._usu_Latitud;
+			}
+			set
+			{
+				if ((this._usu_Latitud != value))
+				{
+					this.Onusu_LatitudChanging(value);
+					this.SendPropertyChanging();
+					this._usu_Latitud = value;
+					this.SendPropertyChanged("usu_Latitud");
+					this.Onusu_LatitudChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_usu_Longitud", DbType="Decimal(11,8)")]
+		public System.Nullable<decimal> usu_Longitud
+		{
+			get
+			{
+				return this._usu_Longitud;
+			}
+			set
+			{
+				if ((this._usu_Longitud != value))
+				{
+					this.Onusu_LongitudChanging(value);
+					this.SendPropertyChanging();
+					this._usu_Longitud = value;
+					this.SendPropertyChanged("usu_Longitud");
+					this.Onusu_LongitudChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_usu_Ciudad", DbType="VarChar(100)")]
 		public string usu_Ciudad
 		{
@@ -6678,46 +6814,6 @@ namespace CapaDatos
 					this._usu_Salt = value;
 					this.SendPropertyChanged("usu_Salt");
 					this.Onusu_SaltChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_usu_Latitud", DbType="Decimal(10,8)")]
-		public System.Nullable<decimal> usu_Latitud
-		{
-			get
-			{
-				return this._usu_Latitud;
-			}
-			set
-			{
-				if ((this._usu_Latitud != value))
-				{
-					this.Onusu_LatitudChanging(value);
-					this.SendPropertyChanging();
-					this._usu_Latitud = value;
-					this.SendPropertyChanged("usu_Latitud");
-					this.Onusu_LatitudChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_usu_Longitud", DbType="Decimal(11,8)")]
-		public System.Nullable<decimal> usu_Longitud
-		{
-			get
-			{
-				return this._usu_Longitud;
-			}
-			set
-			{
-				if ((this._usu_Longitud != value))
-				{
-					this.Onusu_LongitudChanging(value);
-					this.SendPropertyChanging();
-					this._usu_Longitud = value;
-					this.SendPropertyChanged("usu_Longitud");
-					this.Onusu_LongitudChanged();
 				}
 			}
 		}

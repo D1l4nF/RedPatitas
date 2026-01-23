@@ -36,6 +36,10 @@ CREATE TABLE tbl_Refugios (
     ref_Telefono VARCHAR(20),
     ref_Email VARCHAR(100),
     ref_LogoUrl VARCHAR(500),
+    ref_FacebookUrl VARCHAR(300),       -- URL de página de Facebook
+    ref_InstagramUrl VARCHAR(300),      -- URL de perfil de Instagram
+    ref_HorarioAtencion VARCHAR(200),   -- Ej: "Lun-Vie: 9:00-18:00"
+    ref_CuentaDonacion VARCHAR(500),    -- URL o datos para donaciones
     ref_Verificado BIT DEFAULT 0,  -- Aprobado por SuperAdmin
     ref_FechaVerificacion DATETIME,
     ref_Estado BIT DEFAULT 1,
@@ -892,4 +896,76 @@ ALTER TABLE tbl_Refugios ADD ref_Longitud DECIMAL(11,8) NULL;
 GO
 
 PRINT 'Migración completada: Campos de geolocalización agregados a tbl_Usuarios y tbl_Refugios';
+GO
+
+
+-- =============================================
+-- Migración: Agregar campos de redes sociales y donación a tbl_Refugios
+-- Fecha: 2026-01-22
+-- Descripción: Agrega columnas para Facebook, Instagram, horario de atención y cuenta de donación
+-- =============================================
+
+USE RedPatitas;
+GO
+
+-- Agregar columna para URL de Facebook
+IF NOT EXISTS (SELECT 1 FROM sys.columns WHERE object_id = OBJECT_ID('dbo.tbl_Refugios') AND name = 'ref_FacebookUrl')
+BEGIN
+    ALTER TABLE dbo.tbl_Refugios
+    ADD ref_FacebookUrl VARCHAR(300) NULL;
+    PRINT 'Columna ref_FacebookUrl agregada correctamente.';
+END
+ELSE
+BEGIN
+    PRINT 'Columna ref_FacebookUrl ya existe.';
+END
+GO
+
+-- Agregar columna para URL de Instagram
+IF NOT EXISTS (SELECT 1 FROM sys.columns WHERE object_id = OBJECT_ID('dbo.tbl_Refugios') AND name = 'ref_InstagramUrl')
+BEGIN
+    ALTER TABLE dbo.tbl_Refugios
+    ADD ref_InstagramUrl VARCHAR(300) NULL;
+    PRINT 'Columna ref_InstagramUrl agregada correctamente.';
+END
+ELSE
+BEGIN
+    PRINT 'Columna ref_InstagramUrl ya existe.';
+END
+GO
+
+-- Agregar columna para horario de atención
+IF NOT EXISTS (SELECT 1 FROM sys.columns WHERE object_id = OBJECT_ID('dbo.tbl_Refugios') AND name = 'ref_HorarioAtencion')
+BEGIN
+    ALTER TABLE dbo.tbl_Refugios
+    ADD ref_HorarioAtencion VARCHAR(200) NULL;
+    PRINT 'Columna ref_HorarioAtencion agregada correctamente.';
+END
+ELSE
+BEGIN
+    PRINT 'Columna ref_HorarioAtencion ya existe.';
+END
+GO
+
+-- Agregar columna para cuenta/enlace de donación
+IF NOT EXISTS (SELECT 1 FROM sys.columns WHERE object_id = OBJECT_ID('dbo.tbl_Refugios') AND name = 'ref_CuentaDonacion')
+BEGIN
+    ALTER TABLE dbo.tbl_Refugios
+    ADD ref_CuentaDonacion VARCHAR(500) NULL;
+    PRINT 'Columna ref_CuentaDonacion agregada correctamente.';
+END
+ELSE
+BEGIN
+    PRINT 'Columna ref_CuentaDonacion ya existe.';
+END
+GO
+
+PRINT '========================================';
+PRINT 'Migración completada exitosamente.';
+PRINT 'Nuevas columnas en tbl_Refugios:';
+PRINT '  - ref_FacebookUrl (VARCHAR 300)';
+PRINT '  - ref_InstagramUrl (VARCHAR 300)';
+PRINT '  - ref_HorarioAtencion (VARCHAR 200)';
+PRINT '  - ref_CuentaDonacion (VARCHAR 500)';
+PRINT '========================================';
 GO
