@@ -8,6 +8,9 @@ namespace RedPatitas.Adoptante
 {
     public partial class Mascotas : System.Web.UI.Page
     {
+        // Lista de IDs de mascotas en favoritos del usuario actual
+        protected HashSet<int> FavoritosIds { get; set; } = new HashSet<int>();
+
         protected void Page_Load(object sender, EventArgs e)
         {
             // Verificar sesión
@@ -17,10 +20,47 @@ namespace RedPatitas.Adoptante
                 return;
             }
 
+            // Cargar favoritos del usuario
+            CargarFavoritosUsuario();
+
             if (!IsPostBack)
             {
                 CargarMascotas();
             }
+        }
+
+        /// <summary>
+        /// Carga los IDs de las mascotas que el usuario tiene en favoritos
+        /// </summary>
+        private void CargarFavoritosUsuario()
+        {
+            try
+            {
+                int idUsuario = Convert.ToInt32(Session["UsuarioId"]);
+                using (var db = new CapaDatos.DataClasses1DataContext())
+                {
+                    FavoritosIds = new HashSet<int>(
+                        db.tbl_Favoritos
+                            .Where(f => f.fav_IdUsuario == idUsuario)
+                            .Select(f => f.fav_IdMascota)
+                    );
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Error al cargar favoritos: " + ex.Message);
+                FavoritosIds = new HashSet<int>();
+            }
+        }
+
+        /// <summary>
+        /// Verifica si una mascota está en los favoritos del usuario
+        /// </summary>
+        protected bool EsFavorito(object idMascota)
+        {
+            if (idMascota == null) return false;
+            int id = Convert.ToInt32(idMascota);
+            return FavoritosIds.Contains(id);
         }
 
         /// <summary>

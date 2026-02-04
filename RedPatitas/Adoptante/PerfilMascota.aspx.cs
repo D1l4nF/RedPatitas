@@ -1,6 +1,6 @@
 using System;
 using System.Linq;
-using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
 using CapaNegocios;
 using CapaDatos;
 
@@ -33,9 +33,6 @@ namespace RedPatitas.Adoptante
             }
         }
 
-        /// <summary>
-        /// Carga los datos de la mascota
-        /// </summary>
         private void CargarMascota()
         {
             try
@@ -52,83 +49,75 @@ namespace RedPatitas.Adoptante
                 // Mostrar panel de mascota
                 pnlMascota.Visible = true;
                 pnlNoEncontrado.Visible = false;
-                pnlCTA.Visible = true;
 
-                // Datos básicos
-                litTitulo.Text = mascota.Nombre;
+                // Título y Meta
+                litTitulo.Text = mascota.Nombre + " - Perfil de Mascota";
+
+                // Emoji y Galería
+                litEmoji.Text = mascota.EmojiEspecie;
+                litThumb1.Text = mascota.EmojiEspecie;
+
+                // Estado
+                litEstado.Text = mascota.EstadoAdopcion ?? "Disponible";
+
+                // Información básica
                 litNombre.Text = mascota.Nombre;
-                litNombreBreadcrumb.Text = mascota.Nombre;
-                litNombreModal.Text = mascota.Nombre;
-                litEstado.Text = mascota.EstadoAdopcion;
-                litUbicacion.Text = $"{mascota.NombreRefugio} - {mascota.CiudadRefugio}";
-
-                // Datos detallados
-                litEspecie.Text = mascota.Especie;
+                litNombre2.Text = mascota.Nombre;
                 litRaza.Text = mascota.Raza;
-                litEdad.Text = mascota.EdadFormateada;
-                litEdadDetalle.Text = mascota.EdadAproximada;
-                litSexo.Text = mascota.Sexo;
-                litTamano.Text = mascota.Tamano;
-                litColor.Text = !string.IsNullOrEmpty(mascota.Color) ? mascota.Color : "--";
+
+                // Tags (Formatting to match Public)
+                litTagEspecie.Text = mascota.EmojiEspecie + " " + mascota.Especie;
+                litTagEdad.Text = "📅 " + mascota.EdadFormateada;
+                litTagTamano.Text = "⚖️ " + mascota.Tamano;
+                litTagSexo.Text = (mascota.Sexo == "Macho" ? "♂️ " : "♀️ ") + mascota.Sexo;
+                litTagUbicacion.Text = "📍 " + mascota.CiudadRefugio;
+
+                // Descripción
+                litDescripcion.Text = !string.IsNullOrEmpty(mascota.Descripcion) 
+                    ? mascota.Descripcion 
+                    : "Esta adorable mascota está esperando un hogar lleno de amor. ¡Conócela!";
+
+                // Estado de salud (Panels instead of Icons)
+                pnlVacunado.Visible = mascota.Vacunado;
+                pnlEsterilizado.Visible = mascota.Esterilizado;
+                pnlDesparasitado.Visible = mascota.Desparasitado;
 
                 // Temperamento
                 if (!string.IsNullOrEmpty(mascota.Temperamento))
                 {
                     pnlTemperamento.Visible = true;
-                    litTemperamento.Text = mascota.Temperamento;
+                    string[] caracteristicas = mascota.Temperamento.Split(',');
+                    string html = "";
+                    foreach (string carac in caracteristicas)
+                    {
+                        html += "<span class=\"char-tag\">" + carac.Trim() + "</span>";
+                    }
+                    litTemperamento.Text = html;
                 }
-
-                // Descripción
-                if (!string.IsNullOrEmpty(mascota.Descripcion))
+                else 
                 {
-                    pnlDescripcion.Visible = true;
-                    litDescripcion.Text = mascota.Descripcion;
-                }
-                else
-                {
-                    pnlDescripcion.Visible = false;
+                    pnlTemperamento.Visible = false;
                 }
 
                 // Refugio
                 litRefugioNombre.Text = mascota.NombreRefugio;
                 litRefugioCiudad.Text = mascota.CiudadRefugio;
-                litRefugioInicial.Text = mascota.NombreRefugio?.Length > 0 
-                    ? mascota.NombreRefugio.Substring(0, 1).ToUpper() 
-                    : "R";
-
-                // Foto o emoji
-                if (!string.IsNullOrEmpty(mascota.FotoPrincipal))
+                
+                // Iniciales del refugio
+                string iniciales = "";
+                if (!string.IsNullOrEmpty(mascota.NombreRefugio))
                 {
-                    imgMascota.ImageUrl = mascota.FotoPrincipal;
-                    imgMascota.Visible = true;
-                    litEmojiGrande.Text = "";
+                    string[] palabras = mascota.NombreRefugio.Split(' ');
+                    foreach (string palabra in palabras)
+                    {
+                        if (!string.IsNullOrEmpty(palabra))
+                            iniciales += palabra[0].ToString().ToUpper();
+                        if (iniciales.Length >= 2) break;
+                    }
                 }
-                else
-                {
-                    imgMascota.Visible = false;
-                    litEmojiGrande.Text = mascota.EmojiEspecie;
-                    litEmojiModal.Text = mascota.EmojiEspecie;
-                }
+                litRefugioInicial.Text = iniciales;
 
-                // Es nueva
-                pnlNuevo.Visible = mascota.EsNueva;
-
-                // Condiciones de entrega (vacunado, esterilizado, desparasitado)
-                SetDeliveryIconStatus(iconVacunado, mascota.Vacunado);
-                SetDeliveryIconStatus(iconEsterilizado, mascota.Esterilizado);
-                SetDeliveryIconStatus(iconDesparasitado, mascota.Desparasitado);
-
-                // Necesidades especiales
-                if (!string.IsNullOrEmpty(mascota.NecesidadesEspeciales))
-                {
-                    pnlNecesidades.Visible = true;
-                    litNecesidades.Text = mascota.NecesidadesEspeciales;
-                }
-
-                // Cargar galería de fotos
-                CargarGaleria();
-
-                // Verificar si ya está en favoritos
+                // Verificar favorito (Logic kept from Adoptante)
                 VerificarFavorito();
             }
             catch (Exception ex)
@@ -138,56 +127,6 @@ namespace RedPatitas.Adoptante
             }
         }
 
-        /// <summary>
-        /// Configura el estilo del icono de entrega según si está activo o no
-        /// </summary>
-        private void SetDeliveryIconStatus(HtmlGenericControl icon, bool isActive)
-        {
-            if (isActive)
-            {
-                icon.Attributes["class"] = "delivery-icon";
-            }
-            else
-            {
-                icon.Attributes["class"] = "delivery-icon inactive";
-            }
-        }
-
-        /// <summary>
-        /// Carga la galería de fotos de la mascota
-        /// </summary>
-        private void CargarGaleria()
-        {
-            try
-            {
-                using (var db = new DataClasses1DataContext())
-                {
-                    var fotos = db.tbl_FotosMascotas
-                        .Where(f => f.fot_IdMascota == IdMascota)
-                        .OrderBy(f => f.fot_Orden)
-                        .ToList();
-
-                    if (fotos.Count > 0)
-                    {
-                        rptFotos.DataSource = fotos;
-                        rptFotos.DataBind();
-                        pnlSinFotos.Visible = false;
-                    }
-                    else
-                    {
-                        pnlSinFotos.Visible = true;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                System.Diagnostics.Debug.WriteLine("Error al cargar galería: " + ex.Message);
-            }
-        }
-
-        /// <summary>
-        /// Verifica si la mascota ya está en favoritos del usuario
-        /// </summary>
         private void VerificarFavorito()
         {
             try
@@ -201,9 +140,11 @@ namespace RedPatitas.Adoptante
 
                     if (esFavorito)
                     {
-                        btnFavorito.Style["background"] = "#FF6B6B";
-                        btnFavorito.Style["color"] = "#fff";
-                        btnFavorito.Text = "<svg viewBox='0 0 24 24' fill='currentColor' width='20' height='20'><path d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/></svg> ❤️ En Favoritos";
+                        btnFavorito.CssClass += " active";
+                        // Note: SVG fill is handled via CSS .active class in public styles usually, 
+                        // but here we might need to swap the icon if strictly server side.
+                        // For now we rely on CSS 'active' class styling.
+                        btnFavorito.Attributes["style"] = "color: #E74C3C;"; // Force color just in case
                     }
                 }
             }
@@ -213,25 +154,19 @@ namespace RedPatitas.Adoptante
             }
         }
 
-        /// <summary>
-        /// Muestra el panel de mascota no encontrada
-        /// </summary>
         private void MostrarNoEncontrado()
         {
             pnlMascota.Visible = false;
             pnlNoEncontrado.Visible = true;
-            pnlCTA.Visible = false;
         }
 
-        /// <summary>
-        /// Evento click del botón favorito
-        /// </summary>
         protected void btnFavorito_Click(object sender, EventArgs e)
         {
             try
             {
                 int idUsuario = Convert.ToInt32(Session["UsuarioId"]);
-                IdMascota = int.Parse(Request.QueryString["id"]);
+                // Ensure IdMascota is set
+                 if (!int.TryParse(Request.QueryString["id"], out IdMascota)) return;
 
                 using (var db = new DataClasses1DataContext())
                 {
@@ -240,7 +175,6 @@ namespace RedPatitas.Adoptante
 
                     if (existente == null)
                     {
-                        // Agregar a favoritos
                         var nuevoFavorito = new tbl_Favoritos
                         {
                             fav_IdUsuario = idUsuario,
@@ -249,22 +183,15 @@ namespace RedPatitas.Adoptante
                         };
                         db.tbl_Favoritos.InsertOnSubmit(nuevoFavorito);
                         db.SubmitChanges();
-
-                        ClientScript.RegisterStartupScript(this.GetType(), "alert", 
-                            "alert('❤️ Mascota agregada a favoritos');", true);
+                        ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('❤️ Mascota agregada a favoritos');", true);
                     }
                     else
                     {
-                        // Eliminar de favoritos
                         db.tbl_Favoritos.DeleteOnSubmit(existente);
                         db.SubmitChanges();
-
-                        ClientScript.RegisterStartupScript(this.GetType(), "alert", 
-                            "alert('💔 Mascota eliminada de favoritos');", true);
+                        ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('💔 Mascota eliminada de favoritos');", true);
                     }
                 }
-
-                // Recargar página para actualizar estado
                 Response.Redirect(Request.RawUrl);
             }
             catch (Exception ex)
@@ -273,13 +200,12 @@ namespace RedPatitas.Adoptante
             }
         }
 
-        /// <summary>
-        /// Evento click del botón adoptar
-        /// </summary>
         protected void btnAdoptar_Click(object sender, EventArgs e)
         {
-            IdMascota = int.Parse(Request.QueryString["id"]);
-            Response.Redirect($"SolicitudAdopcion.aspx?id={IdMascota}");
+            if (int.TryParse(Request.QueryString["id"], out IdMascota))
+            {
+                 Response.Redirect($"SolicitudAdopcion.aspx?id={IdMascota}");
+            }
         }
     }
 }

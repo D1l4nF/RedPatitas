@@ -109,14 +109,9 @@
     <Content Include="Refugio\Dashboard.aspx" />
     <Content Include="Refugio\Perfil.aspx" />
     <Content Include="Style\auth.css" />
-    <Content Include="Style\dashboard-admin-refugio.css" />
-    <Content Include="Style\dashboard-admin.css" />
-    <Content Include="Style\dashboard.css" />
-    <Content Include="Style\forms.css" />
-    <Content Include="Style\landing.css" />
-    <Content Include="Style\public-pages.css" />
-    <Content Include="Style\pet-cards.css" />
-    <Content Include="Style\ux-components.css" />
+    <Content Include="Style\estilos-base.css" />
+    <Content Include="Style\estilos-paneles.css" />
+    <Content Include="Style\estilos-publicos.css" />
     <Content Include="Js\ux-components.js" />
     <Content Include="Web.config" />
   </ItemGroup>

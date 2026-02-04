@@ -1,0 +1,1242 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía de Componentes UI - RedPatitas</title>
+
+    <!-- Hojas de estilo del proyecto -->
+    <link href="../Style/estilos-base.css" rel="stylesheet" type="text/css" />
+    <link href="../Style/estilos-publicos.css" rel="stylesheet" type="text/css" />
+    <link href="../Style/estilos-paneles.css" rel="stylesheet" type="text/css" />
+
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <style>
+        body {
+            background: var(--bg-color, #F8F9FA);
+            padding: 0;
+            margin: 0;
+        }
+
+        .guide-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .guide-header {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: linear-gradient(135deg, var(--primary-color, #FF8C42), var(--primary-hover, #E67A30));
+            color: white;
+            border-radius: 20px;
+            margin-bottom: 2rem;
+        }
+
+        .guide-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .guide-header p {
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+
+        .guide-nav {
+            background: white;
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 1rem;
+            z-index: 100;
+        }
+
+        .guide-nav ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            padding: 0;
+            margin: 0;
+        }
+
+        .guide-nav a {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: var(--bg-color, #F8F9FA);
+            color: var(--text-color, #333);
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .guide-nav a:hover {
+            background: var(--primary-color, #FF8C42);
+            color: white;
+        }
+
+        .component-section {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            color: var(--secondary-color, #4A3B32);
+            margin: 0;
+        }
+
+        .section-desc {
+            color: var(--text-light, #666);
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color, #E0E0E0);
+        }
+
+        .btn-code {
+            background: #1E1E1E;
+            color: #4EC9B0;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.2s;
+        }
+
+        .btn-code:hover {
+            background: #2D2D2D;
+            transform: translateY(-2px);
+        }
+
+        .component-demo {
+            background: var(--bg-color, #F8F9FA);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .component-label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-light, #666);
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .component-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+
+        /* Botones demo */
+        .btn-primary {
+            background: var(--primary-color, #FF8C42);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-hover, #E67A30);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--secondary-color, #4A3B32);
+            border: 2px solid var(--border-color, #E0E0E0);
+            padding: 0.75rem 1.5rem;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--primary-color, #FF8C42);
+            color: var(--primary-color, #FF8C42);
+        }
+
+        .btn-danger {
+            background: var(--error, #E74C3C);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .btn-success {
+            background: var(--success, #27AE60);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .action-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            border: none;
+            background: var(--bg-color, #F8F9FA);
+            color: var(--text-light, #666);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .action-btn:hover {
+            background: var(--primary-light, #FFF3E8);
+            color: var(--primary-color);
+        }
+
+        /* Alertas demo */
+        .alert {
+            padding: 1rem 1.25rem;
+            border-radius: 12px;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .alert.success {
+            background: #D4EDDA;
+            color: #155724;
+        }
+
+        .alert.warning {
+            background: #FFF3CD;
+            color: #856404;
+        }
+
+        .alert.error {
+            background: #F8D7DA;
+            color: #721C24;
+        }
+
+        .alert.info {
+            background: #D1ECF1;
+            color: #0C5460;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid var(--border-color, #E0E0E0);
+            border-radius: 10px;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: all 0.2s;
+            background: white;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-color, #FF8C42);
+            box-shadow: 0 0 0 3px rgba(255, 140, 66, 0.1);
+        }
+
+        .form-group.error .form-control {
+            border-color: var(--error, #E74C3C);
+        }
+
+        .form-group.success .form-control {
+            border-color: var(--success, #27AE60);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .guide-nav ul {
+                flex-direction: column;
+            }
+
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="guide-container">
+        <!-- Header -->
+        <header class="guide-header">
+            <h1>🎨 Guía de Componentes UI</h1>
+            <p>RedPatitas - Haz clic en "Ver Código" para ver cómo implementar cada componente</p>
+        </header>
+
+        <!-- Navegación -->
+        <nav class="guide-nav">
+            <ul>
+                <li><a href="#botones">Botones</a></li>
+                <li><a href="#formularios">Formularios</a></li>
+                <li><a href="#tarjetas">Estadísticas</a></li>
+                <li><a href="#mascota">Mascota</a></li>
+                <li><a href="#tablas">Tablas</a></li>
+                <li><a href="#alertas">Alertas</a></li>
+                <li><a href="#vacios">Estados Vacíos</a></li>
+                <li><a href="#spinners">Spinners</a></li>
+                <li><a href="#toasts">Toasts</a></li>
+            </ul>
+        </nav>
+
+        <!-- BOTONES -->
+        <section id="botones" class="component-section">
+            <div class="section-header">
+                <h2 class="section-title">🔘 Botones</h2>
+                <button class="btn-code" onclick="showCode('botones')">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                        <polyline points="16 18 22 12 16 6" />
+                        <polyline points="8 6 2 12 8 18" />
+                    </svg>
+                    Ver Código
+                </button>
+            </div>
+            <p class="section-desc">Diferentes estilos de botones para acciones.</p>
+
+            <div class="component-demo">
+                <div class="component-label">Botones Principales</div>
+                <div class="component-row">
+                    <button class="btn-primary">Primario</button>
+                    <button class="btn-secondary">Secundario</button>
+                    <button class="btn-danger">Peligro</button>
+                    <button class="btn-success">Éxito</button>
+                </div>
+            </div>
+
+            <div class="component-demo">
+                <div class="component-label">Botones de Acción (Iconos)</div>
+                <div class="component-row">
+                    <button class="action-btn" title="Editar">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20"
+                            height="20">
+                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+                        </svg>
+                    </button>
+                    <button class="action-btn" title="Eliminar">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20"
+                            height="20">
+                            <polyline points="3,6 5,6 21,6" />
+                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                        </svg>
+                    </button>
+                    <button class="action-btn" title="Ver">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20"
+                            height="20">
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                            <circle cx="12" cy="12" r="3" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- FORMULARIOS -->
+        <section id="formularios" class="component-section">
+            <div class="section-header">
+                <h2 class="section-title">📝 Formularios</h2>
+                <button class="btn-code" onclick="showCode('formularios')">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                        <polyline points="16 18 22 12 16 6" />
+                        <polyline points="8 6 2 12 8 18" />
+                    </svg>
+                    Ver Código
+                </button>
+            </div>
+            <p class="section-desc">Campos de entrada, selects y validaciones.</p>
+
+            <div class="component-demo">
+                <div class="component-label">Campos de Texto</div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Nombre <span class="required">*</span></label>
+                        <input type="text" class="form-control" placeholder="Ingresa el nombre">
+                        <span class="input-hint">Ejemplo: Max, Luna, Rocky</span>
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" class="form-control" placeholder="correo@ejemplo.com">
+                    </div>
+                </div>
+            </div>
+
+            <div class="component-demo">
+                <div class="component-label">Select / Dropdown</div>
+                <div class="form-group">
+                    <label>Especie</label>
+                    <select class="form-control">
+                        <option value="">Seleccionar...</option>
+                        <option value="perro">🐕 Perro</option>
+                        <option value="gato">🐱 Gato</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="component-demo">
+                <div class="component-label">Estados de Validación</div>
+                <div class="form-grid">
+                    <div class="form-group error">
+                        <label>Campo con Error</label>
+                        <input type="text" class="form-control" value="valor incorrecto">
+                        <span class="validation-message error">⚠️ Este campo es obligatorio</span>
+                    </div>
+                    <div class="form-group success">
+                        <label>Campo Válido</label>
+                        <input type="text" class="form-control" value="correcto@email.com">
+                        <span class="validation-message success">✓ Email válido</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TARJETAS ESTADÍSTICAS -->
+        <section id="tarjetas" class="component-section">
+            <div class="section-header">
+                <h2 class="section-title">📊 Tarjetas de Estadísticas</h2>
+                <button class="btn-code" onclick="showCode('tarjetas')">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                        <polyline points="16 18 22 12 16 6" />
+                        <polyline points="8 6 2 12 8 18" />
+                    </svg>
+                    Ver Código
+                </button>
+            </div>
+            <p class="section-desc">Métricas visuales para dashboards.</p>
+
+            <div class="component-demo">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon orange">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24"
+                                height="24">
+                                <path
+                                    d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                            </svg>
+                        </div>
+                        <div class="stat-info">
+                            <h3>156</h3>
+                            <p>Adopciones</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon blue">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24"
+                                height="24">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                                <circle cx="9" cy="7" r="4" />
+                            </svg>
+                        </div>
+                        <div class="stat-info">
+                            <h3>42</h3>
+                            <p>Usuarios</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon green">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24"
+                                height="24">
+                                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+                            </svg>
+                        </div>
+                        <div class="stat-info">
+                            <h3>89%</h3>
+                            <p>Éxito</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon purple">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24"
+                                height="24">
+                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                                <line x1="16" y1="2" x2="16" y2="6" />
+                                <line x1="8" y1="2" x2="8" y2="6" />
+                            </svg>
+                        </div>
+                        <div class="stat-info">
+                            <h3>28</h3>
+                            <p>Este mes</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TARJETA DE MASCOTA -->
+        <section id="mascota" class="component-section">
+            <div class="section-header">
+                <h2 class="section-title">🐕 Tarjeta de Mascota</h2>
+                <button class="btn-code" onclick="showCode('mascota')">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                        <polyline points="16 18 22 12 16 6" />
+                        <polyline points="8 6 2 12 8 18" />
+                    </svg>
+                    Ver Código
+                </button>
+            </div>
+            <p class="section-desc">Componente principal para mostrar mascotas.</p>
+
+            <div class="component-demo">
+                <div class="component-row" style="gap: 2rem;">
+                    <div class="pet-card-adopta">
+                        <div class="pet-card-image">
+                            <div class="pet-emoji">🐕</div>
+                            <span class="pet-badge nuevo">Nuevo</span>
+                            <a href="javascript:void(0);" class="pet-favorite"
+                                onclick="this.classList.toggle('active')">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18"
+                                    height="18">
+                                    <path
+                                        d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                                </svg>
+                            </a>
+                        </div>
+                        <div class="pet-card-body">
+                            <div class="pet-card-header">
+                                <h3>Max</h3>
+                                <span class="pet-age">2 años</span>
+                            </div>
+                            <p class="pet-breed">Labrador • Macho</p>
+                            <div class="pet-location">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14"
+                                    height="14">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                                    <circle cx="12" cy="10" r="3" />
+                                </svg>
+                                Lima, Perú
+                            </div>
+                            <a href="#" class="btn-ver-perfil">Ver Perfil</a>
+                        </div>
+                    </div>
+
+                    <div class="pet-card-adopta">
+                        <div class="pet-card-image">
+                            <div class="pet-emoji">🐱</div>
+                            <span class="pet-badge disponible">Disponible</span>
+                            <a href="javascript:void(0);" class="pet-favorite active">
+                                <svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2"
+                                    width="18" height="18">
+                                    <path
+                                        d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                                </svg>
+                            </a>
+                        </div>
+                        <div class="pet-card-body">
+                            <div class="pet-card-header">
+                                <h3>Luna</h3>
+                                <span class="pet-age">1 año</span>
+                            </div>
+                            <p class="pet-breed">Persa • Hembra</p>
+                            <div class="pet-location">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14"
+                                    height="14">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                                    <circle cx="12" cy="10" r="3" />
+                                </svg>
+                                Arequipa
+                            </div>
+                            <a href="#" class="btn-ver-perfil">Ver Perfil</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TABLAS -->
+        <section id="tablas" class="component-section">
+            <div class="section-header">
+                <h2 class="section-title">📋 Tablas</h2>
+                <button class="btn-code" onclick="showCode('tablas')">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                        <polyline points="16 18 22 12 16 6" />
+                        <polyline points="8 6 2 12 8 18" />
+                    </svg>
+                    Ver Código
+                </button>
+            </div>
+            <p class="section-desc">Tablas de datos con estilos.</p>
+
+            <div class="component-demo">
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Mascota</th>
+                                <th>Especie</th>
+                                <th>Estado</th>
+                                <th>Fecha</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="pet-cell">
+                                        <div class="pet-img"
+                                            style="display: flex; align-items: center; justify-content: center;">🐕
+                                        </div>
+                                        <span>Max</span>
+                                    </div>
+                                </td>
+                                <td>Perro</td>
+                                <td><span class="status-badge available">Disponible</span></td>
+                                <td>15/01/2025</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="pet-cell">
+                                        <div class="pet-img"
+                                            style="display: flex; align-items: center; justify-content: center;">🐱
+                                        </div>
+                                        <span>Luna</span>
+                                    </div>
+                                </td>
+                                <td>Gato</td>
+                                <td><span class="status-badge pending">Pendiente</span></td>
+                                <td>20/01/2025</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ALERTAS -->
+        <section id="alertas" class="component-section">
+            <div class="section-header">
+                <h2 class="section-title">⚠️ Alertas</h2>
+                <button class="btn-code" onclick="showCode('alertas')">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                        <polyline points="16 18 22 12 16 6" />
+                        <polyline points="8 6 2 12 8 18" />
+                    </svg>
+                    Ver Código
+                </button>
+            </div>
+            <p class="section-desc">Mensajes de notificación en página.</p>
+
+            <div class="component-demo">
+                <div class="alert success"><span>✅</span>
+                    <div><strong>Éxito:</strong> La operación se completó correctamente.</div>
+                </div>
+                <div class="alert warning"><span>⚠️</span>
+                    <div><strong>Advertencia:</strong> Hay campos pendientes.</div>
+                </div>
+                <div class="alert error"><span>❌</span>
+                    <div><strong>Error:</strong> No se pudo procesar.</div>
+                </div>
+                <div class="alert info"><span>ℹ️</span>
+                    <div><strong>Info:</strong> Recuerda verificar tu email.</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ESTADOS VACÍOS -->
+        <section id="vacios" class="component-section">
+            <div class="section-header">
+                <h2 class="section-title">📭 Estados Vacíos</h2>
+                <button class="btn-code" onclick="showCode('vacios')">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                        <polyline points="16 18 22 12 16 6" />
+                        <polyline points="8 6 2 12 8 18" />
+                    </svg>
+                    Ver Código
+                </button>
+            </div>
+            <p class="section-desc">Para mostrar cuando no hay contenido.</p>
+
+            <div class="component-demo">
+                <div class="empty-state">
+                    <div class="empty-state-icon">🐾</div>
+                    <h3 class="empty-state-title">No hay mascotas disponibles</h3>
+                    <p class="empty-state-desc">Intenta cambiar los filtros o vuelve más tarde.</p>
+                    <a href="#" class="empty-state-action">Buscar Mascotas</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- SPINNERS -->
+        <section id="spinners" class="component-section">
+            <div class="section-header">
+                <h2 class="section-title">⏳ Spinners</h2>
+                <button class="btn-code" onclick="showCode('spinners')">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                        <polyline points="16 18 22 12 16 6" />
+                        <polyline points="8 6 2 12 8 18" />
+                    </svg>
+                    Ver Código
+                </button>
+            </div>
+            <p class="section-desc">Indicadores de carga.</p>
+
+            <div class="component-demo">
+                <div class="component-row" style="gap: 2rem; align-items: center;">
+                    <div style="text-align: center;">
+                        <div class="spinner small"></div>
+                        <p style="margin-top: 0.5rem; font-size: 0.85rem; color: var(--text-light);">Small</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <div class="spinner"></div>
+                        <p style="margin-top: 0.5rem; font-size: 0.85rem; color: var(--text-light);">Normal</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <div class="spinner large"></div>
+                        <p style="margin-top: 0.5rem; font-size: 0.85rem; color: var(--text-light);">Large</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TOASTS -->
+        <section id="toasts" class="component-section">
+            <div class="section-header">
+                <h2 class="section-title">🔔 Toasts (SweetAlert2)</h2>
+                <button class="btn-code" onclick="showCode('toasts')">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                        <polyline points="16 18 22 12 16 6" />
+                        <polyline points="8 6 2 12 8 18" />
+                    </svg>
+                    Ver Código
+                </button>
+            </div>
+            <p class="section-desc">Notificaciones flotantes usando SweetAlert2.</p>
+
+            <div class="component-demo">
+                <div class="component-label">Haz clic para probar</div>
+                <div class="component-row">
+                    <button class="btn-success" onclick="showToast('success', '✅ Guardado correctamente')">Toast
+                        Éxito</button>
+                    <button class="btn-primary" onclick="showToast('info', 'ℹ️ Información importante')">Toast
+                        Info</button>
+                    <button class="btn-secondary" onclick="showToast('warning', '⚠️ Atención requerida')">Toast
+                        Advertencia</button>
+                    <button class="btn-danger" onclick="showToast('error', '❌ Error al procesar')">Toast Error</button>
+                </div>
+            </div>
+
+            <div class="component-demo">
+                <div class="component-label">Modal de Confirmación</div>
+                <button class="btn-danger" onclick="showConfirm()">Eliminar (con confirmación)</button>
+            </div>
+        </section>
+
+        <!-- PIE -->
+        <footer style="text-align: center; padding: 2rem; color: var(--text-light, #666);">
+            <p>RedPatitas - Guía de Componentes UI</p>
+            <p style="font-size: 0.85rem;">Última actualización: Febrero 2025</p>
+        </footer>
+    </div>
+
+    <script>
+        // Toasts con SweetAlert2
+        function showToast(icon, title) {
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 2000,
+                timerProgressBar: true
+            });
+            Toast.fire({ icon: icon, title: title });
+        }
+
+        function showConfirm() {
+            Swal.fire({
+                icon: 'warning',
+                title: '¿Estás seguro?',
+                text: 'Esta acción no se puede deshacer',
+                showCancelButton: true,
+                confirmButtonText: 'Sí, eliminar',
+                cancelButtonText: 'Cancelar',
+                confirmButtonColor: '#E74C3C',
+                cancelButtonColor: '#666'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    showToast('success', '✅ Eliminado correctamente');
+                }
+            });
+        }
+
+        // Mostrar código de implementación
+        function showCode(component) {
+            const codes = {
+                botones: {
+                    title: '🔘 Implementar Botones',
+                    html: `
+<h4>1. Botón Primario (ASP.NET)</h4>
+<pre><code>&lt;asp:Button ID="btnGuardar" runat="server" 
+    Text="Guardar" 
+    CssClass="btn-primary" 
+    OnClick="btnGuardar_Click" /&gt;</code></pre>
+
+<h4>2. Botón Secundario</h4>
+<pre><code>&lt;asp:Button ID="btnCancelar" runat="server" 
+    Text="Cancelar" 
+    CssClass="btn-secondary" /&gt;</code></pre>
+
+<h4>3. Botón con Enlace</h4>
+<pre><code>&lt;a href="pagina.aspx" class="btn-primary"&gt;
+    Ir a Página
+&lt;/a&gt;</code></pre>
+
+<h4>4. Botón de Acción con Icono</h4>
+<pre><code>&lt;asp:LinkButton ID="btnEditar" runat="server" 
+    CssClass="action-btn" ToolTip="Editar"&gt;
+    &lt;svg viewBox="0 0 24 24" fill="none" 
+        stroke="currentColor" stroke-width="2" 
+        width="20" height="20"&gt;
+        &lt;path d="M11 4H4a2 2 0... /&gt;
+    &lt;/svg&gt;
+&lt;/asp:LinkButton&gt;</code></pre>
+
+<h4>Clases disponibles:</h4>
+<ul>
+    <li><code>btn-primary</code> - Naranja principal</li>
+    <li><code>btn-secondary</code> - Borde gris</li>
+    <li><code>btn-danger</code> - Rojo para eliminar</li>
+    <li><code>btn-success</code> - Verde para éxito</li>
+    <li><code>action-btn</code> - Botón cuadrado para iconos</li>
+</ul>`
+                },
+                formularios: {
+                    title: '📝 Implementar Formularios',
+                    html: `
+<h4>1. Campo de Texto</h4>
+<pre><code>&lt;div class="form-group"&gt;
+    &lt;label&gt;Nombre &lt;span class="required"&gt;*&lt;/span&gt;&lt;/label&gt;
+    &lt;asp:TextBox ID="txtNombre" runat="server" 
+        CssClass="form-control" 
+        placeholder="Ingresa el nombre" /&gt;
+    &lt;span class="input-hint"&gt;Ejemplo: Max, Luna&lt;/span&gt;
+&lt;/div&gt;</code></pre>
+
+<h4>2. Select / DropDownList</h4>
+<pre><code>&lt;div class="form-group"&gt;
+    &lt;label&gt;Especie&lt;/label&gt;
+    &lt;asp:DropDownList ID="ddlEspecie" runat="server" 
+        CssClass="form-control"&gt;
+        &lt;asp:ListItem Value=""&gt;Seleccionar...&lt;/asp:ListItem&gt;
+        &lt;asp:ListItem Value="perro"&gt;🐕 Perro&lt;/asp:ListItem&gt;
+        &lt;asp:ListItem Value="gato"&gt;🐱 Gato&lt;/asp:ListItem&gt;
+    &lt;/asp:DropDownList&gt;
+&lt;/div&gt;</code></pre>
+
+<h4>3. Campo con Error</h4>
+<pre><code>&lt;div class="form-group error"&gt;
+    &lt;label&gt;Email&lt;/label&gt;
+    &lt;asp:TextBox ID="txtEmail" runat="server" 
+        CssClass="form-control" /&gt;
+    &lt;span class="validation-message error"&gt;
+        ⚠️ Este campo es obligatorio
+    &lt;/span&gt;
+&lt;/div&gt;</code></pre>
+
+<h4>4. Grid de 2 Columnas</h4>
+<pre><code>&lt;div class="form-grid"&gt;
+    &lt;div class="form-group"&gt;...&lt;/div&gt;
+    &lt;div class="form-group"&gt;...&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+<h4>Clases disponibles:</h4>
+<ul>
+    <li><code>form-group</code> - Contenedor de campo</li>
+    <li><code>form-group error</code> - Campo con error</li>
+    <li><code>form-group success</code> - Campo válido</li>
+    <li><code>form-control</code> - Estilo del input</li>
+    <li><code>form-grid</code> - Grid de 2 columnas</li>
+</ul>`
+                },
+                tarjetas: {
+                    title: '📊 Implementar Tarjetas de Estadísticas',
+                    html: `
+<h4>Código Completo</h4>
+<pre><code>&lt;div class="stats-grid"&gt;
+    &lt;div class="stat-card"&gt;
+        &lt;div class="stat-icon orange"&gt;
+            &lt;svg viewBox="0 0 24 24" fill="none" 
+                stroke="currentColor" stroke-width="2" 
+                width="24" height="24"&gt;
+                &lt;path d="M20.84 4.61..." /&gt;
+            &lt;/svg&gt;
+        &lt;/div&gt;
+        &lt;div class="stat-info"&gt;
+            &lt;h3&gt;156&lt;/h3&gt;
+            &lt;p&gt;Adopciones&lt;/p&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;!-- Más tarjetas... --&gt;
+&lt;/div&gt;</code></pre>
+
+<h4>Colores disponibles para stat-icon:</h4>
+<ul>
+    <li><code>stat-icon orange</code> - Naranja</li>
+    <li><code>stat-icon blue</code> - Azul</li>
+    <li><code>stat-icon green</code> - Verde</li>
+    <li><code>stat-icon purple</code> - Morado</li>
+</ul>
+
+<h4>Con datos dinámicos (C#):</h4>
+<pre><code>&lt;h3&gt;&lt;%: TotalAdopciones %&gt;&lt;/h3&gt;
+&lt;p&gt;Adopciones&lt;/p&gt;</code></pre>`
+                },
+                mascota: {
+                    title: '🐕 Implementar Tarjeta de Mascota',
+                    html: `
+<h4>Estructura Completa</h4>
+<pre><code>&lt;div class="pet-card-adopta"&gt;
+    &lt;div class="pet-card-image"&gt;
+        &lt;!-- Con imagen --&gt;
+        &lt;img src="~/Uploads/mascota.jpg" alt="Max" /&gt;
+        
+        &lt;!-- O con emoji (si no hay foto) --&gt;
+        &lt;div class="pet-emoji"&gt;🐕&lt;/div&gt;
+        
+        &lt;!-- Badge --&gt;
+        &lt;span class="pet-badge nuevo"&gt;Nuevo&lt;/span&gt;
+        
+        &lt;!-- Favorito --&gt;
+        &lt;a href="javascript:void(0);" 
+           class="pet-favorite"
+           onclick="toggleFavorito(this, &lt;%# Eval('Id') %&gt;)"&gt;
+            &lt;svg&gt;...&lt;/svg&gt;
+        &lt;/a&gt;
+    &lt;/div&gt;
+    
+    &lt;div class="pet-card-body"&gt;
+        &lt;div class="pet-card-header"&gt;
+            &lt;h3&gt;&lt;%# Eval("Nombre") %&gt;&lt;/h3&gt;
+            &lt;span class="pet-age"&gt;2 años&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;p class="pet-breed"&gt;Labrador • Macho&lt;/p&gt;
+        &lt;div class="pet-location"&gt;
+            &lt;svg&gt;...&lt;/svg&gt;
+            &lt;%# Eval("Ciudad") %&gt;
+        &lt;/div&gt;
+        &lt;a href="PerfilMascota.aspx?id=&lt;%# Eval('Id') %&gt;" 
+           class="btn-ver-perfil"&gt;Ver Perfil&lt;/a&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+<h4>Badges disponibles:</h4>
+<ul>
+    <li><code>pet-badge nuevo</code> - Naranja</li>
+    <li><code>pet-badge disponible</code> - Verde</li>
+    <li><code>pet-badge urgente</code> - Rojo</li>
+</ul>
+
+<h4>Favorito activo:</h4>
+<pre><code>&lt;a class="pet-favorite active"&gt;...&lt;/a&gt;</code></pre>`
+                },
+                tablas: {
+                    title: '📋 Implementar Tablas',
+                    html: `
+<h4>Estructura Básica</h4>
+<pre><code>&lt;div class="table-container"&gt;
+    &lt;table&gt;
+        &lt;thead&gt;
+            &lt;tr&gt;
+                &lt;th&gt;Mascota&lt;/th&gt;
+                &lt;th&gt;Estado&lt;/th&gt;
+                &lt;th&gt;Fecha&lt;/th&gt;
+            &lt;/tr&gt;
+        &lt;/thead&gt;
+        &lt;tbody&gt;
+            &lt;tr&gt;
+                &lt;td&gt;
+                    &lt;div class="pet-cell"&gt;
+                        &lt;img src="foto.jpg" class="pet-img" /&gt;
+                        &lt;span&gt;Max&lt;/span&gt;
+                    &lt;/div&gt;
+                &lt;/td&gt;
+                &lt;td&gt;
+                    &lt;span class="status-badge available"&gt;
+                        Disponible
+                    &lt;/span&gt;
+                &lt;/td&gt;
+                &lt;td&gt;15/01/2025&lt;/td&gt;
+            &lt;/tr&gt;
+        &lt;/tbody&gt;
+    &lt;/table&gt;
+&lt;/div&gt;</code></pre>
+
+<h4>Status badges disponibles:</h4>
+<ul>
+    <li><code>status-badge available</code> - Verde</li>
+    <li><code>status-badge pending</code> - Amarillo</li>
+    <li><code>status-badge adopted</code> - Azul</li>
+    <li><code>status-badge active</code> - Azul</li>
+    <li><code>status-badge inactive</code> - Gris</li>
+</ul>`
+                },
+                alertas: {
+                    title: '⚠️ Implementar Alertas',
+                    html: `
+<h4>Alertas Estáticas</h4>
+<pre><code>&lt;!-- Éxito --&gt;
+&lt;div class="alert success"&gt;
+    &lt;span&gt;✅&lt;/span&gt;
+    &lt;div&gt;&lt;strong&gt;Éxito:&lt;/strong&gt; Operación completada.&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Advertencia --&gt;
+&lt;div class="alert warning"&gt;
+    &lt;span&gt;⚠️&lt;/span&gt;
+    &lt;div&gt;&lt;strong&gt;Advertencia:&lt;/strong&gt; Campos pendientes.&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Error --&gt;
+&lt;div class="alert error"&gt;
+    &lt;span&gt;❌&lt;/span&gt;
+    &lt;div&gt;&lt;strong&gt;Error:&lt;/strong&gt; No se pudo procesar.&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Información --&gt;
+&lt;div class="alert info"&gt;
+    &lt;span&gt;ℹ️&lt;/span&gt;
+    &lt;div&gt;&lt;strong&gt;Info:&lt;/strong&gt; Verifica tu email.&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+<h4>Clases disponibles:</h4>
+<ul>
+    <li><code>alert success</code> - Verde</li>
+    <li><code>alert warning</code> - Amarillo</li>
+    <li><code>alert error</code> - Rojo</li>
+    <li><code>alert info</code> - Azul</li>
+</ul>`
+                },
+                vacios: {
+                    title: '📭 Implementar Estados Vacíos',
+                    html: `
+<h4>Código Completo</h4>
+<pre><code>&lt;div class="empty-state"&gt;
+    &lt;div class="empty-state-icon"&gt;🐾&lt;/div&gt;
+    &lt;h3 class="empty-state-title"&gt;
+        No hay mascotas disponibles
+    &lt;/h3&gt;
+    &lt;p class="empty-state-desc"&gt;
+        Intenta cambiar los filtros o vuelve más tarde.
+    &lt;/p&gt;
+    &lt;a href="mascotas.aspx" class="empty-state-action"&gt;
+        Buscar Mascotas
+    &lt;/a&gt;
+&lt;/div&gt;</code></pre>
+
+<h4>Variaciones de Iconos:</h4>
+<ul>
+    <li>🐾 - Sin mascotas</li>
+    <li>💔 - Sin favoritos</li>
+    <li>🔍 - Búsqueda vacía</li>
+    <li>🔔 - Sin notificaciones</li>
+    <li>💬 - Sin mensajes</li>
+    <li>📋 - Lista vacía</li>
+</ul>`
+                },
+                spinners: {
+                    title: '⏳ Implementar Spinners',
+                    html: `
+<h4>Spinner Básico</h4>
+<pre><code>&lt;div class="spinner"&gt;&lt;/div&gt;</code></pre>
+
+<h4>Tamaños Disponibles</h4>
+<pre><code>&lt;!-- Pequeño --&gt;
+&lt;div class="spinner small"&gt;&lt;/div&gt;
+
+&lt;!-- Normal --&gt;
+&lt;div class="spinner"&gt;&lt;/div&gt;
+
+&lt;!-- Grande --&gt;
+&lt;div class="spinner large"&gt;&lt;/div&gt;</code></pre>
+
+<h4>Overlay de Carga (pantalla completa)</h4>
+<pre><code>&lt;div class="loading-overlay active"&gt;
+    &lt;div class="spinner large"&gt;&lt;/div&gt;
+    &lt;p class="loading-text"&gt;Cargando...&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+
+<h4>Mostrar/Ocultar con JavaScript:</h4>
+<pre><code>// Mostrar
+document.querySelector('.loading-overlay')
+    .classList.add('active');
+
+// Ocultar
+document.querySelector('.loading-overlay')
+    .classList.remove('active');</code></pre>`
+                },
+                toasts: {
+                    title: '🔔 Implementar Toasts con SweetAlert2',
+                    html: `
+<h4>1. Incluir SweetAlert2 en el Master</h4>
+<pre><code>&lt;!-- En el &lt;head&gt; del Master --&gt;
+&lt;script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"&gt;
+&lt;/script&gt;</code></pre>
+
+<h4>2. Toast de Éxito</h4>
+<pre><code>const Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 2000,
+    timerProgressBar: true
+});
+
+Toast.fire({
+    icon: 'success',
+    title: '✅ Guardado correctamente'
+});</code></pre>
+
+<h4>3. Toast de Error</h4>
+<pre><code>Toast.fire({
+    icon: 'error',
+    title: '❌ Error al procesar'
+});</code></pre>
+
+<h4>4. Modal de Confirmación</h4>
+<pre><code>Swal.fire({
+    icon: 'warning',
+    title: '¿Estás seguro?',
+    text: 'Esta acción no se puede deshacer',
+    showCancelButton: true,
+    confirmButtonText: 'Sí, eliminar',
+    cancelButtonText: 'Cancelar',
+    confirmButtonColor: '#E74C3C'
+}).then((result) => {
+    if (result.isConfirmed) {
+        // Ejecutar acción
+    }
+});</code></pre>
+
+<h4>Iconos disponibles:</h4>
+<ul>
+    <li><code>'success'</code> - Verde con check</li>
+    <li><code>'error'</code> - Rojo con X</li>
+    <li><code>'warning'</code> - Amarillo con !</li>
+    <li><code>'info'</code> - Azul con i</li>
+    <li><code>'question'</code> - Azul con ?</li>
+</ul>`
+                }
+            };
+
+            const data = codes[component];
+
+            Swal.fire({
+                title: data.title,
+                html: data.html,
+                width: '800px',
+                showCloseButton: true,
+                showConfirmButton: false,
+                customClass: {
+                    popup: 'code-modal',
+                    htmlContainer: 'code-content'
+                }
+            });
+        }
+    </script>
+
+    <style>
+        /* Estilos para el modal de código */
+        .code-modal {
+            text-align: left !important;
+        }
+
+        .code-content {
+            text-align: left !important;
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+
+        .code-content h4 {
+            color: var(--secondary-color, #4A3B32);
+            margin: 1.5rem 0 0.75rem 0;
+            font-size: 1rem;
+        }
+
+        .code-content h4:first-child {
+            margin-top: 0;
+        }
+
+        .code-content pre {
+            background: #1E1E1E;
+            border-radius: 8px;
+            padding: 1rem;
+            overflow-x: auto;
+            margin: 0.5rem 0;
+        }
+
+        .code-content code {
+            color: #D4D4D4;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.85rem;
+            white-space: pre;
+        }
+
+        .code-content ul {
+            margin: 0.5rem 0;
+            padding-left: 1.5rem;
+        }
+
+        .code-content li {
+            margin: 0.35rem 0;
+            color: var(--text-color, #333);
+        }
+
+        .code-content li code {
+            background: #F5F5F5;
+            color: #E74C3C;
+            padding: 0.15rem 0.4rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+        }
+    </style>
+</body>
+
+</html>

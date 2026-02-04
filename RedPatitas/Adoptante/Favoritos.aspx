@@ -6,8 +6,7 @@
     </asp:Content>
 
     <asp:Content ID="Content2" ContentPlaceHolderID="head" runat="server">
-        <link href='<%= ResolveUrl("~/Style/dashboard.css") %>' rel="stylesheet" type="text/css" />
-        <link href='<%= ResolveUrl("~/Style/pet-cards.css") %>' rel="stylesheet" type="text/css" />
+        <link href='<%= ResolveUrl("~/Style/estilos-publicos.css") %>' rel="stylesheet" type="text/css" />
     </asp:Content>
 
     <asp:Content ID="Content3" ContentPlaceHolderID="PageHeader" runat="server">
@@ -40,7 +39,7 @@
         <asp:Panel ID="pnlFavoritos" runat="server" CssClass="pets-grid">
             <asp:Repeater ID="rptFavoritos" runat="server" OnItemCommand="rptFavoritos_ItemCommand">
                 <ItemTemplate>
-                    <article class="pet-card">
+                    <div class="pet-card-adopta">
                         <div class="pet-card-image">
                             <asp:Panel ID="pnlFoto" runat="server"
                                 Visible='<%# !string.IsNullOrEmpty(Convert.ToString(Eval("FotoPrincipal"))) %>'>
@@ -49,70 +48,48 @@
                             </asp:Panel>
                             <asp:Panel ID="pnlEmoji" runat="server" CssClass="pet-card-emoji"
                                 Visible='<%# string.IsNullOrEmpty(Convert.ToString(Eval("FotoPrincipal"))) %>'>
-                                <%# Eval("EmojiEspecie") %>
+                                <div class="pet-emoji">
+                                    <%# Eval("EmojiEspecie") %>
+                                </div>
                             </asp:Panel>
 
-                            <!-- Remove from Favorites Button -->
-                            <asp:LinkButton ID="btnQuitarFavorito" runat="server" CssClass="pet-favorite-btn active"
-                                CommandName="Quitar" CommandArgument='<%# Eval("IdMascota") %>'
-                                ToolTip="Quitar de favoritos">
-                                <svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2">
+                            <span class="pet-badge disponible">Favorito ❤️</span>
+
+                            <a href="javascript:void(0);" class="pet-favorite active" data-id='<%# Eval("IdMascota") %>'
+                                onclick="quitarFavorito(this, <%# Eval(" IdMascota") %>)" title="Quitar de favoritos">
+                                <svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2"
+                                    width="20" height="20">
                                     <path
                                         d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
                                 </svg>
-                            </asp:LinkButton>
+                            </a>
                         </div>
 
-                        <div class="pet-card-content">
+                        <div class="pet-card-body">
                             <div class="pet-card-header">
-                                <h3 class="pet-card-name">
+                                <h3>
                                     <%# Eval("Nombre") %>
                                 </h3>
-                                <span class="pet-card-species">
-                                    <%# Eval("EmojiEspecie") %>
-                                </span>
-                            </div>
-
-                            <div class="pet-card-details">
-                                <span class="pet-detail-tag">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <circle cx="12" cy="12" r="10" />
-                                        <polyline points="12 6 12 12 16 14" />
-                                    </svg>
+                                <span class="pet-age">
                                     <%# Eval("EdadFormateada") %>
                                 </span>
-                                <span class="pet-detail-tag">
-                                    <%# Eval("Sexo") %>
-                                </span>
-                                <span class="pet-detail-tag">📏 <%# Eval("Tamano") %></span>
                             </div>
-
-                            <div class="pet-card-location">
-                                <svg viewBox="0 0 24 24" fill="currentColor">
-                                    <path
-                                        d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+                            <p class="pet-breed">
+                                <%# Eval("EmojiEspecie") %>
+                                    <%# Eval("Sexo") %> • <%# Eval("Tamano") %>
+                            </p>
+                            <div class="pet-location">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16"
+                                    height="16">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                    <circle cx="12" cy="10" r="3"></circle>
                                 </svg>
-                                <span>
-                                    <%# Eval("NombreRefugio") %>
-                                </span>
+                                <%# Eval("NombreRefugio") %>
                             </div>
-
-                            <div class="pet-card-actions">
-                                <a href='<%# ResolveUrl("~/Adoptante/PerfilMascota.aspx?id=" + Eval("IdMascota")) %>'
-                                    class="btn-view-pet">
-                                    Ver Perfil
-                                </a>
-                                <asp:LinkButton ID="btnAdoptar" runat="server" CssClass="btn-adopt-quick"
-                                    CommandName="Adoptar" CommandArgument='<%# Eval("IdMascota") %>'
-                                    ToolTip="Solicitar adopción">
-                                    <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
-                                        <path
-                                            d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
-                                    </svg>
-                                </asp:LinkButton>
-                            </div>
+                            <a href='<%# ResolveUrl("~/Adoptante/PerfilMascota.aspx?id=" + Eval("IdMascota")) %>'
+                                class="btn-ver-perfil">Ver Perfil</a>
                         </div>
-                    </article>
+                    </div>
                 </ItemTemplate>
             </asp:Repeater>
         </asp:Panel>
@@ -127,4 +104,66 @@
                 🔍 Buscar Mascotas
             </a>
         </asp:Panel>
+
+        <script type="text/javascript">
+            var usuarioId = <%= Session["UsuarioId"] != null ? Session["UsuarioId"].ToString() : "0" %>;
+
+            function quitarFavorito(btn, idMascota) {
+                var card = btn.closest('.pet-card-adopta');
+
+                // Llamar al handler
+                var url = '<%= ResolveUrl("~/Adoptante/FavoritosHandler.ashx") %>?idMascota=' + idMascota + '&idUsuario=' + usuarioId;
+                fetch(url, { method: 'GET' })
+                    .then(response => response.json())
+                    .then(result => {
+                        if (result.success && !result.isFavorite) {
+                            // Mostrar toast
+                            const Toast = Swal.mixin({
+                                toast: true,
+                                position: 'top-end',
+                                showConfirmButton: false,
+                                timer: 2000,
+                                timerProgressBar: true
+                            });
+
+                            Toast.fire({
+                                icon: 'info',
+                                title: '💔 ' + result.message
+                            });
+
+                            // Animar y remover la tarjeta
+                            card.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+                            card.style.opacity = '0';
+                            card.style.transform = 'scale(0.8)';
+                            setTimeout(() => {
+                                card.remove();
+                                // Actualizar contador
+                                var countEl = document.querySelector('.results-count strong');
+                                if (countEl) {
+                                    var count = parseInt(countEl.textContent) - 1;
+                                    countEl.textContent = count;
+                                    if (count === 0) {
+                                        location.reload();
+                                    }
+                                }
+                            }, 300);
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error',
+                                text: result.message || 'Error al quitar de favoritos',
+                                confirmButtonColor: '#FF8C42'
+                            });
+                        }
+                    })
+                    .catch(error => {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error de conexión',
+                            text: 'No se pudo procesar la solicitud',
+                            confirmButtonColor: '#FF8C42'
+                        });
+                    });
+            }
+        </script>
     </asp:Content>

@@ -25,7 +25,7 @@
                 align-items: center;
                 gap: 0.5rem;
                 padding: 0.75rem 1.5rem;
-                background: linear-gradient(135deg, #7c3aed, #a855f7);
+                background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
                 color: white;
                 border: none;
                 border-radius: 10px;
@@ -37,7 +37,7 @@
 
             .btn-primary:hover {
                 transform: translateY(-2px);
-                box-shadow: 0 4px 15px rgba(124, 58, 237, 0.3);
+                box-shadow: 0 4px 15px rgba(255, 140, 66, 0.3);
             }
 
             /* Form Panel - Modern Modal Style */
@@ -50,7 +50,7 @@
             }
 
             .form-header {
-                background: linear-gradient(135deg, #7c3aed 0%, #a855f7 100%);
+                background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-hover) 100%);
                 color: white;
                 padding: 1.5rem 2rem;
                 display: flex;
@@ -107,7 +107,7 @@
             }
 
             .form-group label i {
-                color: #7c3aed;
+                color: var(--primary-color);
                 font-size: 0.9rem;
             }
 
@@ -126,9 +126,9 @@
             .form-group select:focus,
             .form-group textarea:focus {
                 outline: none;
-                border-color: #7c3aed;
+                border-color: var(--primary-color);
                 background: white;
-                box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.1);
+                box-shadow: 0 0 0 4px rgba(255, 140, 66, 0.1);
             }
 
             .form-group.full-width {
@@ -138,7 +138,7 @@
             .form-section-title {
                 font-size: 0.9rem;
                 font-weight: 700;
-                color: #7c3aed;
+                color: var(--primary-color);
                 text-transform: uppercase;
                 letter-spacing: 0.5px;
                 margin-bottom: 0.5rem;
@@ -199,13 +199,13 @@
             }
 
             .file-upload-wrapper:hover {
-                border-color: #7c3aed;
-                background: #f5f3ff;
+                border-color: var(--primary-color);
+                background: var(--primary-light);
             }
 
             .file-upload-wrapper i {
                 font-size: 2rem;
-                color: #7c3aed;
+                color: var(--primary-color);
                 margin-bottom: 0.5rem;
             }
 
