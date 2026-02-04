@@ -38,7 +38,7 @@ namespace RedPatitas.Admin
             ActivarTab("seguridad");
         }
 
-        private void ActivarTab(string tab)
+        private void ActivarTab(string tab, bool recargarDropdown = true)
         {
             tabCriterios.CssClass = "config-tab";
             tabEspecies.CssClass = "config-tab";
@@ -56,7 +56,10 @@ namespace RedPatitas.Admin
                 case "especies":
                     tabEspecies.CssClass = "config-tab active";
                     pnlEspecies.CssClass = "config-section active";
-                    CargarEspeciesDropdown();
+                    if (recargarDropdown)
+                    {
+                        CargarEspeciesDropdown();
+                    }
                     break;
                 case "seguridad":
                     tabSeguridad.CssClass = "config-tab active";
@@ -279,11 +282,17 @@ namespace RedPatitas.Admin
                     txtEspecieNombre.Text = "";
                     CargarEspecies();
                     CargarEspeciesDropdown();
+                    
+                    // Toast de notificación
+                    ScriptManager.RegisterStartupScript(this, GetType(), "toastEspecie", 
+                        "Swal.fire({toast: true, position: 'top-end', icon: 'success', title: 'Especie guardada correctamente', showConfirmButton: false, timer: 2500});", true);
                 }
             }
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine("Error guardando especie: " + ex.Message);
+                ScriptManager.RegisterStartupScript(this, GetType(), "toastError", 
+                    "Swal.fire({toast: true, position: 'top-end', icon: 'error', title: 'Error al guardar especie', showConfirmButton: false, timer: 2500});", true);
             }
         }
 
@@ -384,11 +393,17 @@ namespace RedPatitas.Admin
                     txtRazaNombre.Text = "";
                     CargarRazas();
                     CargarEspecies();
+                    
+                    // Toast de notificación
+                    ScriptManager.RegisterStartupScript(this, GetType(), "toastRaza", 
+                        "Swal.fire({toast: true, position: 'top-end', icon: 'success', title: 'Raza guardada correctamente', showConfirmButton: false, timer: 2500});", true);
                 }
             }
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine("Error guardando raza: " + ex.Message);
+                ScriptManager.RegisterStartupScript(this, GetType(), "toastErrorRaza", 
+                    "Swal.fire({toast: true, position: 'top-end', icon: 'error', title: 'Error al guardar raza', showConfirmButton: false, timer: 2500});", true);
             }
             ActivarTab("especies");
         }
@@ -396,6 +411,7 @@ namespace RedPatitas.Admin
         protected void rptRazas_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
             int id = int.Parse(e.CommandArgument.ToString());
+            bool esEdicion = false;
 
             using (var db = new DataClasses1DataContext())
             {
@@ -404,10 +420,21 @@ namespace RedPatitas.Admin
                     var raza = db.tbl_Razas.FirstOrDefault(r => r.raz_IdRaza == id);
                     if (raza != null)
                     {
+                        // Guardar el ID de especie antes de recargar el dropdown
+                        int idEspecie = raza.raz_IdEspecie;
+                        
                         hdnRazaId.Value = raza.raz_IdRaza.ToString();
                         txtRazaNombre.Text = raza.raz_Nombre;
+                        
+                        // Primero cargar el dropdown
                         CargarEspeciesDropdown();
-                        ddlEspecieRaza.SelectedValue = raza.raz_IdEspecie.ToString();
+                        
+                        // Luego seleccionar el valor correcto
+                        if (ddlEspecieRaza.Items.FindByValue(idEspecie.ToString()) != null)
+                        {
+                            ddlEspecieRaza.SelectedValue = idEspecie.ToString();
+                        }
+                        esEdicion = true;
                     }
                 }
                 else if (e.CommandName == "Eliminar")
@@ -422,7 +449,8 @@ namespace RedPatitas.Admin
                     }
                 }
             }
-            ActivarTab("especies");
+            // Al editar, no recargar el dropdown para preservar la selección
+            ActivarTab("especies", !esEdicion);
         }
 
         #endregion
