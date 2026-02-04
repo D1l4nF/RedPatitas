@@ -94,20 +94,18 @@
             </div>
             </FooterTemplate>
             </asp:Repeater>
-            <asp:Panel ID="pnlSinMascotasHome" runat="server" Visible="false" CssClass="no-pets-message"
-                style="text-align: center; padding: 2rem;">
-                <p style="color: #999;">Próximamente tendremos mascotas disponibles. ¡Vuelve pronto!</p>
+            <asp:Panel ID="pnlSinMascotasHome" runat="server" Visible="false" CssClass="no-pets-message">
+                <p>Próximamente tendremos mascotas disponibles. ¡Vuelve pronto!</p>
             </asp:Panel>
         </section>
 
         <!-- Allied Shelters Section -->
-        <section id="aliados" class="allied-shelters" style="background: #FFF8F0; padding: 4rem 1rem;">
-            <div class="container" style="max-width: 1200px; margin: 0 auto; text-align: center;">
+        <section id="aliados" class="allied-shelters">
+            <div class="container">
                 <h2 class="section-title">Nuestros Aliados</h2>
                 <asp:Repeater ID="rptAliados" runat="server">
                     <HeaderTemplate>
-                        <div class="allies-grid"
-                            style="display: flex; justify-content: center; flex-wrap: wrap; gap: 2rem; align-items: center;">
+                        <div class="allies-grid">
                     </HeaderTemplate>
                     <ItemTemplate>
                         <div class="ally-card" onclick="showShelterModal(this)" data-id='<%# Eval("IdRefugio") %>'
@@ -129,10 +127,10 @@
                             <img src='<%# ResolveUrl(Convert.ToString(Eval("LogoUrl"))) %>' alt='<%# Eval("Nombre") %>'
                                 style="width: 80px; height: 80px; object-fit: contain; border-radius: 50%; background: #f9f9f9;"
                                 onerror="this.src='../Images/default-shelter.png'" />
-                            <h4 style="font-size: 0.9rem; color: #4A3B32; margin: 0;">
+                            <h4>
                                 <%# Eval("Nombre") %>
                             </h4>
-                            <span style="font-size: 0.8rem; color: #999;">
+                            <span>
                                 <%# Eval("Ciudad") %>
                             </span>
                         </div>
@@ -142,287 +140,40 @@
             </FooterTemplate>
             </asp:Repeater>
 
-            <asp:Panel ID="pnlSinAliados" runat="server" Visible="false">
-                <p style="color: #999;">Sé el primer refugio aliado de nuestra red.</p>
+            <asp:Panel ID="pnlSinAliados" runat="server" Visible="false" CssClass="no-allies-message">
+                <p>Sé el primer refugio aliado de nuestra red.</p>
             </asp:Panel>
             </div>
         </section>
 
         <!-- Shelter Detail Modal (Premium Design) -->
-        <style>
-            @keyframes modalSlideIn {
-                from {
-                    opacity: 0;
-                    transform: scale(0.95) translateY(20px);
-                }
+        <!-- Estilos movidos a public-pages.css -->
 
-                to {
-                    opacity: 1;
-                    transform: scale(1) translateY(0);
-                }
-            }
-
-            .ally-modal-overlay {
-                display: none;
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background: rgba(0, 0, 0, 0.7);
-                backdrop-filter: blur(4px);
-                z-index: 9999;
-                align-items: center;
-                justify-content: center;
-                overflow-y: auto;
-                padding: 1rem;
-            }
-
-            .ally-modal-content {
-                background: #fff;
-                border-radius: 20px;
-                width: 95%;
-                max-width: 480px;
-                position: relative;
-                animation: modalSlideIn 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-                box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
-                max-height: 90vh;
-                overflow-y: auto;
-            }
-
-            .ally-modal-close {
-                position: absolute;
-                top: 12px;
-                right: 12px;
-                background: rgba(255, 255, 255, 0.9);
-                border: none;
-                font-size: 1.3rem;
-                cursor: pointer;
-                width: 36px;
-                height: 36px;
-                border-radius: 50%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                z-index: 10;
-                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-                transition: transform 0.2s;
-            }
-
-            .ally-modal-close:hover {
-                transform: scale(1.1);
-            }
-
-            .ally-modal-header {
-                background: linear-gradient(135deg, #FF8C42 0%, #FF6B35 50%, #E85D25 100%);
-                padding: 1.25rem 1.25rem 1rem;
-                text-align: center;
-                color: white;
-                border-radius: 20px 20px 0 0;
-            }
-
-            .ally-modal-logo {
-                width: 70px;
-                height: 70px;
-                border-radius: 50%;
-                object-fit: cover;
-                background: white;
-                border: 3px solid rgba(255, 255, 255, 0.4);
-                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            }
-
-            .ally-modal-stats {
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                gap: 10px;
-                padding: 0.75rem 1.25rem;
-                background: #FDFAF8;
-            }
-
-            .ally-stat-card {
-                text-align: center;
-                padding: 0.6rem 0.5rem;
-                background: white;
-                border-radius: 10px;
-                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-            }
-
-            .ally-stat-icon {
-                font-size: 1.2rem;
-            }
-
-            .ally-stat-number {
-                font-size: 1.4rem;
-                font-weight: 700;
-            }
-
-            .ally-stat-label {
-                font-size: 0.65rem;
-                color: #888;
-                text-transform: uppercase;
-            }
-
-            .ally-modal-body {
-                padding: 0.75rem 1.25rem 1rem;
-            }
-
-            .ally-info-card {
-                background: #f9f9f9;
-                border-radius: 10px;
-                padding: 0.6rem 0.8rem;
-                margin-bottom: 0.75rem;
-            }
-
-            .ally-info-row {
-                display: flex;
-                gap: 8px;
-                align-items: center;
-                padding: 5px 0;
-                font-size: 0.85rem;
-                color: #444;
-                border-bottom: 1px solid rgba(0, 0, 0, 0.04);
-            }
-
-            .ally-info-row:last-child {
-                border-bottom: none;
-            }
-
-            .ally-info-icon {
-                width: 20px;
-                text-align: center;
-                flex-shrink: 0;
-            }
-
-            .ally-social-links {
-                display: flex;
-                justify-content: center;
-                gap: 10px;
-                margin-bottom: 0.75rem;
-            }
-
-            .ally-social-btn {
-                width: 40px;
-                height: 40px;
-                border-radius: 50%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                text-decoration: none;
-                transition: transform 0.2s;
-                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-            }
-
-            .ally-social-btn:hover {
-                transform: scale(1.1);
-            }
-
-            .ally-social-btn svg {
-                width: 20px;
-                height: 20px;
-            }
-
-            .ally-social-btn.facebook {
-                background: #4267B2;
-            }
-
-            .ally-social-btn.facebook svg {
-                fill: white;
-            }
-
-            .ally-social-btn.instagram {
-                background: linear-gradient(45deg, #f09433, #dc2743, #bc1888);
-            }
-
-            .ally-social-btn.instagram svg {
-                fill: white;
-            }
-
-            .ally-social-btn.whatsapp {
-                background: #25D366;
-            }
-
-            .ally-social-btn.whatsapp svg {
-                fill: white;
-            }
-
-            .ally-social-btn.facebook {
-                background: linear-gradient(135deg, #4267B2, #3b5998);
-            }
-
-            .ally-social-btn.instagram {
-                background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
-            }
-
-            .ally-social-btn.whatsapp {
-                background: linear-gradient(135deg, #25D366, #128C7E);
-            }
-
-            .ally-action-btn {
-                display: inline-flex;
-                align-items: center;
-                justify-content: center;
-                gap: 6px;
-                padding: 10px 16px;
-                border-radius: 10px;
-                font-weight: 600;
-                font-size: 0.85rem;
-                text-decoration: none;
-                transition: all 0.2s;
-                flex: 1;
-            }
-
-            .ally-action-btn.primary {
-                background: linear-gradient(135deg, #FF8C42, #FF6B35);
-                color: white;
-            }
-
-            .ally-action-btn.secondary {
-                background: linear-gradient(135deg, #27AE60, #219150);
-                color: white;
-            }
-
-            .ally-action-btn.donate {
-                background: linear-gradient(135deg, #E74C3C, #C0392B);
-                color: white;
-            }
-
-            .ally-action-btn:hover {
-                transform: translateY(-2px);
-                opacity: 0.95;
-            }
-
-            .ally-action-buttons {
-                display: flex;
-                gap: 8px;
-                flex-wrap: wrap;
-            }
-        </style>
-
-        <div id="allyModal" class="ally-modal-overlay">
+        <div id="allyModal" class="ally-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modalName"
+            aria-hidden="true">
             <div class="ally-modal-content">
                 <!-- Close Button -->
-                <button type="button" onclick="closeAllyModal()" class="ally-modal-close">&times;</button>
+                <button type="button" onclick="closeAllyModal()" class="ally-modal-close"
+                    aria-label="Cerrar modal">&times;</button>
 
                 <!-- Header -->
                 <div class="ally-modal-header">
                     <img id="modalLogo" src="" alt="Logo" class="ally-modal-logo" />
-                    <h2 id="modalName" style="margin: 0.5rem 0 0.15rem; font-size: 1.25rem; font-weight: 700;">Nombre
-                        Refugio</h2>
-                    <span id="modalCity" style="font-size: 0.85rem;">📍 Ciudad</span>
-                    <span id="modalYear" style="display: block; font-size: 0.75rem; opacity: 0.85; margin-top: 2px;">🏛️
-                        Desde 2026</span>
+                    <h2 id="modalName" class="ally-modal-name">Nombre Refugio</h2>
+                    <span id="modalCity" class="ally-modal-city">📍 Ciudad</span>
+                    <span id="modalYear" class="ally-modal-year">🏛️ Desde 2026</span>
                 </div>
 
                 <!-- Statistics -->
                 <div class="ally-modal-stats">
                     <div class="ally-stat-card">
                         <div class="ally-stat-icon">🏠</div>
-                        <div class="ally-stat-number" id="statAdoptadas" style="color: #27AE60;">0</div>
+                        <div class="ally-stat-number success" id="statAdoptadas">0</div>
                         <div class="ally-stat-label">Adoptadas</div>
                     </div>
                     <div class="ally-stat-card">
                         <div class="ally-stat-icon">🐾</div>
-                        <div class="ally-stat-number" id="statDisponibles" style="color: #3498DB;">0</div>
+                        <div class="ally-stat-number info" id="statDisponibles">0</div>
                         <div class="ally-stat-label">En espera</div>
                     </div>
                 </div>
@@ -430,14 +181,14 @@
                 <!-- Body -->
                 <div class="ally-modal-body">
                     <!-- Description -->
-                    <p id="modalDesc" style="color: #555; line-height: 1.5; margin: 0 0 0.6rem; font-size: 0.85rem;">
+                    <p id="modalDesc" class="ally-modal-desc">
                     </p>
 
                     <!-- Contact Info Card -->
                     <div class="ally-info-card">
                         <div class="ally-info-row">
                             <span class="ally-info-icon">📍</span>
-                            <span id="modalAddress" style="flex: 1;">Dirección</span>
+                            <span id="modalAddress">Dirección</span>
                         </div>
                         <div class="ally-info-row">
                             <span class="ally-info-icon">📞</span>
@@ -445,7 +196,7 @@
                         </div>
                         <div id="emailRow" class="ally-info-row" style="display: none;">
                             <span class="ally-info-icon">✉️</span>
-                            <a id="modalEmail" href="" style="color: #FF8C42; text-decoration: none;">email</a>
+                            <a id="modalEmail" href="">email</a>
                         </div>
                         <div id="horarioRow" class="ally-info-row" style="display: none;">
                             <span class="ally-info-icon">🕐</span>
@@ -614,7 +365,11 @@
 
                     // Show modal
                     modal.style.setProperty('display', 'flex', 'important');
+                    modal.setAttribute('aria-hidden', 'false');
                     document.body.style.overflow = 'hidden'; // Prevent background scroll
+
+                    // Focus on close button for keyboard accessibility
+                    setTimeout(() => modal.querySelector('.ally-modal-close').focus(), 100);
 
                 } catch (e) {
                     console.error('Error showing modal:', e);
@@ -625,6 +380,7 @@
                 const modal = document.getElementById('allyModal');
                 if (modal) {
                     modal.style.display = 'none';
+                    modal.setAttribute('aria-hidden', 'true');
                     document.body.style.overflow = ''; // Restore scroll
                 }
             }
@@ -689,6 +445,13 @@
                 <h2 class="section-title">Historias de Éxito</h2>
                 <div class="testimonials-grid">
                     <div class="testimonial-card">
+                        <div class="testimonial-author">
+                            <div class="author-avatar">MG</div>
+                            <div class="author-info">
+                                <span class="author-name">María González</span>
+                                <span class="author-pet">Adoptó a Luna 🐱</span>
+                            </div>
+                        </div>
                         <div class="testimonial-content">
                             <p>
                                 "Adoptamos a Luna hace 6 meses y ha cambiado nuestras vidas. El proceso fue
@@ -697,15 +460,15 @@
                                 de RedPatitas nos acompañó en todo momento."
                             </p>
                         </div>
-                        <div class="testimonial-author">
-                            <div class="author-avatar">MG</div>
-                            <div class="author-info">
-                                <span class="author-name">María González</span>
-                                <span class="author-pet">Adoptó a Luna 🐱</span>
-                            </div>
-                        </div>
                     </div>
                     <div class="testimonial-card">
+                        <div class="testimonial-author">
+                            <div class="author-avatar">CR</div>
+                            <div class="author-info">
+                                <span class="author-name">Carlos Ruiz</span>
+                                <span class="author-pet">Reencontró a Max 🐕</span>
+                            </div>
+                        </div>
                         <div class="testimonial-content">
                             <p>
                                 "Gracias a RedPatitas encontré a mi perrito Max después de 3 días perdido. La
@@ -714,15 +477,15 @@
                                 increíble y muy solidaria."
                             </p>
                         </div>
-                        <div class="testimonial-author">
-                            <div class="author-avatar">CR</div>
-                            <div class="author-info">
-                                <span class="author-name">Carlos Ruiz</span>
-                                <span class="author-pet">Reencontró a Max 🐕</span>
-                            </div>
-                        </div>
                     </div>
                     <div class="testimonial-card">
+                        <div class="testimonial-author">
+                            <div class="author-avatar">RE</div>
+                            <div class="author-info">
+                                <span class="author-name">Refugio Esperanza</span>
+                                <span class="author-pet">Refugio Aliado 🏠</span>
+                            </div>
+                        </div>
                         <div class="testimonial-content">
                             <p>
                                 "Como refugio, RedPatitas nos ha ayudado a encontrar hogares para más de 50
@@ -730,13 +493,6 @@
                                 una
                                 herramienta indispensable."
                             </p>
-                        </div>
-                        <div class="testimonial-author">
-                            <div class="author-avatar">RE</div>
-                            <div class="author-info">
-                                <span class="author-name">Refugio Esperanza</span>
-                                <span class="author-pet">Refugio Aliado 🏠</span>
-                            </div>
                         </div>
                     </div>
                 </div>

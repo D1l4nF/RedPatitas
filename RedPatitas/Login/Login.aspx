@@ -40,11 +40,11 @@
 
                     <asp:Panel ID="pnlLogin" runat="server" DefaultButton="btnLogin">
                         <div class="form-group">
-                            <label for="email">Correo Electrónico</label>
+                            <label for="txtEmail">Correo Electrónico</label>
                             <div class="input-wrapper">
                                 <!-- Email Icon -->
                                 <svg class="input-icon" viewBox="0 0 24 24" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
+                                    xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                     <path
                                         d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4Z"
                                         stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -53,16 +53,17 @@
                                         stroke-linecap="round" stroke-linejoin="round" />
                                 </svg>
                                 <asp:TextBox ID="txtEmail" runat="server" TextMode="Email" placeholder="tu@email.com"
-                                    CssClass="form-control" ClientIDMode="Static" required></asp:TextBox>
+                                    CssClass="form-control" ClientIDMode="Static" required aria-required="true">
+                                </asp:TextBox>
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label for="password">Contraseña</label>
+                            <label for="txtPassword">Contraseña</label>
                             <div class="input-wrapper has-toggle">
                                 <!-- Lock Icon -->
                                 <svg class="input-icon" viewBox="0 0 24 24" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
+                                    xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                     <rect x="3" y="11" width="18" height="11" rx="2" ry="2" stroke="currentColor"
                                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                     <path
@@ -71,7 +72,8 @@
                                         stroke-linejoin="round" />
                                 </svg>
                                 <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" placeholder="••••••••"
-                                    CssClass="form-control" ClientIDMode="Static" required></asp:TextBox>
+                                    CssClass="form-control" ClientIDMode="Static" required aria-required="true">
+                                </asp:TextBox>
                                 <button type="button" class="password-toggle" data-target="txtPassword"
                                     aria-label="Mostrar contraseña">
                                     <svg class="icon-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor"

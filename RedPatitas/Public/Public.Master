@@ -11,10 +11,8 @@
             RedPatitas
         </asp:ContentPlaceHolder>
     </title>
-    <link rel="stylesheet" href="~/Style/landing.css">
-    <link rel="stylesheet" href="~/Style/public-pages.css">
-    <link rel="stylesheet" href="~/Style/forms.css">
-    <link rel="stylesheet" href="~/Style/ux-components.css">
+    <link rel="stylesheet" href="~/Style/estilos-base.css">
+    <link rel="stylesheet" href="~/Style/estilos-publicos.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
@@ -33,21 +31,21 @@
                     RedPatitas
                 </a>
 
-                <nav class="nav" id="nav">
-                    <ul class="nav-links">
-                        <li><a href="~/Public/Home.aspx" runat="server" class="nav-link">Inicio</a></li>
-                        <li><a href="~/Public/Adopta.aspx" runat="server" class="nav-link">Adopta</a></li>
-                        <li><a href="~/Public/MapaExtravios.aspx" runat="server" class="nav-link">Mapa</a></li>
-                        <li><a href="~/Public/Reportar.aspx" runat="server" class="nav-link">Reportar</a></li>
+                <nav class="nav" id="nav" role="navigation" aria-label="Navegación principal">
+                    <ul class="nav-links" role="list">
+                        <li role="listitem"><a href="~/Public/Home.aspx" runat="server" class="nav-link">Inicio</a></li>
+                        <li role="listitem"><a href="~/Public/Adopta.aspx" runat="server" class="nav-link">Adopta</a></li>
+                        <li role="listitem"><a href="~/Public/MapaExtravios.aspx" runat="server" class="nav-link">Mapa</a></li>
+                        <li role="listitem"><a href="~/Public/Reportar.aspx" runat="server" class="nav-link">Reportar</a></li>
                     </ul>
                     <a href="~/Login/Login.aspx" runat="server" class="btn-login">Ingresar</a>
                 </nav>
 
-                <div class="menu-toggle" id="menuToggle">
+                <button type="button" class="menu-toggle" id="menuToggle" aria-label="Abrir menú de navegación" aria-expanded="false" aria-controls="nav">
                     <span></span>
                     <span></span>
                     <span></span>
-                </div>
+                </button>
             </div>
         </header>
         <!-- CONTENIDO DINÁMICO -->
@@ -121,8 +119,9 @@
         const nav = document.getElementById('nav');
 
         menuToggle.addEventListener('click', () => {
-            nav.classList.toggle('active');
+            const isExpanded = nav.classList.toggle('active');
             menuToggle.classList.toggle('active');
+            menuToggle.setAttribute('aria-expanded', isExpanded);
         });
 
         // Close menu when clicking a link
@@ -130,6 +129,7 @@
             link.addEventListener('click', () => {
                 nav.classList.remove('active');
                 menuToggle.classList.remove('active');
+                menuToggle.setAttribute('aria-expanded', 'false');
             });
         });
 
@@ -143,5 +143,6 @@
             }
         });
     </script>
+    <script src="<%= ResolveUrl("~/Js/ux-components.js") %>"></script>
 </body>
 </html>

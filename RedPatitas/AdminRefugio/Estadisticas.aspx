@@ -70,9 +70,9 @@
                 background: linear-gradient(90deg, var(--accent-color), var(--accent-light));
             }
 
-            .kpi-card.teal {
-                --accent-color: #0d9488;
-                --accent-light: #14b8a6;
+            .kpi-card.primary {
+                --accent-color: #FF8C42;
+                --accent-light: #FFA666;
             }
 
             .kpi-card.blue {
@@ -239,8 +239,8 @@
                 transition: width 0.5s ease;
             }
 
-            .progress-bar.teal {
-                background: linear-gradient(90deg, #0d9488, #14b8a6);
+            .progress-bar.primary {
+                background: linear-gradient(90deg, #FF8C42, #FFA666);
             }
 
             .progress-bar.blue {
@@ -352,7 +352,7 @@
         <!-- Main KPI Cards -->
         <div class="kpi-grid">
             <!-- Total Mascotas -->
-            <div class="kpi-card teal">
+            <div class="kpi-card primary">
                 <div class="kpi-icon"><i class="fas fa-paw"></i></div>
                 <div class="kpi-value">
                     <asp:Literal ID="litTotalMascotas" runat="server">0</asp:Literal>
@@ -445,7 +445,7 @@
             <!-- Ocupación del Refugio -->
             <div class="performance-card">
                 <div class="performance-header">
-                    <div class="performance-icon" style="background: #ccfbf1; color: #0d9488;">
+                    <div class="performance-icon" style="background: #FFF0E6; color: #FF8C42;">
                         <i class="fas fa-home"></i>
                     </div>
                     <div class="performance-title">Capacidad del Refugio</div>
@@ -455,7 +455,7 @@
                 </div>
                 <div class="metric-subtitle">Ocupación actual estimada</div>
                 <div class="progress-bar-container">
-                    <div class="progress-bar teal" id="progressCapacidad" runat="server" style="width: 65%;"></div>
+                    <div class="progress-bar primary" id="progressCapacidad" runat="server" style="width: 65%;"></div>
                 </div>
             </div>
 
@@ -581,7 +581,7 @@
                         labels: labelsEspecies.length ? labelsEspecies : ['Sin datos'],
                         datasets: [{
                             data: dataEspecies.length ? dataEspecies : [1],
-                            backgroundColor: ['#0d9488', '#3b82f6', '#f59e0b', '#8b5cf6', '#f43f5e', '#6b7280'],
+                            backgroundColor: ['#FF8C42', '#3b82f6', '#f59e0b', '#8b5cf6', '#f43f5e', '#6b7280'],
                             borderWidth: 0,
                             hoverOffset: 10
                         }]
