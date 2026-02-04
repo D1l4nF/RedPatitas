@@ -56,11 +56,11 @@
 
         <!-- Filtros -->
         <div class="admin-panel" style="margin-bottom: 1.5rem;">
-            <div class="form-row">
+            <div class="filter-row">
                 <div class="form-group">
                     <label>Tipo de Reporte</label>
                     <asp:DropDownList ID="ddlTipo" runat="server" AutoPostBack="true"
-                        OnSelectedIndexChanged="Filtros_Changed">
+                        OnSelectedIndexChanged="Filtros_Changed" CssClass="form-control">
                         <asp:ListItem Value="">-- Todos --</asp:ListItem>
                         <asp:ListItem Value="Perdida">Perdida</asp:ListItem>
                         <asp:ListItem Value="Encontrada">Encontrada</asp:ListItem>
@@ -69,7 +69,7 @@
                 <div class="form-group">
                     <label>Estado</label>
                     <asp:DropDownList ID="ddlEstado" runat="server" AutoPostBack="true"
-                        OnSelectedIndexChanged="Filtros_Changed">
+                        OnSelectedIndexChanged="Filtros_Changed" CssClass="form-control">
                         <asp:ListItem Value="">-- Todos --</asp:ListItem>
                         <asp:ListItem Value="Reportado">Reportado</asp:ListItem>
                         <asp:ListItem Value="EnBusqueda">En Búsqueda</asp:ListItem>
@@ -81,10 +81,12 @@
                 </div>
                 <div class="form-group">
                     <label>Buscar</label>
-                    <asp:TextBox ID="txtBusqueda" runat="server" placeholder="Nombre, ciudad..."></asp:TextBox>
+                    <asp:TextBox ID="txtBusqueda" runat="server" placeholder="Nombre, ciudad..."
+                        CssClass="form-control"></asp:TextBox>
                 </div>
-                <div class="form-group" style="align-self: flex-end;">
-                    <asp:Button ID="btnBuscar" runat="server" Text="Buscar" CssClass="btn-add"
+                <div class="form-group">
+                    <label>&nbsp;</label>
+                    <asp:Button ID="btnBuscar" runat="server" Text="Buscar" CssClass="btn btn-primary"
                         OnClick="Filtros_Changed" />
                 </div>
             </div>

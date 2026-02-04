@@ -250,8 +250,11 @@ namespace CapaNegocios
                     usuario.usu_IdRol = 3;
                 }
                 
-                // Si se le quita el refugio a un personal (3), vuelve a ser Adoptante (4)?
-                // Opcional: De momento solo manejamos la promoción.
+                // Si se le quita el refugio a un personal (3), vuelve a ser Adoptante (4)
+                if (usuario.usu_IdRol == 3 && !idRefugio.HasValue)
+                {
+                    usuario.usu_IdRol = 4;
+                }
                 
                 db.SubmitChanges();
                 return true;

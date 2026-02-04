@@ -102,7 +102,8 @@
                                         <asp:LinkButton ID="btnEliminar" runat="server" CommandName="Eliminar"
                                             CommandArgument='<%# Eval("IdCriterio") %>'
                                             CssClass="table-action-btn delete"
-                                            OnClientClick="return confirm('¿Eliminar este criterio?');">Eliminar
+                                            OnClientClick="return confirmAction('¿Eliminar criterio?', 'Esta acción no se puede deshacer', 'warning');">
+                                            Eliminar
                                         </asp:LinkButton>
                                     </td>
                                 </tr>
@@ -155,7 +156,8 @@
                                             <asp:LinkButton ID="btnEliminarEspecie" runat="server"
                                                 CommandName="Eliminar" CommandArgument='<%# Eval("IdEspecie") %>'
                                                 CssClass="table-action-btn delete"
-                                                OnClientClick="return confirm('¿Eliminar esta especie?');">Eliminar
+                                                OnClientClick="return confirmAction('¿Eliminar especie?', 'Se desactivará la especie y sus razas', 'warning');">
+                                                Eliminar
                                             </asp:LinkButton>
                                         </td>
                                     </tr>
@@ -209,7 +211,8 @@
                                             <asp:LinkButton ID="btnEliminarRaza" runat="server" CommandName="Eliminar"
                                                 CommandArgument='<%# Eval("IdRaza") %>'
                                                 CssClass="table-action-btn delete"
-                                                OnClientClick="return confirm('¿Eliminar esta raza?');">Eliminar
+                                                OnClientClick="return confirmAction('¿Eliminar raza?', 'Esta acción no se puede deshacer', 'warning');">
+                                                Eliminar
                                             </asp:LinkButton>
                                         </td>
                                     </tr>

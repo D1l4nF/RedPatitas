@@ -1811,3 +1811,692 @@ body.theme-admin-refugio .page-title::after {
     flex-wrap: nowrap; /* Prevent wrapping of logo text and badge */
 }
 
+/* ========================================
+   FORM CONTROLS - Controles de Formularios
+   ======================================== */
+.form-control {
+    width: auto;
+    min-width: 180px;
+    padding: 0.6rem 1rem;
+    border: 2px solid #E5E7EB;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-family: inherit;
+    background-color: white;
+    color: var(--text-color);
+    transition: all 0.2s ease;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(255, 140, 66, 0.15);
+}
+
+.form-control:hover:not(:focus) {
+    border-color: #D1D5DB;
+}
+
+/* Estilos específicos para Select/Dropdown */
+select.form-control {
+    padding-right: 2.5rem;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23666666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 16px;
+    cursor: pointer;
+}
+
+select.form-control:focus {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23FF8C42' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+}
+
+/* Input con placeholder estilizado */
+.form-control::placeholder {
+    color: #9CA3AF;
+    font-style: normal;
+}
+
+/* Estados de validación */
+.form-control.error,
+.form-group.error .form-control {
+    border-color: #EF4444;
+    background-color: #FEF2F2;
+}
+
+.form-control.success,
+.form-group.success .form-control {
+    border-color: #10B981;
+    background-color: #F0FDF4;
+}
+
+/* Disabled state */
+.form-control:disabled {
+    background-color: #F3F4F6;
+    color: #9CA3AF;
+    cursor: not-allowed;
+    border-color: #E5E7EB;
+}
+
+/* Form Group styling */
+.form-group label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-color);
+    margin-bottom: 0.35rem;
+}
+
+.form-group .input-hint {
+    display: block;
+    font-size: 0.75rem;
+    color: var(--text-light);
+    margin-top: 0.35rem;
+}
+
+.validation-message {
+    display: block;
+    font-size: 0.75rem;
+    margin-top: 0.35rem;
+}
+
+.validation-message.error {
+    color: #EF4444;
+}
+
+.validation-message.success {
+    color: #10B981;
+}
+
+/* ========================================
+   TABLE ACTION BUTTONS - Botones de Tabla (Mejorados)
+   ======================================== */
+.table-action-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.4rem 0.75rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: 500;
+    font-family: inherit;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    white-space: nowrap;
+    background: #F3F4F6;
+    color: #374151;
+}
+
+.table-action-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.table-action-btn.edit {
+    background: rgba(255, 140, 66, 0.12);
+    color: #EA580C;
+}
+
+.table-action-btn.edit:hover {
+    background: rgba(255, 140, 66, 0.22);
+    color: #C2410C;
+}
+
+.table-action-btn.delete {
+    background: rgba(239, 68, 68, 0.12);
+    color: #DC2626;
+}
+
+.table-action-btn.delete:hover {
+    background: rgba(239, 68, 68, 0.22);
+    color: #B91C1C;
+}
+
+.table-action-btn.success {
+    background: rgba(16, 185, 129, 0.12);
+    color: #059669;
+}
+
+.table-action-btn.success:hover {
+    background: rgba(16, 185, 129, 0.22);
+    color: #047857;
+}
+
+.table-action-btn.approve {
+    background: #D1FAE5;
+    color: #059669;
+}
+
+.table-action-btn.approve:hover {
+    background: #059669;
+    color: white;
+}
+
+.table-action-btn.reject {
+    background: #FEE2E2;
+    color: #DC2626;
+}
+
+.table-action-btn.reject:hover {
+    background: #DC2626;
+    color: white;
+}
+
+/* Container para múltiples botones de acción */
+.action-buttons,
+td .table-action-btn + .table-action-btn {
+    margin-left: 0.35rem;
+}
+
+
+/* ========================================
+   FILTER ROW - Fila de Filtros
+   ======================================== */
+.filter-row {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    align-items: flex-end;
+}
+
+.filter-row .form-group {
+    min-width: 150px;
+}
+
+.filter-row .btn {
+    align-self: flex-end;
+    margin-bottom: 0;
+}
+
+/* ========================================
+   FIX: SELECT OPTIONS - Prevenir fondo en opciones
+   ======================================== */
+select.form-control option {
+    background: white;
+    color: var(--text-color);
+    padding: 0.5rem;
+}
+
+/* ========================================
+   FIX: TABLE ACTION BUTTONS AS LINKS (LinkButton ASP.NET)
+   Los LinkButton renderizan como <a>, necesitan estilos específicos
+   ======================================== */
+a.table-action-btn,
+.admin-table td a.table-action-btn {
+    display: inline-flex !important;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.4rem 0.8rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: 500;
+    font-family: inherit;
+    transition: all 0.2s ease;
+    text-decoration: none !important;
+    white-space: nowrap;
+    background: #F3F4F6;
+    color: #374151 !important;
+    margin-right: 0.25rem;
+    margin-bottom: 0.25rem;
+}
+
+a.table-action-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+    text-decoration: none !important;
+}
+
+a.table-action-btn.edit,
+.admin-table td a.table-action-btn.edit {
+    background: linear-gradient(135deg, #FFF7ED, #FFEDD5);
+    color: #EA580C !important;
+    border: 1px solid rgba(234, 88, 12, 0.2);
+}
+
+a.table-action-btn.edit:hover {
+    background: linear-gradient(135deg, #FFEDD5, #FED7AA);
+    color: #C2410C !important;
+}
+
+a.table-action-btn.delete,
+.admin-table td a.table-action-btn.delete {
+    background: linear-gradient(135deg, #FEF2F2, #FEE2E2);
+    color: #DC2626 !important;
+    border: 1px solid rgba(220, 38, 38, 0.2);
+}
+
+a.table-action-btn.delete:hover {
+    background: linear-gradient(135deg, #FEE2E2, #FECACA);
+    color: #B91C1C !important;
+}
+
+a.table-action-btn.success,
+.admin-table td a.table-action-btn.success {
+    background: linear-gradient(135deg, #F0FDF4, #DCFCE7);
+    color: #059669 !important;
+    border: 1px solid rgba(5, 150, 105, 0.2);
+}
+
+a.table-action-btn.success:hover {
+    background: linear-gradient(135deg, #DCFCE7, #BBF7D0);
+    color: #047857 !important;
+}
+
+/* Contenedor de acciones en tabla */
+.admin-table td:last-child {
+    white-space: nowrap;
+}
+
+/* ========================================
+   FIX: NATIVE SELECT ARROW HIDDEN
+   ======================================== */
+select.form-control::-ms-expand {
+    display: none;
+}
+
+/* Para navegadores WebKit (Chrome, Safari, Edge) */
+@supports (-webkit-appearance: none) {
+    select.form-control {
+        -webkit-appearance: none;
+        appearance: none;
+    }
+}
+
+/* ========================================
+   FIX FINAL: Estilos con máxima especificidad
+   ======================================== */
+
+/* Dropdowns en tabla admin - eliminar patrón */
+.admin-panel select.form-control,
+.filter-row select.form-control,
+select.form-control {
+    background-color: white !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23666666' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E") !important;
+    background-repeat: no-repeat !important;
+    background-position: right 0.75rem center !important;
+    background-size: 12px !important;
+}
+
+/* Botones de acción en tabla - selectores muy específicos */
+.admin-table tbody tr td a,
+.admin-table td a[id*="btn"],
+table.admin-table a {
+    display: inline-flex !important;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.4rem 0.75rem !important;
+    border-radius: 6px !important;
+    font-size: 0.78rem !important;
+    font-weight: 500;
+    text-decoration: none !important;
+    white-space: nowrap;
+    margin: 0.15rem;
+    transition: all 0.2s ease;
+    background: #F3F4F6 !important;
+    color: #374151 !important;
+}
+
+/* Clases específicas para cada tipo */
+.admin-table td a.table-action-btn.delete,
+.admin-table a[class*="delete"],
+a[id*="CambiarEstado"][class*="delete"] {
+    background: linear-gradient(135deg, #FEF2F2, #FEE2E2) !important;
+    color: #DC2626 !important;
+    border: 1px solid rgba(220, 38, 38, 0.25) !important;
+}
+
+.admin-table td a.table-action-btn.edit,
+.admin-table a[class*="edit"],
+a[id*="btn"][class*="edit"] {
+    background: linear-gradient(135deg, #FFF7ED, #FFEDD5) !important;
+    color: #EA580C !important;
+    border: 1px solid rgba(234, 88, 12, 0.25) !important;
+}
+
+.admin-table td a.table-action-btn.success,
+.admin-table a[class*="success"],
+a[id*="btn"][class*="success"] {
+    background: linear-gradient(135deg, #F0FDF4, #DCFCE7) !important;
+    color: #059669 !important;
+    border: 1px solid rgba(5, 150, 105, 0.25) !important;
+}
+
+/* ========================================
+   FIX: Alineación del botón en filter-row
+   ======================================== */
+.filter-row {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    align-items: flex-end !important;
+}
+
+.filter-row > .form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.filter-row > input[type="submit"],
+.filter-row > .btn,
+.filter-row > [type="submit"] {
+    align-self: flex-end;
+    height: 38px;
+    margin-bottom: 0;
+}
+
+/* ========================================
+   FIX FINAL: Botones de acción - forzar estilos
+   ======================================== */
+/* Aplicar a TODOS los links en la columna de acciones */
+.admin-table td:last-child a {
+    display: inline-block !important;
+    padding: 0.35rem 0.65rem !important;
+    border-radius: 6px !important;
+    font-size: 0.75rem !important;
+    font-weight: 500 !important;
+    text-decoration: none !important;
+    margin: 2px !important;
+    transition: all 0.2s ease !important;
+    border: 1px solid transparent !important;
+}
+
+/* Estilo por defecto (gris) */
+.admin-table td:last-child a {
+    background: #F3F4F6 !important;
+    color: #374151 !important;
+}
+
+/* Botón delete/desactivar - Detectar por clase O por texto */
+.admin-table td:last-child a[class*="delete"],
+.admin-table td:last-child a:contains("Desactivar") {
+    background: linear-gradient(135deg, #FEF2F2, #FEE2E2) !important;
+    color: #DC2626 !important;
+    border-color: rgba(220, 38, 38, 0.3) !important;
+}
+
+/* Botón edit/asignar */
+.admin-table td:last-child a[class*="edit"] {
+    background: linear-gradient(135deg, #FFF7ED, #FFEDD5) !important;
+    color: #EA580C !important;
+    border-color: rgba(234, 88, 12, 0.3) !important;
+}
+
+/* Botón success/gestionar */
+.admin-table td:last-child a[class*="success"] {
+    background: linear-gradient(135deg, #F0FDF4, #DCFCE7) !important;
+    color: #059669 !important;
+    border-color: rgba(5, 150, 105, 0.3) !important;
+}
+
+/* Hover effects */
+.admin-table td:last-child a:hover {
+    transform: translateY(-1px) !important;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.15) !important;
+}
+
+/* ========================================
+   OVERRIDE FINAL - Botones acción tabla
+   ======================================== */
+a.table-action-btn {
+    display: inline-block !important;
+    padding: 6px 12px !important;
+    margin: 2px 4px !important;
+    border-radius: 6px !important;
+    font-size: 12px !important;
+    font-weight: 500 !important;
+    text-decoration: none !important;
+    cursor: pointer !important;
+    transition: all 0.2s !important;
+    border: 1px solid transparent !important;
+    background-color: #f3f4f6 !important;
+    color: #374151 !important;
+}
+
+a.table-action-btn.delete {
+    background-color: #fee2e2 !important;
+    background-image: linear-gradient(135deg, #fef2f2, #fee2e2) !important;
+    color: #dc2626 !important;
+    border-color: #fca5a5 !important;
+}
+
+a.table-action-btn.delete:hover {
+    background-color: #fecaca !important;
+    box-shadow: 0 2px 4px rgba(220,38,38,0.2) !important;
+}
+
+a.table-action-btn.edit {
+    background-color: #ffedd5 !important;
+    background-image: linear-gradient(135deg, #fff7ed, #ffedd5) !important;
+    color: #ea580c !important;
+    border-color: #fdba74 !important;
+}
+
+a.table-action-btn.edit:hover {
+    background-color: #fed7aa !important;
+    box-shadow: 0 2px 4px rgba(234,88,12,0.2) !important;
+}
+
+a.table-action-btn.success {
+    background-color: #dcfce7 !important;
+    background-image: linear-gradient(135deg, #f0fdf4, #dcfce7) !important;
+    color: #059669 !important;
+    border-color: #86efac !important;
+}
+
+a.table-action-btn.success:hover {
+    background-color: #bbf7d0 !important;
+    box-shadow: 0 2px 4px rgba(5,150,105,0.2) !important;
+}
+
+/* ========================================
+   BUTTONS - Estilos de botones
+   ======================================== */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1.25rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #FF8C42, #E67A30);
+    color: white !important;
+    box-shadow: 0 2px 4px rgba(255, 140, 66, 0.3);
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #E67A30, #D16A20);
+    box-shadow: 0 4px 8px rgba(255, 140, 66, 0.4);
+    transform: translateY(-1px);
+}
+
+.btn-secondary {
+    background: white;
+    color: #4A3B32;
+    border: 2px solid #E0E0E0;
+}
+
+.btn-secondary:hover {
+    border-color: #FF8C42;
+    color: #FF8C42;
+}
+
+.btn-danger {
+    background: linear-gradient(135deg, #EF4444, #DC2626);
+    color: white !important;
+}
+
+.btn-success {
+    background: linear-gradient(135deg, #10B981, #059669);
+    color: white !important;
+}
+
+/* Botón en filter-row */
+.filter-row .btn {
+    height: auto;
+    min-height: 38px;
+}
+
+/* ========================================
+   FIX: Table Action Buttons - Texto completo
+   ======================================== */
+.admin-table td:last-child {
+    min-width: 180px;
+}
+
+a.table-action-btn,
+.admin-table td a {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 4px !important;
+    padding: 5px 10px !important;
+    margin: 2px !important;
+    border-radius: 6px !important;
+    font-size: 11px !important;
+    font-weight: 500 !important;
+    text-decoration: none !important;
+    white-space: nowrap !important;
+    line-height: 1.4 !important;
+    vertical-align: middle !important;
+}
+
+/* ========================================
+   OVERRIDE: Botón primario forzado
+   ======================================== */
+.btn.btn-primary,
+input.btn-primary,
+input[type="submit"].btn-primary,
+button.btn-primary {
+    background: linear-gradient(135deg, #FF8C42, #E67A30) !important;
+    background-color: #FF8C42 !important;
+    color: white !important;
+    border: none !important;
+    box-shadow: 0 2px 4px rgba(255, 140, 66, 0.3) !important;
+}
+
+.btn.btn-primary:hover,
+input.btn-primary:hover,
+input[type="submit"].btn-primary:hover {
+    background: linear-gradient(135deg, #E67A30, #D16A20) !important;
+    box-shadow: 0 4px 8px rgba(255, 140, 66, 0.4) !important;
+}
+
+/* ========================================
+   FIX: Columna de acciones - más espacio
+   ======================================== */
+.admin-table th:last-child,
+.admin-table td:last-child {
+    min-width: 220px !important;
+    width: auto !important;
+    white-space: normal !important;
+}
+
+/* Botones de acción - layout vertical */
+.admin-table td:last-child {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 4px !important;
+    align-items: center !important;
+}
+
+/* Reset y estilo limpio para botones de acción */
+.admin-table td:last-child a.table-action-btn {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 6px 10px !important;
+    margin: 2px !important;
+    border-radius: 6px !important;
+    font-size: 12px !important;
+    font-weight: 500 !important;
+    text-decoration: none !important;
+    white-space: nowrap !important;
+    overflow: visible !important;
+    text-overflow: unset !important;
+    max-width: none !important;
+    min-width: fit-content !important;
+}
+
+/* ========================================
+   MODAL BUTTONS - Botones de Modal
+   ======================================== */
+.modal-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1.25rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+}
+
+.modal-btn.primary {
+    background: linear-gradient(135deg, #10B981, #059669) !important;
+    color: white !important;
+    box-shadow: 0 2px 4px rgba(16, 185, 129, 0.3);
+}
+
+.modal-btn.primary:hover {
+    background: linear-gradient(135deg, #059669, #047857) !important;
+    box-shadow: 0 4px 8px rgba(16, 185, 129, 0.4);
+}
+
+.modal-btn.secondary {
+    background: white !important;
+    color: #4A3B32 !important;
+    border: 2px solid #E0E0E0 !important;
+}
+
+.modal-btn.secondary:hover {
+    border-color: #FF8C42 !important;
+    color: #FF8C42 !important;
+}
+
+.modal-btn.delete {
+    background: linear-gradient(135deg, #EF4444, #DC2626) !important;
+    color: white !important;
+    box-shadow: 0 2px 4px rgba(239, 68, 68, 0.3);
+}
+
+.modal-btn.delete:hover {
+    background: linear-gradient(135deg, #DC2626, #B91C1C) !important;
+    box-shadow: 0 4px 8px rgba(239, 68, 68, 0.4);
+}
+
+.modal-btn.warning {
+    background: linear-gradient(135deg, #F59E0B, #D97706) !important;
+    color: white !important;
+}
+
+/* Modal actions container */
+.modal-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid #eee;
+}

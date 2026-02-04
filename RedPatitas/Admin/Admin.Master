@@ -10,8 +10,8 @@
             Panel Admin | RedPatitas
         </asp:ContentPlaceHolder>
     </title>
-    <link rel="stylesheet" href="~/Style/estilos-base.css">
-    <link rel="stylesheet" href="~/Style/estilos-paneles.css">
+    <link rel="stylesheet" href="<%= ResolveUrl("~/Style/estilos-base.css") %>">
+    <link rel="stylesheet" href="<%= ResolveUrl("~/Style/estilos-paneles.css") %>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -169,12 +169,53 @@
             </div>
         </main>
     </form>
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="text/javascript">
         function toggleSidebar() {
             var sidebar = document.querySelector('.sidebar');
             var overlay = document.getElementById('sidebarOverlay');
             sidebar.classList.toggle('active');
             overlay.classList.toggle('active');
+        }
+        
+        // Función para confirmaciones con SweetAlert2
+        function confirmAction(title, text, icon) {
+            event.preventDefault();
+            var element = event.target.closest('a') || event.target;
+            
+            Swal.fire({
+                title: title,
+                text: text,
+                icon: icon || 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#FF8C42',
+                cancelButtonColor: '#6B7280',
+                confirmButtonText: 'Sí, continuar',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Ejecutar el postback del elemento
+                    if (element.href && element.href.indexOf('javascript:') === 0) {
+                        eval(element.href.replace('javascript:', ''));
+                    } else {
+                        __doPostBack(element.name || element.id, '');
+                    }
+                }
+            });
+            return false;
+        }
+        
+        // Función para mostrar toast de notificación
+        function showToast(message, icon) {
+            Swal.fire({
+                toast: true,
+                position: 'top-end',
+                icon: icon || 'success',
+                title: message,
+                showConfirmButton: false,
+                timer: 2500
+            });
         }
     </script>
     <script src="<%= ResolveUrl("~/Js/ux-components.js") %>"></script>

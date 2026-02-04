@@ -20,18 +20,16 @@
                 <span class="panel-title">Filtros</span>
             </div>
             <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-            <div style="display: flex; gap: 1rem; flex-wrap: wrap; align-items: flex-end;">
-                <div>
-                    <label
-                        style="font-size: 0.8rem; color: var(--text-light); display: block; margin-bottom: 0.25rem;">Rol</label>
+            <div class="filter-row">
+                <div class="form-group">
+                    <label>Rol</label>
                     <asp:DropDownList ID="ddlFiltroRol" runat="server" AutoPostBack="true"
                         OnSelectedIndexChanged="ddlFiltroRol_SelectedIndexChanged" CssClass="form-control">
                         <asp:ListItem Value="0" Text="Todos los roles"></asp:ListItem>
                     </asp:DropDownList>
                 </div>
-                <div>
-                    <label
-                        style="font-size: 0.8rem; color: var(--text-light); display: block; margin-bottom: 0.25rem;">Estado</label>
+                <div class="form-group">
+                    <label>Estado</label>
                     <asp:DropDownList ID="ddlFiltroEstado" runat="server" AutoPostBack="true"
                         OnSelectedIndexChanged="ddlFiltroEstado_SelectedIndexChanged" CssClass="form-control">
                         <asp:ListItem Value="" Text="Todos"></asp:ListItem>
@@ -39,14 +37,16 @@
                         <asp:ListItem Value="false" Text="Inactivos"></asp:ListItem>
                     </asp:DropDownList>
                 </div>
-                <div>
-                    <label
-                        style="font-size: 0.8rem; color: var(--text-light); display: block; margin-bottom: 0.25rem;">Buscar</label>
+                <div class="form-group">
+                    <label>Buscar</label>
                     <asp:TextBox ID="txtBusqueda" runat="server" placeholder="Nombre o email..."
                         CssClass="form-control"></asp:TextBox>
                 </div>
-                <asp:Button ID="btnBuscar" runat="server" Text="Buscar" CssClass="btn btn-primary"
-                    OnClick="btnBuscar_Click" />
+                <div class="form-group">
+                    <label>&nbsp;</label>
+                    <asp:Button ID="btnBuscar" runat="server" Text="Buscar" CssClass="btn btn-primary"
+                        OnClick="btnBuscar_Click" />
+                </div>
             </div>
         </div>
 
@@ -138,11 +138,8 @@
                                     <!-- Indicador Verificado -->
                                     <span class="status-badge success"
                                         style='<%# (int)Eval("IdRol") == 2 && (bool)Eval("RefugioVerificado") ? "display:inline-block; font-size: 0.75rem;" : "display:none;" %>'>
-                                        <!-- Indicador Verificado -->
-                                        <span class="status-badge success"
-                                            style='<%# (int)Eval("IdRol") == 2 && (bool)Eval("RefugioVerificado") ? "display:inline-block; font-size: 0.75rem;" : "display:none;" %>'>
-                                            ✓ Verificado
-                                        </span>
+                                        ✓ Verificado
+                                    </span>
                                 </td>
                             </tr>
                         </ItemTemplate>
