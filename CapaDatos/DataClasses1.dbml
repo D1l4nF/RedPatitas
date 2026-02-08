@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="RedPatitas" Class="DataClasses1DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=.;Initial Catalog=RedPatitas;Integrated Security=True;Encrypt=True;Trust Server Certificate=True" SettingsObjectName="CapaDatos.Properties.Settings" SettingsPropertyName="RedPatitasConnectionString2" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=DESKTOP-HBFHBMR\SQLEXPRESS;Initial Catalog=RedPatitas;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False" SettingsObjectName="CapaDatos.Properties.Settings" SettingsPropertyName="RedPatitasConnectionString3" Provider="System.Data.SqlClient" />
   <Table Name="dbo.tbl_Auditoria" Member="tbl_Auditoria">
     <Type Name="tbl_Auditoria">
       <Column Name="aud_IdAuditoria" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -23,6 +23,9 @@
       <Column Name="avi_Descripcion" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="avi_FechaAvistamiento" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="avi_FechaReporte" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="avi_Latitud" Type="System.Decimal" DbType="Decimal(10,8)" CanBeNull="true" />
+      <Column Name="avi_Longitud" Type="System.Decimal" DbType="Decimal(11,8)" CanBeNull="true" />
+      <Column Name="avi_FotoUrl" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
       <Association Name="tbl_ReportesMascotas_tbl_Avistamientos" Member="tbl_ReportesMascotas" ThisKey="avi_IdReporte" OtherKey="rep_IdReporte" Type="tbl_ReportesMascotas" IsForeignKey="true" />
       <Association Name="tbl_Usuarios_tbl_Avistamientos" Member="tbl_Usuarios" ThisKey="avi_IdUsuario" OtherKey="usu_IdUsuario" Type="tbl_Usuarios" IsForeignKey="true" />
     </Type>
@@ -178,14 +181,14 @@
       <Column Name="ref_Telefono" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
       <Column Name="ref_Email" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
       <Column Name="ref_LogoUrl" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
-      <Column Name="ref_Verificado" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="ref_FechaVerificacion" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="ref_Estado" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="ref_FechaRegistro" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="ref_FacebookUrl" Type="System.String" DbType="VarChar(300)" CanBeNull="true" />
       <Column Name="ref_InstagramUrl" Type="System.String" DbType="VarChar(300)" CanBeNull="true" />
       <Column Name="ref_HorarioAtencion" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
       <Column Name="ref_CuentaDonacion" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="ref_Verificado" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="ref_FechaVerificacion" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ref_Estado" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="ref_FechaRegistro" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Association Name="tbl_Refugios_tbl_Campanias" Member="tbl_Campanias" ThisKey="ref_IdRefugio" OtherKey="cam_IdRefugio" Type="tbl_Campanias" />
       <Association Name="tbl_Refugios_tbl_Mascotas" Member="tbl_Mascotas" ThisKey="ref_IdRefugio" OtherKey="mas_IdRefugio" Type="tbl_Mascotas" />
       <Association Name="tbl_Refugios_tbl_Usuarios" Member="tbl_Usuarios" ThisKey="ref_IdRefugio" OtherKey="usu_IdRefugio" Type="tbl_Usuarios" />

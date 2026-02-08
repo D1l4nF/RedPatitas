@@ -19,6 +19,7 @@ namespace RedPatitas.Admin
                 CargarMascotasPorEstado();
                 CargarAdopcionesMensuales();
                 CargarTopRefugios();
+                CargarEstadisticasReportes();
             }
         }
 
@@ -199,6 +200,24 @@ namespace RedPatitas.Admin
             {
                 pnlSinRefugios.Visible = true;
                 System.Diagnostics.Debug.WriteLine("Error cargando top refugios: " + ex.Message);
+            }
+        }
+
+        private void CargarEstadisticasReportes()
+        {
+            try
+            {
+                var stats = CapaNegocios.CN_ReporteService.ObtenerEstadisticasReportes();
+                
+                litReportesTotales.Text = stats.TotalReportes.ToString("N0");
+                litReportesPerdidas.Text = stats.Perdidas.ToString("N0");
+                litReportesEncontradas.Text = stats.Encontradas.ToString("N0");
+                litReportesReunidas.Text = stats.Reunidas.ToString("N0");
+                litTotalAvistamientos.Text = stats.TotalAvistamientos.ToString("N0");
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Error cargando estadísticas de reportes: " + ex.Message);
             }
         }
 

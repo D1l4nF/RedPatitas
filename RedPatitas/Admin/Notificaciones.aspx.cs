@@ -94,9 +94,9 @@ namespace RedPatitas.Admin
                     };
 
                     // Intentar obtener el usuario actual de la sesión
-                    if (Session["IdUsuario"] != null)
+                    if (Session["UsuarioId"] != null)
                     {
-                        auditoria.aud_IdUsuario = Convert.ToInt32(Session["IdUsuario"]);
+                        auditoria.aud_IdUsuario = Convert.ToInt32(Session["UsuarioId"]);
                     }
 
                     db.tbl_Auditoria.InsertOnSubmit(auditoria);
