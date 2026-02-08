@@ -969,3 +969,68 @@ PRINT '  - ref_HorarioAtencion (VARCHAR 200)';
 PRINT '  - ref_CuentaDonacion (VARCHAR 500)';
 PRINT '========================================';
 GO
+
+-- =============================================
+-- Migración: Agregar campos de geolocalización a tbl_Avistamientos
+-- Fecha: 2026-02-07
+-- Descripción: Agrega coordenadas y foto de prueba para avistamientos en el mapa
+-- =============================================
+
+USE RedPatitas;
+GO
+
+-- Agregar columna para latitud del avistamiento
+IF NOT EXISTS (SELECT 1 FROM sys.columns WHERE object_id = OBJECT_ID('dbo.tbl_Avistamientos') AND name = 'avi_Latitud')
+BEGIN
+    ALTER TABLE dbo.tbl_Avistamientos
+    ADD avi_Latitud DECIMAL(10,8) NULL;
+    PRINT 'Columna avi_Latitud agregada correctamente.';
+END
+ELSE
+BEGIN
+    PRINT 'Columna avi_Latitud ya existe.';
+END
+GO
+
+-- Agregar columna para longitud del avistamiento
+IF NOT EXISTS (SELECT 1 FROM sys.columns WHERE object_id = OBJECT_ID('dbo.tbl_Avistamientos') AND name = 'avi_Longitud')
+BEGIN
+    ALTER TABLE dbo.tbl_Avistamientos
+    ADD avi_Longitud DECIMAL(11,8) NULL;
+    PRINT 'Columna avi_Longitud agregada correctamente.';
+END
+ELSE
+BEGIN
+    PRINT 'Columna avi_Longitud ya existe.';
+END
+GO
+
+-- Agregar columna para URL de foto del avistamiento
+IF NOT EXISTS (SELECT 1 FROM sys.columns WHERE object_id = OBJECT_ID('dbo.tbl_Avistamientos') AND name = 'avi_FotoUrl')
+BEGIN
+    ALTER TABLE dbo.tbl_Avistamientos
+    ADD avi_FotoUrl VARCHAR(500) NULL;
+    PRINT 'Columna avi_FotoUrl agregada correctamente.';
+END
+ELSE
+BEGIN
+    PRINT 'Columna avi_FotoUrl ya existe.';
+END
+GO
+
+-- Crear índice para búsquedas geográficas de avistamientos
+IF NOT EXISTS (SELECT 1 FROM sys.indexes WHERE object_id = OBJECT_ID('dbo.tbl_Avistamientos') AND name = 'IX_Avistamientos_Coordenadas')
+BEGIN
+    CREATE INDEX IX_Avistamientos_Coordenadas ON tbl_Avistamientos(avi_Latitud, avi_Longitud);
+    PRINT 'Índice IX_Avistamientos_Coordenadas creado.';
+END
+GO
+
+PRINT '========================================';
+PRINT 'Migración completada exitosamente.';
+PRINT 'Nuevas columnas en tbl_Avistamientos:';
+PRINT '  - avi_Latitud (DECIMAL 10,8)';
+PRINT '  - avi_Longitud (DECIMAL 11,8)';
+PRINT '  - avi_FotoUrl (VARCHAR 500)';
+PRINT '========================================';
+GO
