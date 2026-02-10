@@ -104,9 +104,9 @@ namespace RedPatitas.Adoptante
 
                 // Obtener ID de usuario (si está logueado)
                 int? idUsuario = null;
-                if (Session["IdUsuario"] != null)
+                if (Session["UsuarioId"] != null)
                 {
-                    idUsuario = Convert.ToInt32(Session["IdUsuario"]);
+                    idUsuario = Convert.ToInt32(Session["UsuarioId"]);
                 }
 
                 // Crear cartas para cada mascota
@@ -263,14 +263,14 @@ namespace RedPatitas.Adoptante
         {
             try
             {
-                if (Session["IdUsuario"] == null)
+                if (Session["UsuarioId"] == null)
                 {
                     Response.Redirect("~/Login.aspx?returnUrl=" + Server.UrlEncode(Request.Url.PathAndQuery));
                     return;
                 }
 
                 int idMascota = Convert.ToInt32(((Button)sender).CommandArgument);
-                int idUsuario = Convert.ToInt32(Session["IdUsuario"]);
+                int idUsuario = Convert.ToInt32(Session["UsuarioId"]);
 
                 // Usar el método existente de CN_AdopcionService
                 bool exito = CN_AdopcionService.SolicitarAdopcion(idMascota, idUsuario);

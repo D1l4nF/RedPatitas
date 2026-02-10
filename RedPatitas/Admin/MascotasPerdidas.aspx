@@ -142,17 +142,10 @@
                                         <%# Eval("Estado") %>
                                     </span></td>
                                 <td>
-                                    <asp:LinkButton ID="btnVerDetalle" runat="server" CommandName="Ver"
-                                        CommandArgument='<%# Eval("IdReporte") %>' CssClass="table-action-btn edit">Ver
-                                    </asp:LinkButton>
-                                    <asp:LinkButton ID="btnCambiarEstado" runat="server" CommandName="Reunido"
-                                        CommandArgument='<%# Eval("IdReporte") %>' CssClass="table-action-btn"
-                                        ToolTip="Marcar como reunido"
-                                        Visible='<%# Eval("Estado").ToString() != "Reunido" %>'>✓ Reunido
-                                    </asp:LinkButton>
-                                    <asp:LinkButton ID="btnCerrar" runat="server" CommandName="Cerrar"
-                                        CommandArgument='<%# Eval("IdReporte") %>' CssClass="table-action-btn delete"
-                                        OnClientClick="return confirm('¿Cerrar este reporte?');">Cerrar</asp:LinkButton>
+                                    <a href='../Public/DetalleReporte.aspx?id=<%# Eval("IdReporte") %>'
+                                        class="table-action-btn edit" target="_blank" title="Ver en página pública">
+                                        👁️ Ver
+                                    </a>
                                 </td>
                             </tr>
                         </ItemTemplate>

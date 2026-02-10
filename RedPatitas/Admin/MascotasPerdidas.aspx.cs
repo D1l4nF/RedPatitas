@@ -108,30 +108,8 @@ namespace RedPatitas.Admin
 
         protected void rptReportes_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
-            int idReporte = int.Parse(e.CommandArgument.ToString());
-
-            using (var db = new DataClasses1DataContext())
-            {
-                var reporte = db.tbl_ReportesMascotas.FirstOrDefault(r => r.rep_IdReporte == idReporte);
-                if (reporte != null)
-                {
-                    if (e.CommandName == "Reunido")
-                    {
-                        reporte.rep_Estado = "Reunido";
-                        reporte.rep_FechaCierre = DateTime.Now;
-                        db.SubmitChanges();
-                    }
-                    else if (e.CommandName == "Cerrar")
-                    {
-                        reporte.rep_Estado = "SinResolver";
-                        reporte.rep_FechaCierre = DateTime.Now;
-                        db.SubmitChanges();
-                    }
-                }
-            }
-
-            CargarEstadisticas();
-            CargarReportes();
+            // Acciones de gestión se han movido al panel Adoptante (MisReportes.aspx)
+            // El Admin solo tiene visibilidad, no acciones de cambio de estado
         }
 
         protected string GetEstadoBadgeClass(string estado)
