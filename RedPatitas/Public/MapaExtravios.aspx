@@ -7,7 +7,6 @@
 
     <asp:Content ID="Content2" ContentPlaceHolderID="head" runat="server">
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-        <script src="https://unpkg.com/leaflet.heat/dist/leaflet-heat.js"></script>
     </asp:Content>
 
     <asp:Content ID="Content3" ContentPlaceHolderID="MainContent" runat="server">
@@ -43,10 +42,7 @@
                     </asp:DropDownList>
                 </div>
                 <div class="filter-group">
-                    <label><input type="checkbox" id="chkHeatmap" onchange="toggleHeatmap()" /> Mapa de Calor</label>
-                </div>
-                <div class="filter-group">
-                    <a href="ReportarMascota.aspx" class="btn-map-action">+ Reportar Mascota</a>
+                    <a href="Reportar.aspx" class="btn-map-action">➕ Reportar Mascota</a>
                 </div>
             </div>
 
@@ -76,8 +72,6 @@
             var map;
             var marcadores = [];
             var reportesData = [];
-            var heatLayer = null;
-            var heatmapActivo = false;
 
             document.addEventListener('DOMContentLoaded', function () {
                 // Inicializar mapa centrado en Quito
@@ -123,8 +117,7 @@
                                 '<p style="margin:0 0 5px 0;"><strong>Descripción:</strong> ' + (reporte.Descripcion || 'Sin descripción') + '</p>' +
                                 '<p style="margin:0 0 5px 0;"><strong>Ubicación:</strong> ' + (reporte.Ubicacion || 'No especificada') + '</p>' +
                                 '<p style="margin:0 0 5px 0;"><strong>Fecha:</strong> ' + (reporte.Fecha || 'No especificada') + '</p>' +
-                                '<p style="margin:0 0 10px 0;"><strong>Contacto:</strong> ' + (reporte.Telefono || 'No disponible') + '</p>' +
-                                '<a href="DetalleReporte.aspx?id=' + reporte.Id + '" style="display:inline-block;padding:6px 12px;background:#6C63FF;color:white;text-decoration:none;border-radius:5px;font-size:12px;">Ver Detalles →</a>' +
+                                '<p style="margin:0;"><strong>Contacto:</strong> ' + (reporte.Telefono || 'No disponible') + '</p>' +
                                 '</div>'
                             );
 
@@ -146,59 +139,13 @@
 
                 marcadores.forEach(function (marker) {
                     if (filtro === 'todos' || marker.tipoReporte === filtro) {
-                        if (!map.hasLayer(marker) && !heatmapActivo) {
+                        if (!map.hasLayer(marker)) {
                             marker.addTo(map);
                         }
                     } else {
                         map.removeLayer(marker);
                     }
                 });
-
-                // Actualizar heatmap si está activo
-                if (heatmapActivo) {
-                    actualizarHeatmap(filtro);
-                }
-            }
-
-            function toggleHeatmap() {
-                heatmapActivo = document.getElementById('chkHeatmap').checked;
-                var filtro = document.getElementById('<%= ddlFiltroTipo.ClientID %>').value;
-
-                if (heatmapActivo) {
-                    // Ocultar marcadores y mostrar heatmap
-                    marcadores.forEach(function (m) { map.removeLayer(m); });
-                    actualizarHeatmap(filtro);
-                } else {
-                    // Mostrar marcadores y quitar heatmap
-                    if (heatLayer) {
-                        map.removeLayer(heatLayer);
-                        heatLayer = null;
-                    }
-                    filtrarMarcadores();
-                }
-            }
-
-            function actualizarHeatmap(filtro) {
-                if (heatLayer) {
-                    map.removeLayer(heatLayer);
-                }
-
-                var heatData = reportesData
-                    .filter(function (r) {
-                        return (filtro === 'todos' || r.Tipo === filtro) && r.Latitud && r.Longitud;
-                    })
-                    .map(function (r) {
-                        return [r.Latitud, r.Longitud, 1];
-                    });
-
-                if (heatData.length > 0) {
-                    heatLayer = L.heatLayer(heatData, {
-                        radius: 25,
-                        blur: 15,
-                        maxZoom: 17,
-                        gradient: { 0.4: 'yellow', 0.65: 'orange', 1: 'red' }
-                    }).addTo(map);
-                }
             }
         </script>
     </asp:Content>

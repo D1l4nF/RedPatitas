@@ -154,61 +154,6 @@
             </div>
         </div>
 
-        <!-- Reportes de Mascotas Perdidas -->
-        <div class="admin-panel" style="margin-top: 1.5rem;">
-            <div class="panel-header">
-                <h2 class="panel-title">🔍 Estadísticas de Mascotas Perdidas</h2>
-                <a href="MascotasPerdidas.aspx" class="btn btn-secondary">Ver Lista →</a>
-            </div>
-            <div class="admin-stats" style="margin: 0; padding: 1rem;">
-                <div class="admin-stat-card" style="flex: 1; margin: 0.5rem;">
-                    <div class="stat-icon reports">📋</div>
-                    <div class="stat-info">
-                        <h3>
-                            <asp:Literal ID="litReportesTotales" runat="server" Text="0"></asp:Literal>
-                        </h3>
-                        <p>Total Reportes</p>
-                    </div>
-                </div>
-                <div class="admin-stat-card" style="flex: 1; margin: 0.5rem;">
-                    <div class="stat-icon" style="background: #E74C3C;">🔴</div>
-                    <div class="stat-info">
-                        <h3>
-                            <asp:Literal ID="litReportesPerdidas" runat="server" Text="0"></asp:Literal>
-                        </h3>
-                        <p>Mascotas Perdidas</p>
-                    </div>
-                </div>
-                <div class="admin-stat-card" style="flex: 1; margin: 0.5rem;">
-                    <div class="stat-icon" style="background: #27AE60;">🟢</div>
-                    <div class="stat-info">
-                        <h3>
-                            <asp:Literal ID="litReportesEncontradas" runat="server" Text="0"></asp:Literal>
-                        </h3>
-                        <p>Mascotas Encontradas</p>
-                    </div>
-                </div>
-                <div class="admin-stat-card" style="flex: 1; margin: 0.5rem;">
-                    <div class="stat-icon" style="background: #8B5CF6;">❤️</div>
-                    <div class="stat-info">
-                        <h3>
-                            <asp:Literal ID="litReportesReunidas" runat="server" Text="0"></asp:Literal>
-                        </h3>
-                        <p>Reunidas con Dueño</p>
-                    </div>
-                </div>
-                <div class="admin-stat-card" style="flex: 1; margin: 0.5rem;">
-                    <div class="stat-icon users">👀</div>
-                    <div class="stat-info">
-                        <h3>
-                            <asp:Literal ID="litTotalAvistamientos" runat="server" Text="0"></asp:Literal>
-                        </h3>
-                        <p>Avistamientos</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <!-- Top 5 Refugios -->
         <div class="admin-panel" style="margin-top: 1.5rem;">
             <div class="panel-header">

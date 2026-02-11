@@ -29,31 +29,6 @@ namespace RedPatitas.Admin
         protected global::System.Web.UI.WebControls.Literal litTotalAdopciones;
 
         /// <summary>
-        /// Control litReportesTotales.
-        /// </summary>
-        protected global::System.Web.UI.WebControls.Literal litReportesTotales;
-
-        /// <summary>
-        /// Control litReportesPerdidas.
-        /// </summary>
-        protected global::System.Web.UI.WebControls.Literal litReportesPerdidas;
-
-        /// <summary>
-        /// Control litReportesEncontradas.
-        /// </summary>
-        protected global::System.Web.UI.WebControls.Literal litReportesEncontradas;
-
-        /// <summary>
-        /// Control litReportesReunidas.
-        /// </summary>
-        protected global::System.Web.UI.WebControls.Literal litReportesReunidas;
-
-        /// <summary>
-        /// Control litTotalAvistamientos.
-        /// </summary>
-        protected global::System.Web.UI.WebControls.Literal litTotalAvistamientos;
-
-        /// <summary>
         /// Control rptUsuariosPorRol.
         /// </summary>
         protected global::System.Web.UI.WebControls.Repeater rptUsuariosPorRol;

@@ -54,16 +54,5 @@ namespace CapaDatos.Properties {
                 return ((string)(this["RedPatitasConnectionString2"]));
             }
         }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DESKTOP-HBFHBMR\\SQLEXPRESS;Initial Catalog=RedPatitas;Integrated Secu" +
-            "rity=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False")]
-        public string RedPatitasConnectionString3 {
-            get {
-                return ((string)(this["RedPatitasConnectionString3"]));
-            }
-        }
     }
 }

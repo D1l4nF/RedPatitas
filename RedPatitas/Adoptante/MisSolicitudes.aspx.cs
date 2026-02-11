@@ -23,7 +23,7 @@ namespace RedPatitas.Adoptante
         {
             try
             {
-                object raw = Session["UsuarioId"];
+                object raw = Session["IdUsuario"] ?? Session["UsuarioId"];
                 if (raw == null || !int.TryParse(raw.ToString(), out int idUsuario))
                 {
                     Response.Redirect("~/Login.aspx");

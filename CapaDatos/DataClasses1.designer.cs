@@ -87,7 +87,7 @@ namespace CapaDatos
     #endregion
 		
 		public DataClasses1DataContext() : 
-				base(global::CapaDatos.Properties.Settings.Default.RedPatitasConnectionString3, mappingSource)
+				base(global::CapaDatos.Properties.Settings.Default.RedPatitasConnectionString2, mappingSource)
 		{
 			OnCreated();
 		}
@@ -616,12 +616,6 @@ namespace CapaDatos
 		
 		private System.Nullable<System.DateTime> _avi_FechaReporte;
 		
-		private System.Nullable<decimal> _avi_Latitud;
-		
-		private System.Nullable<decimal> _avi_Longitud;
-		
-		private string _avi_FotoUrl;
-		
 		private EntityRef<tbl_ReportesMascotas> _tbl_ReportesMascotas;
 		
 		private EntityRef<tbl_Usuarios> _tbl_Usuarios;
@@ -644,12 +638,6 @@ namespace CapaDatos
     partial void Onavi_FechaAvistamientoChanged();
     partial void Onavi_FechaReporteChanging(System.Nullable<System.DateTime> value);
     partial void Onavi_FechaReporteChanged();
-    partial void Onavi_LatitudChanging(System.Nullable<decimal> value);
-    partial void Onavi_LatitudChanged();
-    partial void Onavi_LongitudChanging(System.Nullable<decimal> value);
-    partial void Onavi_LongitudChanged();
-    partial void Onavi_FotoUrlChanging(string value);
-    partial void Onavi_FotoUrlChanged();
     #endregion
 		
 		public tbl_Avistamientos()
@@ -803,67 +791,6 @@ namespace CapaDatos
 					this._avi_FechaReporte = value;
 					this.SendPropertyChanged("avi_FechaReporte");
 					this.Onavi_FechaReporteChanged();
-				}
-			}
-		}
-		
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_avi_Latitud", DbType="Decimal(10,8)")]
-		public System.Nullable<decimal> avi_Latitud
-		{
-			get
-			{
-				return this._avi_Latitud;
-			}
-			set
-			{
-				if ((this._avi_Latitud != value))
-				{
-					this.Onavi_LatitudChanging(value);
-					this.SendPropertyChanging();
-					this._avi_Latitud = value;
-					this.SendPropertyChanged("avi_Latitud");
-					this.Onavi_LatitudChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_avi_Longitud", DbType="Decimal(11,8)")]
-		public System.Nullable<decimal> avi_Longitud
-		{
-			get
-			{
-				return this._avi_Longitud;
-			}
-			set
-			{
-				if ((this._avi_Longitud != value))
-				{
-					this.Onavi_LongitudChanging(value);
-					this.SendPropertyChanging();
-					this._avi_Longitud = value;
-					this.SendPropertyChanged("avi_Longitud");
-					this.Onavi_LongitudChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_avi_FotoUrl", DbType="VarChar(500)")]
-		public string avi_FotoUrl
-		{
-			get
-			{
-				return this._avi_FotoUrl;
-			}
-			set
-			{
-				if ((this._avi_FotoUrl != value))
-				{
-					this.Onavi_FotoUrlChanging(value);
-					this.SendPropertyChanging();
-					this._avi_FotoUrl = value;
-					this.SendPropertyChanged("avi_FotoUrl");
-					this.Onavi_FotoUrlChanged();
 				}
 			}
 		}
@@ -3971,14 +3898,6 @@ namespace CapaDatos
 		
 		private string _ref_LogoUrl;
 		
-		private string _ref_FacebookUrl;
-		
-		private string _ref_InstagramUrl;
-		
-		private string _ref_HorarioAtencion;
-		
-		private string _ref_CuentaDonacion;
-		
 		private System.Nullable<bool> _ref_Verificado;
 		
 		private System.Nullable<System.DateTime> _ref_FechaVerificacion;
@@ -3986,6 +3905,14 @@ namespace CapaDatos
 		private System.Nullable<bool> _ref_Estado;
 		
 		private System.Nullable<System.DateTime> _ref_FechaRegistro;
+		
+		private string _ref_FacebookUrl;
+		
+		private string _ref_InstagramUrl;
+		
+		private string _ref_HorarioAtencion;
+		
+		private string _ref_CuentaDonacion;
 		
 		private EntitySet<tbl_Campanias> _tbl_Campanias;
 		
@@ -4017,14 +3944,6 @@ namespace CapaDatos
     partial void Onref_EmailChanged();
     partial void Onref_LogoUrlChanging(string value);
     partial void Onref_LogoUrlChanged();
-    partial void Onref_FacebookUrlChanging(string value);
-    partial void Onref_FacebookUrlChanged();
-    partial void Onref_InstagramUrlChanging(string value);
-    partial void Onref_InstagramUrlChanged();
-    partial void Onref_HorarioAtencionChanging(string value);
-    partial void Onref_HorarioAtencionChanged();
-    partial void Onref_CuentaDonacionChanging(string value);
-    partial void Onref_CuentaDonacionChanged();
     partial void Onref_VerificadoChanging(System.Nullable<bool> value);
     partial void Onref_VerificadoChanged();
     partial void Onref_FechaVerificacionChanging(System.Nullable<System.DateTime> value);
@@ -4033,6 +3952,14 @@ namespace CapaDatos
     partial void Onref_EstadoChanged();
     partial void Onref_FechaRegistroChanging(System.Nullable<System.DateTime> value);
     partial void Onref_FechaRegistroChanged();
+    partial void Onref_FacebookUrlChanging(string value);
+    partial void Onref_FacebookUrlChanged();
+    partial void Onref_InstagramUrlChanging(string value);
+    partial void Onref_InstagramUrlChanged();
+    partial void Onref_HorarioAtencionChanging(string value);
+    partial void Onref_HorarioAtencionChanged();
+    partial void Onref_CuentaDonacionChanging(string value);
+    partial void Onref_CuentaDonacionChanged();
     #endregion
 		
 		public tbl_Refugios()
@@ -4243,86 +4170,6 @@ namespace CapaDatos
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ref_FacebookUrl", DbType="VarChar(300)")]
-		public string ref_FacebookUrl
-		{
-			get
-			{
-				return this._ref_FacebookUrl;
-			}
-			set
-			{
-				if ((this._ref_FacebookUrl != value))
-				{
-					this.Onref_FacebookUrlChanging(value);
-					this.SendPropertyChanging();
-					this._ref_FacebookUrl = value;
-					this.SendPropertyChanged("ref_FacebookUrl");
-					this.Onref_FacebookUrlChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ref_InstagramUrl", DbType="VarChar(300)")]
-		public string ref_InstagramUrl
-		{
-			get
-			{
-				return this._ref_InstagramUrl;
-			}
-			set
-			{
-				if ((this._ref_InstagramUrl != value))
-				{
-					this.Onref_InstagramUrlChanging(value);
-					this.SendPropertyChanging();
-					this._ref_InstagramUrl = value;
-					this.SendPropertyChanged("ref_InstagramUrl");
-					this.Onref_InstagramUrlChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ref_HorarioAtencion", DbType="VarChar(200)")]
-		public string ref_HorarioAtencion
-		{
-			get
-			{
-				return this._ref_HorarioAtencion;
-			}
-			set
-			{
-				if ((this._ref_HorarioAtencion != value))
-				{
-					this.Onref_HorarioAtencionChanging(value);
-					this.SendPropertyChanging();
-					this._ref_HorarioAtencion = value;
-					this.SendPropertyChanged("ref_HorarioAtencion");
-					this.Onref_HorarioAtencionChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ref_CuentaDonacion", DbType="VarChar(500)")]
-		public string ref_CuentaDonacion
-		{
-			get
-			{
-				return this._ref_CuentaDonacion;
-			}
-			set
-			{
-				if ((this._ref_CuentaDonacion != value))
-				{
-					this.Onref_CuentaDonacionChanging(value);
-					this.SendPropertyChanging();
-					this._ref_CuentaDonacion = value;
-					this.SendPropertyChanged("ref_CuentaDonacion");
-					this.Onref_CuentaDonacionChanged();
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ref_Verificado", DbType="Bit")]
 		public System.Nullable<bool> ref_Verificado
 		{
@@ -4399,6 +4246,86 @@ namespace CapaDatos
 					this._ref_FechaRegistro = value;
 					this.SendPropertyChanged("ref_FechaRegistro");
 					this.Onref_FechaRegistroChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ref_FacebookUrl", DbType="VarChar(300)")]
+		public string ref_FacebookUrl
+		{
+			get
+			{
+				return this._ref_FacebookUrl;
+			}
+			set
+			{
+				if ((this._ref_FacebookUrl != value))
+				{
+					this.Onref_FacebookUrlChanging(value);
+					this.SendPropertyChanging();
+					this._ref_FacebookUrl = value;
+					this.SendPropertyChanged("ref_FacebookUrl");
+					this.Onref_FacebookUrlChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ref_InstagramUrl", DbType="VarChar(300)")]
+		public string ref_InstagramUrl
+		{
+			get
+			{
+				return this._ref_InstagramUrl;
+			}
+			set
+			{
+				if ((this._ref_InstagramUrl != value))
+				{
+					this.Onref_InstagramUrlChanging(value);
+					this.SendPropertyChanging();
+					this._ref_InstagramUrl = value;
+					this.SendPropertyChanged("ref_InstagramUrl");
+					this.Onref_InstagramUrlChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ref_HorarioAtencion", DbType="VarChar(200)")]
+		public string ref_HorarioAtencion
+		{
+			get
+			{
+				return this._ref_HorarioAtencion;
+			}
+			set
+			{
+				if ((this._ref_HorarioAtencion != value))
+				{
+					this.Onref_HorarioAtencionChanging(value);
+					this.SendPropertyChanging();
+					this._ref_HorarioAtencion = value;
+					this.SendPropertyChanged("ref_HorarioAtencion");
+					this.Onref_HorarioAtencionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ref_CuentaDonacion", DbType="VarChar(500)")]
+		public string ref_CuentaDonacion
+		{
+			get
+			{
+				return this._ref_CuentaDonacion;
+			}
+			set
+			{
+				if ((this._ref_CuentaDonacion != value))
+				{
+					this.Onref_CuentaDonacionChanging(value);
+					this.SendPropertyChanging();
+					this._ref_CuentaDonacion = value;
+					this.SendPropertyChanged("ref_CuentaDonacion");
+					this.Onref_CuentaDonacionChanged();
 				}
 			}
 		}

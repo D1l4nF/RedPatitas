@@ -95,7 +95,6 @@
 		<Content Include="Adoptante\SolicitudAdopcion.aspx" />
 		<Content Include="Adoptante\Solicitudes.aspx" />
 		<Content Include="Adoptante\ReportarMascota.aspx" />
-		<Content Include="Adoptante\MisReportes.aspx" />
 		<Content Include="Adoptante\Perfil.aspx" />
 		<Content Include="Images\img_jaime.jpg" />
 		<Content Include="Images\jaime.png" />
@@ -106,7 +105,6 @@
 		<Content Include="Public\404.aspx" />
 		<Content Include="Public\Adopta.aspx" />
 		<Content Include="Public\Home.aspx" />
-		<Content Include="Public\DetalleReporte.aspx" />
 		<Content Include="Public\PerfilMascota.aspx" />
 		<Content Include="Public\Reportar.aspx" />
 		<Content Include="Public\MapaExtravios.aspx" />
@@ -303,13 +301,6 @@
 		<Compile Include="Adoptante\Solicitudes.aspx.designer.cs">
 			<DependentUpon>Solicitudes.aspx</DependentUpon>
 		</Compile>
-		<Compile Include="Adoptante\MisReportes.aspx.cs">
-			<DependentUpon>MisReportes.aspx</DependentUpon>
-			<SubType>ASPXCodeBehind</SubType>
-		</Compile>
-		<Compile Include="Adoptante\MisReportes.aspx.designer.cs">
-			<DependentUpon>MisReportes.aspx</DependentUpon>
-		</Compile>
 		<Compile Include="Adoptante\ReportarMascota.aspx.cs">
 			<DependentUpon>ReportarMascota.aspx</DependentUpon>
 			<SubType>ASPXCodeBehind</SubType>
@@ -373,13 +364,6 @@
 		</Compile>
 		<Compile Include="Public\404.aspx.designer.cs">
 			<DependentUpon>404.aspx</DependentUpon>
-		</Compile>
-		<Compile Include="Public\DetalleReporte.aspx.cs">
-			<DependentUpon>DetalleReporte.aspx</DependentUpon>
-			<SubType>ASPXCodeBehind</SubType>
-		</Compile>
-		<Compile Include="Public\DetalleReporte.aspx.designer.cs">
-			<DependentUpon>DetalleReporte.aspx</DependentUpon>
 		</Compile>
 		<Compile Include="Public\Adopta.aspx.cs">
 			<DependentUpon>Adopta.aspx</DependentUpon>
