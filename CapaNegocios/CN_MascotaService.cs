@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using CapaDatos;
@@ -316,6 +316,35 @@ namespace CapaNegocios
                 db.SubmitChanges();
             }
         }
+        /// <summary>
+        /// Actualiza los datos de una mascota existente
+        /// </summary>
+        public bool ActualizarMascota(tbl_Mascotas mascotaActualizada)
+        {
+            using (var db = new DataClasses1DataContext())
+            {
+                var mascota = db.tbl_Mascotas
+                    .FirstOrDefault(m => m.mas_IdMascota == mascotaActualizada.mas_IdMascota
+                                      && m.mas_Estado == true);
+
+                if (mascota == null) return false;
+
+                mascota.mas_Nombre         = mascotaActualizada.mas_Nombre;
+                mascota.mas_IdRaza         = mascotaActualizada.mas_IdRaza;
+                mascota.mas_Sexo           = mascotaActualizada.mas_Sexo;
+                mascota.mas_EdadAproximada = mascotaActualizada.mas_EdadAproximada;
+                mascota.mas_Tamano         = mascotaActualizada.mas_Tamano;
+                mascota.mas_Color          = mascotaActualizada.mas_Color;
+                mascota.mas_Descripcion    = mascotaActualizada.mas_Descripcion;
+                mascota.mas_Vacunado       = mascotaActualizada.mas_Vacunado;
+                mascota.mas_Esterilizado   = mascotaActualizada.mas_Esterilizado;
+                mascota.mas_EstadoAdopcion = mascotaActualizada.mas_EstadoAdopcion;
+
+                db.SubmitChanges();
+                return true;
+            }
+        }
+
 
         /// <summary>
         /// Elimina lógicamente una mascota

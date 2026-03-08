@@ -63,6 +63,13 @@
                     </svg>
                     Reportar Mascota
                 </asp:HyperLink>
+                <asp:HyperLink ID="lnkMisReportes" runat="server" NavigateUrl="~/Adoptante/MisReportes.aspx" CssClass="nav-link">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 11l3 3L22 4"></path>
+                        <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"></path>
+                    </svg>
+                    Mis Reportes
+                </asp:HyperLink>
                 <div class="menu-category">Mi Cuenta</div>
                 <asp:HyperLink ID="lnkFavoritos" runat="server" NavigateUrl="~/Adoptante/Favoritos.aspx" CssClass="nav-link">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"

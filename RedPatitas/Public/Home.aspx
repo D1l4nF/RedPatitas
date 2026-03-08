@@ -76,7 +76,15 @@
                     <ItemTemplate>
                         <div class="pet-card">
                             <div class="pet-image">
-                                <%# Eval("EmojiEspecie") %>
+                                <asp:Panel runat="server"
+                                    Visible='<%# !string.IsNullOrEmpty(Convert.ToString(Eval("FotoPrincipal"))) %>'>
+                                    <img src='<%# ResolveUrl(Convert.ToString(Eval("FotoPrincipal"))) %>'
+                                        alt="Foto mascota" style="width:100%; height:100%; object-fit:cover;" />
+                                </asp:Panel>
+                                <asp:Panel runat="server"
+                                    Visible='<%# string.IsNullOrEmpty(Convert.ToString(Eval("FotoPrincipal"))) %>'>
+                                    <%# Eval("EmojiEspecie") %>
+                                </asp:Panel>
                             </div>
                             <div class="pet-info">
                                 <h3 class="pet-name">

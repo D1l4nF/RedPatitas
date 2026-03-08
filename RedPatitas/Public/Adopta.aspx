@@ -76,18 +76,26 @@
                     <ItemTemplate>
                         <div class="pet-card-adopta">
                             <div class="pet-card-image">
-                                <%# Eval("EmojiEspecie") %>
-                                    <span class='<%# (bool)Eval("EsNueva") ? "pet-badge new" : "pet-badge" %>'>
-                                        <%# (bool)Eval("EsNueva") ? "Nuevo" : "Disponible" %>
-                                    </span>
-                                    <button class="pet-favorite" aria-label="Agregar a favoritos" type="button">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                            width="18" height="18">
-                                            <path
-                                                d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
-                                            </path>
-                                        </svg>
-                                    </button>
+                                <asp:Panel runat="server"
+                                    Visible='<%# !string.IsNullOrEmpty(Convert.ToString(Eval("FotoPrincipal"))) %>'>
+                                    <img src='<%# ResolveUrl(Convert.ToString(Eval("FotoPrincipal"))) %>'
+                                        alt="Foto mascota" style="width:100%; height:100%; object-fit:cover;" />
+                                </asp:Panel>
+                                <asp:Panel runat="server"
+                                    Visible='<%# string.IsNullOrEmpty(Convert.ToString(Eval("FotoPrincipal"))) %>'>
+                                    <%# Eval("EmojiEspecie") %>
+                                </asp:Panel>
+                                <span class='<%# (bool)Eval("EsNueva") ? "pet-badge new" : "pet-badge" %>'>
+                                    <%# (bool)Eval("EsNueva") ? "Nuevo" : "Disponible" %>
+                                </span>
+                                <button class="pet-favorite" aria-label="Agregar a favoritos" type="button">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        width="18" height="18">
+                                        <path
+                                            d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+                                        </path>
+                                    </svg>
+                                </button>
                             </div>
                             <div class="pet-card-body">
                                 <div class="pet-card-header">

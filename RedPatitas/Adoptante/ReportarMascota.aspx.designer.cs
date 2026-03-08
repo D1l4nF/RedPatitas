@@ -32,5 +32,7 @@ namespace RedPatitas.Adoptante
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvTelefono;
         protected global::System.Web.UI.WebControls.TextBox txtEmail;
         protected global::System.Web.UI.WebControls.Button btnEnviar;
+        // Añadido: control de carga múltiple de fotos
+        protected global::System.Web.UI.WebControls.FileUpload fuFotos;
     }
 }
