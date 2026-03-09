@@ -119,103 +119,343 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AdminRefugio\AdminRefugio.Master.cs"><DependentUpon>AdminRefugio.Master</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
-    <Compile Include="AdminRefugio\AdminRefugio.Master.designer.cs"><DependentUpon>AdminRefugio.Master</DependentUpon></Compile>
-    <Compile Include="AdminRefugio\Dashboard.aspx.cs"><DependentUpon>Dashboard.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
-    <Compile Include="AdminRefugio\Dashboard.aspx.designer.cs"><DependentUpon>Dashboard.aspx</DependentUpon></Compile>
-    <Compile Include="AdminRefugio\Perfil.aspx.cs"><DependentUpon>Perfil.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
-    <Compile Include="AdminRefugio\Perfil.aspx.designer.cs"><DependentUpon>Perfil.aspx</DependentUpon></Compile>
-    <Compile Include="AdminRefugio\Campanias.aspx.cs"><DependentUpon>Campanias.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
-    <Compile Include="AdminRefugio\Campanias.aspx.designer.cs"><DependentUpon>Campanias.aspx</DependentUpon></Compile>
-    <Compile Include="AdminRefugio\Estadisticas.aspx.cs"><DependentUpon>Estadisticas.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
-    <Compile Include="AdminRefugio\Estadisticas.aspx.designer.cs"><DependentUpon>Estadisticas.aspx</DependentUpon></Compile>
-    <Compile Include="AdminRefugio\Mascotas.aspx.cs"><DependentUpon>Mascotas.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
-    <Compile Include="AdminRefugio\Mascotas.aspx.designer.cs"><DependentUpon>Mascotas.aspx</DependentUpon></Compile>
-    <Compile Include="AdminRefugio\Solicitudes.aspx.cs"><DependentUpon>Solicitudes.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
-    <Compile Include="AdminRefugio\Solicitudes.aspx.designer.cs"><DependentUpon>Solicitudes.aspx</DependentUpon></Compile>
-    <Compile Include="AdminRefugio\Usuarios.aspx.cs"><DependentUpon>Usuarios.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
-    <Compile Include="AdminRefugio\Usuarios.aspx.designer.cs"><DependentUpon>Usuarios.aspx</DependentUpon></Compile>
-    <Compile Include="AdminRefugio\RevisarSolicitud.aspx.cs"><DependentUpon>RevisarSolicitud.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
-    <Compile Include="AdminRefugio\RevisarSolicitud.aspx.designer.cs"><DependentUpon>RevisarSolicitud.aspx</DependentUpon></Compile>
-    <Compile Include="Admin\Admin.Master.cs"><DependentUpon>Admin.Master</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
-    <Compile Include="Admin\Admin.Master.designer.cs"><DependentUpon>Admin.Master</DependentUpon></Compile>
-    <Compile Include="Admin\Auditoria.aspx.cs"><DependentUpon>Auditoria.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
-    <Compile Include="Admin\Auditoria.aspx.designer.cs"><DependentUpon>Auditoria.aspx</DependentUpon></Compile>
-    <Compile Include="Admin\Configuracion.aspx.cs"><DependentUpon>Configuracion.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
-    <Compile Include="Admin\Configuracion.aspx.designer.cs"><DependentUpon>Configuracion.aspx</DependentUpon></Compile>
-    <Compile Include="Admin\Dashboard.aspx.cs"><DependentUpon>Dashboard.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
-    <Compile Include="Admin\Dashboard.aspx.designer.cs"><DependentUpon>Dashboard.aspx</DependentUpon></Compile>
-    <Compile Include="Admin\Notificaciones.aspx.cs"><DependentUpon>Notificaciones.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
-    <Compile Include="Admin\Notificaciones.aspx.designer.cs"><DependentUpon>Notificaciones.aspx</DependentUpon></Compile>
-    <Compile Include="Admin\MascotasPerdidas.aspx.cs"><DependentUpon>MascotasPerdidas.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
-    <Compile Include="Admin\MascotasPerdidas.aspx.designer.cs"><DependentUpon>MascotasPerdidas.aspx</DependentUpon></Compile>
-    <Compile Include="Admin\Perfil.aspx.cs"><DependentUpon>Perfil.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
-    <Compile Include="Admin\Perfil.aspx.designer.cs"><DependentUpon>Perfil.aspx</DependentUpon></Compile>
-    <Compile Include="Admin\Refugios.aspx.cs"><DependentUpon>Refugios.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
-    <Compile Include="Admin\Refugios.aspx.designer.cs"><DependentUpon>Refugios.aspx</DependentUpon></Compile>
-    <Compile Include="Admin\Reportes.aspx.cs"><DependentUpon>Reportes.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
-    <Compile Include="Admin\Reportes.aspx.designer.cs"><DependentUpon>Reportes.aspx</DependentUpon></Compile>
-    <Compile Include="Admin\Usuarios.aspx.cs"><DependentUpon>Usuarios.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
-    <Compile Include="Admin\Usuarios.aspx.designer.cs"><DependentUpon>Usuarios.aspx</DependentUpon></Compile>
-    <Compile Include="Adoptante\Adoptante.Master.cs"><DependentUpon>Adoptante.Master</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
-    <Compile Include="Adoptante\Adoptante.Master.designer.cs"><DependentUpon>Adoptante.Master</DependentUpon></Compile>
-    <Compile Include="Adoptante\Dashboard.aspx.cs"><DependentUpon>Dashboard.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
-    <Compile Include="Adoptante\Dashboard.aspx.designer.cs"><DependentUpon>Dashboard.aspx</DependentUpon></Compile>
-    <Compile Include="Adoptante\Perfil.aspx.cs"><DependentUpon>Perfil.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
-    <Compile Include="Adoptante\Perfil.aspx.designer.cs"><DependentUpon>Perfil.aspx</DependentUpon></Compile>
-    <Compile Include="Adoptante\Mascotas.aspx.cs"><DependentUpon>Mascotas.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
-    <Compile Include="Adoptante\Mascotas.aspx.designer.cs"><DependentUpon>Mascotas.aspx</DependentUpon></Compile>
-    <Compile Include="Adoptante\PerfilMascota.aspx.cs"><DependentUpon>PerfilMascota.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
-    <Compile Include="Adoptante\PerfilMascota.aspx.designer.cs"><DependentUpon>PerfilMascota.aspx</DependentUpon></Compile>
-    <Compile Include="Adoptante\Favoritos.aspx.cs"><DependentUpon>Favoritos.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
-    <Compile Include="Adoptante\Favoritos.aspx.designer.cs"><DependentUpon>Favoritos.aspx</DependentUpon></Compile>
-    <Compile Include="Adoptante\Solicitudes.aspx.cs"><DependentUpon>Solicitudes.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
-    <Compile Include="Adoptante\Solicitudes.aspx.designer.cs"><DependentUpon>Solicitudes.aspx</DependentUpon></Compile>
-    <Compile Include="Adoptante\ReportarMascota.aspx.cs"><DependentUpon>ReportarMascota.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
-    <Compile Include="Adoptante\ReportarMascota.aspx.designer.cs"><DependentUpon>ReportarMascota.aspx</DependentUpon></Compile>
-    <Compile Include="Adoptante\SolicitudAdopcion.aspx.cs"><DependentUpon>SolicitudAdopcion.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
-    <Compile Include="Adoptante\SolicitudAdopcion.aspx.designer.cs"><DependentUpon>SolicitudAdopcion.aspx</DependentUpon></Compile>
-    <Compile Include="Adoptante\MascotasDisponible.aspx.cs"><DependentUpon>MascotasDisponible.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
-    <Compile Include="Adoptante\MascotasDisponible.aspx.designer.cs"><DependentUpon>MascotasDisponible.aspx</DependentUpon></Compile>
-    <Compile Include="Adoptante\MisSolicitudes.aspx.cs"><DependentUpon>MisSolicitudes.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
-    <Compile Include="Adoptante\MisSolicitudes.aspx.designer.cs"><DependentUpon>MisSolicitudes.aspx</DependentUpon></Compile>
-    <Compile Include="Login\Login.aspx.cs"><DependentUpon>Login.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
-    <Compile Include="Login\Login.aspx.designer.cs"><DependentUpon>Login.aspx</DependentUpon></Compile>
-    <Compile Include="Login\RecuperarContrasena.aspx.cs"><DependentUpon>RecuperarContrasena.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
-    <Compile Include="Login\RecuperarContrasena.aspx.designer.cs"><DependentUpon>RecuperarContrasena.aspx</DependentUpon></Compile>
-    <Compile Include="Login\CambiarContrasena.aspx.cs"><DependentUpon>CambiarContrasena.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
-    <Compile Include="Login\CambiarContrasena.aspx.designer.cs"><DependentUpon>CambiarContrasena.aspx</DependentUpon></Compile>
-    <Compile Include="Login\Registro.aspx.cs"><DependentUpon>Registro.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
-    <Compile Include="Login\Registro.aspx.designer.cs"><DependentUpon>Registro.aspx</DependentUpon></Compile>
+    <Compile Include="AdminRefugio\AdminRefugio.Master.cs">
+      <DependentUpon>AdminRefugio.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminRefugio\AdminRefugio.Master.designer.cs">
+      <DependentUpon>AdminRefugio.Master</DependentUpon>
+    </Compile>
+    <Compile Include="AdminRefugio\Dashboard.aspx.cs">
+      <DependentUpon>Dashboard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminRefugio\Dashboard.aspx.designer.cs">
+      <DependentUpon>Dashboard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminRefugio\Perfil.aspx.cs">
+      <DependentUpon>Perfil.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminRefugio\Perfil.aspx.designer.cs">
+      <DependentUpon>Perfil.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminRefugio\Campanias.aspx.cs">
+      <DependentUpon>Campanias.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminRefugio\Campanias.aspx.designer.cs">
+      <DependentUpon>Campanias.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminRefugio\Estadisticas.aspx.cs">
+      <DependentUpon>Estadisticas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminRefugio\Estadisticas.aspx.designer.cs">
+      <DependentUpon>Estadisticas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminRefugio\Mascotas.aspx.cs">
+      <DependentUpon>Mascotas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminRefugio\Mascotas.aspx.designer.cs">
+      <DependentUpon>Mascotas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminRefugio\Solicitudes.aspx.cs">
+      <DependentUpon>Solicitudes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminRefugio\Solicitudes.aspx.designer.cs">
+      <DependentUpon>Solicitudes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminRefugio\Usuarios.aspx.cs">
+      <DependentUpon>Usuarios.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminRefugio\Usuarios.aspx.designer.cs">
+      <DependentUpon>Usuarios.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminRefugio\RevisarSolicitud.aspx.cs">
+      <DependentUpon>RevisarSolicitud.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminRefugio\RevisarSolicitud.aspx.designer.cs">
+      <DependentUpon>RevisarSolicitud.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Admin.Master.cs">
+      <DependentUpon>Admin.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Admin.Master.designer.cs">
+      <DependentUpon>Admin.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Auditoria.aspx.cs">
+      <DependentUpon>Auditoria.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Auditoria.aspx.designer.cs">
+      <DependentUpon>Auditoria.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Configuracion.aspx.cs">
+      <DependentUpon>Configuracion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Configuracion.aspx.designer.cs">
+      <DependentUpon>Configuracion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Dashboard.aspx.cs">
+      <DependentUpon>Dashboard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Dashboard.aspx.designer.cs">
+      <DependentUpon>Dashboard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Notificaciones.aspx.cs">
+      <DependentUpon>Notificaciones.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Notificaciones.aspx.designer.cs">
+      <DependentUpon>Notificaciones.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\MascotasPerdidas.aspx.cs">
+      <DependentUpon>MascotasPerdidas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\MascotasPerdidas.aspx.designer.cs">
+      <DependentUpon>MascotasPerdidas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Perfil.aspx.cs">
+      <DependentUpon>Perfil.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Perfil.aspx.designer.cs">
+      <DependentUpon>Perfil.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Refugios.aspx.cs">
+      <DependentUpon>Refugios.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Refugios.aspx.designer.cs">
+      <DependentUpon>Refugios.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Reportes.aspx.cs">
+      <DependentUpon>Reportes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Reportes.aspx.designer.cs">
+      <DependentUpon>Reportes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Usuarios.aspx.cs">
+      <DependentUpon>Usuarios.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Usuarios.aspx.designer.cs">
+      <DependentUpon>Usuarios.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Adoptante\Adoptante.Master.cs">
+      <DependentUpon>Adoptante.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Adoptante\Adoptante.Master.designer.cs">
+      <DependentUpon>Adoptante.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Adoptante\Dashboard.aspx.cs">
+      <DependentUpon>Dashboard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Adoptante\Dashboard.aspx.designer.cs">
+      <DependentUpon>Dashboard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Adoptante\Perfil.aspx.cs">
+      <DependentUpon>Perfil.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Adoptante\Perfil.aspx.designer.cs">
+      <DependentUpon>Perfil.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Adoptante\Mascotas.aspx.cs">
+      <DependentUpon>Mascotas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Adoptante\Mascotas.aspx.designer.cs">
+      <DependentUpon>Mascotas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Adoptante\PerfilMascota.aspx.cs">
+      <DependentUpon>PerfilMascota.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Adoptante\PerfilMascota.aspx.designer.cs">
+      <DependentUpon>PerfilMascota.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Adoptante\Favoritos.aspx.cs">
+      <DependentUpon>Favoritos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Adoptante\Favoritos.aspx.designer.cs">
+      <DependentUpon>Favoritos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Adoptante\Solicitudes.aspx.cs">
+      <DependentUpon>Solicitudes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Adoptante\Solicitudes.aspx.designer.cs">
+      <DependentUpon>Solicitudes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Adoptante\ReportarMascota.aspx.cs">
+      <DependentUpon>ReportarMascota.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Adoptante\ReportarMascota.aspx.designer.cs">
+      <DependentUpon>ReportarMascota.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Adoptante\SolicitudAdopcion.aspx.cs">
+      <DependentUpon>SolicitudAdopcion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Adoptante\SolicitudAdopcion.aspx.designer.cs">
+      <DependentUpon>SolicitudAdopcion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Adoptante\MascotasDisponible.aspx.cs">
+      <DependentUpon>MascotasDisponible.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Adoptante\MascotasDisponible.aspx.designer.cs">
+      <DependentUpon>MascotasDisponible.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Adoptante\MisSolicitudes.aspx.cs">
+      <DependentUpon>MisSolicitudes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Adoptante\MisSolicitudes.aspx.designer.cs">
+      <DependentUpon>MisSolicitudes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Login\Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login\Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Login\RecuperarContrasena.aspx.cs">
+      <DependentUpon>RecuperarContrasena.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login\RecuperarContrasena.aspx.designer.cs">
+      <DependentUpon>RecuperarContrasena.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Login\CambiarContrasena.aspx.cs">
+      <DependentUpon>CambiarContrasena.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login\CambiarContrasena.aspx.designer.cs">
+      <DependentUpon>CambiarContrasena.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Login\Registro.aspx.cs">
+      <DependentUpon>Registro.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login\Registro.aspx.designer.cs">
+      <DependentUpon>Registro.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Public\404.aspx.cs"><DependentUpon>404.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
-    <Compile Include="Public\404.aspx.designer.cs"><DependentUpon>404.aspx</DependentUpon></Compile>
-    <Compile Include="Public\Adopta.aspx.cs"><DependentUpon>Adopta.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
-    <Compile Include="Public\Adopta.aspx.designer.cs"><DependentUpon>Adopta.aspx</DependentUpon></Compile>
-    <Compile Include="Public\Home.aspx.cs"><DependentUpon>Home.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
-    <Compile Include="Public\Home.aspx.designer.cs"><DependentUpon>Home.aspx</DependentUpon></Compile>
-    <Compile Include="Public\PerfilMascota.aspx.cs"><DependentUpon>PerfilMascota.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
-    <Compile Include="Public\PerfilMascota.aspx.designer.cs"><DependentUpon>PerfilMascota.aspx</DependentUpon></Compile>
-    <Compile Include="Public\Public.Master.cs"><DependentUpon>Public.Master</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
-    <Compile Include="Public\Public.Master.designer.cs"><DependentUpon>Public.Master</DependentUpon></Compile>
-    <Compile Include="Public\Reportar.aspx.cs"><DependentUpon>Reportar.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
-    <Compile Include="Public\Reportar.aspx.designer.cs"><DependentUpon>Reportar.aspx</DependentUpon></Compile>
-    <Compile Include="Public\MapaExtravios.aspx.cs"><DependentUpon>MapaExtravios.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
-    <Compile Include="Public\MapaExtravios.aspx.designer.cs"><DependentUpon>MapaExtravios.aspx</DependentUpon></Compile>
-    <Compile Include="Refugio\Dashboard.aspx.cs"><DependentUpon>Dashboard.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
-    <Compile Include="Refugio\Dashboard.aspx.designer.cs"><DependentUpon>Dashboard.aspx</DependentUpon></Compile>
-    <Compile Include="Refugio\Refugio.Master.cs"><DependentUpon>Refugio.Master</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
-    <Compile Include="Refugio\Refugio.Master.designer.cs"><DependentUpon>Refugio.Master</DependentUpon></Compile>
-    <Compile Include="Refugio\Perfil.aspx.cs"><DependentUpon>Perfil.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
-    <Compile Include="Refugio\Perfil.aspx.designer.cs"><DependentUpon>Perfil.aspx</DependentUpon></Compile>
-    <Compile Include="Adoptante\MisSeguimientos.aspx.cs"><DependentUpon>MisSeguimientos.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
-    <Compile Include="Adoptante\MisSeguimientos.aspx.designer.cs"><DependentUpon>MisSeguimientos.aspx</DependentUpon></Compile>
-    <Compile Include="Adoptante\CompletarSeguimiento.aspx.cs"><DependentUpon>CompletarSeguimiento.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
-    <Compile Include="Adoptante\CompletarSeguimiento.aspx.designer.cs"><DependentUpon>CompletarSeguimiento.aspx</DependentUpon></Compile>
-    <Compile Include="AdminRefugio\AuditoriaSeguimientos.aspx.cs"><DependentUpon>AuditoriaSeguimientos.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
-    <Compile Include="AdminRefugio\AuditoriaSeguimientos.aspx.designer.cs"><DependentUpon>AuditoriaSeguimientos.aspx</DependentUpon></Compile>
-    <Compile Include="AdminRefugio\VerSeguimiento.aspx.cs"><DependentUpon>VerSeguimiento.aspx</DependentUpon><SubType>ASPXCodeBehind</SubType></Compile>
-    <Compile Include="AdminRefugio\VerSeguimiento.aspx.designer.cs"><DependentUpon>VerSeguimiento.aspx</DependentUpon></Compile>
+    <Compile Include="Public\404.aspx.cs">
+      <DependentUpon>404.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Public\404.aspx.designer.cs">
+      <DependentUpon>404.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Public\Adopta.aspx.cs">
+      <DependentUpon>Adopta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Public\Adopta.aspx.designer.cs">
+      <DependentUpon>Adopta.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Public\Home.aspx.cs">
+      <DependentUpon>Home.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Public\Home.aspx.designer.cs">
+      <DependentUpon>Home.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Public\PerfilMascota.aspx.cs">
+      <DependentUpon>PerfilMascota.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Public\PerfilMascota.aspx.designer.cs">
+      <DependentUpon>PerfilMascota.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Public\Public.Master.cs">
+      <DependentUpon>Public.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Public\Public.Master.designer.cs">
+      <DependentUpon>Public.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Public\Reportar.aspx.cs">
+      <DependentUpon>Reportar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Public\Reportar.aspx.designer.cs">
+      <DependentUpon>Reportar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Public\MapaExtravios.aspx.cs">
+      <DependentUpon>MapaExtravios.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Public\MapaExtravios.aspx.designer.cs">
+      <DependentUpon>MapaExtravios.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Refugio\Dashboard.aspx.cs">
+      <DependentUpon>Dashboard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Refugio\Dashboard.aspx.designer.cs">
+      <DependentUpon>Dashboard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Refugio\Refugio.Master.cs">
+      <DependentUpon>Refugio.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Refugio\Refugio.Master.designer.cs">
+      <DependentUpon>Refugio.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Refugio\Perfil.aspx.cs">
+      <DependentUpon>Perfil.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Refugio\Perfil.aspx.designer.cs">
+      <DependentUpon>Perfil.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Adoptante\MisSeguimientos.aspx.cs">
+      <DependentUpon>MisSeguimientos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Adoptante\MisSeguimientos.aspx.designer.cs">
+      <DependentUpon>MisSeguimientos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Adoptante\CompletarSeguimiento.aspx.cs">
+      <DependentUpon>CompletarSeguimiento.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Adoptante\CompletarSeguimiento.aspx.designer.cs">
+      <DependentUpon>CompletarSeguimiento.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminRefugio\AuditoriaSeguimientos.aspx.cs">
+      <DependentUpon>AuditoriaSeguimientos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminRefugio\AuditoriaSeguimientos.aspx.designer.cs">
+      <DependentUpon>AuditoriaSeguimientos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminRefugio\VerSeguimiento.aspx.cs">
+      <DependentUpon>VerSeguimiento.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminRefugio\VerSeguimiento.aspx.designer.cs">
+      <DependentUpon>VerSeguimiento.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Admin\Admin.Master" />
@@ -224,8 +464,12 @@
     <None Include="packages.config" />
     <Content Include="Refugio\Refugio.Master" />
     <Content Include="Public\Public.Master" />
-    <None Include="Web.Debug.config"><DependentUpon>Web.config</DependentUpon></None>
-    <None Include="Web.Release.config"><DependentUpon>Web.config</DependentUpon></None>
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CapaDatos\CapaDatos.csproj">
@@ -253,9 +497,9 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>49677</DevelopmentServerPort>
+          <DevelopmentServerPort>53492</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:49677/</IISUrl>
+          <IISUrl>http://localhost:53492/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl></CustomServerUrl>

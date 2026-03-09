@@ -228,3 +228,8 @@ BEGIN
     SELECT 1 AS Exito, 'Devolución procesada y mascota reingresada al catálogo general' AS Mensaje;
 END;
 GO
+
+
+UPDATE tbl_SeguimientosAdopcion
+SET seg_FechaProgramada = GETDATE()
+WHERE seg_NumeroEtapa = 1;

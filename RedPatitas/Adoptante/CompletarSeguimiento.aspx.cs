@@ -84,11 +84,18 @@ namespace RedPatitas.Adoptante
                     return;
                 }
 
-                decimal decimalLat = Convert.ToDecimal(hfLatitud.Value.Replace(".", ",")); // C# parsing seguro para comas o puntos
-                decimal decimalLong = Convert.ToDecimal(hfLongitud.Value.Replace(".", ","));
+                // Parseo universal de coordenadas independiente del idioma de Windows
+                decimal decimalLat = decimal.Parse(hfLatitud.Value.Replace(",", "."), System.Globalization.CultureInfo.InvariantCulture);
+                decimal decimalLong = decimal.Parse(hfLongitud.Value.Replace(",", "."), System.Globalization.CultureInfo.InvariantCulture);
 
 
-                // 2. SUBIR LA FOTO EN VIVO FORZOSA (Manejo de archivos)
+                // 2. CREAR CARPETA SI NO EXISTE Y SUBIR LA FOTO EN VIVO FORZOSA
+                string folderPath = Server.MapPath("~/Uploads/Seguimientos/");
+                if (!Directory.Exists(folderPath))
+                {
+                    Directory.CreateDirectory(folderPath);
+                }
+
                 string rutaFotoEnVivo = "";
                 if (fuFotoVivo.HasFile)
                 {
@@ -166,7 +173,8 @@ namespace RedPatitas.Adoptante
         // Utilidad rápida para SweetAlert
         private void MostrarAlerta(string titulo, string mensaje, string icono)
         {
-            ScriptManager.RegisterStartupScript(this, GetType(), "alerta", $"Swal.fire('{titulo}', '{mensaje.Replace("'", "\\'")}', '{icono}');", true);
+            string msjLimpio = mensaje.Replace("\\", "\\\\").Replace("'", "\\'").Replace("\n", "\\n").Replace("\r", "");
+            ScriptManager.RegisterStartupScript(this, GetType(), "alerta", $"Swal.fire('{titulo}', '{msjLimpio}', '{icono}');", true);
         }
 
     }

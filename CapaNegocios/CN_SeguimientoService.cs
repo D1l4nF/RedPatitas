@@ -55,7 +55,9 @@ namespace CapaNegocios
                                         Etapa = x.seg.seg_NumeroEtapa,
                                         Titulo = x.seg.seg_TituloEtapa,
                                         NombreMascota = x.mas.mas_Nombre,
-                                        FotoMascota = x.fot_Url != null ? "~/Uploads/Mascotas/" + x.fot_Url : "https://ui-avatars.com/api/?name=" + x.mas.mas_Nombre + "&background=FF8C42&color=fff",
+                                        FotoMascota = x.fot_Url != null
+                                            ? (x.fot_Url.StartsWith("http") ? x.fot_Url : (x.fot_Url.StartsWith("~/") ? x.fot_Url : (x.fot_Url.StartsWith("/") ? "~" + x.fot_Url : "~/Images/Mascotas/" + x.fot_Url)))
+                                            : "https://ui-avatars.com/api/?name=" + x.mas.mas_Nombre + "&background=FF8C42&color=fff",
                                         FechaProgramada = x.seg.seg_FechaProgramada,
                                         Estado = x.seg.seg_Estado,
                                         DiferenciaDias = (x.seg.seg_FechaProgramada - DateTime.Now).Days
