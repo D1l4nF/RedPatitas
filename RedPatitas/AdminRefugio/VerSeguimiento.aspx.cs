@@ -66,11 +66,22 @@ namespace RedPatitas.AdminRefugio
                         var serializer = new System.Web.Script.Serialization.JavaScriptSerializer();
                         dictRespuestas = serializer.Deserialize<Dictionary<string, string>>(reporte.seg_RespuestasJSON);
 
-                        // Parsear true/false a español legible
+                        // Parsear true/false a español legible y mapear valores de listas
                         var listaFormateada = new List<KeyValuePair<string, string>>();
                         foreach (var kvp in dictRespuestas)
                         {
-                            string valor = kvp.Value == "True" ? "SÍ" : (kvp.Value == "False" ? "NO" : kvp.Value);
+                            string valor = kvp.Value;
+                            
+                            // 1. Mapear booleanos
+                            if (valor == "True") valor = "SÍ";
+                            else if (valor == "False") valor = "NO";
+                            
+                            // 2. Mapear valores del DropDown de Alimentación
+                            else if (valor == "Normal_100") valor = "Come toda su ración (100% normal)";
+                            else if (valor == "Poco_Ansioso") valor = "Come poco (posible ansiedad)";
+                            else if (valor == "Casi_Nada") valor = "Casi no prueba la comida";
+
+                            // 3. Fallback vacío
                             valor = string.IsNullOrEmpty(valor) ? "No Registrado" : valor;
 
                             listaFormateada.Add(new KeyValuePair<string, string>(

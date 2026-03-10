@@ -41,6 +41,9 @@ namespace RedPatitas.Adoptante
                 var listaFormateada = new List<object>();
                 bool tieneRegistros = false;
 
+                // Mantiene el estado de aprobación por mascota (para cuando el adoptante tiene más de 1 animalito)
+                var dicEstadoAprobacionPorMascota = new Dictionary<string, bool>();
+
                 foreach (var seg in seguimientos)
                 {
                     tieneRegistros = true;
@@ -54,6 +57,14 @@ namespace RedPatitas.Adoptante
 
                     int etapaNum = seg.Etapa;
                     string nombreAnimal = seg.NombreMascota;
+
+                    // Si es la primera vez que evaluamos una fase de esta mascota, la primera etapa siempre puede inicializar como "abrible"
+                    if (!dicEstadoAprobacionPorMascota.ContainsKey(nombreAnimal))
+                    {
+                        dicEstadoAprobacionPorMascota[nombreAnimal] = true;
+                    }
+
+                    bool etapaAnteriorAprobada = dicEstadoAprobacionPorMascota[nombreAnimal];
 
                     string msjExplicativo = "¡Enhorabuena por adoptar a " + nombreAnimal + "! Nos encantaría saber si se está adaptando bien a su nuevo hogar. Faltan " + difDias + " días para que puedas habilitar el formulario y enviarnos novedades y fotos mágicas.";
 
@@ -71,6 +82,8 @@ namespace RedPatitas.Adoptante
                         claseBadge = "badge-aprobado";
                         msjExplicativo = "✅ El administrador de la fundación revisó y aprobó este reporte de seguimiento.";
                         mostrarBoton = false;
+
+                        dicEstadoAprobacionPorMascota[nombreAnimal] = true; // Habilita que la siguiente etapa de ÉSTA mascota se abra inmediatamente
                     }
                     else if (estadoBase == "Enviado")
                     {
@@ -78,6 +91,8 @@ namespace RedPatitas.Adoptante
                         claseBadge = "badge-enviado";
                         msjExplicativo = "📬 Evaluando... Has enviado el formulario satelital. Esperando repuesta del refugio.";
                         mostrarBoton = false;
+
+                        dicEstadoAprobacionPorMascota[nombreAnimal] = false; // Bloquea la apertura temprana de las siguientes
                     }
                     else if (estadoBase == "Rechazado")
                     {
@@ -86,11 +101,14 @@ namespace RedPatitas.Adoptante
                         msjExplicativo = "⚠️ EL REFUGIO HA SOLICITADO QUE CORRIJAS O VUELVAS A ENVIAR ESTE REPORTE CON FOTOS NUEVAS.";
                         mostrarBoton = true;
                         estadoBase = "Requiere Atención Urgente";
+
+                        dicEstadoAprobacionPorMascota[nombreAnimal] = false; // Bloquea la apertura temprana de las siguientes
                     }
                     else // 'Pendiente' originalmente
                     {
-                        // Si ya pasó la fecha o es el mismo día, cambia a 'Disponible' visualmente
-                        if (DateTime.Now.Date >= fProg.Date)
+                        // IMPORTANTE (Ajuste para testear flujo):
+                        // Si la etapa anterior de ESTA mascota ya fue aprobada, la habilitamos de inmediato.
+                        if (etapaAnteriorAprobada || DateTime.Now.Date >= fProg.Date)
                         {
                             claseContainer = "item-disponible";
                             claseBadge = "badge-disponible";
@@ -98,6 +116,8 @@ namespace RedPatitas.Adoptante
                             msjExplicativo = "¿Está todo bien con " + nombreAnimal + "? Ha llegado el momento de documentar esta etapa. Haz clic abajo para enviarnos una foto satelital para saber que todo está en orden.";
                             mostrarBoton = true;
                         }
+
+                        dicEstadoAprobacionPorMascota[nombreAnimal] = false; // Como esta fase está pendiente/en curso, las siguientes NO estarán desbloqueadas aún.
                     }
 
                     // Meter los cálculos finales a la lista
