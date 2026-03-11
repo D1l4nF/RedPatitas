@@ -134,7 +134,7 @@
                             style="background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: transform 0.3s; width: 180px; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; cursor: pointer;">
                             <img src='<%# ResolveUrl(Convert.ToString(Eval("LogoUrl"))) %>' alt='<%# Eval("Nombre") %>'
                                 style="width: 80px; height: 80px; object-fit: contain; border-radius: 50%; background: #f9f9f9;"
-                                onerror="this.src='../Images/default-shelter.png'" />
+                                onerror="this.src='../Images/Default/default-shelter.png'" />
                             <h4>
                                 <%# Eval("Nombre") %>
                             </h4>
@@ -256,7 +256,7 @@
                     if (!modal) return;
 
                     // Basic fields
-                    document.getElementById('modalLogo').src = card.dataset.logo || '../Images/default-shelter.png';
+                    document.getElementById('modalLogo').src = card.dataset.logo || '../Images/Default/default-shelter.png';
                     document.getElementById('modalName').innerText = card.dataset.nombre || 'Refugio';
                     document.getElementById('modalCity').innerText = '📍 ' + (card.dataset.ciudad || 'Ciudad no especificada');
                     document.getElementById('modalDesc').innerText = card.dataset.descripcion || 'Sin descripción disponible.';

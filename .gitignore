@@ -418,6 +418,8 @@ FodyWeavers.xsd
 *.msp
 
 # User specific - Ignore uploaded images but keep folder
+*.png
 RedPatitas/Images/*
 !RedPatitas/Images/.gitkeep
-*.png
+!RedPatitas/Images/Default/
+!RedPatitas/Images/Default/*

@@ -1,5 +1,5 @@
-<%@ Page Title="Detalle de Reporte" Language="C#" MasterPageFile="~/Adoptante/Adoptante.Master" AutoEventWireup="true"
-    CodeBehind="DetalleReporte.aspx.cs" Inherits="RedPatitas.Adoptante.DetalleReporte" %>
+<%@ Page Title="Detalle de Reporte" Language="C#" MasterPageFile="~/Admin/Admin.Master" AutoEventWireup="true"
+    CodeBehind="DetalleReporte.aspx.cs" Inherits="RedPatitas.Admin.DetalleReporte" %>
 
     <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
         Detalle de Reporte | RedPatitas
@@ -173,7 +173,7 @@
         <div class="page-header">
             <h1 class="page-title">📋 Detalle del Reporte</h1>
             <div class="breadcrumb">
-                <a href="MisReportes.aspx" style="color:inherit; text-decoration:none;">Mis Reportes</a>
+                <a href="MascotasPerdidas.aspx" style="color:inherit; text-decoration:none;">Mascotas Perdidas</a>
                 &rsaquo; Detalle
             </div>
         </div>
@@ -186,16 +186,16 @@
         <asp:HiddenField ID="hfLngEdicion" runat="server" />
 
         <div class="detalle-container">
-            <a href="MisReportes.aspx" class="btn-back">&#8592; Volver a Mis Reportes</a>
+            <a href="MascotasPerdidas.aspx" class="btn-back">&#8592; Volver a Mascotas Perdidas</a>
 
             <asp:Panel ID="pnlNoEncontrado" runat="server" Visible="false">
                 <div class="no-encontrado">
                     <div style="font-size:4rem;">🔍</div>
                     <h2>Reporte no encontrado</h2>
                     <p style="color:#666; margin-bottom:1.5rem;">El reporte que buscas no existe o fue eliminado.</p>
-                    <a href="MisReportes.aspx" class="btn-primary"
+                    <a href="MascotasPerdidas.aspx" class="btn-primary"
                         style="text-decoration:none; padding:10px 24px; border-radius:10px; display:inline-block;">
-                        Ver mis reportes
+                        Ver mascotas perdidas
                     </a>
                 </div>
             </asp:Panel>

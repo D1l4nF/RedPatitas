@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using CapaDatos;
 
@@ -14,6 +14,12 @@ namespace RedPatitas.Public
                 Response.Redirect("~/Login/Login.aspx?returnUrl=" +
                     Server.UrlEncode(Request.Url.PathAndQuery));
                 return;
+            }
+
+            // Habilitar subida de archivos
+            if (Page.Form != null)
+            {
+                Page.Form.Enctype = "multipart/form-data";
             }
 
             if (!IsPostBack)
@@ -102,48 +108,96 @@ namespace RedPatitas.Public
 
                     db.tbl_Avistamientos.InsertOnSubmit(avistamiento);
 
-                    // Actualizar estado del reporte
+                    // Actualizar estado y ubicación del reporte
                     var reporte = db.tbl_ReportesMascotas
                         .FirstOrDefault(r => r.rep_IdReporte == idReporte);
 
-                    if (reporte != null &&
-                        (reporte.rep_Estado == "Reportado" || reporte.rep_Estado == "EnBusqueda"))
+                    if (reporte != null)
                     {
-                        reporte.rep_Estado = "Avistado";
-
-                        // Notificar al dueño
-                        var notificacion = new tbl_Notificaciones
+                        // Update location based on this sighting
+                        if (!string.IsNullOrEmpty(hfLat.Value) && !string.IsNullOrEmpty(hfLng.Value))
                         {
-                            not_IdUsuario = reporte.rep_IdUsuario,
-                            not_Titulo = "👁 ¡Avistaron a tu mascota!",
-                            not_Mensaje = string.Format(
-                                "Alguien reportó haber visto a {0} en: {1}",
-                                string.IsNullOrEmpty(reporte.rep_NombreMascota)
-                                    ? "tu mascota"
-                                    : reporte.rep_NombreMascota,
-                                ubicacionCompleta),
-                            not_Tipo = "Reporte",
-                            not_Icono = "👁",
-                            not_UrlAccion = "~/Public/DetalleReporte.aspx?id=" + idReporte,
-                            not_Leida = false,
-                            not_FechaCreacion = DateTime.Now
-                        };
-                        db.tbl_Notificaciones.InsertOnSubmit(notificacion);
+                            decimal lat, lng;
+                            if (decimal.TryParse(hfLat.Value, System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out lat) &&
+                                decimal.TryParse(hfLng.Value, System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out lng))
+                            {
+                                reporte.rep_Latitud = lat;
+                                reporte.rep_Longitud = lng;
+                            }
+                        }
+                        reporte.rep_UbicacionUltima = ubicacionCompleta;
+
+                        if (reporte.rep_Estado == "Reportado" || reporte.rep_Estado == "EnBusqueda")
+                        {
+                            reporte.rep_Estado = "Avistado";
+
+                            // Notificar al dueño
+                            var notificacion = new tbl_Notificaciones
+                            {
+                                not_IdUsuario = reporte.rep_IdUsuario,
+                                not_Titulo = "👁 ¡Avistaron a tu mascota!",
+                                not_Mensaje = string.Format(
+                                    "Alguien reportó haber visto a {0} en: {1}",
+                                    string.IsNullOrEmpty(reporte.rep_NombreMascota)
+                                        ? "tu mascota"
+                                        : reporte.rep_NombreMascota,
+                                    ubicacionCompleta),
+                                not_Tipo = "Reporte",
+                                not_Icono = "👁",
+                                not_UrlAccion = "~/Public/DetalleReporte.aspx?id=" + idReporte,
+                                not_Leida = false,
+                                not_FechaCreacion = DateTime.Now
+                            };
+                            db.tbl_Notificaciones.InsertOnSubmit(notificacion);
+                        }
+
+                        db.SubmitChanges();
+
+                        // Procesar foto opcional del avistamiento y guardarla en tbl_FotosReportes
+                        if (fuFotoAvistamiento.HasFile)
+                        {
+                            string extension = System.IO.Path.GetExtension(fuFotoAvistamiento.FileName).ToLower();
+                            string[] extensionesPermitidas = { ".jpg", ".jpeg", ".png", ".gif" };
+
+                            if (extensionesPermitidas.Contains(extension))
+                            {
+                                int maxSize = 5 * 1024 * 1024; // 5MB
+                                if (fuFotoAvistamiento.PostedFile.ContentLength <= maxSize)
+                                {
+                                    string fileName = Guid.NewGuid().ToString() + "_avist" + extension;
+                                    string savePath = Server.MapPath("~/Uploads/Reportes/" + fileName);
+
+                                    string dirPath = Server.MapPath("~/Uploads/Reportes/");
+                                    if (!System.IO.Directory.Exists(dirPath))
+                                    {
+                                        System.IO.Directory.CreateDirectory(dirPath);
+                                    }
+
+                                    fuFotoAvistamiento.SaveAs(savePath);
+
+                                    var nuevaFoto = new tbl_FotosReportes
+                                    {
+                                        fore_IdReporte = idReporte,
+                                        fore_Url = "~/Uploads/Reportes/" + fileName,
+                                        fore_Orden = 99 // Para que aparezca al final
+                                    };
+                                    db.tbl_FotosReportes.InsertOnSubmit(nuevaFoto);
+                                    db.SubmitChanges();
+                                }
+                            }
+                        }
+
+                        string urlDetalle = ResolveUrl("~/Public/DetalleReporte.aspx?id=" + idReporte);
+
+                        ClientScript.RegisterStartupScript(GetType(), "alertExito",
+                            string.Format(
+                                "Swal.fire({{icon:'success',title:'¡Avistamiento registrado!'," +
+                                "text:'Gracias. La mascota ha sido actualizada en el mapa y el dueño ha sido notificado.'," +
+                                "confirmButtonText:'Ver detalle del reporte'}})" +
+                                ".then(function(r){{if(r.isConfirmed || true)window.location.href='{0}';}});",
+                                urlDetalle),
+                            true);
                     }
-
-                    db.SubmitChanges();
-
-                    string urlDetalle = ResolveUrl(
-                        "~/Public/DetalleReporte.aspx?id=" + idReporte);
-
-                    ClientScript.RegisterStartupScript(GetType(), "alertExito",
-                        string.Format(
-                            "Swal.fire({{icon:'success',title:'¡Avistamiento registrado!'," +
-                            "text:'Gracias. El dueño ha sido notificado.'," +
-                            "confirmButtonText:'Ver detalle del reporte'}})" +
-                            ".then(function(r){{if(r.isConfirmed)window.location.href='{0}';}});",
-                            urlDetalle),
-                        true);
                 }
             }
             catch (Exception ex)

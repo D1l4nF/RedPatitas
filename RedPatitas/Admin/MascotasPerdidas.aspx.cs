@@ -110,6 +110,12 @@ namespace RedPatitas.Admin
         {
             int idReporte = int.Parse(e.CommandArgument.ToString());
 
+            if (e.CommandName == "Ver")
+            {
+                Response.Redirect($"~/Admin/DetalleReporte.aspx?id={idReporte}");
+                return;
+            }
+
             using (var db = new DataClasses1DataContext())
             {
                 var reporte = db.tbl_ReportesMascotas.FirstOrDefault(r => r.rep_IdReporte == idReporte);

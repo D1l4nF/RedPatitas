@@ -1,0 +1,46 @@
+//------------------------------------------------------------------------------
+// <generado automáticamente>
+//     Este código fue generado por una herramienta.
+//
+//     Los cambios en este archivo podrían causar un comportamiento incorrecto y se perderán si
+//     se vuelve a generar el código. 
+// </generado automáticamente>
+//------------------------------------------------------------------------------
+
+namespace RedPatitas.Admin
+{
+    public partial class DetalleReporte
+    {
+        protected global::System.Web.UI.WebControls.Panel pnlNoEncontrado;
+        protected global::System.Web.UI.WebControls.Panel pnlDetalle;
+        protected global::System.Web.UI.WebControls.Literal litTipoBadge;
+        protected global::System.Web.UI.WebControls.Literal litNombreMascota;
+        protected global::System.Web.UI.WebControls.Literal litEstadoBadge;
+        protected global::System.Web.UI.WebControls.Panel pnlFotos;
+        protected global::System.Web.UI.WebControls.Repeater rptFotos;
+        protected global::System.Web.UI.WebControls.Literal litEspecie;
+        protected global::System.Web.UI.WebControls.Literal litColor;
+        protected global::System.Web.UI.WebControls.Literal litTamano;
+        protected global::System.Web.UI.WebControls.Literal litSexo;
+        protected global::System.Web.UI.WebControls.Literal litEdad;
+        protected global::System.Web.UI.WebControls.Literal litFecha;
+        protected global::System.Web.UI.WebControls.Literal litDescripcion;
+        protected global::System.Web.UI.WebControls.Panel pnlMapa;
+        protected global::System.Web.UI.WebControls.Literal litUbicacion;
+        protected global::System.Web.UI.WebControls.HiddenField hfLatDetalle;
+        protected global::System.Web.UI.WebControls.HiddenField hfLngDetalle;
+        protected global::System.Web.UI.WebControls.Panel pnlContacto;
+        protected global::System.Web.UI.WebControls.HyperLink lnkTelefono;
+        protected global::System.Web.UI.WebControls.Literal litTelefono;
+        protected global::System.Web.UI.WebControls.Literal litEmail;
+        protected global::System.Web.UI.WebControls.Panel pnlLoginAviso;
+        protected global::System.Web.UI.WebControls.Panel pnlBtnAvistamiento;
+        protected global::System.Web.UI.WebControls.HyperLink lnkAvistamiento;
+        protected global::System.Web.UI.WebControls.Panel pnlAccionesDueno;
+        protected global::System.Web.UI.WebControls.LinkButton btnMarcarReunidoDetalle;
+        protected global::System.Web.UI.WebControls.HiddenField hiddenIdReporte;
+        protected global::System.Web.UI.WebControls.Literal litTotalAvistamientos;
+        protected global::System.Web.UI.WebControls.Panel pnlSinAvistamientos;
+        protected global::System.Web.UI.WebControls.Repeater rptAvistamientos;
+    }
+}

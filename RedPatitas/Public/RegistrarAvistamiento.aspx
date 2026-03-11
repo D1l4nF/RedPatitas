@@ -43,8 +43,13 @@
 
                     <div class="form-group">
                         <label>📍 ¿Dónde lo viste? *</label>
-                        <asp:TextBox ID="txtUbicacion" runat="server" CssClass="form-control"
-                            placeholder="Ej: Parque El Ejido, junto a la fuente"></asp:TextBox>
+                        <div style="display:flex; gap:10px;">
+                            <asp:TextBox ID="txtUbicacion" runat="server" CssClass="form-control"
+                                placeholder="Ej: Parque El Ejido, junto a la fuente" style="flex:1;"></asp:TextBox>
+                            <asp:TextBox ID="txtCiudadAvi" runat="server" CssClass="form-control"
+                                placeholder="Ciudad (Ej: Quito)" style="width:150px;"></asp:TextBox>
+                            <button type="button" class="btn-secondary" id="btnBuscarUbicacion" style="padding:10px 15px; border-radius:8px;">🔍 Buscar</button>
+                        </div>
                         <asp:RequiredFieldValidator ID="rfvUbicacion" runat="server" ControlToValidate="txtUbicacion"
                             ErrorMessage="La ubicación es requerida" ForeColor="Red" Display="Dynamic" />
                     </div>
@@ -80,6 +85,11 @@
                             ForeColor="Red" Display="Dynamic" />
                     </div>
 
+                    <div class="form-group">
+                        <label>📸 Foto del avistamiento (opcional)</label>
+                        <asp:FileUpload ID="fuFotoAvistamiento" runat="server" accept="image/*" CssClass="form-control" />
+                    </div>
+
                     <div class="form-actions">
                         <asp:Button ID="btnEnviar" runat="server" Text="👁 Enviar Avistamiento" CssClass="btn-primary"
                             OnClick="btnEnviar_Click" />
@@ -91,6 +101,7 @@
         </section>
 
         <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+        <script src='<%= ResolveUrl("~/Js/mapas-reportes.js") %>'></script>
         <script type="text/javascript">
             document.addEventListener('DOMContentLoaded', function () {
                 var map = L.map('mapAvistamiento').setView([-0.1807, -78.4678], 13);
@@ -101,9 +112,105 @@
                 var marker;
                 map.on('click', function (e) {
                     if (marker) map.removeLayer(marker);
-                    marker = L.marker(e.latlng).addTo(map);
+                    marker = L.marker(e.latlng, { draggable: true }).addTo(map);
                     document.getElementById('<%= hfLat.ClientID %>').value = e.latlng.lat;
                     document.getElementById('<%= hfLng.ClientID %>').value = e.latlng.lng;
+                    
+                    // Reverse geocoding con formato corto
+                    MapaReportes.geocodificacionInversa(e.latlng.lat, e.latlng.lng, function(addr) {
+                        if (!addr) return;
+                        var ubicacion = [addr.road, addr.suburb].filter(Boolean).join(', ');
+                        if (!ubicacion) ubicacion = addr.display_name.split(',').slice(0, 2).join(',').trim();
+                        var txtUbi = document.getElementById('<%= txtUbicacion.ClientID %>');
+                        var txtCiu = document.getElementById('<%= txtCiudadAvi.ClientID %>');
+                        if (txtUbi) txtUbi.value = ubicacion;
+                        if (txtCiu) txtCiu.value = addr.city || '';
+                    });
+                    
+                    marker.on('dragend', function(ev) {
+                        var pos = ev.target.getLatLng();
+                        document.getElementById('<%= hfLat.ClientID %>').value = pos.lat;
+                        document.getElementById('<%= hfLng.ClientID %>').value = pos.lng;
+                        MapaReportes.geocodificacionInversa(pos.lat, pos.lng, function(addr) {
+                            if (!addr) return;
+                            var ubicacion = [addr.road, addr.suburb].filter(Boolean).join(', ');
+                            if (!ubicacion) ubicacion = addr.display_name.split(',').slice(0, 2).join(',').trim();
+                            var txtUbi = document.getElementById('<%= txtUbicacion.ClientID %>');
+                            var txtCiu = document.getElementById('<%= txtCiudadAvi.ClientID %>');
+                            if (txtUbi) txtUbi.value = ubicacion;
+                            if (txtCiu) txtCiu.value = addr.city || '';
+                        });
+                    });
+                });
+
+                var btnEnviar = document.getElementById('<%= btnEnviar.ClientID %>');
+                if (btnEnviar) {
+                    btnEnviar.addEventListener('click', function (e) {
+                        var ubicacion = document.getElementById('<%= txtUbicacion.ClientID %>').value.trim();
+                        var fecha = document.getElementById('<%= txtFechaAvistamiento.ClientID %>').value.trim();
+                        var descripcion = document.getElementById('<%= txtDescripcion.ClientID %>').value.trim();
+
+                        if (!ubicacion || !fecha || !descripcion) {
+                            e.preventDefault();
+                            Swal.fire({
+                                icon: 'warning',
+                                title: 'Campos incompletos',
+                                text: 'Por favor, completa ubicación, fecha y descripción antes de enviar.'
+                            });
+                        }
+                    });
+                }
+
+                document.getElementById('btnBuscarUbicacion').addEventListener('click', function() {
+                    var direccion = document.getElementById('<%= txtUbicacion.ClientID %>').value;
+                    var ciudad = document.getElementById('<%= txtCiudadAvi.ClientID %>').value;
+                    if (!direccion) return;
+                    
+                    // Concatenar ciudad para evitar resultados de otros países
+                    var query = direccion + (ciudad ? ', ' + ciudad : '') + ', Ecuador';
+                    
+                    var oldText = this.innerHTML;
+                    this.innerHTML = "⏳ Buscando...";
+                    this.disabled = true;
+
+                    fetch('https://nominatim.openstreetmap.org/search?format=json&q=' + encodeURIComponent(query) + '&countrycodes=ec')
+                        .then(response => response.json())
+                        .then(data => {
+                            this.innerHTML = oldText;
+                            this.disabled = false;
+
+                            if (data && data.length > 0) {
+                                var lat = parseFloat(data[0].lat);
+                                var lon = parseFloat(data[0].lon);
+                                map.setView([lat, lon], 16);
+                                
+                                if (marker) map.removeLayer(marker);
+                                marker = L.marker([lat, lon], { draggable: true }).addTo(map);
+                                document.getElementById('<%= hfLat.ClientID %>').value = lat;
+                                document.getElementById('<%= hfLng.ClientID %>').value = lon;
+                                
+                                marker.on('dragend', function(ev) {
+                                    var pos = ev.target.getLatLng();
+                                    document.getElementById('<%= hfLat.ClientID %>').value = pos.lat;
+                                    document.getElementById('<%= hfLng.ClientID %>').value = pos.lng;
+                                    MapaReportes.geocodificacionInversa(pos.lat, pos.lng, function(addr) {
+                                        if (!addr) return;
+                                        var ubicacion = [addr.road, addr.suburb].filter(Boolean).join(', ');
+                                        if (!ubicacion) ubicacion = addr.display_name.split(',').slice(0, 2).join(',').trim();
+                                        document.getElementById('<%= txtUbicacion.ClientID %>').value = ubicacion;
+                                        var ciu = document.getElementById('<%= txtCiudadAvi.ClientID %>');
+                                        if (ciu) ciu.value = addr.city || '';
+                                    });
+                                });
+                            } else {
+                                Swal.fire({ icon: 'warning', title: 'Ups', text: 'No pudimos encontrar esa dirección. Intenta marcando directamente en el mapa.'});
+                            }
+                        })
+                        .catch(err => {
+                            this.innerHTML = oldText;
+                            this.disabled = false;
+                            console.error("Geocoding error:", err);
+                        });
                 });
 
                 // Fecha default: ahora

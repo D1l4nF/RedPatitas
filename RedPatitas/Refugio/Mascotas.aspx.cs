@@ -1,4 +1,4 @@
-using CapaDatos;
+﻿using CapaDatos;
 using CapaNegocios;
 using System;
 using System.IO;
@@ -316,7 +316,7 @@ namespace RedPatitas.Refugio
         protected string ResolveFotoUrl(object foto)
         {
             if (foto == null || string.IsNullOrEmpty(foto.ToString()))
-                return "~/Images/placeholder-pet.png";
+                return "~/Images/Default/placeholder-pet.png";
 
             string url = foto.ToString();
             if (url.StartsWith("~/"))

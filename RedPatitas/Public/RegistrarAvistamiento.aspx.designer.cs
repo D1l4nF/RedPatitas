@@ -15,6 +15,7 @@ namespace RedPatitas.Public
         protected global::System.Web.UI.WebControls.Label lblMensaje;
         protected global::System.Web.UI.WebControls.HiddenField hfIdReporte;
         protected global::System.Web.UI.WebControls.TextBox txtUbicacion;
+        protected global::System.Web.UI.WebControls.TextBox txtCiudadAvi;
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvUbicacion;
         protected global::System.Web.UI.WebControls.TextBox txtFechaAvistamiento;
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvFecha;
@@ -22,6 +23,7 @@ namespace RedPatitas.Public
         protected global::System.Web.UI.WebControls.HiddenField hfLng;
         protected global::System.Web.UI.WebControls.TextBox txtDescripcion;
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvDescripcion;
+        protected global::System.Web.UI.WebControls.FileUpload fuFotoAvistamiento;
         protected global::System.Web.UI.WebControls.Button btnEnviar;
     }
 }
