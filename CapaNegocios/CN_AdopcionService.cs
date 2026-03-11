@@ -139,6 +139,9 @@ namespace CapaNegocios
                 mascota.mas_EstadoAdopcion = "Adoptado";
 
                 db.SubmitChanges();
+
+                // NUEVO: Generar los cronogramas automáticos (Timeline) después de guardar
+                db.sp_ProgramarSeguimientosAdopcion(idSolicitud);
             }
         }
 

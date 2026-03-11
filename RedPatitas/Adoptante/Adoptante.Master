@@ -11,8 +11,8 @@
             Panel Adoptante | RedPatitas
         </asp:ContentPlaceHolder>
     </title>
-    <link rel="stylesheet" href="~/Style/estilos-base.css">
-    <link rel="stylesheet" href="~/Style/estilos-paneles.css">
+    <link href="../Style/estilos-base.css" rel="stylesheet" type="text/css" />
+    <link href="../Style/estilos-paneles.css" rel="stylesheet" type="text/css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -55,13 +55,19 @@
                     Buscar Mascotas
                 </asp:HyperLink>
                 <asp:HyperLink ID="lnkReportar" runat="server" NavigateUrl="~/Adoptante/ReportarMascota.aspx" CssClass="nav-link">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
                         <line x1="12" y1="9" x2="12" y2="13"></line>
                         <line x1="12" y1="17" x2="12.01" y2="17"></line>
                     </svg>
                     Reportar Mascota
+                </asp:HyperLink>
+                <asp:HyperLink ID="lnkMisMascotas" runat="server" NavigateUrl="~/Adoptante/MisSeguimientos.aspx" CssClass="nav-link">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polyline points="12 6 12 12 16 14"></polyline>
+                    </svg>
+                    Cronograma Seguimiento
                 </asp:HyperLink>
                 <div class="menu-category">Mi Cuenta</div>
                 <asp:HyperLink ID="lnkFavoritos" runat="server" NavigateUrl="~/Adoptante/Favoritos.aspx" CssClass="nav-link">
