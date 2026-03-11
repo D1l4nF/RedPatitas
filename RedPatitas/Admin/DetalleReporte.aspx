@@ -105,10 +105,13 @@
             }
 
             .mapa-mini {
+                width: 100%;
                 height: 250px;
                 border-radius: 12px;
                 margin: 1rem 0;
                 border: 1px solid #e0e0e0;
+                position: relative;
+                z-index: 1;
             }
 
             .contacto-box {
@@ -182,8 +185,7 @@
     <asp:Content ID="Content4" ContentPlaceHolderID="MainContent" runat="server">
 
         <%-- HiddenFields fuera de paneles ocultos para que siempre se rendericen --%>
-        <asp:HiddenField ID="hfLatEdicion" runat="server" />
-        <asp:HiddenField ID="hfLngEdicion" runat="server" />
+
 
         <div class="detalle-container">
             <a href="MascotasPerdidas.aspx" class="btn-back">&#8592; Volver a Mascotas Perdidas</a>
@@ -331,83 +333,9 @@
 
                                                 <asp:HiddenField ID="hiddenIdReporte" runat="server" />
 
-                                                <%-- Acciones del dueño del reporte --%>
-                                                    <asp:Panel ID="pnlAccionesDueno" runat="server" Visible="false">
-                                                        <div
-                                                            style="margin-top:1.5rem; padding-top:1.5rem; border-top:1px solid #eee; display:flex; gap:0.75rem; flex-wrap:wrap;">
-                                                            <asp:LinkButton ID="btnActivarEdicion" runat="server" CssClass="btn-secondary"
-                                                                OnClick="btnActivarEdicion_Click"
-                                                                style="text-decoration:none; padding:10px 20px; border-radius:10px; background:#f0f0f0; border:1px solid #ddd; cursor:pointer;">
-                                                                ✏️ Editar Reporte
-                                                            </asp:LinkButton>
-                                                            <asp:LinkButton ID="btnMarcarReunidoDetalle" runat="server"
-                                                                CommandName="MarcarReunido" CssClass="btn-primary"
-                                                                OnClick="btnMarcarReunidoDetalle_Click"
-                                                                style="text-decoration:none; padding:10px 20px; border-radius:10px;">
-                                                                ✅ Marcar como Reunido
-                                                            </asp:LinkButton>
-                                                        </div>
-                                                    </asp:Panel>
                         </asp:Panel>
 
-                        <%-- ═══════════ VISTA EDICIÓN ═══════════ --%>
-                        <asp:Panel ID="pnlVistaEdicion" runat="server" Visible="false">
-                            <div style="background:#fff3cd; border-radius:10px; padding:12px 1rem; margin-bottom:1.5rem; font-size:0.9rem; color:#856404;">
-                                ✏️ Modo edición activado — modifica los campos y guarda los cambios.
-                            </div>
-                            <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
-                                <div class="form-group">
-                                    <label style="font-weight:600; display:block; margin-bottom:5px;">Nombre:</label>
-                                    <asp:TextBox ID="txtEditNombre" runat="server" CssClass="form-control" style="width:100%; border:1px solid #ddd; border-radius:6px; padding:8px;"></asp:TextBox>
-                                </div>
-                                <div class="form-group">
-                                    <label style="font-weight:600; display:block; margin-bottom:5px;">Color:</label>
-                                    <asp:TextBox ID="txtEditColor" runat="server" CssClass="form-control" style="width:100%; border:1px solid #ddd; border-radius:6px; padding:8px;"></asp:TextBox>
-                                </div>
-                                <div class="form-group">
-                                    <label style="font-weight:600; display:block; margin-bottom:5px;">Tamaño:</label>
-                                    <asp:TextBox ID="txtEditTamano" runat="server" CssClass="form-control" style="width:100%; border:1px solid #ddd; border-radius:6px; padding:8px;"></asp:TextBox>
-                                </div>
-                                <div class="form-group">
-                                    <label style="font-weight:600; display:block; margin-bottom:5px;">Edad:</label>
-                                    <asp:TextBox ID="txtEditEdad" runat="server" CssClass="form-control" style="width:100%; border:1px solid #ddd; border-radius:6px; padding:8px;"></asp:TextBox>
-                                </div>
-                                <div class="form-group">
-                                    <label style="font-weight:600; display:block; margin-bottom:5px;">Fecha evento:</label>
-                                    <asp:TextBox ID="txtEditFecha" runat="server" TextMode="Date" CssClass="form-control" style="width:100%; border:1px solid #ddd; border-radius:6px; padding:8px;"></asp:TextBox>
-                                </div>
-                                <div class="form-group" style="grid-column: 1 / -1;">
-                                    <label>Ubicación y Mapa:</label>
-                                    <div style="display:flex; gap:10px;">
-                                        <asp:TextBox ID="txtEditUbicacion" runat="server" CssClass="form-control" placeholder="Escribe tu ubicación..." style="flex:1; border:1px solid #ddd; border-radius:6px; padding:8px;"></asp:TextBox>
-                                        <asp:TextBox ID="txtEditCiudad" runat="server" CssClass="form-control" placeholder="Ciudad (Ej: Quito)" style="width:150px; border:1px solid #ddd; border-radius:6px; padding:8px;"></asp:TextBox>
-                                        <button type="button" id="btnBuscarEdicion" class="btn-secondary" style="padding:8px 16px; border-radius:6px; background:#f0f0f0; border:1px solid #ddd; cursor:pointer;" onclick="buscarUbicacionEdicion()">🔍 Buscar</button>
-                                    </div>
-                                    <div id="mapaEdicion" class="mapa-mini" style="margin-top:10px; height:250px; border-radius:8px; border:1px solid #ddd; z-index:1;"></div>
-                                </div>
-                            </div>
 
-                            <div class="form-group" style="margin-top:15px; margin-bottom:15px;">
-                                <label style="font-weight:600; display:block; margin-bottom:5px;">Actualizar Descripción:</label>
-                                <asp:TextBox ID="txtEditDescripcion" runat="server" TextMode="MultiLine" Rows="3" CssClass="form-control" style="width:100%; border:1px solid #ddd; border-radius:6px; padding:10px;"></asp:TextBox>
-                            </div>
-                            
-                            <div class="form-group" style="margin-bottom:15px;">
-                                <label style="font-weight:600; display:block; margin-bottom:5px;">Añadir Foto (opcional):</label>
-                                <asp:FileUpload ID="fuNuevaFoto" runat="server" accept="image/*" style="width:100%;" />
-                            </div>
-                            
-                            <div style="display:flex; gap:10px;">
-                                <asp:LinkButton ID="btnGuardarCambios" runat="server" CommandName="GuardarCambios" CssClass="btn-primary" style="text-decoration:none; padding:8px 16px; border-radius:8px; display:inline-block; font-size:0.9rem; background:#1a73e8; color:white; border:none; cursor:pointer;" OnClick="btnGuardarCambios_Click">
-                                    💾 Guardar
-                                </asp:LinkButton>
-                                
-                                <asp:LinkButton ID="btnCancelarEdicion" runat="server" CssClass="btn-secondary" OnClick="btnCancelarEdicion_Click"
-                                    style="text-decoration:none; padding:8px 16px; border-radius:8px; display:inline-block; font-size:0.9rem; background:#f0f0f0; color:#333; border:1px solid #ddd; cursor:pointer;">
-                                    ❌ Cancelar
-                                </asp:LinkButton>
-                            </div>
-                        </asp:Panel>
 
                     </div>
 
@@ -470,6 +398,8 @@
                         iconSize: [36, 36], iconAnchor: [18, 18]
                     });
                     L.marker([parseFloat(lat), parseFloat(lng)], { icon: icon }).addTo(mapa);
+                    
+                    setTimeout(function() { mapa.invalidateSize(); }, 300);
                 } else {
                     var mapaDiv = document.getElementById('mapaDetalle');
                     if (mapaDiv) mapaDiv.style.display = 'none';
@@ -485,88 +415,6 @@
                 });
             }
 
-            // ═══════════ MAPA DE EDICIÓN ═══════════
-            var mapaEdi, markerEdi;
-            function inicializarMapaEdicion() {
-                var latE = parseFloat(document.getElementById('<%= hfLatEdicion.ClientID %>').value) || -0.1807;
-                var lngE = parseFloat(document.getElementById('<%= hfLngEdicion.ClientID %>').value) || -78.4678;
 
-                if (mapaEdi) { mapaEdi.remove(); }
-
-                mapaEdi = L.map('mapaEdicion').setView([latE, lngE], 15);
-                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                    attribution: '© OpenStreetMap'
-                }).addTo(mapaEdi);
-
-                var iconEdi = L.divIcon({
-                    className: 'custom-marker',
-                    html: '<div style="background:#1a73e8;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;box-shadow:0 2px 8px rgba(0,0,0,0.35);">📍</div>',
-                    iconSize: [32, 32], iconAnchor: [16, 32]
-                });
-
-                markerEdi = L.marker([latE, lngE], { icon: iconEdi, draggable: true }).addTo(mapaEdi);
-                
-                // Reverse geocoding con formato corto al arrastrar
-                markerEdi.on('dragend', function(event) {
-                    var position = markerEdi.getLatLng();
-                    document.getElementById('<%= hfLatEdicion.ClientID %>').value = position.lat;
-                    document.getElementById('<%= hfLngEdicion.ClientID %>').value = position.lng;
-                    MapaReportes.geocodificacionInversa(position.lat, position.lng, function(addr) {
-                        if (!addr) return;
-                        var ubicacion = [addr.road, addr.suburb].filter(Boolean).join(', ');
-                        if (!ubicacion) ubicacion = addr.display_name.split(',').slice(0, 2).join(',').trim();
-                        document.getElementById('<%= txtEditUbicacion.ClientID %>').value = ubicacion;
-                        var ciu = document.getElementById('<%= txtEditCiudad.ClientID %>');
-                        if (ciu) ciu.value = addr.city || '';
-                    });
-                });
-                
-                // Reverse geocoding con formato corto al hacer click
-                mapaEdi.on('click', function(e) {
-                    markerEdi.setLatLng(e.latlng);
-                    document.getElementById('<%= hfLatEdicion.ClientID %>').value = e.latlng.lat;
-                    document.getElementById('<%= hfLngEdicion.ClientID %>').value = e.latlng.lng;
-                    MapaReportes.geocodificacionInversa(e.latlng.lat, e.latlng.lng, function(addr) {
-                        if (!addr) return;
-                        var ubicacion = [addr.road, addr.suburb].filter(Boolean).join(', ');
-                        if (!ubicacion) ubicacion = addr.display_name.split(',').slice(0, 2).join(',').trim();
-                        document.getElementById('<%= txtEditUbicacion.ClientID %>').value = ubicacion;
-                        var ciu = document.getElementById('<%= txtEditCiudad.ClientID %>');
-                        if (ciu) ciu.value = addr.city || '';
-                    });
-                });
-                
-                // Forzar reajuste inmediato del canvas
-                setTimeout(function () { mapaEdi.invalidateSize(); }, 300);
-            }
-
-            function buscarUbicacionEdicion() {
-                const direccion = document.getElementById('<%= txtEditUbicacion.ClientID %>').value;
-                var ciudadEl = document.getElementById('<%= txtEditCiudad.ClientID %>');
-                const ciudad = ciudadEl ? ciudadEl.value : '';
-                if (!direccion.trim()) {
-                    Swal.fire({ icon: 'warning', title: 'Atención', text: 'Escribe una dirección' });
-                    return;
-                }
-
-                // Concatenar ciudad para evitar resultados de otros países
-                var query = direccion + (ciudad ? ', ' + ciudad : '') + ', Ecuador';
-
-                fetch('https://nominatim.openstreetmap.org/search?format=json&q=' + encodeURIComponent(query) + '&countrycodes=ec')
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data && data.length > 0) {
-                            var lat = parseFloat(data[0].lat);
-                            var lon = parseFloat(data[0].lon);
-                            mapaEdi.setView([lat, lon], 16);
-                            markerEdi.setLatLng([lat, lon]);
-                            document.getElementById('<%= hfLatEdicion.ClientID %>').value = lat;
-                            document.getElementById('<%= hfLngEdicion.ClientID %>').value = lon;
-                        } else {
-                            Swal.fire({ icon: 'warning', title: 'Ups', text: 'No pudimos encontrar esa dirección.' });
-                        }
-                    })
-                    .catch(err => console.error("Geocoding error:", err));
-            }
         </script>
     </asp:Content>

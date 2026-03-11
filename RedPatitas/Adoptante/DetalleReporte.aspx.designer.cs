@@ -35,5 +35,21 @@ namespace RedPatitas.Adoptante
         protected global::System.Web.UI.WebControls.Literal litTotalAvistamientos;
         protected global::System.Web.UI.WebControls.Panel pnlSinAvistamientos;
         protected global::System.Web.UI.WebControls.Repeater rptAvistamientos;
+        protected global::System.Web.UI.WebControls.Panel pnlVistaLectura;
+        protected global::System.Web.UI.WebControls.Panel pnlVistaEdicion;
+        protected global::System.Web.UI.WebControls.TextBox txtEditNombre;
+        protected global::System.Web.UI.WebControls.TextBox txtEditColor;
+        protected global::System.Web.UI.WebControls.TextBox txtEditTamano;
+        protected global::System.Web.UI.WebControls.TextBox txtEditEdad;
+        protected global::System.Web.UI.WebControls.TextBox txtEditFecha;
+        protected global::System.Web.UI.WebControls.TextBox txtEditUbicacion;
+        protected global::System.Web.UI.WebControls.TextBox txtEditCiudad;
+        protected global::System.Web.UI.WebControls.TextBox txtEditDescripcion;
+        protected global::System.Web.UI.WebControls.HiddenField hfLatEdicion;
+        protected global::System.Web.UI.WebControls.HiddenField hfLngEdicion;
+        protected global::System.Web.UI.WebControls.FileUpload fuNuevaFoto;
+        protected global::System.Web.UI.WebControls.LinkButton btnActivarEdicion;
+        protected global::System.Web.UI.WebControls.LinkButton btnGuardarCambios;
+        protected global::System.Web.UI.WebControls.LinkButton btnCancelarEdicion;
     }
 }

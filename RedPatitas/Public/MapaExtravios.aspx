@@ -501,9 +501,8 @@
                         <ItemTemplate>
                             <a class="recent-card" href='DetalleReporte.aspx?id=<%# Eval("Id") %>'>
                                 <img class="recent-card-img"
-                                    src='<%# !string.IsNullOrEmpty(Eval("FotoPrincipal").ToString()) ? ResolveUrl(Eval("FotoPrincipal").ToString()) : ResolveUrl("~/Content/img/no-pet-photo.png") %>'
-                                    alt="Foto mascota"
-                                    onerror="this.src='https://via.placeholder.com/100x100?text=Sin+foto'" />
+                                    src='<%# !string.IsNullOrEmpty(Eval("FotoPrincipal").ToString()) ? ResolveUrl(Eval("FotoPrincipal").ToString()) : ResolveUrl("~/Images/Default/default-pet.png") %>'
+                                    onerror="this.src='/Images/Default/default-pet.png'" />
                                 <div class="recent-card-body">
                                     <div style="display:flex; justify-content:space-between; align-items:center;">
                                         <span class="recent-card-title">
@@ -596,12 +595,9 @@
                         iconSize: [34, 34], iconAnchor: [17, 17], popupAnchor: [0, -17]
                     });
 
-                    var fotoHtml = '';
-                    if (r.FotoPrincipal) {
-                        fotoHtml = '<img src="' + resolveUrl(r.FotoPrincipal) + '" ' +
-                            'style="width:100%;height:120px;object-fit:cover;border-radius:8px;margin-bottom:8px;" ' +
-                            'onerror="this.style.display=\'none\'" />';
-                    }
+                    var fotoHtml = '<img src="' + (r.FotoPrincipal ? resolveUrl(r.FotoPrincipal) : resolveUrl('~/Images/Default/default-pet.png')) + '" ' +
+                        'style="width:100%;height:120px;object-fit:cover;border-radius:8px;margin-bottom:8px;" ' +
+                        'onerror="this.src=\'' + resolveUrl('~/Images/Default/default-pet.png') + '\'" />';
 
                     var popup =
                         '<div style="min-width:240px;max-width:280px;font-family:Inter,sans-serif;">' +
