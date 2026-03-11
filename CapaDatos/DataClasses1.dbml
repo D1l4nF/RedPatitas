@@ -256,6 +256,7 @@
       <Column Name="sol_FechaSolicitud" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="sol_FechaRevision" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Association Name="tbl_SolicitudesAdopcion_tbl_DetalleEvaluacion" Member="tbl_DetalleEvaluacion" ThisKey="sol_IdSolicitud" OtherKey="det_IdSolicitud" Type="tbl_DetalleEvaluacion" />
+      <Association Name="tbl_SolicitudesAdopcion_tbl_SeguimientosAdopcion" Member="tbl_SeguimientosAdopcion" ThisKey="sol_IdSolicitud" OtherKey="seg_IdSolicitud" Type="tbl_SeguimientosAdopcion" />
       <Association Name="tbl_Mascotas_tbl_SolicitudesAdopcion" Member="tbl_Mascotas" ThisKey="sol_IdMascota" OtherKey="mas_IdMascota" Type="tbl_Mascotas" IsForeignKey="true" />
       <Association Name="tbl_Usuarios_tbl_SolicitudesAdopcion" Member="tbl_Usuarios" ThisKey="sol_IdUsuario" OtherKey="usu_IdUsuario" Type="tbl_Usuarios" IsForeignKey="true" />
       <Association Name="tbl_Usuarios_tbl_SolicitudesAdopcion1" Member="tbl_Usuarios1" ThisKey="sol_IdUsuarioRevision" OtherKey="usu_IdUsuario" Type="tbl_Usuarios" IsForeignKey="true" />
@@ -304,6 +305,7 @@
       <Association Name="tbl_Usuarios_tbl_SolicitudesAdopcion" Member="tbl_SolicitudesAdopcion" ThisKey="usu_IdUsuario" OtherKey="sol_IdUsuario" Type="tbl_SolicitudesAdopcion" />
       <Association Name="tbl_Usuarios_tbl_SolicitudesAdopcion1" Member="tbl_SolicitudesAdopcion1" ThisKey="usu_IdUsuario" OtherKey="sol_IdUsuarioRevision" Type="tbl_SolicitudesAdopcion" />
       <Association Name="tbl_Usuarios_tbl_TokensRecuperacion" Member="tbl_TokensRecuperacion" ThisKey="usu_IdUsuario" OtherKey="tok_IdUsuario" Type="tbl_TokensRecuperacion" />
+      <Association Name="tbl_Usuarios_tbl_SeguimientosAdopcion" Member="tbl_SeguimientosAdopcion" ThisKey="usu_IdUsuario" OtherKey="seg_IdUsuarioRevision" Type="tbl_SeguimientosAdopcion" />
       <Association Name="tbl_Roles_tbl_Usuarios" Member="tbl_Roles" ThisKey="usu_IdRol" OtherKey="rol_IdRol" Type="tbl_Roles" IsForeignKey="true" />
       <Association Name="tbl_Refugios_tbl_Usuarios" Member="tbl_Refugios" ThisKey="usu_IdRefugio" OtherKey="ref_IdRefugio" Type="tbl_Refugios" IsForeignKey="true" />
     </Type>
@@ -377,4 +379,73 @@
       <Column Name="NombreRefugio" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
+  <Table Name="dbo.tbl_SeguimientosAdopcion" Member="tbl_SeguimientosAdopcion">
+    <Type Name="tbl_SeguimientosAdopcion">
+      <Column Name="seg_IdSeguimiento" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="seg_IdSolicitud" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="seg_NumeroEtapa" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="seg_TituloEtapa" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="seg_FechaProgramada" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="seg_Latitud" Type="System.Decimal" DbType="Decimal(10,8)" CanBeNull="true" />
+      <Column Name="seg_Longitud" Type="System.Decimal" DbType="Decimal(11,8)" CanBeNull="true" />
+      <Column Name="seg_FotoUrlEnVivo" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="seg_ArchivoAdjuntoUrl" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="seg_RespuestasJSON" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="seg_Estado" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="seg_FechaEnvio" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="seg_FechaRevision" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="seg_IdUsuarioRevision" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="seg_ComentariosRevision" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="seg_FechaCreacion" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="tbl_SolicitudesAdopcion_tbl_SeguimientosAdopcion" Member="tbl_SolicitudesAdopcion" ThisKey="seg_IdSolicitud" OtherKey="sol_IdSolicitud" Type="tbl_SolicitudesAdopcion" IsForeignKey="true" />
+      <Association Name="tbl_Usuarios_tbl_SeguimientosAdopcion" Member="tbl_Usuarios" ThisKey="seg_IdUsuarioRevision" OtherKey="usu_IdUsuario" Type="tbl_Usuarios" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Function Name="dbo.sp_ProgramarSeguimientosAdopcion" Method="sp_ProgramarSeguimientosAdopcion">
+    <Parameter Name="IdSolicitud" Parameter="idSolicitud" Type="System.Int32" DbType="Int" />
+    <ElementType Name="sp_ProgramarSeguimientosAdopcionResult">
+      <Column Name="Exito" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Mensaje" Type="System.String" DbType="VarChar(46) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_EnviarSeguimiento" Method="sp_EnviarSeguimiento">
+    <Parameter Name="IdSeguimiento" Parameter="idSeguimiento" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Latitud" Parameter="latitud" Type="System.Decimal" DbType="Decimal(10,8)" />
+    <Parameter Name="Longitud" Parameter="longitud" Type="System.Decimal" DbType="Decimal(11,8)" />
+    <Parameter Name="FotoUrlEnVivo" Parameter="fotoUrlEnVivo" Type="System.String" DbType="VarChar(500)" />
+    <Parameter Name="ArchivoAdjuntoUrl" Parameter="archivoAdjuntoUrl" Type="System.String" DbType="VarChar(500)" />
+    <Parameter Name="RespuestasJSON" Parameter="respuestasJSON" Type="System.String" DbType="Text" />
+    <ElementType Name="sp_EnviarSeguimientoResult">
+      <Column Name="FilasActualizadas" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_RevisarSeguimiento" Method="sp_RevisarSeguimiento">
+    <Parameter Name="IdSeguimiento" Parameter="idSeguimiento" Type="System.Int32" DbType="Int" />
+    <Parameter Name="IdUsuarioRevision" Parameter="idUsuarioRevision" Type="System.Int32" DbType="Int" />
+    <Parameter Name="EstadoNuevo" Parameter="estadoNuevo" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="Comentarios" Parameter="comentarios" Type="System.String" DbType="Text" />
+    <ElementType Name="sp_RevisarSeguimientoResult">
+      <Column Name="FilasActualizadas" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_SolicitarDevolucion" Method="sp_SolicitarDevolucion">
+    <Parameter Name="IdSolicitud" Parameter="idSolicitud" Type="System.Int32" DbType="Int" />
+    <Parameter Name="MotivoDevolucion" Parameter="motivoDevolucion" Type="System.String" DbType="Text" />
+    <Parameter Name="IdUsuarioSolicitante" Parameter="idUsuarioSolicitante" Type="System.Int32" DbType="Int" />
+    <ElementType Name="sp_SolicitarDevolucionResult">
+      <Column Name="Exito" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Mensaje" Type="System.String" DbType="VarChar(67) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_ConfirmarDevolucionRetorno" Method="sp_ConfirmarDevolucionRetorno">
+    <Parameter Name="IdSolicitud" Parameter="idSolicitud" Type="System.Int32" DbType="Int" />
+    <Parameter Name="IdMascota" Parameter="idMascota" Type="System.Int32" DbType="Int" />
+    <Parameter Name="IdUsuarioAdmin" Parameter="idUsuarioAdmin" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ComentariosFinales" Parameter="comentariosFinales" Type="System.String" DbType="Text" />
+    <Parameter Name="EsMaltrato" Parameter="esMaltrato" Type="System.Boolean" DbType="Bit" />
+    <ElementType Name="sp_ConfirmarDevolucionRetornoResult">
+      <Column Name="Exito" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Mensaje" Type="System.String" DbType="VarChar(62) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
 </Database>
