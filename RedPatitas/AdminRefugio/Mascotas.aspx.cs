@@ -156,7 +156,8 @@ namespace RedPatitas.AdminRefugio
                             mas_IdRefugio = idRefugio,
                             mas_IdUsuarioRegistro = idUsuario,
                             mas_EstadoAdopcion = "Disponible",
-                            mas_FechaRegistro = DateTime.Now
+                            mas_FechaRegistro = DateTime.Now,
+                            mas_Estado = true
                         };
                     }
 

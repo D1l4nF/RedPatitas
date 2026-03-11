@@ -53,7 +53,8 @@
                                         stroke-linecap="round" stroke-linejoin="round" />
                                 </svg>
                                 <asp:TextBox ID="txtEmail" runat="server" TextMode="Email" placeholder="tu@email.com"
-                                    CssClass="form-control" ClientIDMode="Static" required aria-required="true">
+                                    CssClass="form-control" ClientIDMode="Static" required="required"
+                                    aria-required="true">
                                 </asp:TextBox>
                             </div>
                         </div>
@@ -72,7 +73,8 @@
                                         stroke-linejoin="round" />
                                 </svg>
                                 <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" placeholder="••••••••"
-                                    CssClass="form-control" ClientIDMode="Static" required aria-required="true">
+                                    CssClass="form-control" ClientIDMode="Static" required="required"
+                                    aria-required="true">
                                 </asp:TextBox>
                                 <button type="button" class="password-toggle" data-target="txtPassword"
                                     aria-label="Mostrar contraseña">

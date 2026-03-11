@@ -7,6 +7,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>
     </ProductVersion>
+    <ProductVersion></ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{F86CE2FC-BC83-457B-BF34-DBD86624C1BA}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
@@ -24,6 +25,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <NuGetPackageImportStamp></NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -124,6 +126,11 @@
     <Content Include="Refugio\Mascotas.aspx" />
     <Content Include="Refugio\Perfil.aspx" />
     <Content Include="Refugio\SolicitudesRecibidas.aspx" />
+    <Content Include="Refugio\Perfil.aspx" />
+    <Content Include="Adoptante\MisSeguimientos.aspx" />
+    <Content Include="Adoptante\CompletarSeguimiento.aspx" />
+    <Content Include="AdminRefugio\AuditoriaSeguimientos.aspx" />
+    <Content Include="AdminRefugio\VerSeguimiento.aspx" />
     <Content Include="Style\estilos-base.css" />
     <Content Include="Style\estilos-publicos.css" />
     <Content Include="Style\estilos-paneles.css" />
@@ -142,6 +149,7 @@
     <Content Include="Public\DetalleReporte.aspx" />
     <Content Include="Public\RegistrarAvistamiento.aspx" />
     <Content Include="Js\mapas-reportes.js" />
+    <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdminRefugio\AdminRefugio.Master.cs">
@@ -512,6 +520,33 @@
     </Compile>
     <Compile Include="Public\RegistrarAvistamiento.aspx.designer.cs">
       <DependentUpon>RegistrarAvistamiento.aspx</DependentUpon>
+    <Compile Include="Adoptante\MisSeguimientos.aspx.cs">
+      <DependentUpon>MisSeguimientos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Adoptante\MisSeguimientos.aspx.designer.cs">
+      <DependentUpon>MisSeguimientos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Adoptante\CompletarSeguimiento.aspx.cs">
+      <DependentUpon>CompletarSeguimiento.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Adoptante\CompletarSeguimiento.aspx.designer.cs">
+      <DependentUpon>CompletarSeguimiento.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminRefugio\AuditoriaSeguimientos.aspx.cs">
+      <DependentUpon>AuditoriaSeguimientos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminRefugio\AuditoriaSeguimientos.aspx.designer.cs">
+      <DependentUpon>AuditoriaSeguimientos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminRefugio\VerSeguimiento.aspx.cs">
+      <DependentUpon>VerSeguimiento.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminRefugio\VerSeguimiento.aspx.designer.cs">
+      <DependentUpon>VerSeguimiento.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -562,6 +597,12 @@
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
           </CustomServerUrl>
+          <DevelopmentServerPort>53492</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:53492/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl></CustomServerUrl>
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
@@ -572,5 +613,8 @@
       <ErrorText>Este proyecto hace referencia a los paquetes NuGet que faltan en este equipo. Use la restauración de paquetes NuGet para descargarlos. Para obtener más información, consulte http://go.microsoft.com/fwlink/?LinkID=322105. El archivo que falta es {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+      <ErrorText>Este proyecto hace referencia a los paquetes NuGet que faltan en este equipo. Use la restauración de paquetes NuGet para descargarlos.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="El archivo de herramientas de compilación no existe." />
   </Target>
 </Project>

@@ -258,6 +258,16 @@ namespace RedPatitas.AdminRefugio
 
                     db.SubmitChanges();
 
+                    // MÓDULO SEGUIMIENTO: Disparar el reloj automáticos de las 4 etapas satelitales
+                    try
+                    {
+                        db.sp_ProgramarSeguimientosAdopcion(solicitud.sol_IdSolicitud);
+                    }
+                    catch (Exception exSeg)
+                    {
+                        System.Diagnostics.Debug.WriteLine("Error crítico al inicializar seguimientos: " + exSeg.Message);
+                    }
+
                     pnlSuccess.Visible = true;
                     litSuccess.Text = "¡Adopción aprobada exitosamente! La mascota ha sido marcada como adoptada.";
                     btnAprobar.Enabled = false;
