@@ -520,6 +520,7 @@
     </Compile>
     <Compile Include="Public\RegistrarAvistamiento.aspx.designer.cs">
       <DependentUpon>RegistrarAvistamiento.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Adoptante\MisSeguimientos.aspx.cs">
       <DependentUpon>MisSeguimientos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -613,8 +614,5 @@
       <ErrorText>Este proyecto hace referencia a los paquetes NuGet que faltan en este equipo. Use la restauración de paquetes NuGet para descargarlos. Para obtener más información, consulte http://go.microsoft.com/fwlink/?LinkID=322105. El archivo que falta es {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
-      <ErrorText>Este proyecto hace referencia a los paquetes NuGet que faltan en este equipo. Use la restauración de paquetes NuGet para descargarlos.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="El archivo de herramientas de compilación no existe." />
   </Target>
 </Project>
