@@ -70,7 +70,7 @@
             <!-- Mascotas Recomendadas -->
             <div class="recent-section">
                 <div class="section-header">
-                    <h2 class="section-title">🐾 Recomendados para ti</h2>
+                    <h2 class="section-title">Recomendados para ti</h2>
                     <a href='<%= ResolveUrl("~/Adoptante/Mascotas.aspx") %>' class="btn-link">Ver más</a>
                 </div>
 
@@ -120,7 +120,6 @@
 
                 <asp:Panel ID="pnlSinMascotas" runat="server" Visible="false"
                     style="text-align: center; padding: 3rem; background: #fff; border-radius: 12px;">
-                    <div style="font-size: 4rem; margin-bottom: 1rem;">🐾</div>
                     <h3 style="color: #4A3B32; margin-bottom: 0.5rem;">No hay mascotas disponibles</h3>
                     <p style="color: #666;">Vuelve pronto, ¡nuevas mascotas llegan cada día!</p>
                 </asp:Panel>
@@ -129,14 +128,18 @@
             <!-- Quick Actions -->
             <div class="recent-section" style="margin-top: 2rem;">
                 <div class="section-header">
-                    <h2 class="section-title">⚡ Acciones rápidas</h2>
+                    <h2 class="section-title">Acciones rápidas</h2>
                 </div>
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
                     <a href='<%= ResolveUrl("~/Adoptante/Mascotas.aspx") %>' class="quick-action-card"
                         style="display: flex; align-items: center; gap: 1rem; padding: 1.25rem; background: #fff; border-radius: 12px; text-decoration: none; color: inherit; transition: all 0.3s ease; box-shadow: 0 2px 8px rgba(0,0,0,0.06);">
                         <div
-                            style="width: 50px; height: 50px; background: #FFF0E6; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">
-                            🔍
+                            style="width: 50px; height: 50px; background: #FFF0E6; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #FF8C42;">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24"
+                                height="24">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                            </svg>
                         </div>
                         <div>
                             <strong style="color: #4A3B32;">Buscar Mascotas</strong>
@@ -146,8 +149,13 @@
                     <a href='<%= ResolveUrl("~/Adoptante/Favoritos.aspx") %>' class="quick-action-card"
                         style="display: flex; align-items: center; gap: 1rem; padding: 1.25rem; background: #fff; border-radius: 12px; text-decoration: none; color: inherit; transition: all 0.3s ease; box-shadow: 0 2px 8px rgba(0,0,0,0.06);">
                         <div
-                            style="width: 50px; height: 50px; background: #FFE6E6; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">
-                            ❤️
+                            style="width: 50px; height: 50px; background: #FFE6E6; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #e74c3c;">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24"
+                                height="24">
+                                <path
+                                    d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+                                </path>
+                            </svg>
                         </div>
                         <div>
                             <strong style="color: #4A3B32;">Mis Favoritos</strong>
@@ -157,8 +165,12 @@
                     <a href='<%= ResolveUrl("~/Adoptante/Perfil.aspx") %>' class="quick-action-card"
                         style="display: flex; align-items: center; gap: 1rem; padding: 1.25rem; background: #fff; border-radius: 12px; text-decoration: none; color: inherit; transition: all 0.3s ease; box-shadow: 0 2px 8px rgba(0,0,0,0.06);">
                         <div
-                            style="width: 50px; height: 50px; background: #E6F0FF; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">
-                            👤
+                            style="width: 50px; height: 50px; background: #E6F0FF; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #1a73e8;">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24"
+                                height="24">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
                         </div>
                         <div>
                             <strong style="color: #4A3B32;">Mi Perfil</strong>

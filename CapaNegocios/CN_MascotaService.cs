@@ -40,9 +40,9 @@ namespace CapaNegocios
                                    Tamano = m.mas_Tamano ?? "Mediano",
                                    Color = m.mas_Color,
                                    Descripcion = m.mas_Descripcion,
-                                   Vacunado = m.mas_Vacunado == true,
-                                   Esterilizado = m.mas_Esterilizado == true,
-                                   Desparasitado = m.mas_Desparasitado == true,
+                                   Vacunado = m.mas_Vacunado ?? false,
+                                   Esterilizado = m.mas_Esterilizado ?? false,
+                                   Desparasitado = m.mas_Desparasitado ?? false,
                                    EstadoAdopcion = m.mas_EstadoAdopcion,
                                    NombreRefugio = m.tbl_Refugios.ref_Nombre,
                                    CiudadRefugio = m.tbl_Refugios.ref_Ciudad ?? "Ecuador",
@@ -87,9 +87,9 @@ namespace CapaNegocios
                     Color = m.mas_Color,
                     Descripcion = m.mas_Descripcion,
                     Temperamento = m.mas_Temperamento,
-                    Vacunado = m.mas_Vacunado == true,
-                    Esterilizado = m.mas_Esterilizado == true,
-                    Desparasitado = m.mas_Desparasitado == true,
+                    Vacunado = m.mas_Vacunado ?? false,
+                    Esterilizado = m.mas_Esterilizado ?? false,
+                    Desparasitado = m.mas_Desparasitado ?? false,
                     NecesidadesEspeciales = m.mas_NecesidadesEspeciales,
                     EstadoAdopcion = m.mas_EstadoAdopcion,
                     NombreRefugio = m.tbl_Refugios.ref_Nombre,
@@ -153,8 +153,8 @@ namespace CapaNegocios
                                    Sexo = m.mas_Sexo.HasValue ? (m.mas_Sexo.Value == 'M' ? "Macho" : "Hembra") : "Desconocido",
                                    Tamano = m.mas_Tamano ?? "Mediano",
                                    Color = m.mas_Color,
-                                   Vacunado = m.mas_Vacunado == true,
-                                   Esterilizado = m.mas_Esterilizado == true,
+                                   Vacunado = m.mas_Vacunado ?? false,
+                                   Esterilizado = m.mas_Esterilizado ?? false,
                                    EstadoAdopcion = m.mas_EstadoAdopcion,
                                    NombreRefugio = m.tbl_Refugios.ref_Nombre,
                                    CiudadRefugio = m.tbl_Refugios.ref_Ciudad ?? "Ecuador",
@@ -226,9 +226,9 @@ namespace CapaNegocios
                                    Tamano = m.mas_Tamano ?? "Mediano",
                                    Color = m.mas_Color,
                                    Descripcion = m.mas_Descripcion,
-                                   Vacunado = m.mas_Vacunado == true,
-                                   Esterilizado = m.mas_Esterilizado == true,
-                                   Desparasitado = m.mas_Desparasitado == true,
+                                   Vacunado = m.mas_Vacunado ?? false,
+                                   Esterilizado = m.mas_Esterilizado ?? false,
+                                   Desparasitado = m.mas_Desparasitado ?? false,
                                    EstadoAdopcion = m.mas_EstadoAdopcion,
                                    NombreRefugio = m.tbl_Refugios.ref_Nombre,
                                    CiudadRefugio = m.tbl_Refugios.ref_Ciudad ?? "Ecuador",
@@ -316,6 +316,35 @@ namespace CapaNegocios
                 db.SubmitChanges();
             }
         }
+        /// <summary>
+        /// Actualiza los datos de una mascota existente
+        /// </summary>
+        public bool ActualizarMascota(tbl_Mascotas mascotaActualizada)
+        {
+            using (var db = new DataClasses1DataContext())
+            {
+                var mascota = db.tbl_Mascotas
+                    .FirstOrDefault(m => m.mas_IdMascota == mascotaActualizada.mas_IdMascota
+                                      && m.mas_Estado == true);
+
+                if (mascota == null) return false;
+
+                mascota.mas_Nombre         = mascotaActualizada.mas_Nombre;
+                mascota.mas_IdRaza         = mascotaActualizada.mas_IdRaza;
+                mascota.mas_Sexo           = mascotaActualizada.mas_Sexo;
+                mascota.mas_EdadAproximada = mascotaActualizada.mas_EdadAproximada;
+                mascota.mas_Tamano         = mascotaActualizada.mas_Tamano;
+                mascota.mas_Color          = mascotaActualizada.mas_Color;
+                mascota.mas_Descripcion    = mascotaActualizada.mas_Descripcion;
+                mascota.mas_Vacunado       = mascotaActualizada.mas_Vacunado;
+                mascota.mas_Esterilizado   = mascotaActualizada.mas_Esterilizado;
+                mascota.mas_EstadoAdopcion = mascotaActualizada.mas_EstadoAdopcion;
+
+                db.SubmitChanges();
+                return true;
+            }
+        }
+
 
         /// <summary>
         /// Elimina lógicamente una mascota

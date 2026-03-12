@@ -135,5 +135,9 @@ namespace RedPatitas.Public
         /// Control lblMensaje.
         /// </summary>
         protected global::System.Web.UI.WebControls.Label lblMensaje;
+        /// <summary>
+        /// Control txtCiudad.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.TextBox txtCiudad;
     }
 }

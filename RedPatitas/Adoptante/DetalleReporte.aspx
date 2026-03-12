@@ -1,0 +1,572 @@
+<%@ Page Title="Detalle de Reporte" Language="C#" MasterPageFile="~/Adoptante/Adoptante.Master" AutoEventWireup="true"
+    CodeBehind="DetalleReporte.aspx.cs" Inherits="RedPatitas.Adoptante.DetalleReporte" %>
+
+    <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
+        Detalle de Reporte | RedPatitas
+    </asp:Content>
+
+    <asp:Content ID="Content2" ContentPlaceHolderID="head" runat="server">
+        <link href='<%= ResolveUrl("~/Style/dashboard.css") %>' rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+        <style>
+            .detalle-container {
+                max-width: 900px;
+                margin: 0 auto;
+            }
+
+            .detalle-hero {
+                background: var(--bg-card, #fff);
+                border-radius: 16px;
+                padding: 2rem;
+                box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+                margin-bottom: 2rem;
+            }
+
+            .tipo-badge {
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+                padding: 6px 16px;
+                border-radius: 20px;
+                font-weight: 700;
+                font-size: 0.9rem;
+                margin-bottom: 1rem;
+            }
+
+            .tipo-perdida {
+                background: #fde8e8;
+                color: #c0392b;
+            }
+
+            .tipo-encontrada {
+                background: #e8f8ef;
+                color: #1e8449;
+            }
+
+            .estado-badge {
+                display: inline-block;
+                padding: 4px 12px;
+                border-radius: 12px;
+                font-size: 0.8rem;
+                font-weight: 600;
+                background: #e8f0fe;
+                color: #1a73e8;
+                margin-left: 8px;
+                vertical-align: middle;
+            }
+
+            .foto-galeria {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+                gap: 12px;
+                margin: 1.5rem 0;
+            }
+
+            .foto-galeria img {
+                width: 100%;
+                aspect-ratio: 1;
+                object-fit: cover;
+                border-radius: 10px;
+                cursor: pointer;
+                transition: transform 0.2s;
+            }
+
+            .foto-galeria img:hover {
+                transform: scale(1.04);
+            }
+
+            .info-grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 1.5rem;
+                margin: 1.5rem 0;
+            }
+
+            @media (max-width: 600px) {
+                .info-grid {
+                    grid-template-columns: 1fr;
+                }
+            }
+
+            .info-item label {
+                font-size: 0.78rem;
+                color: #888;
+                font-weight: 600;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+                display: block;
+                margin-bottom: 4px;
+            }
+
+            .info-item span {
+                font-size: 1rem;
+                color: #222;
+                font-weight: 500;
+            }
+
+            .mapa-mini {
+                height: 250px;
+                border-radius: 12px;
+                margin: 1rem 0;
+                border: 1px solid #e0e0e0;
+            }
+
+            .contacto-box {
+                background: #f8f9fa;
+                border-radius: 12px;
+                padding: 1.5rem;
+                margin: 1.5rem 0;
+            }
+
+            .avistamientos-section {
+                background: var(--bg-card, #fff);
+                border-radius: 16px;
+                padding: 2rem;
+                box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+                margin-bottom: 2rem;
+            }
+
+            .avistamiento-item {
+                border-left: 3px solid #1a73e8;
+                padding: 1rem 1rem 1rem 1.25rem;
+                margin-bottom: 1rem;
+                background: #f8f9fa;
+                border-radius: 0 8px 8px 0;
+            }
+
+            .login-aviso {
+                background: #fff3cd;
+                border-radius: 10px;
+                padding: 1rem 1.5rem;
+                font-size: 0.9rem;
+                color: #856404;
+                margin-top: 1rem;
+            }
+
+            .no-encontrado {
+                text-align: center;
+                padding: 4rem 2rem;
+            }
+
+            .btn-back {
+                display: inline-flex;
+                align-items: center;
+                gap: 6px;
+                padding: 8px 16px;
+                border-radius: 8px;
+                background: #f0f0f0;
+                color: #333;
+                text-decoration: none;
+                font-weight: 500;
+                margin-bottom: 1.5rem;
+                font-size: 0.9rem;
+                transition: background 0.2s;
+            }
+
+            .btn-back:hover {
+                background: #e0e0e0;
+            }
+        </style>
+    </asp:Content>
+
+    <asp:Content ID="Content3" ContentPlaceHolderID="PageHeader" runat="server">
+        <div class="page-header">
+            <h1 class="page-title">📋 Detalle del Reporte</h1>
+            <div class="breadcrumb">
+                <a href="MisReportes.aspx" style="color:inherit; text-decoration:none;">Mis Reportes</a>
+                &rsaquo; Detalle
+            </div>
+        </div>
+    </asp:Content>
+
+    <asp:Content ID="Content4" ContentPlaceHolderID="MainContent" runat="server">
+
+        <%-- HiddenFields fuera de paneles ocultos para que siempre se rendericen --%>
+        <asp:HiddenField ID="hfLatEdicion" runat="server" />
+        <asp:HiddenField ID="hfLngEdicion" runat="server" />
+
+        <div class="detalle-container">
+            <a href="MisReportes.aspx" class="btn-back">&#8592; Volver a Mis Reportes</a>
+
+            <asp:Panel ID="pnlNoEncontrado" runat="server" Visible="false">
+                <div class="no-encontrado">
+                    <div style="font-size:4rem;">🔍</div>
+                    <h2>Reporte no encontrado</h2>
+                    <p style="color:#666; margin-bottom:1.5rem;">El reporte que buscas no existe o fue eliminado.</p>
+                    <a href="MisReportes.aspx" class="btn-primary"
+                        style="text-decoration:none; padding:10px 24px; border-radius:10px; display:inline-block;">
+                        Ver mis reportes
+                    </a>
+                </div>
+            </asp:Panel>
+
+            <asp:Panel ID="pnlDetalle" runat="server">
+
+                <%-- Card principal --%>
+                    <div class="detalle-hero">
+                        <asp:Literal ID="litTipoBadge" runat="server"></asp:Literal>
+
+                        <h1 style="margin:0 0 0.5rem; font-size:1.8rem;">
+                            <asp:Literal ID="litNombreMascota" runat="server">Sin nombre</asp:Literal>
+                            <asp:Literal ID="litEstadoBadge" runat="server"></asp:Literal>
+                        </h1>
+
+                        <%-- ═══════════ VISTA LECTURA ═══════════ --%>
+                        <asp:Panel ID="pnlVistaLectura" runat="server">
+
+                        <%-- Galería de fotos --%>
+                            <asp:Panel ID="pnlFotos" runat="server">
+                                <div class="foto-galeria">
+                                    <asp:Repeater ID="rptFotos" runat="server">
+                                        <ItemTemplate>
+                                            <img src='<%# ResolveUrl(Eval("fore_Url").ToString()) %>'
+                                                alt="Foto de la mascota" onclick="verFotoGrande(this.src)" />
+                                        </ItemTemplate>
+                                    </asp:Repeater>
+                                </div>
+                            </asp:Panel>
+
+                            <%-- Datos de la mascota --%>
+                                <div class="info-grid">
+                                    <div class="info-item">
+                                        <label>🐾 Especie</label>
+                                        <span>
+                                            <asp:Literal ID="litEspecie" runat="server">-</asp:Literal>
+                                        </span>
+                                    </div>
+                                    <div class="info-item">
+                                        <label>🎨 Color</label>
+                                        <span>
+                                            <asp:Literal ID="litColor" runat="server">-</asp:Literal>
+                                        </span>
+                                    </div>
+                                    <div class="info-item">
+                                        <label>📏 Tamaño</label>
+                                        <span>
+                                            <asp:Literal ID="litTamano" runat="server">-</asp:Literal>
+                                        </span>
+                                    </div>
+                                    <div class="info-item">
+                                        <label>⚧ Sexo</label>
+                                        <span>
+                                            <asp:Literal ID="litSexo" runat="server">-</asp:Literal>
+                                        </span>
+                                    </div>
+                                    <div class="info-item">
+                                        <label>🎂 Edad aproximada</label>
+                                        <span>
+                                            <asp:Literal ID="litEdad" runat="server">-</asp:Literal>
+                                        </span>
+                                    </div>
+                                    <div class="info-item">
+                                        <label>📅 Fecha del evento</label>
+                                        <span>
+                                            <asp:Literal ID="litFecha" runat="server">-</asp:Literal>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <%-- Descripción --%>
+                                    <div style="margin-top:1rem;">
+                                        <label
+                                            style="font-size:0.78rem;color:#888;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;display:block;margin-bottom:6px;">
+                                            📋 Descripción
+                                        </label>
+                                        <p style="margin:0;line-height:1.7;color:#333;">
+                                            <asp:Literal ID="litDescripcion" runat="server"></asp:Literal>
+                                        </p>
+                                    </div>
+
+                                    <%-- Mapa de ubicación --%>
+                                        <asp:Panel ID="pnlMapa" runat="server">
+                                            <h3 style="margin:1.5rem 0 0.5rem;">📍 Última ubicación conocida</h3>
+                                            <p style="font-size:0.9rem;color:#666;margin:0 0 0.5rem;">
+                                                <asp:Literal ID="litUbicacion" runat="server"></asp:Literal>
+                                            </p>
+                                            <div id="mapaDetalle" class="mapa-mini"></div>
+                                            <asp:HiddenField ID="hfLatDetalle" runat="server" />
+                                            <asp:HiddenField ID="hfLngDetalle" runat="server" />
+                                        </asp:Panel>
+
+                                        <%-- Datos de contacto --%>
+                                            <asp:Panel ID="pnlContacto" runat="server">
+                                                <div class="contacto-box">
+                                                    <h3 style="margin:0 0 1rem;">📞 Datos de contacto</h3>
+                                                    <div class="info-grid">
+                                                        <div class="info-item">
+                                                            <label>Teléfono</label>
+                                                            <span>
+                                                                <asp:HyperLink ID="lnkTelefono" runat="server">
+                                                                    <asp:Literal ID="litTelefono" runat="server">
+                                                                    </asp:Literal>
+                                                                </asp:HyperLink>
+                                                            </span>
+                                                        </div>
+                                                        <div class="info-item">
+                                                            <label>Email</label>
+                                                            <span>
+                                                                <asp:Literal ID="litEmail" runat="server"></asp:Literal>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </asp:Panel>
+
+                                            <asp:Panel ID="pnlLoginAviso" runat="server" Visible="false">
+                                                <div class="login-aviso">
+                                                    🔒 <a href='<%= ResolveUrl("~/Login/Login.aspx") %>'>Inicia
+                                                        sesión</a>
+                                                    para ver los datos de contacto del reportante.
+                                                </div>
+                                            </asp:Panel>
+
+                                            <%-- Botón registrar avistamiento --%>
+                                                <asp:Panel ID="pnlBtnAvistamiento" runat="server" Visible="false">
+                                                    <asp:HyperLink ID="lnkAvistamiento" runat="server"
+                                                        CssClass="btn-primary"
+                                                        style="display:inline-block; text-decoration:none; padding:12px 24px; border-radius:10px; margin-top:1rem;">
+                                                        👁 Registrar Avistamiento
+                                                    </asp:HyperLink>
+                                                </asp:Panel>
+
+                                                <asp:HiddenField ID="hiddenIdReporte" runat="server" />
+
+                                                <%-- Acciones del dueño del reporte --%>
+                                                    <asp:Panel ID="pnlAccionesDueno" runat="server" Visible="false">
+                                                        <div
+                                                            style="margin-top:1.5rem; padding-top:1.5rem; border-top:1px solid #eee; display:flex; gap:0.75rem; flex-wrap:wrap;">
+                                                            <asp:LinkButton ID="btnActivarEdicion" runat="server" CssClass="btn-secondary"
+                                                                OnClick="btnActivarEdicion_Click"
+                                                                style="text-decoration:none; padding:10px 20px; border-radius:10px; background:#f0f0f0; border:1px solid #ddd; cursor:pointer;">
+                                                                ✏️ Editar Reporte
+                                                            </asp:LinkButton>
+                                                            <asp:LinkButton ID="btnMarcarReunidoDetalle" runat="server"
+                                                                CommandName="MarcarReunido" CssClass="btn-primary"
+                                                                OnClick="btnMarcarReunidoDetalle_Click"
+                                                                style="text-decoration:none; padding:10px 20px; border-radius:10px;">
+                                                                ✅ Marcar como Reunido
+                                                            </asp:LinkButton>
+                                                        </div>
+                                                    </asp:Panel>
+                        </asp:Panel>
+
+                        <%-- ═══════════ VISTA EDICIÓN ═══════════ --%>
+                        <asp:Panel ID="pnlVistaEdicion" runat="server" Visible="false">
+                            <div style="background:#fff3cd; border-radius:10px; padding:12px 1rem; margin-bottom:1.5rem; font-size:0.9rem; color:#856404;">
+                                ✏️ Modo edición activado — modifica los campos y guarda los cambios.
+                            </div>
+                            <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+                                <div class="form-group">
+                                    <label style="font-weight:600; display:block; margin-bottom:5px;">Nombre:</label>
+                                    <asp:TextBox ID="txtEditNombre" runat="server" CssClass="form-control" style="width:100%; border:1px solid #ddd; border-radius:6px; padding:8px;"></asp:TextBox>
+                                </div>
+                                <div class="form-group">
+                                    <label style="font-weight:600; display:block; margin-bottom:5px;">Color:</label>
+                                    <asp:TextBox ID="txtEditColor" runat="server" CssClass="form-control" style="width:100%; border:1px solid #ddd; border-radius:6px; padding:8px;"></asp:TextBox>
+                                </div>
+                                <div class="form-group">
+                                    <label style="font-weight:600; display:block; margin-bottom:5px;">Tamaño:</label>
+                                    <asp:TextBox ID="txtEditTamano" runat="server" CssClass="form-control" style="width:100%; border:1px solid #ddd; border-radius:6px; padding:8px;"></asp:TextBox>
+                                </div>
+                                <div class="form-group">
+                                    <label style="font-weight:600; display:block; margin-bottom:5px;">Edad:</label>
+                                    <asp:TextBox ID="txtEditEdad" runat="server" CssClass="form-control" style="width:100%; border:1px solid #ddd; border-radius:6px; padding:8px;"></asp:TextBox>
+                                </div>
+                                <div class="form-group">
+                                    <label style="font-weight:600; display:block; margin-bottom:5px;">Fecha evento:</label>
+                                    <asp:TextBox ID="txtEditFecha" runat="server" TextMode="Date" CssClass="form-control" style="width:100%; border:1px solid #ddd; border-radius:6px; padding:8px;"></asp:TextBox>
+                                </div>
+                                <div class="form-group" style="grid-column: 1 / -1;">
+                                    <label>Ubicación y Mapa:</label>
+                                    <div style="display:flex; gap:10px;">
+                                        <asp:TextBox ID="txtEditUbicacion" runat="server" CssClass="form-control" placeholder="Escribe tu ubicación..." style="flex:1; border:1px solid #ddd; border-radius:6px; padding:8px;"></asp:TextBox>
+                                        <asp:TextBox ID="txtEditCiudad" runat="server" CssClass="form-control" placeholder="Ciudad (Ej: Quito)" style="width:150px; border:1px solid #ddd; border-radius:6px; padding:8px;"></asp:TextBox>
+                                        <button type="button" id="btnBuscarEdicion" class="btn-secondary" style="padding:8px 16px; border-radius:6px; background:#f0f0f0; border:1px solid #ddd; cursor:pointer;" onclick="buscarUbicacionEdicion()">🔍 Buscar</button>
+                                    </div>
+                                    <div id="mapaEdicion" class="mapa-mini" style="margin-top:10px; height:250px; border-radius:8px; border:1px solid #ddd; z-index:1;"></div>
+                                </div>
+                            </div>
+
+                            <div class="form-group" style="margin-top:15px; margin-bottom:15px;">
+                                <label style="font-weight:600; display:block; margin-bottom:5px;">Actualizar Descripción:</label>
+                                <asp:TextBox ID="txtEditDescripcion" runat="server" TextMode="MultiLine" Rows="3" CssClass="form-control" style="width:100%; border:1px solid #ddd; border-radius:6px; padding:10px;"></asp:TextBox>
+                            </div>
+                            
+                            <div class="form-group" style="margin-bottom:15px;">
+                                <label style="font-weight:600; display:block; margin-bottom:5px;">Añadir Foto (opcional):</label>
+                                <asp:FileUpload ID="fuNuevaFoto" runat="server" accept="image/*" style="width:100%;" />
+                            </div>
+                            
+                            <div style="display:flex; gap:10px;">
+                                <asp:LinkButton ID="btnGuardarCambios" runat="server" CommandName="GuardarCambios" CssClass="btn-primary" style="text-decoration:none; padding:8px 16px; border-radius:8px; display:inline-block; font-size:0.9rem; background:#1a73e8; color:white; border:none; cursor:pointer;" OnClick="btnGuardarCambios_Click">
+                                    💾 Guardar
+                                </asp:LinkButton>
+                                
+                                <asp:LinkButton ID="btnCancelarEdicion" runat="server" CssClass="btn-secondary" OnClick="btnCancelarEdicion_Click"
+                                    style="text-decoration:none; padding:8px 16px; border-radius:8px; display:inline-block; font-size:0.9rem; background:#f0f0f0; color:#333; border:1px solid #ddd; cursor:pointer;">
+                                    ❌ Cancelar
+                                </asp:LinkButton>
+                            </div>
+                        </asp:Panel>
+
+                    </div>
+
+                    <%-- Avistamientos --%>
+                        <div class="avistamientos-section">
+                            <h2 style="margin:0 0 1.5rem;">
+                                👁 Avistamientos
+                                (<asp:Literal ID="litTotalAvistamientos" runat="server">0</asp:Literal>)
+                            </h2>
+
+                            <asp:Panel ID="pnlSinAvistamientos" runat="server">
+                                <p style="color:#888; text-align:center; padding:2rem;">
+                                    Aún no hay avistamientos registrados.
+                                </p>
+                            </asp:Panel>
+
+                            <asp:Repeater ID="rptAvistamientos" runat="server">
+                                <ItemTemplate>
+                                    <div class="avistamiento-item">
+                                        <div
+                                            style="display:flex; justify-content:space-between; margin-bottom:6px; flex-wrap:wrap; gap:4px;">
+                                            <strong>📍 <%# System.Web.HttpUtility.HtmlEncode((Eval("avi_Ubicacion")
+                                                    ?? "" ).ToString()) %></strong>
+                                            <span style="font-size:0.82rem; color:#888;">
+                                                <%# Eval("avi_FechaReporte") !=null ?
+                                                    ((DateTime)Eval("avi_FechaReporte")).ToString("dd/MM/yyyy HH:mm")
+                                                    : "" %>
+                                            </span>
+                                        </div>
+                                        <p style="margin:0; color:#555; font-size:0.92rem;">
+                                            <%# System.Web.HttpUtility.HtmlEncode((Eval("avi_Descripcion") ?? ""
+                                                ).ToString()) %>
+                                        </p>
+                                    </div>
+                                </ItemTemplate>
+                            </asp:Repeater>
+                        </div>
+
+            </asp:Panel>
+        </div>
+
+        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+        <script src='<%= ResolveUrl("~/Js/mapas-reportes.js") %>'></script>
+        <script type="text/javascript">
+            document.addEventListener('DOMContentLoaded', function () {
+                var lat = document.getElementById('<%= hfLatDetalle.ClientID %>').value;
+                var lng = document.getElementById('<%= hfLngDetalle.ClientID %>').value;
+
+                if (lat && lng) {
+                    var mapa = L.map('mapaDetalle').setView([parseFloat(lat), parseFloat(lng)], 15);
+                    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                        attribution: '© OpenStreetMap'
+                    }).addTo(mapa);
+
+                    var icon = L.divIcon({
+                        className: 'custom-marker',
+                        html: '<div style="background:#e74c3c;width:36px;height:36px;border-radius:50%;' +
+                            'display:flex;align-items:center;justify-content:center;font-size:18px;' +
+                            'box-shadow:0 2px 8px rgba(0,0,0,0.4);">📍</div>',
+                        iconSize: [36, 36], iconAnchor: [18, 18]
+                    });
+                    L.marker([parseFloat(lat), parseFloat(lng)], { icon: icon }).addTo(mapa);
+                } else {
+                    var mapaDiv = document.getElementById('mapaDetalle');
+                    if (mapaDiv) mapaDiv.style.display = 'none';
+                }
+            });
+
+            function verFotoGrande(src) {
+                Swal.fire({
+                    imageUrl: src, imageAlt: 'Foto mascota',
+                    showConfirmButton: false, showCloseButton: true,
+                    background: 'rgba(0,0,0,0.9)',
+                    imageWidth: '90%', imageHeight: 'auto'
+                });
+            }
+
+            // ═══════════ MAPA DE EDICIÓN ═══════════
+            var mapaEdi, markerEdi;
+            function inicializarMapaEdicion() {
+                var latE = parseFloat(document.getElementById('<%= hfLatEdicion.ClientID %>').value) || -0.1807;
+                var lngE = parseFloat(document.getElementById('<%= hfLngEdicion.ClientID %>').value) || -78.4678;
+
+                if (mapaEdi) { mapaEdi.remove(); }
+
+                mapaEdi = L.map('mapaEdicion').setView([latE, lngE], 15);
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '© OpenStreetMap'
+                }).addTo(mapaEdi);
+
+                var iconEdi = L.divIcon({
+                    className: 'custom-marker',
+                    html: '<div style="background:#1a73e8;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;box-shadow:0 2px 8px rgba(0,0,0,0.35);">📍</div>',
+                    iconSize: [32, 32], iconAnchor: [16, 32]
+                });
+
+                markerEdi = L.marker([latE, lngE], { icon: iconEdi, draggable: true }).addTo(mapaEdi);
+                
+                // Reverse geocoding con formato corto al arrastrar
+                markerEdi.on('dragend', function(event) {
+                    var position = markerEdi.getLatLng();
+                    document.getElementById('<%= hfLatEdicion.ClientID %>').value = position.lat;
+                    document.getElementById('<%= hfLngEdicion.ClientID %>').value = position.lng;
+                    MapaReportes.geocodificacionInversa(position.lat, position.lng, function(addr) {
+                        if (!addr) return;
+                        var ubicacion = [addr.road, addr.suburb].filter(Boolean).join(', ');
+                        if (!ubicacion) ubicacion = addr.display_name.split(',').slice(0, 2).join(',').trim();
+                        document.getElementById('<%= txtEditUbicacion.ClientID %>').value = ubicacion;
+                        var ciu = document.getElementById('<%= txtEditCiudad.ClientID %>');
+                        if (ciu) ciu.value = addr.city || '';
+                    });
+                });
+                
+                // Reverse geocoding con formato corto al hacer click
+                mapaEdi.on('click', function(e) {
+                    markerEdi.setLatLng(e.latlng);
+                    document.getElementById('<%= hfLatEdicion.ClientID %>').value = e.latlng.lat;
+                    document.getElementById('<%= hfLngEdicion.ClientID %>').value = e.latlng.lng;
+                    MapaReportes.geocodificacionInversa(e.latlng.lat, e.latlng.lng, function(addr) {
+                        if (!addr) return;
+                        var ubicacion = [addr.road, addr.suburb].filter(Boolean).join(', ');
+                        if (!ubicacion) ubicacion = addr.display_name.split(',').slice(0, 2).join(',').trim();
+                        document.getElementById('<%= txtEditUbicacion.ClientID %>').value = ubicacion;
+                        var ciu = document.getElementById('<%= txtEditCiudad.ClientID %>');
+                        if (ciu) ciu.value = addr.city || '';
+                    });
+                });
+                
+                // Forzar reajuste inmediato del canvas
+                setTimeout(function () { mapaEdi.invalidateSize(); }, 300);
+            }
+
+            function buscarUbicacionEdicion() {
+                const direccion = document.getElementById('<%= txtEditUbicacion.ClientID %>').value;
+                var ciudadEl = document.getElementById('<%= txtEditCiudad.ClientID %>');
+                const ciudad = ciudadEl ? ciudadEl.value : '';
+                if (!direccion.trim()) {
+                    Swal.fire({ icon: 'warning', title: 'Atención', text: 'Escribe una dirección' });
+                    return;
+                }
+
+                // Concatenar ciudad para evitar resultados de otros países
+                var query = direccion + (ciudad ? ', ' + ciudad : '') + ', Ecuador';
+
+                fetch('https://nominatim.openstreetmap.org/search?format=json&q=' + encodeURIComponent(query) + '&countrycodes=ec')
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data && data.length > 0) {
+                            var lat = parseFloat(data[0].lat);
+                            var lon = parseFloat(data[0].lon);
+                            mapaEdi.setView([lat, lon], 16);
+                            markerEdi.setLatLng([lat, lon]);
+                            document.getElementById('<%= hfLatEdicion.ClientID %>').value = lat;
+                            document.getElementById('<%= hfLngEdicion.ClientID %>').value = lon;
+                        } else {
+                            Swal.fire({ icon: 'warning', title: 'Ups', text: 'No pudimos encontrar esa dirección.' });
+                        }
+                    })
+                    .catch(err => console.error("Geocoding error:", err));
+            }
+        </script>
+    </asp:Content>

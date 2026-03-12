@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Adoptante.master.cs" Inherits="RedPatitas.Adoptante.Adoptante" %>
+<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Adoptante.master.cs" Inherits="RedPatitas.Adoptante.Adoptante" %>
 
 <!DOCTYPE html>
 
@@ -61,6 +61,13 @@
                         <line x1="12" y1="17" x2="12.01" y2="17"></line>
                     </svg>
                     Reportar Mascota
+                </asp:HyperLink>
+                <asp:HyperLink ID="lnkMisReportes" runat="server" NavigateUrl="~/Adoptante/MisReportes.aspx" CssClass="nav-link">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 11l3 3L22 4"></path>
+                        <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"></path>
+                    </svg>
+                    Mis Reportes
                 </asp:HyperLink>
                 <asp:HyperLink ID="lnkMisMascotas" runat="server" NavigateUrl="~/Adoptante/MisSeguimientos.aspx" CssClass="nav-link">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">

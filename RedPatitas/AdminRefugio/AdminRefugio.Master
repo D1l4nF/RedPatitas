@@ -129,7 +129,7 @@
                 <a href="Perfil.aspx" class="user-profile-link">
                     <div class="user-profile">
                         <asp:Image ID="imgPerfilUsuario" runat="server"
-                            ImageUrl="~/Images/default-refugio.png"
+                            ImageUrl="~/Images/Default/default-refugio.png"
                             CssClass="avatar"
                             Width="40px" Height="40px"
                             Style="border-radius: 50%; object-fit: cover;" />

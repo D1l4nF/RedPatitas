@@ -137,12 +137,12 @@ namespace RedPatitas.Adoptante
             Image img = new Image();
             img.ImageUrl = !string.IsNullOrEmpty(mascota.FotoPrincipal)
                 ? mascota.FotoPrincipal
-                : "~/Images/default-pet.jpg";
+                : "~/Images/Default/default-pet.jpg";
             img.CssClass = "card-img-top";
             img.AlternateText = mascota.mas_Nombre;
             img.Style.Add("height", "250px");
             img.Style.Add("object-fit", "cover");
-            img.Attributes.Add("onerror", "this.src='Images/default-pet.jpg'");
+            img.Attributes.Add("onerror", "this.src='Images/Default/default-pet.jpg'");
             card.Controls.Add(img);
 
             // Badge de estado

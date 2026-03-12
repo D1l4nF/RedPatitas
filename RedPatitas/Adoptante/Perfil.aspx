@@ -47,7 +47,7 @@
 
             <div class="avatar-section">
                 <asp:Image ID="imgFotoActual" runat="server" CssClass="avatar-img"
-                    ImageUrl="~/Images/default-user.png" />
+                    ImageUrl="~/Images/Default/default-user.png" />
 
                 <div class="avatar-actions">
                     <asp:FileUpload ID="fuFotoPerfil" runat="server" CssClass="btn-secondary" accept=".jpg,.png,.jpeg"

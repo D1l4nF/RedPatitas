@@ -196,7 +196,7 @@ namespace RedPatitas.Admin
                 if (!string.IsNullOrEmpty(detalle.FotoUrl))
                     imgRefugioVerif.ImageUrl = detalle.FotoUrl;
                 else
-                    imgRefugioVerif.ImageUrl = "~/Images/default-shelter.png";
+                    imgRefugioVerif.ImageUrl = "~/Images/Default/default-shelter.png";
 
                 // Lógica de botones y estado
                 if (detalle.Verificado)

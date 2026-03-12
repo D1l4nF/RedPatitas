@@ -49,7 +49,7 @@
             <!-- Sección de Logo del Refugio -->
             <div class="avatar-section">
                 <asp:Image ID="imgFotoActual" runat="server" CssClass="avatar-img"
-                    ImageUrl="~/Images/default-refugio.png" />
+                    ImageUrl="~/Images/Default/default-refugio.png" />
                 <div class="avatar-actions">
                     <asp:FileUpload ID="fuFotoPerfil" runat="server" CssClass="btn-secondary" accept=".jpg,.png,.jpeg"
                         onchange="previewImage(this)" />

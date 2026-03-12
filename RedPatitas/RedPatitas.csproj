@@ -1,10 +1,12 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
     <ProductVersion></ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{F86CE2FC-BC83-457B-BF34-DBD86624C1BA}</ProjectGuid>
@@ -21,6 +23,8 @@
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
     <NuGetPackageImportStamp></NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -60,6 +64,8 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
@@ -77,11 +83,13 @@
     <Content Include="Admin\Configuracion.aspx" />
     <Content Include="Admin\Dashboard.aspx" />
     <Content Include="Admin\MascotasPerdidas.aspx" />
+    <Content Include="Admin\DetalleReporte.aspx" />
     <Content Include="Admin\Notificaciones.aspx" />
     <Content Include="Admin\Perfil.aspx" />
     <Content Include="Admin\Refugios.aspx" />
     <Content Include="Admin\Reportes.aspx" />
     <Content Include="Admin\Usuarios.aspx" />
+    <Content Include="Adoptante\AdoptanteService.asmx" />
     <Content Include="Adoptante\Dashboard.aspx" />
     <Content Include="Adoptante\Mascotas.aspx" />
     <Content Include="Adoptante\PerfilMascota.aspx" />
@@ -94,6 +102,16 @@
     <Content Include="Adoptante\Perfil.aspx" />
     <Content Include="Images\img_jaime.jpg" />
     <Content Include="Images\jaime.png" />
+    <Content Include="Images\Mascotas\32fc94fc-8ddf-4614-82ad-291cf5a5479f.jpg" />
+    <Content Include="Images\Mascotas\638369a6-f2bf-4cb7-bd96-8794d05a18d4.jpg" />
+    <Content Include="Images\Mascotas\82ebf029-6555-4f99-b697-021a91a90d74.jpg" />
+    <Content Include="Images\Mascotas\mascota_1_639046401366125153.png" />
+    <Content Include="Images\Mascotas\mascota_1_639046409115864164.png" />
+    <Content Include="Images\Mascotas\mascota_2_639046396990558136.jpg" />
+    <Content Include="Images\Mascotas\mascota_3_639073690541047452.jpg" />
+    <Content Include="Images\Reportes\reporte_9_639073647879568960.jpg" />
+    <Content Include="Images\Reportes\rep_20_1_794f9d9952c3491986712bdd5604be71.jpg" />
+    <Content Include="Images\Reportes\rep_5_1_edbf60683c1c4650804e4f680dc8833b.jpg" />
     <Content Include="Login\Login.aspx" />
     <Content Include="Login\RecuperarContrasena.aspx" />
     <Content Include="Login\CambiarContrasena.aspx" />
@@ -105,6 +123,9 @@
     <Content Include="Public\Reportar.aspx" />
     <Content Include="Public\MapaExtravios.aspx" />
     <Content Include="Refugio\Dashboard.aspx" />
+    <Content Include="Refugio\Mascotas.aspx" />
+    <Content Include="Refugio\Perfil.aspx" />
+    <Content Include="Refugio\SolicitudesRecibidas.aspx" />
     <Content Include="Refugio\Perfil.aspx" />
     <Content Include="Adoptante\MisSeguimientos.aspx" />
     <Content Include="Adoptante\CompletarSeguimiento.aspx" />
@@ -116,6 +137,18 @@
     <Content Include="Public\ComponentesUI.html" />
     <Content Include="Js\ux-components.js" />
     <Content Include="Adoptante\FavoritosHandler.ashx" />
+    <Content Include="Uploads\Reportes\2fa21ec8-1761-48c1-a84f-d8a9f986a825.jpg" />
+    <Content Include="Uploads\Reportes\446d4f3e-6010-4d1e-8a7a-d59074aa73a8.png" />
+    <Content Include="Uploads\Reportes\ae8d6c10-93f3-4396-a672-2832bb7985b4.png" />
+    <Content Include="Uploads\Reportes\d19f0740-eddd-4b44-aa09-680cc170ac9d.png" />
+    <Content Include="Web.config" />
+    <Content Include="Adoptante\MisReportes.aspx" />
+    <Content Include="Adoptante\DetalleReporte.aspx" />
+    <Content Include="Adoptante\ReporteService.asmx" />
+    <Content Include="Adoptante\ReporteFotoHandler.ashx" />
+    <Content Include="Public\DetalleReporte.aspx" />
+    <Content Include="Public\RegistrarAvistamiento.aspx" />
+    <Content Include="Js\mapas-reportes.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -224,6 +257,13 @@
     <Compile Include="Admin\MascotasPerdidas.aspx.designer.cs">
       <DependentUpon>MascotasPerdidas.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Admin\DetalleReporte.aspx.cs">
+      <DependentUpon>DetalleReporte.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\DetalleReporte.aspx.designer.cs">
+      <DependentUpon>DetalleReporte.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Admin\Perfil.aspx.cs">
       <DependentUpon>Perfil.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -258,6 +298,10 @@
     </Compile>
     <Compile Include="Adoptante\Adoptante.Master.designer.cs">
       <DependentUpon>Adoptante.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Adoptante\AdoptanteService.asmx.cs">
+      <DependentUpon>AdoptanteService.asmx</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Adoptante\Dashboard.aspx.cs">
       <DependentUpon>Dashboard.aspx</DependentUpon>
@@ -414,6 +458,13 @@
     <Compile Include="Refugio\Dashboard.aspx.designer.cs">
       <DependentUpon>Dashboard.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Refugio\Mascotas.aspx.cs">
+      <DependentUpon>Mascotas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Refugio\Mascotas.aspx.designer.cs">
+      <DependentUpon>Mascotas.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Refugio\Refugio.Master.cs">
       <DependentUpon>Refugio.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -427,6 +478,48 @@
     </Compile>
     <Compile Include="Refugio\Perfil.aspx.designer.cs">
       <DependentUpon>Perfil.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Refugio\SolicitudesRecibidas.aspx.cs">
+      <DependentUpon>SolicitudesRecibidas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Refugio\SolicitudesRecibidas.aspx.designer.cs">
+      <DependentUpon>SolicitudesRecibidas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Adoptante\MisReportes.aspx.cs">
+      <DependentUpon>MisReportes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Adoptante\MisReportes.aspx.designer.cs">
+      <DependentUpon>MisReportes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Adoptante\DetalleReporte.aspx.cs">
+      <DependentUpon>DetalleReporte.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Adoptante\DetalleReporte.aspx.designer.cs">
+      <DependentUpon>DetalleReporte.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Adoptante\ReporteService.asmx.cs">
+      <DependentUpon>ReporteService.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Adoptante\ReporteFotoHandler.ashx.cs">
+      <DependentUpon>ReporteFotoHandler.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Public\DetalleReporte.aspx.cs">
+      <DependentUpon>DetalleReporte.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Public\DetalleReporte.aspx.designer.cs">
+      <DependentUpon>DetalleReporte.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Public\RegistrarAvistamiento.aspx.cs">
+      <DependentUpon>RegistrarAvistamiento.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Public\RegistrarAvistamiento.aspx.designer.cs">
+      <DependentUpon>RegistrarAvistamiento.aspx</DependentUpon>
     </Compile>
     <Compile Include="Adoptante\MisSeguimientos.aspx.cs">
       <DependentUpon>MisSeguimientos.aspx</DependentUpon>
@@ -461,6 +554,7 @@
     <Content Include="Admin\Admin.Master" />
     <Content Include="AdminRefugio\AdminRefugio.Master" />
     <Content Include="Adoptante\Adoptante.Master" />
+    <Content Include="Images\Mascotas\d5c1652c-5132-40c8-b108-5b7e13e9e8dd.webp" />
     <None Include="packages.config" />
     <Content Include="Refugio\Refugio.Master" />
     <Content Include="Public\Public.Master" />
@@ -497,6 +591,13 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>49677</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:49677/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
           <DevelopmentServerPort>53492</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:53492/</IISUrl>
@@ -510,8 +611,8 @@
   </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
-      <ErrorText>Este proyecto hace referencia a los paquetes NuGet que faltan en este equipo. Use la restauración de paquetes NuGet para descargarlos.</ErrorText>
+      <ErrorText>Este proyecto hace referencia a los paquetes NuGet que faltan en este equipo. Use la restauración de paquetes NuGet para descargarlos. Para obtener más información, consulte http://go.microsoft.com/fwlink/?LinkID=322105. El archivo que falta es {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="El archivo de herramientas de compilación no existe." />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
   </Target>
 </Project>
