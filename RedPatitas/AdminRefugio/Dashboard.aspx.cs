@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -31,38 +31,42 @@ namespace RedPatitas.AdminRefugio
         {
             try
             {
-                // 1. Cargar Estadísticas Generales
-                var stats = _dashboardService.ObtenerEstadisticasGenerales();
+                if (Session["RefugioId"] == null) return;
+                int idRefugio = Convert.ToInt32(Session["RefugioId"]);
+
+                // 1. Cargar Estadísticas del Refugio
+                var stats = _dashboardService.ObtenerEstadisticasRefugioStaff(idRefugio);
 
                 // Totales
-                litTotalUsuarios.Text = stats.TotalUsuarios.ToString();
-                litTotalMascotas.Text = stats.TotalMascotas.ToString();
-                litTotalAdopciones.Text = stats.AdopcionesExitosas.ToString();
+                litTotalUsuarios.Text = stats.SolicitudesPendientes.ToString();
+                litTotalMascotas.Text = stats.MisMascotasPublicadas.ToString();
+                litTotalAdopciones.Text = stats.MisAdopcionesExitosas.ToString();
                 litTotalReportes.Text = stats.ReportesActivos.ToString();
 
                 // Tendencias
-                litTrendUsuarios.Text = stats.TendenciaUsuarios;
+                litTrendUsuarios.Text = stats.TendenciaSolicitudes;
                 litTrendMascotas.Text = stats.TendenciaMascotas;
                 litTrendAdopciones.Text = stats.TendenciaAdopciones;
                 litTrendReportes.Text = stats.TendenciaReportes;
 
-                // Estilos para tendencias (verde si sube lo bueno, rojo si baja, etc.)
-                AplicarEstiloTendencia(divTrendUsuarios, stats.TendenciaUsuarios);
+                // Estilos para tendencias
+                AplicarEstiloTendencia(divTrendUsuarios, stats.TendenciaSolicitudes);
                 AplicarEstiloTendencia(divTrendMascotas, stats.TendenciaMascotas);
                 AplicarEstiloTendencia(divTrendAdopciones, stats.TendenciaAdopciones);
-
-                // Para reportes, subir es "malo" generalmente, pero depende de la interpretación.
-                // Usaremos lógica estándar por ahora.
                 AplicarEstiloTendencia(divTrendReportes, stats.TendenciaReportes);
 
-
-                // 2. Cargar Usuarios Recientes
-                var usuariosRecientes = _dashboardService.ObtenerUsuariosRecientes(5);
+                // 2. Cargar Usuarios Recientes del Refugio
+                var usuariosRecientes = _dashboardService.ObtenerUsuariosRecientesPorRefugio(idRefugio, 50);
                 rptUsuariosRecientes.DataSource = usuariosRecientes;
                 rptUsuariosRecientes.DataBind();
 
-                // 3. Cargar Actividad Reciente
-                var actividadReciente = _dashboardService.ObtenerActividadReciente(6);
+                // 3. Cargar Solicitudes Recientes del Refugio
+                var solicitudesRecientes = _dashboardService.ObtenerSolicitudesRecientesRefugio(idRefugio, 5);
+                rptSolicitudesRecientes.DataSource = solicitudesRecientes;
+                rptSolicitudesRecientes.DataBind();
+
+                // 4. Cargar Actividad Reciente del Refugio
+                var actividadReciente = _dashboardService.ObtenerActividadRecienteRefugio(idRefugio, 6);
                 rptActividadReciente.DataSource = actividadReciente;
                 rptActividadReciente.DataBind();
 

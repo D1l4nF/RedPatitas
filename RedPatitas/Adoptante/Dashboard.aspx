@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Inicio" Language="C#" MasterPageFile="~/Adoptante/Adoptante.Master" AutoEventWireup="true"
+<%@ Page Title="Inicio" Language="C#" MasterPageFile="~/Adoptante/Adoptante.Master" AutoEventWireup="true"
     CodeBehind="Dashboard.aspx.cs" Inherits="RedPatitas.Adoptante.Dashboard" %>
 
     <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
@@ -91,9 +91,10 @@
                                         <tr>
                                             <td>
                                                 <div class="pet-cell">
-                                                    <div class="pet-img"
-                                                        style="background: linear-gradient(135deg, #FFE8CC 0%, #FFD275 100%); display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">
-                                                        <%# Eval("EmojiEspecie") %>
+                                                    <div class="pet-img" style="background: #f4f4f4; overflow: hidden; display: flex; align-items: center; justify-content: center;">
+                                                        <img src='<%# string.IsNullOrEmpty(Eval("FotoPrincipal") as string) ? ResolveUrl("~/Images/pepery.jpg") : ResolveUrl(Eval("FotoPrincipal").ToString()) %>' 
+                                                             alt="Mascota" 
+                                                             style="width: 100%; height: 100%; object-fit: cover;" />
                                                     </div>
                                                     <span>
                                                         <%# Eval("Nombre") %>

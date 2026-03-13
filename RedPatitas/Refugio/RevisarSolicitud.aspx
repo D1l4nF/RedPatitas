@@ -1,5 +1,5 @@
-<%@ Page Title="Revisar Solicitud" Language="C#" MasterPageFile="~/AdminRefugio/AdminRefugio.Master"
-    AutoEventWireup="true" CodeBehind="RevisarSolicitud.aspx.cs" Inherits="RedPatitas.AdminRefugio.RevisarSolicitud" %>
+<%@ Page Title="" Language="C#" MasterPageFile="~/Refugio/Refugio.Master"
+    AutoEventWireup="true" CodeBehind="RevisarSolicitud.aspx.cs" Inherits="RedPatitas.Refugio.RevisarSolicitud" %>
 
     <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
         Revisar Solicitud de Adopción | RedPatitas
@@ -7,449 +7,6 @@
 
     <asp:Content ID="Content2" ContentPlaceHolderID="head" runat="server">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-        <style>
-            .review-container {
-                max-width: 900px;
-                margin: 0 auto;
-            }
-
-            .back-btn {
-                display: inline-flex;
-                align-items: center;
-                gap: 0.5rem;
-                padding: 0.75rem 1.25rem;
-                background: #f5f5f5;
-                color: #666;
-                border-radius: 10px;
-                text-decoration: none;
-                font-weight: 600;
-                margin-bottom: 1.5rem;
-                transition: all 0.2s;
-            }
-
-            .back-btn:hover {
-                background: #eee;
-                color: #333;
-            }
-
-
-            /* Sección Evaluable */
-            .eval-section {
-                background: white;
-                border-radius: 16px;
-                margin-bottom: 1.5rem;
-                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-                overflow: hidden;
-            }
-
-            .eval-header {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                padding: 1rem 1.5rem;
-                background: linear-gradient(135deg, #f8f9fa 0%, #fff 100%);
-                border-bottom: 2px solid #f0f0f0;
-            }
-
-            .eval-title {
-                font-size: 1.1rem;
-                font-weight: 700;
-                color: #4A3B32;
-                display: flex;
-                align-items: center;
-                gap: 0.5rem;
-            }
-
-            .eval-weight {
-                background: #FF8C42;
-                color: white;
-                padding: 0.35rem 0.75rem;
-                border-radius: 20px;
-                font-size: 0.8rem;
-                font-weight: 700;
-            }
-
-            .eval-content {
-                padding: 1.5rem;
-            }
-
-            .info-grid {
-                display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-                gap: 1rem;
-                margin-bottom: 1rem;
-            }
-
-            .info-item {
-                padding: 0.75rem 1rem;
-                background: #f9f9f9;
-                border-radius: 8px;
-                border-left: 3px solid #FF8C42;
-            }
-
-            .info-label {
-                font-size: 0.7rem;
-                color: #888;
-                text-transform: uppercase;
-                letter-spacing: 0.5px;
-                margin-bottom: 0.25rem;
-            }
-
-            .info-value {
-                font-size: 0.95rem;
-                color: #333;
-                font-weight: 500;
-            }
-
-            .info-value.good {
-                color: #27AE60;
-            }
-
-            .info-value.warning {
-                color: #F39C12;
-            }
-
-            .info-value.bad {
-                color: #E74C3C;
-            }
-
-            .text-block {
-                background: #f9f9f9;
-                border-radius: 8px;
-                padding: 1rem;
-                line-height: 1.6;
-                color: #555;
-                font-style: italic;
-                margin-bottom: 1rem;
-            }
-
-            /* Evaluación inline */
-            .eval-box {
-                background: linear-gradient(135deg, #FFF8E1 0%, #FFFDE7 100%);
-                border: 2px solid #FFD54F;
-                border-radius: 12px;
-                padding: 1rem 1.25rem;
-                margin-top: 1rem;
-            }
-
-            .eval-suggestion {
-                display: flex;
-                align-items: center;
-                gap: 0.5rem;
-                margin-bottom: 0.75rem;
-                font-size: 0.9rem;
-                color: #856404;
-            }
-
-            .eval-suggestion i {
-                color: #F9A825;
-            }
-
-            .suggested-score {
-                font-weight: 700;
-                background: #FFC107;
-                color: #333;
-                padding: 0.15rem 0.5rem;
-                border-radius: 4px;
-            }
-
-            .eval-input-row {
-                display: flex;
-                align-items: center;
-                gap: 1rem;
-                flex-wrap: wrap;
-            }
-
-            .eval-input-row label {
-                font-weight: 600;
-                color: #333;
-            }
-
-            .score-slider-container {
-                flex: 1;
-                min-width: 200px;
-                display: flex;
-                align-items: center;
-                gap: 0.75rem;
-            }
-
-            .score-slider {
-                flex: 1;
-                height: 8px;
-                -webkit-appearance: none;
-                background: linear-gradient(90deg, #E74C3C 0%, #F39C12 50%, #27AE60 100%);
-                border-radius: 4px;
-                outline: none;
-            }
-
-            .score-slider::-webkit-slider-thumb {
-                -webkit-appearance: none;
-                width: 24px;
-                height: 24px;
-                background: white;
-                border: 3px solid #FF8C42;
-                border-radius: 50%;
-                cursor: pointer;
-                box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-            }
-
-            .score-value {
-                min-width: 45px;
-                text-align: center;
-                font-size: 1.5rem;
-                font-weight: 800;
-                color: #4A3B32;
-            }
-
-            /* Fotos Grid */
-            .photos-grid {
-                display: grid;
-                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-                gap: 0.75rem;
-                margin-top: 1rem;
-            }
-
-            .photo-card {
-                aspect-ratio: 1;
-                border-radius: 8px;
-                overflow: hidden;
-                cursor: pointer;
-                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            }
-
-            .photo-card img {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-                transition: transform 0.2s;
-            }
-
-            .photo-card:hover img {
-                transform: scale(1.1);
-            }
-
-            .no-photos {
-                color: #999;
-                font-style: italic;
-                padding: 1rem;
-                text-align: center;
-                background: #f9f9f9;
-                border-radius: 8px;
-            }
-
-            /* Puntaje Total */
-            .total-card {
-                background: white;
-                border-radius: 16px;
-                padding: 2rem;
-                text-align: center;
-                margin-bottom: 1.5rem;
-                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-            }
-
-            .total-label {
-                font-size: 0.9rem;
-                color: #888;
-                text-transform: uppercase;
-                letter-spacing: 1px;
-                margin-bottom: 0.5rem;
-            }
-
-            .total-score {
-                font-size: 4rem;
-                font-weight: 800;
-                line-height: 1;
-                margin-bottom: 0.5rem;
-            }
-
-            .total-score.excellent {
-                color: #27AE60;
-            }
-
-            .total-score.good {
-                color: #2ECC71;
-            }
-
-            .total-score.warning {
-                color: #F39C12;
-            }
-
-            .total-score.danger {
-                color: #E74C3C;
-            }
-
-            .total-status {
-                font-size: 1.1rem;
-                font-weight: 600;
-                padding: 0.5rem 1.5rem;
-                border-radius: 25px;
-                display: inline-block;
-            }
-
-            .total-status.excellent {
-                background: #D5F5E3;
-                color: #1E8449;
-            }
-
-            .total-status.good {
-                background: #D5F5E3;
-                color: #27AE60;
-            }
-
-            .total-status.warning {
-                background: #FEF9E7;
-                color: #D68910;
-            }
-
-            .total-status.danger {
-                background: #FDEDEC;
-                color: #C0392B;
-            }
-
-            /* Botones de acción */
-            .actions-row {
-                display: flex;
-                gap: 1rem;
-                justify-content: center;
-                flex-wrap: wrap;
-            }
-
-            .btn-action {
-                padding: 1rem 2.5rem;
-                border: none;
-                border-radius: 12px;
-                font-weight: 700;
-                font-size: 1.1rem;
-                cursor: pointer;
-                display: inline-flex;
-                align-items: center;
-                gap: 0.5rem;
-                transition: all 0.2s;
-            }
-
-            .btn-approve {
-                background: linear-gradient(135deg, #27AE60 0%, #2ECC71 100%);
-                color: white;
-            }
-
-            .btn-approve:hover {
-                transform: translateY(-2px);
-                box-shadow: 0 6px 20px rgba(39, 174, 96, 0.4);
-            }
-
-            .btn-reject {
-                background: linear-gradient(135deg, #E74C3C 0%, #C0392B 100%);
-                color: white;
-            }
-
-            .btn-reject:hover {
-                transform: translateY(-2px);
-                box-shadow: 0 6px 20px rgba(231, 76, 60, 0.4);
-            }
-
-            /* Modal */
-            .modal-overlay {
-                position: fixed;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                background: rgba(0, 0, 0, 0.5);
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                z-index: 9999;
-            }
-
-            .modal-content {
-                background: white;
-                border-radius: 16px;
-                padding: 2rem;
-                max-width: 500px;
-                width: 95%;
-            }
-
-            .modal-textarea {
-                width: 100%;
-                min-height: 120px;
-                padding: 1rem;
-                border: 2px solid #e0e0e0;
-                border-radius: 10px;
-                font-family: inherit;
-                font-size: 0.95rem;
-                resize: vertical;
-                margin-bottom: 0.5rem;
-            }
-
-            .modal-actions {
-                display: flex;
-                gap: 1rem;
-                justify-content: flex-end;
-                margin-top: 1rem;
-            }
-
-            .btn-cancel {
-                padding: 0.75rem 1.5rem;
-                background: #f5f5f5;
-                color: #666;
-                border: none;
-                border-radius: 8px;
-                font-weight: 600;
-                cursor: pointer;
-            }
-
-            /* Alertas */
-            .alert {
-                padding: 1rem 1.5rem;
-                border-radius: 10px;
-                margin-bottom: 1.5rem;
-                display: flex;
-                align-items: center;
-                gap: 0.75rem;
-            }
-
-            .alert-error {
-                background: #FEE2E2;
-                color: #991B1B;
-                border: 1px solid #FECACA;
-            }
-
-            .alert-success {
-                background: #D1FAE5;
-                color: #065F46;
-                border: 1px solid #A7F3D0;
-            }
-
-            /* Solo info (sin evaluación) */
-            .info-only .eval-weight {
-                display: none;
-            }
-
-            .info-only .eval-box {
-                display: none;
-            }
-
-            @media (max-width: 768px) {
-                .solicitud-header {
-                    flex-direction: column;
-                    text-align: center;
-                }
-
-                .eval-header {
-                    flex-direction: column;
-                    gap: 0.5rem;
-                }
-
-                .actions-row {
-                    flex-direction: column;
-                }
-
-                .btn-action {
-                    width: 100%;
-                    justify-content: center;
-                }
-            }
-        </style>
     </asp:Content>
 
     <asp:Content ID="Content4" ContentPlaceHolderID="PageHeader" runat="server">
@@ -461,9 +18,9 @@
 
     <asp:Content ID="Content3" ContentPlaceHolderID="MainContent" runat="server">
         <div class="recent-section">
-        <div class="review-container">
+            <div class="review-container">
 
-            <a href="Solicitudes.aspx" class="back-btn">
+                <a href="Solicitudes.aspx" class="back-btn">
                 <i class="fas fa-arrow-left"></i> Volver a Solicitudes
             </a>
 
@@ -568,7 +125,7 @@
                                 <i class="fas fa-lightbulb"></i>
                                 <span>Puntaje sugerido: <span class="suggested-score"
                                         id="sugMotivacion">5</span>/10</span>
-                                <span style="margin-left: 0.5rem; color: #666; font-size: 0.85rem;"
+                                <span class="reason-text"
                                     id="sugMotivacionReason">(texto básico)</span>
                             </div>
                             <div class="eval-input-row">
@@ -599,7 +156,7 @@
                                 <i class="fas fa-lightbulb"></i>
                                 <span>Puntaje sugerido: <span class="suggested-score"
                                         id="sugExperiencia">5</span>/10</span>
-                                <span style="margin-left: 0.5rem; color: #666; font-size: 0.85rem;"
+                                <span class="reason-text"
                                     id="sugExperienciaReason"></span>
                             </div>
                             <div class="eval-input-row">
@@ -645,7 +202,7 @@
 
                         <!-- Fotos de vivienda -->
                         <asp:Panel ID="pnlFotos" runat="server" Visible="false">
-                            <h4 style="margin: 1rem 0 0.5rem 0; color: #666;"><i class="fas fa-camera"></i> Fotos de
+                            <h4 class="fotos-title"><i class="fas fa-camera"></i> Fotos de
                                 Vivienda</h4>
                             <asp:Repeater ID="rptFotos" runat="server">
                                 <HeaderTemplate>
@@ -669,7 +226,7 @@
                 <div class="eval-suggestion">
                     <i class="fas fa-lightbulb"></i>
                     <span>Puntaje sugerido: <span class="suggested-score" id="sugVivienda">7</span>/10</span>
-                    <span style="margin-left: 0.5rem; color: #666; font-size: 0.85rem;" id="sugViviendaReason"></span>
+                    <span class="reason-text" id="sugViviendaReason"></span>
                 </div>
                 <div class="eval-input-row">
                     <label>Tu evaluación:</label>
@@ -705,7 +262,7 @@
                     </div>
                 </div>
                 <asp:Panel ID="pnlDetallesOtrasMascotas" runat="server" Visible="false">
-                    <div class="info-item" style="margin-top: 0.5rem;">
+                    <div class="info-item info-item-spaced">
                         <div class="info-label">Detalle de Otras Mascotas</div>
                         <div class="info-value">
                             <asp:Literal ID="litDetalleOtrasMascotas" runat="server"></asp:Literal>
@@ -713,7 +270,7 @@
                     </div>
                 </asp:Panel>
                 <asp:Panel ID="pnlEdadesNinos" runat="server" Visible="false">
-                    <div class="info-item" style="margin-top: 0.5rem;">
+                    <div class="info-item info-item-spaced">
                         <div class="info-label">Edades de los Niños</div>
                         <div class="info-value">
                             <asp:Literal ID="litEdadesNinos" runat="server"></asp:Literal>
@@ -725,7 +282,7 @@
                     <div class="eval-suggestion">
                         <i class="fas fa-lightbulb"></i>
                         <span>Puntaje sugerido: <span class="suggested-score" id="sugFamilia">7</span>/10</span>
-                        <span style="margin-left: 0.5rem; color: #666; font-size: 0.85rem;"
+                        <span class="reason-text"
                             id="sugFamiliaReason"></span>
                     </div>
                     <div class="eval-input-row">
@@ -816,19 +373,20 @@
         <asp:HiddenField ID="hfTextoExperiencia" runat="server" />
 
         <!-- Botones de Acción -->
-        <div class="actions-row">
+        <asp:Panel ID="pnlAcciones" runat="server" CssClass="actions-row">
             <asp:Button ID="btnAprobar" runat="server" CssClass="btn-action btn-approve" Text="✅ Aprobar Adopción"
-                OnClick="btnAprobar_Click"
-                OnClientClick="return prepararEnvio() && confirm('¿Aprobar esta adopción? La mascota pasará a estado ADOPTADO.');" />
-            <asp:Button ID="btnRechazar" runat="server" CssClass="btn-action btn-reject" Text="❌ Rechazar Solicitud"
-                OnClick="btnRechazar_Click" OnClientClick="return prepararEnvio();" />
-        </div>
-
+                OnClick="btnAprobar_Click" CausesValidation="false"
+                OnClientClick="return prepararEnvio() &amp;&amp; confirm('¿Aprobar esta adopción? La mascota pasará a estado ADOPTADO.');" />
+            <button type="button" class="btn-action btn-reject" onclick="prepararEnvio(); mostrarModalRechazo();">❌ Rechazar Solicitud</button>
         </asp:Panel>
 
-        <!-- Modal Rechazo -->
-        <asp:Panel ID="pnlModalRechazo" runat="server" Visible="false" CssClass="modal-overlay">
-            <div class="modal-content">
+        </asp:Panel> <!-- Cierra pnlContenido -->
+        </div> <!-- Cierra review-container -->
+        </div> <!-- Cierra recent-section -->
+
+        <!-- Modal Rechazo (FUERA DEL CONTENEDOR PARA EVITAR CLIPPING) -->
+        <div id="modalRechazo" class="modal-overlay" style="display:none;">
+            <div class="modal-content modal">
                 <h3 style="margin-bottom: 1rem;"><i class="fas fa-comment-alt"></i> Motivo del Rechazo</h3>
                 <p style="color: #666; margin-bottom: 1rem;">Esta información será enviada al adoptante.</p>
                 <asp:TextBox ID="txtMotivoRechazo" runat="server" CssClass="modal-textarea" TextMode="MultiLine"
@@ -837,14 +395,13 @@
                     ErrorMessage="El motivo es requerido" ForeColor="Red" ValidationGroup="Rechazo" Display="Dynamic">
                 </asp:RequiredFieldValidator>
                 <div class="modal-actions">
-                    <asp:Button ID="btnCancelarRechazo" runat="server" Text="Cancelar" CssClass="btn-cancel"
-                        OnClick="btnCancelarRechazo_Click" CausesValidation="false" />
+                    <button type="button" class="btn-cancel" onclick="ocultarModalRechazo();">Cancelar</button>
                     <asp:Button ID="btnConfirmarRechazo" runat="server" Text="Confirmar Rechazo"
                         CssClass="btn-action btn-reject" OnClick="btnConfirmarRechazo_Click"
+                        OnClientClick="return prepararEnvio();"
                         ValidationGroup="Rechazo" />
                 </div>
             </div>
-        </asp:Panel>
         </div>
 
         <script type="text/javascript">
@@ -1039,5 +596,24 @@
                 document.getElementById('<%= hfEvaluaciones.ClientID %>').value = JSON.stringify(evaluaciones);
                 return true;
             }
+
+            function mostrarModalRechazo() {
+                var modal = document.getElementById('modalRechazo');
+                modal.style.display = 'flex';
+                // Un pequeño retraso para que CSS reconozca el display antes de animar
+                setTimeout(function() {
+                    modal.classList.add('active');
+                }, 10);
+            }
+
+            function ocultarModalRechazo() {
+                var modal = document.getElementById('modalRechazo');
+                modal.classList.remove('active');
+                // Esperar a que la transición termine (aprox 300ms) para esconderlo
+                setTimeout(function() {
+                    modal.style.display = 'none';
+                }, 300);
+            }
         </script>
+        </div>
     </asp:Content>

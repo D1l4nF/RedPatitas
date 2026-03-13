@@ -4,7 +4,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace RedPatitas.AdminRefugio
+namespace RedPatitas.Refugio
 {
     public partial class RevisarSolicitud
     {
@@ -55,13 +55,11 @@ namespace RedPatitas.AdminRefugio
         protected global::System.Web.UI.WebControls.HiddenField hfTextoMotivacion;
         protected global::System.Web.UI.WebControls.HiddenField hfTextoExperiencia;
         protected global::System.Web.UI.WebControls.Button btnAprobar;
-        protected global::System.Web.UI.WebControls.Button btnRechazar;
+        protected global::System.Web.UI.WebControls.Panel pnlAcciones;
         protected global::System.Web.UI.WebControls.Panel pnlMotivoRechazo;
         protected global::System.Web.UI.WebControls.Literal litMotivoRechazoMostrado;
-        protected global::System.Web.UI.WebControls.Panel pnlModalRechazo;
         protected global::System.Web.UI.WebControls.TextBox txtMotivoRechazo;
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvMotivo;
-        protected global::System.Web.UI.WebControls.Button btnCancelarRechazo;
         protected global::System.Web.UI.WebControls.Button btnConfirmarRechazo;
     }
 }
