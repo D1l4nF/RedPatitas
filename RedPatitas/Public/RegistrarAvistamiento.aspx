@@ -13,13 +13,13 @@
 
     <asp:Content ID="Content3" ContentPlaceHolderID="MainContent" runat="server">
 
-        <section class="report-hero">
+        <section class="report-hero" style="max-width: 800px; margin: 0 auto;">
             <h1>👁 Registrar Avistamiento</h1>
             <p>¿Viste a esta mascota? Tu avistamiento puede ayudar a reunirla con su familia.</p>
         </section>
 
         <section class="report-section">
-            <div class="report-container" style="max-width:640px;">
+            <div class="report-container" style="max-width:800px;">
                 <div class="report-form-card">
 
                     <!-- Info del reporte -->

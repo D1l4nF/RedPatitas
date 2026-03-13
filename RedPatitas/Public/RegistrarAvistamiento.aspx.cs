@@ -8,13 +8,6 @@ namespace RedPatitas.Public
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            // Requiere login
-            if (Session["UsuarioId"] == null)
-            {
-                Response.Redirect("~/Login/Login.aspx?returnUrl=" +
-                    Server.UrlEncode(Request.Url.PathAndQuery));
-                return;
-            }
 
             // Habilitar subida de archivos
             if (Page.Form != null)
@@ -76,10 +69,8 @@ namespace RedPatitas.Public
         {
             if (!Page.IsValid) return;
 
-            if (Session["UsuarioId"] == null) return;
-
             int idReporte = Convert.ToInt32(hfIdReporte.Value);
-            int idUsuario = Convert.ToInt32(Session["UsuarioId"]);
+            int? idUsuario = Session["UsuarioId"] != null ? (int?)Convert.ToInt32(Session["UsuarioId"]) : null;
 
             try
             {

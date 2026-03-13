@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Web.UI;
 using CapaDatos;
@@ -62,6 +62,24 @@ namespace RedPatitas.Public
 
                     db.tbl_ReportesMascotas.InsertOnSubmit(reporte);
                     db.SubmitChanges();
+
+                    // Registrar la ubicación original como el primer avistamiento para el mapa
+                    if (reporte.rep_Latitud.HasValue && reporte.rep_Longitud.HasValue)
+                    {
+                        var avistamientoInicial = new tbl_Avistamientos
+                        {
+                            avi_IdReporte = reporte.rep_IdReporte,
+                            avi_IdUsuario = reporte.rep_IdUsuario,
+                            avi_Ubicacion = reporte.rep_UbicacionUltima + " (Coords: " + 
+                                reporte.rep_Latitud.Value.ToString(System.Globalization.CultureInfo.InvariantCulture) + ", " + 
+                                reporte.rep_Longitud.Value.ToString(System.Globalization.CultureInfo.InvariantCulture) + ")",
+                            avi_Descripcion = "Reportado inicialmente en esta ubicación.",
+                            avi_FechaAvistamiento = reporte.rep_FechaEvento ?? reporte.rep_FechaReporte,
+                            avi_FechaReporte = DateTime.Now
+                        };
+                        db.tbl_Avistamientos.InsertOnSubmit(avistamientoInicial);
+                        db.SubmitChanges();
+                    }
 
                     // ── Guardar fotos si se subieron ─────────────────────────────
                     if (fuImagenes.HasFiles)

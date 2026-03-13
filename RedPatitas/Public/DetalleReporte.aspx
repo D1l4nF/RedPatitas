@@ -684,6 +684,7 @@
                     </div>
 
                     <asp:HiddenField ID="hiddenIdReporte" runat="server" />
+                    <asp:HiddenField ID="hfAvistamientosCoords" runat="server" />
                 </div>
 
                 <!-- ══ Avistamientos ══ -->
@@ -722,12 +723,12 @@
                                             <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
                                             <circle cx="12" cy="10" r="3" />
                                         </svg>
-                                        <%# System.Web.HttpUtility.HtmlEncode((Eval("avi_Ubicacion") ?? "" ).ToString())
+                                        <%# System.Web.HttpUtility.HtmlEncode((Eval("UbicacionLimpia") ?? "" ).ToString())
                                             %>
                                     </span>
                                     <span class="avistamiento-fecha">
-                                        <%# Eval("avi_FechaReporte") !=null ?
-                                            ((DateTime)Eval("avi_FechaReporte")).ToString("dd/MM/yyyy HH:mm") : "" %>
+                                        <%# Eval("Fecha") !=null ?
+                                            ((DateTime)Eval("Fecha")).ToString("dd/MM/yyyy HH:mm") : "" %>
                                     </span>
                                 </div>
                                 <p class="avistamiento-desc">
@@ -766,6 +767,43 @@
                             iconSize: [36, 36], iconAnchor: [18, 18]
                         });
                         L.marker([parseFloat(lat), parseFloat(lng)], { icon: icon }).addTo(mapa);
+
+                        // Draw path of avistamientos
+                        var hfAvistamientosCoords = document.getElementById('<%= hfAvistamientosCoords.ClientID %>');
+                        if (hfAvistamientosCoords && hfAvistamientosCoords.value) {
+                            try {
+                                var puntos = JSON.parse(hfAvistamientosCoords.value);
+                                if (puntos.length > 0) {
+                                    var latlngs = puntos.map(function(p) { return [p.lat, p.lng]; });
+                                    
+                                    // Add a polyline with a nice color (e.g. orange dashed)
+                                    var pathLine = L.polyline(latlngs, {
+                                        color: '#ff6b35',
+                                        weight: 4,
+                                        opacity: 0.8,
+                                        dashArray: '10, 10'
+                                    }).addTo(mapa);
+
+                                    // Add small markers for intermediate points
+                                    var dotIcon = L.divIcon({
+                                        className: 'dot-marker',
+                                        html: '<div style="background:#ff6b35;width:12px;height:12px;border-radius:50%;border:2px solid #fff;"></div>',
+                                        iconSize: [12, 12], iconAnchor: [6, 6]
+                                    });
+
+                                    puntos.forEach(function(p) {
+                                        L.marker([p.lat, p.lng], { icon: dotIcon })
+                                            .bindPopup("<b>Avistamiento:</b><br>" + p.desc)
+                                            .addTo(mapa);
+                                    });
+
+                                    // Fit bounds to show the whole path
+                                    mapa.fitBounds(pathLine.getBounds(), { padding: [20, 20] });
+                                }
+                            } catch (e) {
+                                console.error("Error parsing avistamientos path:", e);
+                            }
+                        }
                     }
                 }
             });
