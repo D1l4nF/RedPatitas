@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="AdminRefugio.master.cs" Inherits="RedPatitas.AdminRefugio.AdminRefugio" %>
+<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="AdminRefugio.master.cs" Inherits="RedPatitas.AdminRefugio.AdminRefugio" %>
 
 <!DOCTYPE html>
 
@@ -11,9 +11,9 @@
             Panel Refugio | RedPatitas
         </asp:ContentPlaceHolder>
     </title>
-    <link href="../Style/estilos-base.css" rel="stylesheet" type="text/css" />
-    <link href="../Style/estilos-paneles.css" rel="stylesheet" type="text/css" />
-    <link href="../Style/forms.css" rel="stylesheet" type="text/css" />
+    <link href="../Style/estilos-base.css?v=1.1" rel="stylesheet" type="text/css" />
+    <link href="../Style/estilos-paneles.css?v=1.1" rel="stylesheet" type="text/css" />
+    <link href="../Style/forms.css?v=1.1" rel="stylesheet" type="text/css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">

@@ -125,7 +125,8 @@
     <Content Include="Refugio\Dashboard.aspx" />
     <Content Include="Refugio\Mascotas.aspx" />
     <Content Include="Refugio\Perfil.aspx" />
-    <Content Include="Refugio\SolicitudesRecibidas.aspx" />
+    <Content Include="Refugio\Solicitudes.aspx" />
+    <Content Include="Refugio\RevisarSolicitud.aspx" />
     <Content Include="Refugio\Perfil.aspx" />
     <Content Include="Adoptante\MisSeguimientos.aspx" />
     <Content Include="Adoptante\CompletarSeguimiento.aspx" />
@@ -479,12 +480,19 @@
     <Compile Include="Refugio\Perfil.aspx.designer.cs">
       <DependentUpon>Perfil.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Refugio\SolicitudesRecibidas.aspx.cs">
-      <DependentUpon>SolicitudesRecibidas.aspx</DependentUpon>
+    <Compile Include="Refugio\Solicitudes.aspx.cs">
+      <DependentUpon>Solicitudes.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Refugio\SolicitudesRecibidas.aspx.designer.cs">
-      <DependentUpon>SolicitudesRecibidas.aspx</DependentUpon>
+    <Compile Include="Refugio\Solicitudes.aspx.designer.cs">
+      <DependentUpon>Solicitudes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Refugio\RevisarSolicitud.aspx.cs">
+      <DependentUpon>RevisarSolicitud.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Refugio\RevisarSolicitud.aspx.designer.cs">
+      <DependentUpon>RevisarSolicitud.aspx</DependentUpon>
     </Compile>
     <Compile Include="Adoptante\MisReportes.aspx.cs">
       <DependentUpon>MisReportes.aspx</DependentUpon>

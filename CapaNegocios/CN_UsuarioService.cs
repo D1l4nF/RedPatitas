@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -392,6 +392,7 @@ namespace CapaNegocios
                 string salt = CN_CryptoService.GenerarSalt();
                 string hash = CN_CryptoService.HashPassword(usuario.usu_Contrasena, salt);
 
+                usuario.usu_IdRol = 3; // 3 = Staff Refugio
                 usuario.usu_Contrasena = hash;
                 usuario.usu_Salt = salt;
                 usuario.usu_Estado = true;

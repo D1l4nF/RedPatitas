@@ -1,17 +1,16 @@
-﻿using CapaDatos;
-using CapaNegocios;
 using System;
-using System.IO;
+using System.Collections.Generic;
 using System.Linq;
+using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using CapaNegocios;
+using CapaDatos;
 
 namespace RedPatitas.Refugio
 {
     public partial class Mascotas : System.Web.UI.Page
     {
-        CN_MascotaService mascotaService = new CN_MascotaService();
-
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -21,309 +20,453 @@ namespace RedPatitas.Refugio
                     Response.Redirect("~/Login/Login.aspx");
                     return;
                 }
-
-                CargarEspecies();
+                CargarEspecies(); // Cargar combo de especies
                 CargarMascotas();
             }
         }
 
         private void CargarEspecies()
         {
-            var especies = mascotaService.ObtenerEspecies();
-            ddlEspecie.Items.Clear();
-            ddlEspecie.Items.Add(new ListItem("-- Seleccionar --", ""));
-            foreach (var esp in especies)
+            try
             {
-                ddlEspecie.Items.Add(new ListItem(esp.esp_Nombre, esp.esp_IdEspecie.ToString()));
+                CN_MascotaService service = new CN_MascotaService();
+                var especies = service.ObtenerEspecies();
+                ddlEspecie.DataSource = especies;
+                ddlEspecie.DataTextField = "esp_Nombre";
+                ddlEspecie.DataValueField = "esp_IdEspecie";
+                ddlEspecie.DataBind();
+
+                ddlEspecie.Items.Insert(0, new ListItem("Seleccione Especie", "0"));
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Error CargarEspecies: " + ex.Message);
             }
         }
 
         protected void ddlEspecie_SelectedIndexChanged(object sender, EventArgs e)
         {
-            CargarRazas();
+            int idEspecie;
+            if (int.TryParse(ddlEspecie.SelectedValue, out idEspecie) && idEspecie > 0)
+            {
+                CargarRazas(idEspecie);
+            }
+            else
+            {
+                ddlRaza.Items.Clear();
+                ddlRaza.Items.Insert(0, new ListItem("Seleccione Especie primero", ""));
+            }
         }
 
-        private void CargarRazas()
+        private void CargarRazas(int idEspecie)
         {
-            ddlRaza.Items.Clear();
-            ddlRaza.Items.Add(new ListItem("-- Seleccionar --", ""));
-
-            if (!string.IsNullOrEmpty(ddlEspecie.SelectedValue))
+            try
             {
-                int idEspecie = int.Parse(ddlEspecie.SelectedValue);
-                var razas = mascotaService.ObtenerRazasPorEspecie(idEspecie);
-                foreach (var raza in razas)
-                {
-                    ddlRaza.Items.Add(new ListItem(raza.raz_Nombre, raza.raz_IdRaza.ToString()));
-                }
+                CN_MascotaService service = new CN_MascotaService();
+                var razas = service.ObtenerRazasPorEspecie(idEspecie);
+                ddlRaza.DataSource = razas;
+                ddlRaza.DataTextField = "raz_Nombre";
+                ddlRaza.DataValueField = "raz_IdRaza";
+                ddlRaza.DataBind();
+
+                ddlRaza.Items.Insert(0, new ListItem("Seleccione Raza", ""));
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Error CargarRazas: " + ex.Message);
             }
         }
 
         private void CargarMascotas()
         {
-            int idRefugio = Convert.ToInt32(Session["RefugioId"]);
-            var mascotas = mascotaService.ObtenerMascotasPorRefugio(idRefugio);
-
-            if (mascotas.Count > 0)
+            try
             {
+                int idRefugio = Convert.ToInt32(Session["RefugioId"]);
+                CN_MascotaService service = new CN_MascotaService();
+                var mascotas = service.ObtenerMascotasPorRefugio(idRefugio);
                 rptMascotas.DataSource = mascotas;
                 rptMascotas.DataBind();
-                pnlLista.Visible = true;
-                pnlEmpty.Visible = false;
             }
-            else
+            catch (Exception ex)
             {
-                pnlLista.Visible = false;
-                pnlEmpty.Visible = true;
+                // Manejo de error
+                System.Diagnostics.Debug.WriteLine("Error CargarMascotas: " + ex.Message);
             }
         }
 
         protected void btnNuevaMascota_Click(object sender, EventArgs e)
         {
             LimpiarFormulario();
-            litTituloForm.Text = "Nueva Mascota";
-            pnlFormulario.Visible = true;
             pnlLista.Visible = false;
-            pnlEmpty.Visible = false;
+            pnlFormulario.Visible = true;
+            litTituloFormulario.Text = "Registrar Nueva Mascota";
         }
 
         protected void btnCancelar_Click(object sender, EventArgs e)
         {
+            pnlLista.Visible = true;
             pnlFormulario.Visible = false;
-            CargarMascotas();
         }
 
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
             try
             {
+                if (!Page.IsValid) return;
+
                 int idRefugio = Convert.ToInt32(Session["RefugioId"]);
-                int idMascota = int.Parse(hfIdMascota.Value);
+                int idUsuario = Convert.ToInt32(Session["UsuarioId"]);
 
-                var mascota = new tbl_Mascotas
-                {
-                    mas_IdMascota = idMascota,
-                    mas_Nombre = txtNombre.Text.Trim(),
-                    mas_IdRefugio = idRefugio,
-                    mas_IdRaza = string.IsNullOrEmpty(ddlRaza.SelectedValue) ? (int?)null : int.Parse(ddlRaza.SelectedValue),
-                    mas_Sexo = string.IsNullOrEmpty(ddlSexo.SelectedValue) ? (char?)null : ddlSexo.SelectedValue[0],
-                    mas_EdadAproximada = ddlEdad.SelectedValue,
-                    mas_Tamano = ddlTamano.SelectedValue,
-                    mas_Color = txtColor.Text.Trim(),
-                    mas_Descripcion = txtDescripcion.Text.Trim(),
-                    mas_Vacunado = chkVacunado.Checked,
-                    mas_Esterilizado = chkEsterilizado.Checked,
-                    mas_EstadoAdopcion = "Disponible"
-                };
+                // Obtener IdRaza seleccionado
+                int idRaza = 0;
+                int.TryParse(ddlRaza.SelectedValue, out idRaza);
 
-                if (idMascota == 0)
+                if (idRaza == 0)
                 {
-                    // Nueva mascota
-                    int nuevoId = mascotaService.RegistrarMascota(mascota);
-                    if (nuevoId > 0)
-                    {
-                        // Subir fotos (galería)
-                        SubirFotos(nuevoId);
-                        MostrarMensaje("Mascota registrada exitosamente", true);
-                    }
-                    else
-                    {
-                        MostrarMensaje("Error al registrar la mascota", false);
-                    }
-                }
-                else
-                {
-                    // Actualizar mascota
-                    bool exito = mascotaService.ActualizarMascota(mascota);
-                    if (exito)
-                    {
-                        SubirFotos(idMascota);
-                        MostrarMensaje("Mascota actualizada exitosamente", true);
-                    }
-                    else
-                    {
-                        MostrarMensaje("Error al actualizar la mascota", false);
-                    }
+                    string scriptRaza = "Swal.fire({ title: 'Atención', text: 'Por favor seleccione una raza', icon: 'warning', confirmButtonColor: '#0D9488' });";
+                    ScriptManager.RegisterStartupScript(this, GetType(), "swal-raza", scriptRaza, true);
+                    return;
                 }
 
-                pnlFormulario.Visible = false;
-                CargarMascotas();
-            }
-            catch (Exception ex)
-            {
-                MostrarMensaje("Error: " + ex.Message, false);
-            }
-        }
+                // Verificar si es edición o creación
+                int idMascotaEditar = 0;
+                int.TryParse(hfIdMascota.Value, out idMascotaEditar);
+                bool esEdicion = idMascotaEditar > 0;
 
-        private void SubirFotos(int idMascota)
-        {
-            try
-            {
-                if (fuFoto.HasFiles)
+                using (var db = new DataClasses1DataContext())
                 {
-                    string rutaFisica = Server.MapPath("~/Images/Mascotas/");
-                    if (!Directory.Exists(rutaFisica))
-                        Directory.CreateDirectory(rutaFisica);
+                    tbl_Mascotas mascota;
 
-                    bool esPrimera = true;
-                    foreach (var archivo in fuFoto.PostedFiles)
+                    if (esEdicion)
                     {
-                        string extension = Path.GetExtension(archivo.FileName).ToLower();
-                        if (extension == ".jpg" || extension == ".jpeg" || extension == ".png" || extension == ".gif")
+                        // EDICIÓN: Obtener mascota existente
+                        mascota = db.tbl_Mascotas.FirstOrDefault(m => m.mas_IdMascota == idMascotaEditar);
+                        if (mascota == null)
                         {
-                            string nombreArchivo = $"mascota_{idMascota}_{DateTime.Now.Ticks}{extension}";
-                            string rutaCompleta = Path.Combine(rutaFisica, nombreArchivo);
-                            archivo.SaveAs(rutaCompleta);
-
-                            string urlFoto = $"~/Images/Mascotas/{nombreArchivo}";
-                            mascotaService.AgregarFotoMascota(idMascota, urlFoto, esPrimera);
-                            esPrimera = false; // Solo la primera foto es principal
+                            string script404 = "Swal.fire({ title: 'Error', text: 'Mascota no encontrada', icon: 'error', confirmButtonColor: '#0D9488' });";
+                            ScriptManager.RegisterStartupScript(this, GetType(), "swal-404", script404, true);
+                            return;
                         }
                     }
-                }
-                else if (fuFoto.HasFile)
-                {
-                    // Single file fallback
-                    string extension = Path.GetExtension(fuFoto.FileName).ToLower();
-                    if (extension == ".jpg" || extension == ".jpeg" || extension == ".png" || extension == ".gif")
+                    else
                     {
-                        string rutaFisica = Server.MapPath("~/Images/Mascotas/");
-                        if (!Directory.Exists(rutaFisica))
-                            Directory.CreateDirectory(rutaFisica);
-
-                        string nombreArchivo = $"mascota_{idMascota}_{DateTime.Now.Ticks}{extension}";
-                        string rutaCompleta = Path.Combine(rutaFisica, nombreArchivo);
-                        fuFoto.SaveAs(rutaCompleta);
-
-                        string urlFoto = $"~/Images/Mascotas/{nombreArchivo}";
-                        mascotaService.AgregarFotoMascota(idMascota, urlFoto, true);
+                        // CREACIÓN: Nueva mascota
+                        mascota = new tbl_Mascotas
+                        {
+                            mas_IdRefugio = idRefugio,
+                            mas_IdUsuarioRegistro = idUsuario,
+                            mas_EstadoAdopcion = "Disponible",
+                            mas_FechaRegistro = DateTime.Now,
+                            mas_Estado = true
+                        };
                     }
+
+                    // Asignar datos comunes
+                    mascota.mas_Nombre = txtNombre.Text.Trim();
+                    mascota.mas_Edad = int.TryParse(txtEdad.Text, out int edad) ? (int?)edad : null;
+                    mascota.mas_EdadAproximada = CalcularEdadAproximada(mascota.mas_Edad);
+                    mascota.mas_Sexo = !string.IsNullOrEmpty(ddlSexo.SelectedValue) ? Convert.ToChar(ddlSexo.SelectedValue) : (char?)null;
+                    mascota.mas_Tamano = ddlTamano.SelectedValue;
+                    mascota.mas_Color = txtColor.Text.Trim();
+                    mascota.mas_Descripcion = txtDescripcion.Text;
+                    mascota.mas_Vacunado = chkVacunado.Checked;
+                    mascota.mas_Esterilizado = chkEsterilizado.Checked;
+                    mascota.mas_Desparasitado = chkDesparasitado.Checked;
+                    mascota.mas_IdRaza = idRaza;
+
+                    if (!esEdicion)
+                    {
+                        db.tbl_Mascotas.InsertOnSubmit(mascota);
+                    }
+
+                    db.SubmitChanges();
+
+                    int idMascotaGuardada = mascota.mas_IdMascota;
+
+                    // Guardar las 3 fotos
+                    GuardarFotosMascota(db, idMascotaGuardada, esEdicion);
+
+                    // Éxito
+                    string mensaje = esEdicion ? "Mascota actualizada correctamente" : "Mascota registrada correctamente";
+                    string scriptSuccess = $"Swal.fire({{ title: '¡Éxito!', text: '{mensaje}', icon: 'success', confirmButtonColor: '#0D9488' }});";
+                    ScriptManager.RegisterStartupScript(this, GetType(), "swal", scriptSuccess, true);
+
+                    LimpiarFormulario();
+                    pnlFormulario.Visible = false;
+                    pnlLista.Visible = true;
+                    CargarMascotas();
                 }
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine("Error SubirFotos: " + ex.Message);
+                System.Diagnostics.Debug.WriteLine("Error Guardar: " + ex.Message);
+                System.Diagnostics.Debug.WriteLine("Error Guardar: " + ex.Message);
+                string scriptError = $"Swal.fire({{ title: 'Error', text: 'Error al guardar: {ex.Message.Replace("'", "")}', icon: 'error', confirmButtonColor: '#0D9488' }});";
+                ScriptManager.RegisterStartupScript(this, GetType(), "swal-error", scriptError, true);
             }
         }
+
+        /// <summary>
+        /// Calcula una descripción de edad aproximada basada en meses
+        /// </summary>
+        private string CalcularEdadAproximada(int? edadMeses)
+        {
+            if (!edadMeses.HasValue) return "Desconocida";
+
+            int meses = edadMeses.Value;
+            if (meses < 3) return "Cachorro";
+            if (meses < 12) return $"{meses} meses";
+
+            int años = meses / 12;
+            int mesesRestantes = meses % 12;
+
+            if (mesesRestantes == 0)
+                return años == 1 ? "1 año" : $"{años} años";
+            else
+                return $"{años} año(s) y {mesesRestantes} meses";
+        }
+
 
         protected void rptMascotas_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
-            int idMascota = int.Parse(e.CommandArgument.ToString());
+            int idMascota = Convert.ToInt32(e.CommandArgument);
 
-            if (e.CommandName == "Editar")
+            if (e.CommandName == "Eliminar")
             {
-                CargarMascotaParaEdicion(idMascota);
+                try
+                {
+                    CN_MascotaService service = new CN_MascotaService();
+                    if (service.EliminarMascota(idMascota))
+                    {
+                        string scriptDel = "Swal.fire({ title: '¡Eliminado!', text: 'Mascota eliminada correctamente', icon: 'success', confirmButtonColor: '#0D9488' });";
+                        ScriptManager.RegisterStartupScript(this, GetType(), "swal-del", scriptDel, true);
+                        CargarMascotas();
+                    }
+                    else
+                    {
+                        string scriptWarn = "Swal.fire({ title: 'Atención', text: 'No se pudo eliminar la mascota. Puede tener solicitudes asociadas.', icon: 'warning', confirmButtonColor: '#0D9488' });";
+                        ScriptManager.RegisterStartupScript(this, GetType(), "swal-warn", scriptWarn, true);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine("Error al eliminar: " + ex.Message);
+                    string scriptErrDel = $"Swal.fire({{ title: 'Error', text: 'Error al eliminar: {ex.Message.Replace("'", "")}', icon: 'error', confirmButtonColor: '#0D9488' }});";
+                    ScriptManager.RegisterStartupScript(this, GetType(), "swal-err-del", scriptErrDel, true);
+                }
             }
-            else if (e.CommandName == "Eliminar")
+            else if (e.CommandName == "Editar")
             {
-                mascotaService.EliminarMascota(idMascota);
-                MostrarMensaje("Mascota eliminada", true);
-                CargarMascotas();
-            }
-        }
-
-        private void CargarMascotaParaEdicion(int idMascota)
-        {
-            var mascota = mascotaService.ObtenerMascotaPorId(idMascota);
-            if (mascota != null)
-            {
-                hfIdMascota.Value = idMascota.ToString();
-                txtNombre.Text = mascota.Nombre;
-                txtColor.Text = mascota.Color;
-                txtDescripcion.Text = mascota.Descripcion;
-                SetDropdownValue(ddlSexo, mascota.Sexo == "Macho" ? "M" : mascota.Sexo == "Hembra" ? "H" : "");
-                SetDropdownValue(ddlEdad, mascota.EdadAproximada);
-                SetDropdownValue(ddlTamano, mascota.Tamano);
-                chkVacunado.Checked = mascota.Vacunado;
-                chkEsterilizado.Checked = mascota.Esterilizado;
-
-                litTituloForm.Text = "Editar Mascota";
-                pnlFormulario.Visible = true;
-                pnlLista.Visible = false;
+                CargarMascotaParaEditar(idMascota);
             }
         }
 
-        private void SetDropdownValue(DropDownList ddl, string value)
+        /// <summary>
+        /// Carga los datos de una mascota en el formulario para editarla
+        /// </summary>
+        private void CargarMascotaParaEditar(int idMascota)
         {
-            if (ddl.Items.FindByValue(value ?? "") != null)
+            try
             {
-                ddl.SelectedValue = value ?? "";
+                using (var db = new DataClasses1DataContext())
+                {
+                    var mascota = db.tbl_Mascotas
+                        .FirstOrDefault(m => m.mas_IdMascota == idMascota);
+
+                    if (mascota == null)
+                    {
+                        string script404Edit = "Swal.fire({ title: 'Error', text: 'Mascota no encontrada', icon: 'error', confirmButtonColor: '#0D9488' });";
+                        ScriptManager.RegisterStartupScript(this, GetType(), "swal-404-edit", script404Edit, true);
+                        return;
+                    }
+
+                    // Guardar ID para edición
+                    hfIdMascota.Value = idMascota.ToString();
+
+                    // Cargar datos en el formulario
+                    txtNombre.Text = mascota.mas_Nombre;
+                    txtEdad.Text = mascota.mas_Edad?.ToString() ?? "";
+                    txtColor.Text = mascota.mas_Color ?? "";
+                    txtDescripcion.Text = mascota.mas_Descripcion ?? "";
+
+                    // Sexo
+                    if (mascota.mas_Sexo.HasValue)
+                    {
+                        string strSexo = mascota.mas_Sexo.Value.ToString().ToUpper();
+                        if (ddlSexo.Items.FindByValue(strSexo) != null)
+                        {
+                            ddlSexo.SelectedValue = strSexo;
+                        }
+                    }
+
+                    // Tamaño
+                    if (!string.IsNullOrEmpty(mascota.mas_Tamano))
+                    {
+                        ListItem item = ddlTamano.Items.FindByText(mascota.mas_Tamano) ?? ddlTamano.Items.FindByValue(mascota.mas_Tamano);
+                        if (item != null) ddlTamano.SelectedValue = item.Value;
+                    }
+
+                    // Checkboxes
+                    chkVacunado.Checked = mascota.mas_Vacunado ?? false;
+                    chkEsterilizado.Checked = mascota.mas_Esterilizado ?? false;
+                    chkDesparasitado.Checked = mascota.mas_Desparasitado ?? false;
+
+                    // Cargar Especie y Raza
+                    if (mascota.mas_IdRaza.HasValue)
+                    {
+                        var raza = db.tbl_Razas.FirstOrDefault(r => r.raz_IdRaza == mascota.mas_IdRaza.Value);
+                        if (raza != null)
+                        {
+                            ddlEspecie.SelectedValue = raza.raz_IdEspecie.ToString();
+                            CargarRazas(raza.raz_IdEspecie);
+                            ddlRaza.SelectedValue = raza.raz_IdRaza.ToString();
+                        }
+                    }
+
+                    // Cargar fotos existentes
+                    var fotos = db.tbl_FotosMascotas
+                        .Where(f => f.fot_IdMascota == idMascota)
+                        .OrderByDescending(f => f.fot_EsPrincipal)
+                        .Take(3)
+                        .ToList();
+
+                    // Mostrar fotos existentes en los previews
+                    if (fotos.Count > 0)
+                    {
+                        imgPreview1.ImageUrl = fotos[0].fot_Url;
+                        imgPreview1.Visible = true;
+                        hfFotoUrl1.Value = fotos[0].fot_Url;
+                    }
+                    if (fotos.Count > 1)
+                    {
+                        imgPreview2.ImageUrl = fotos[1].fot_Url;
+                        imgPreview2.Visible = true;
+                        hfFotoUrl2.Value = fotos[1].fot_Url;
+                    }
+                    if (fotos.Count > 2)
+                    {
+                        imgPreview3.ImageUrl = fotos[2].fot_Url;
+                        imgPreview3.Visible = true;
+                        hfFotoUrl3.Value = fotos[2].fot_Url;
+                    }
+
+                    // Mostrar formulario en modo edición
+                    pnlLista.Visible = false;
+                    pnlFormulario.Visible = true;
+                    litTituloFormulario.Text = "✏️ Editar Mascota: " + mascota.mas_Nombre;
+                }
             }
-            else
+            catch (Exception ex)
             {
-                ddl.SelectedIndex = 0;
+                System.Diagnostics.Debug.WriteLine("Error CargarMascotaParaEditar: " + ex.Message);
+                string script = $"Swal.fire({{ title: 'Error', text: 'Error al cargar mascota: {ex.Message.Replace("'", "")}', icon: 'error', confirmButtonColor: '#0D9488' }});";
+                ScriptManager.RegisterStartupScript(this, GetType(), "swal-load-err", script, true);
             }
         }
 
         private void LimpiarFormulario()
         {
-            hfIdMascota.Value = "0";
+            hfIdMascota.Value = "";
+            hfFotoUrl1.Value = "";
+            hfFotoUrl2.Value = "";
+            hfFotoUrl3.Value = "";
             txtNombre.Text = "";
+            txtEdad.Text = "";
+
+            // Reset dropdowns
+            if (ddlEspecie.Items.Count > 0)
+                ddlEspecie.SelectedIndex = 0;
+            ddlRaza.Items.Clear();
+            ddlRaza.Items.Insert(0, new ListItem("Seleccione Especie primero", ""));
+
+            if (ddlSexo.Items.Count > 0)
+                ddlSexo.SelectedIndex = 0;
+            if (ddlTamano.Items.Count > 0)
+                ddlTamano.SelectedIndex = 0;
+
             txtColor.Text = "";
             txtDescripcion.Text = "";
-            ddlEspecie.SelectedIndex = 0;
-            ddlRaza.Items.Clear();
-            ddlRaza.Items.Add(new ListItem("-- Seleccionar --", ""));
-            ddlSexo.SelectedIndex = 0;
-            ddlEdad.SelectedIndex = 0;
-            ddlTamano.SelectedIndex = 0;
             chkVacunado.Checked = false;
             chkEsterilizado.Checked = false;
+            chkDesparasitado.Checked = false;
+
+            // Limpiar previews de fotos
+            imgPreview1.Visible = false;
+            imgPreview2.Visible = false;
+            imgPreview3.Visible = false;
         }
 
-        private void MostrarMensaje(string mensaje, bool exito)
+        /// <summary>
+        /// Guarda las fotos de la mascota
+        /// </summary>
+        private void GuardarFotosMascota(DataClasses1DataContext db, int idMascota, bool esEdicion)
         {
-            lblMensaje.Text = mensaje;
-            lblMensaje.ForeColor = exito ? System.Drawing.Color.Green : System.Drawing.Color.Red;
-            lblMensaje.Visible = true;
-        }
-
-        protected string GetStatusClass(string estado)
-        {
-            switch (estado?.ToLower())
+            try
             {
-                case "disponible": return "available";
-                case "enproceso": return "process";
-                case "adoptado": return "adopted";
-                default: return "available";
-            }
-        }
+                var fileUploads = new[] { fuFoto1, fuFoto2, fuFoto3 };
+                var esPrincipal = new[] { true, false, false };
+                string folderPath = Server.MapPath("~/Images/Mascotas/");
 
-        protected string GetBadgeClass(string estado)
-        {
-            switch (estado?.ToLower())
+                // Crear directorio si no existe
+                if (!System.IO.Directory.Exists(folderPath))
+                    System.IO.Directory.CreateDirectory(folderPath);
+
+                for (int i = 0; i < fileUploads.Length; i++)
+                {
+                    if (fileUploads[i].HasFile)
+                    {
+                        try
+                        {
+                            string fileName = Guid.NewGuid().ToString() + System.IO.Path.GetExtension(fileUploads[i].FileName);
+                            string fullPath = System.IO.Path.Combine(folderPath, fileName);
+                            fileUploads[i].SaveAs(fullPath);
+
+                            string fotoUrl = "/Images/Mascotas/" + fileName;
+
+                            // Si es edición y es la foto principal, actualizar la existente
+                            if (esEdicion && esPrincipal[i])
+                            {
+                                var fotoExistente = db.tbl_FotosMascotas
+                                    .FirstOrDefault(f => f.fot_IdMascota == idMascota && f.fot_EsPrincipal == true);
+
+                                if (fotoExistente != null)
+                                {
+                                    fotoExistente.fot_Url = fotoUrl;
+                                }
+                                else
+                                {
+                                    db.tbl_FotosMascotas.InsertOnSubmit(new tbl_FotosMascotas
+                                    {
+                                        fot_IdMascota = idMascota,
+                                        fot_Url = fotoUrl,
+                                        fot_EsPrincipal = true
+                                    });
+                                }
+                            }
+                            else
+                            {
+                                // Agregar nueva foto
+                                db.tbl_FotosMascotas.InsertOnSubmit(new tbl_FotosMascotas
+                                {
+                                    fot_IdMascota = idMascota,
+                                    fot_Url = fotoUrl,
+                                    fot_EsPrincipal = esPrincipal[i]
+                                });
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            System.Diagnostics.Debug.WriteLine($"Error subiendo foto {i + 1}: {ex.Message}");
+                        }
+                    }
+                }
+
+                db.SubmitChanges();
+            }
+            catch (Exception ex)
             {
-                case "disponible": return "pet-badge-new";
-                case "enproceso": return "pet-badge-process";
-                case "adoptado": return "pet-badge-urgent";
-                default: return "pet-badge-new";
+                System.Diagnostics.Debug.WriteLine("Error en GuardarFotosMascota: " + ex.Message);
             }
-        }
-
-        protected string GetEmojiByEspecie(string especie)
-        {
-            switch (especie?.ToLower())
-            {
-                case "perro": return "🐕";
-                case "gato": return "🐱";
-                case "conejo": return "🐰";
-                case "ave": return "🐦";
-                case "hámster": return "🐹";
-                default: return "🐾";
-            }
-        }
-
-        protected string ResolveFotoUrl(object foto)
-        {
-            if (foto == null || string.IsNullOrEmpty(foto.ToString()))
-                return "~/Images/Default/placeholder-pet.png";
-
-            string url = foto.ToString();
-            if (url.StartsWith("~/"))
-            {
-                return ResolveUrl(url);
-            }
-            return url;
         }
     }
 }

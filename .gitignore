@@ -423,3 +423,12 @@ RedPatitas/Images/*
 !RedPatitas/Images/.gitkeep
 !RedPatitas/Images/Default/
 !RedPatitas/Images/Default/*
+
+# Ignorar fotos subidas por los usuarios
+RedPatitas/Images/Mascotas/*
+
+# Ignorar archivos de seguimientos
+RedPatitas/Uploads/Seguimientos/*
+
+# Ignorar fotos de reportes de mascotas perdidas
+RedPatitas/Images/Reportes/*

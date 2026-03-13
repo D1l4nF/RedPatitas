@@ -58,6 +58,35 @@ namespace CapaNegocios
         }
 
         /// <summary>
+        /// DTO para estadísticas del dashboard para Personal de Refugio
+        /// </summary>
+        public class EstadisticasRefugioStaff
+        {
+            public int MisMascotasPublicadas { get; set; }
+            public int MisAdopcionesExitosas { get; set; }
+            public int SolicitudesPendientes { get; set; }
+            public int ReportesActivos { get; set; }
+            public string TendenciaMascotas { get; set; }
+            public string TendenciaAdopciones { get; set; }
+            public string TendenciaSolicitudes { get; set; }
+            public string TendenciaReportes { get; set; }
+        }
+
+        /// <summary>
+        /// DTO para solicitudes recientes en dashboard del Refugio
+        /// </summary>
+        public class SolicitudRecienteStaff
+        {
+            public int IdSolicitud { get; set; }
+            public string NombreAdoptante { get; set; }
+            public string NombreMascota { get; set; }
+            public string FotoMascota { get; set; }
+            public string Estado { get; set; }
+            public DateTime FechaEnvio { get; set; }
+            public string TiempoRelativo { get; set; }
+        }
+
+        /// <summary>
         /// DTO para estadísticas de mascotas por refugio
         /// </summary>
         public class EstadisticaRefugio
@@ -399,6 +428,83 @@ namespace CapaNegocios
                 }
 
                 return new DatosTendencia { Etiquetas = etiquetas, Valores = valores };
+            }
+        }
+
+        /// <summary>
+        /// Obtiene estadísticas para el dashboard de un refugio específico
+        /// </summary>
+        public EstadisticasRefugioStaff ObtenerEstadisticasRefugioStaff(int idRefugio)
+        {
+            using (var db = new DataClasses1DataContext())
+            {
+                var stats = new EstadisticasRefugioStaff();
+
+                // Mis Mascotas Publicadas
+                stats.MisMascotasPublicadas = db.tbl_Mascotas.Count(m => m.mas_IdRefugio == idRefugio && m.mas_Estado == true);
+
+                // Mis Adopciones Exitosas
+                stats.MisAdopcionesExitosas = db.tbl_Mascotas.Count(m => m.mas_IdRefugio == idRefugio && m.mas_EstadoAdopcion == "Adoptado");
+
+                // Solicitudes Pendientes (para las mascotas de este refugio)
+                stats.SolicitudesPendientes = db.tbl_SolicitudesAdopcion
+                    .Count(s => s.tbl_Mascotas.mas_IdRefugio == idRefugio && s.sol_Estado == "Pendiente");
+
+                // Reportes Activos de mascotas de este refugio
+                stats.ReportesActivos = db.tbl_ReportesMascotas
+                    .Count(r => r.tbl_Usuarios.usu_IdRefugio == idRefugio && (r.rep_Estado == "Reportado" || r.rep_Estado == "EnBusqueda"));
+
+                // Calcular tendencias (comparar mes actual vs anterior)
+                var inicioMesActual = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+                var inicioMesAnterior = inicioMesActual.AddMonths(-1);
+
+                // Tendencia mascotas
+                var mascotasMesActual = db.tbl_Mascotas.Count(m => m.mas_IdRefugio == idRefugio && m.mas_FechaRegistro >= inicioMesActual);
+                var mascotasMesAnterior = db.tbl_Mascotas.Count(m => m.mas_IdRefugio == idRefugio && m.mas_FechaRegistro >= inicioMesAnterior && m.mas_FechaRegistro < inicioMesActual);
+                stats.TendenciaMascotas = CalcularTendencia(mascotasMesActual, mascotasMesAnterior);
+
+                // Tendencia adopciones
+                var adopcionesMesActual = db.tbl_Mascotas.Count(m => m.mas_IdRefugio == idRefugio && m.mas_FechaAdopcion >= inicioMesActual);
+                var adopcionesMesAnterior = db.tbl_Mascotas.Count(m => m.mas_IdRefugio == idRefugio && m.mas_FechaAdopcion >= inicioMesAnterior && m.mas_FechaAdopcion < inicioMesActual);
+                stats.TendenciaAdopciones = CalcularTendencia(adopcionesMesActual, adopcionesMesAnterior);
+
+                // Tendencia solicitudes
+                var solicitMesActual = db.tbl_SolicitudesAdopcion.Count(s => s.tbl_Mascotas.mas_IdRefugio == idRefugio && s.sol_FechaSolicitud >= inicioMesActual);
+                var solicitMesAnterior = db.tbl_SolicitudesAdopcion.Count(s => s.tbl_Mascotas.mas_IdRefugio == idRefugio && s.sol_FechaSolicitud >= inicioMesAnterior && s.sol_FechaSolicitud < inicioMesActual);
+                stats.TendenciaSolicitudes = CalcularTendencia(solicitMesActual, solicitMesAnterior);
+
+                // Tendencia reportes
+                var reportesMesActual = db.tbl_ReportesMascotas.Count(r => r.tbl_Usuarios.usu_IdRefugio == idRefugio && r.rep_FechaReporte >= inicioMesActual);
+                var reportesMesAnterior = db.tbl_ReportesMascotas.Count(r => r.tbl_Usuarios.usu_IdRefugio == idRefugio && r.rep_FechaReporte >= inicioMesAnterior && r.rep_FechaReporte < inicioMesActual);
+                stats.TendenciaReportes = CalcularTendencia(reportesMesActual, reportesMesAnterior, true);
+
+                return stats;
+            }
+        }
+
+        /// <summary>
+        /// Obtiene últimas solicitudes para el dashboard de un refugio específico
+        /// </summary>
+        public List<SolicitudRecienteStaff> ObtenerSolicitudesRecientesRefugio(int idRefugio, int cantidad = 5)
+        {
+            using (var db = new DataClasses1DataContext())
+            {
+                return db.tbl_SolicitudesAdopcion
+                    .Where(s => s.tbl_Mascotas.mas_IdRefugio == idRefugio)
+                    .OrderByDescending(s => s.sol_FechaSolicitud)
+                    .Take(cantidad)
+                    .ToList()
+                    .Select(s => new SolicitudRecienteStaff
+                    {
+                        IdSolicitud = s.sol_IdSolicitud,
+                        NombreAdoptante = s.tbl_Usuarios.usu_Nombre + " " + s.tbl_Usuarios.usu_Apellido,
+                        NombreMascota = s.tbl_Mascotas.mas_Nombre,
+                        FotoMascota = s.tbl_Mascotas.tbl_FotosMascotas.Where(f => f.fot_EsPrincipal == true).Select(f => f.fot_Url).FirstOrDefault() ?? "../Images/pepery.jpg",
+                        Estado = s.sol_Estado,
+                        FechaEnvio = s.sol_FechaSolicitud ?? DateTime.Now,
+                        TiempoRelativo = CalcularTiempoRelativo(s.sol_FechaSolicitud ?? DateTime.Now)
+                    })
+                    .ToList();
             }
         }
 
