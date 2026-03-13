@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using CapaDatos;
 
@@ -6,6 +6,8 @@ namespace RedPatitas.Public
 {
     public partial class DetalleReporte : System.Web.UI.Page
     {
+        protected System.Web.UI.WebControls.HiddenField hfAvistamientosCoords;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -84,8 +86,12 @@ namespace RedPatitas.Public
                     litDescripcion.Text = System.Web.HttpUtility.HtmlEncode(
                         reporte.rep_Descripcion ?? "Sin descripción.");
 
-                    litUbicacion.Text = System.Web.HttpUtility.HtmlEncode(
-                        reporte.rep_UbicacionUltima ?? reporte.rep_Ciudad ?? "");
+                    string ubiUltima = reporte.rep_UbicacionUltima ?? reporte.rep_Ciudad ?? "";
+                    int idxUltima = ubiUltima.IndexOf("(Coords: ");
+                    if (idxUltima >= 0) {
+                        ubiUltima = ubiUltima.Substring(0, idxUltima).Trim();
+                    }
+                    litUbicacion.Text = System.Web.HttpUtility.HtmlEncode(ubiUltima);
 
                     // Coordenadas para el mapa
                     if (reporte.rep_Latitud.HasValue && reporte.rep_Longitud.HasValue)
@@ -114,25 +120,29 @@ namespace RedPatitas.Public
 
                         pnlContacto.Visible   = true;
                         pnlLoginAviso.Visible = false;
-
-                        // Botón avistamiento solo si reporte activo y el usuario NO es el dueño
-                        bool activo = reporte.rep_Estado != "Reunido" &&
-                                      reporte.rep_Estado != "SinResolver";
-                        int idUsuario = Convert.ToInt32(Session["UsuarioId"]);
-                        bool esDueno = reporte.rep_IdUsuario == idUsuario;
-
-                        pnlBtnAvistamiento.Visible = activo && !esDueno;
-                        if (activo && !esDueno)
-                        {
-                            lnkAvistamiento.NavigateUrl =
-                                ResolveUrl("~/Public/RegistrarAvistamiento.aspx?idReporte=" + idReporte);
-                        }
                     }
                     else
                     {
                         pnlContacto.Visible       = false;
                         pnlLoginAviso.Visible     = true;
-                        pnlBtnAvistamiento.Visible = false;
+                    }
+
+                    // Botón avistamiento visible para todos excepto para el dueño
+                    bool activo = reporte.rep_Estado != "Reunido" &&
+                                  reporte.rep_Estado != "SinResolver";
+                    bool esDueno = false;
+                    
+                    if (logueado)
+                    {
+                        int idUsuario = Convert.ToInt32(Session["UsuarioId"]);
+                        esDueno = reporte.rep_IdUsuario == idUsuario;
+                    }
+
+                    pnlBtnAvistamiento.Visible = activo && !esDueno;
+                    if (activo && !esDueno)
+                    {
+                        lnkAvistamiento.NavigateUrl =
+                            ResolveUrl("~/Public/RegistrarAvistamiento.aspx?idReporte=" + idReporte);
                     }
 
                     // Fotos del reporte
@@ -157,20 +167,55 @@ namespace RedPatitas.Public
                     // Avistamientos
                     var avistamientos = db.tbl_Avistamientos
                         .Where(a => a.avi_IdReporte == idReporte)
-                        .OrderByDescending(a => a.avi_FechaReporte)
+                        .OrderBy(a => a.avi_FechaAvistamiento ?? a.avi_FechaReporte) // Orden ascendente para la ruta
                         .ToList();
 
-                    litTotalAvistamientos.Text = avistamientos.Count.ToString();
+                    var avistamientosList = avistamientos.Select(a => {
+                        string ubi = a.avi_Ubicacion ?? "";
+                        string latStr = "";
+                        string lngStr = "";
+                        int idx = ubi.IndexOf("(Coords: ");
+                        if(idx >= 0) {
+                            string coords = ubi.Substring(idx + 9).Replace(")", "");
+                            var parts = coords.Split(',');
+                            if(parts.Length == 2) {
+                                latStr = parts[0].Trim();
+                                lngStr = parts[1].Trim();
+                            }
+                            ubi = ubi.Substring(0, idx).Trim();
+                        }
+                        return new {
+                            UbicacionLimpia = ubi,
+                            Lat = latStr,
+                            Lng = lngStr,
+                            a.avi_Descripcion,
+                            Fecha = a.avi_FechaAvistamiento ?? a.avi_FechaReporte
+                        };
+                    }).ToList();
 
-                    if (avistamientos.Any())
+                    // Lista para mostrar ordenada descendente
+                    var avistamientosView = avistamientosList.OrderByDescending(a => a.Fecha).ToList();
+
+                    litTotalAvistamientos.Text = avistamientosView.Count.ToString();
+
+                    if (avistamientosView.Any())
                     {
-                        rptAvistamientos.DataSource = avistamientos;
+                        rptAvistamientos.DataSource = avistamientosView;
                         rptAvistamientos.DataBind();
                         pnlSinAvistamientos.Visible = false;
+
+                        // Construir JSON de coordenadas para el mapa
+                        var arrayPuntos = avistamientosList
+                                            .Where(x => !string.IsNullOrEmpty(x.Lat) && !string.IsNullOrEmpty(x.Lng))
+                                            .Select(x => "{\"lat\": " + x.Lat + ", \"lng\": " + x.Lng + ", \"desc\": \"" + System.Web.HttpUtility.JavaScriptStringEncode(x.UbicacionLimpia) + "\"}")
+                                            .ToArray();
+                        
+                        hfAvistamientosCoords.Value = "[" + string.Join(",", arrayPuntos) + "]";
                     }
                     else
                     {
                         pnlSinAvistamientos.Visible = true;
+                        hfAvistamientosCoords.Value = "[]";
                     }
                 }
             }

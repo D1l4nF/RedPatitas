@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Public.master.cs" Inherits="RedPatitas.Public.Public" %>
+<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Public.master.cs" Inherits="RedPatitas.Public.Public" %>
 
 <!DOCTYPE html>
 
@@ -19,6 +19,7 @@
         rel="stylesheet">
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
     <form id="form1" runat="server">
