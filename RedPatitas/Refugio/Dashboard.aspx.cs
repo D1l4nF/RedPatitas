@@ -61,13 +61,9 @@ namespace RedPatitas.Refugio
                 rptSolicitudesRecientes.DataSource = solicitudesRecientes;
                 rptSolicitudesRecientes.DataBind();
 
-                // 3. Cargar Actividad Reciente (aquí podríamos filtrar por refugio si hubiese método,
-                // de momento usamos el general o lo omitimos, o en CN_DashboardService modificarlo luego.
-                // Como es Staff, no debe ver la genérica global. Así que la vaciamos o usamos la global sin datos confidenciales).
-                // Optaremos por usar la global genérica si no filtra cosas secretas, aunque lo ideal es filtrar.
-                // Para mantenerlo seguro, evitamos mostrar reportes ajenos o lo comentamos.
-                // Para simplificar, la removemos del staff o usamos una vacia temporal.
-                rptActividadReciente.DataSource = new List<object>(); // TODO: Implementar actividad de Staff
+                // 3. Cargar Actividad Reciente del Refugio
+                var actividadReciente = _dashboardService.ObtenerActividadRecienteRefugio(idRefugio, 6);
+                rptActividadReciente.DataSource = actividadReciente;
                 rptActividadReciente.DataBind();
 
             }

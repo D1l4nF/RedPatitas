@@ -1,4 +1,4 @@
-﻿using CapaDatos;
+using CapaDatos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -93,6 +93,44 @@ namespace CapaNegocios
             }
         }
 
+        // TODAS LAS SOLICITUDES RECIBIDAS (REFUGIO) CON FILTRO OPCIONAL
+        public static List<SolicitudDTO> SolicitudesRecibidasTodas(int idRefugio, string filtroEstado = null)
+        {
+            using (var db = new DataClasses1DataContext())
+            {
+                var query = from s in db.tbl_SolicitudesAdopcion
+                            join m in db.tbl_Mascotas on s.sol_IdMascota equals m.mas_IdMascota
+                            join u in db.tbl_Usuarios on s.sol_IdUsuario equals u.usu_IdUsuario
+                            where m.mas_IdRefugio == idRefugio
+                            select new { s, m, u };
+
+                if (!string.IsNullOrEmpty(filtroEstado) && filtroEstado != "Todas")
+                {
+                    query = query.Where(x => x.s.sol_Estado == filtroEstado);
+                }
+
+                return (from x in query
+                        orderby x.s.sol_FechaSolicitud descending
+                        select new SolicitudDTO
+                        {
+                            sol_IdSolicitud = x.s.sol_IdSolicitud,
+                            IdSolicitud = x.s.sol_IdSolicitud,
+                            IdMascota = x.s.sol_IdMascota,
+                            NombreMascota = x.m.mas_Nombre,
+                            FotoMascota = x.m.tbl_FotosMascotas
+                                .Where(f => f.fot_EsPrincipal == true)
+                                .Select(f => f.fot_Url)
+                                .FirstOrDefault() ?? "https://via.placeholder.com/80?text=🐾",
+                            IdAdoptante = x.s.sol_IdUsuario,
+                            NombreAdoptante = x.u.usu_Nombre,
+                            ApellidoAdoptante = x.u.usu_Apellido ?? "",
+                            sol_FechaSolicitud = x.s.sol_FechaSolicitud,
+                            Estado = x.s.sol_Estado,
+                            ref_IdRefugio = idRefugio
+                        }).ToList();
+            }
+        }
+
         // OBTENER ADOPCIONES POR MES (para estadísticas)
         public static Dictionary<string, int> ObtenerAdopcionesPorMes(int idRefugio)
         {
@@ -142,6 +180,9 @@ namespace CapaNegocios
 
                 // NUEVO: Generar los cronogramas automáticos (Timeline) después de guardar
                 db.sp_ProgramarSeguimientosAdopcion(idSolicitud);
+
+                // Auditoría
+                CN_AuditoriaService.RegistrarAccion(null, "UPDATE", "tbl_SolicitudesAdopcion", idSolicitud, "Estado: Pendiente", "Estado: Aprobada");
             }
         }
 
@@ -162,6 +203,9 @@ namespace CapaNegocios
                 mascota.mas_EstadoAdopcion = "Disponible";
 
                 db.SubmitChanges();
+
+                // Auditoría
+                CN_AuditoriaService.RegistrarAccion(null, "UPDATE", "tbl_SolicitudesAdopcion", idSolicitud, "Estado: Pendiente", "Estado: Rechazada");
             }
         }
 

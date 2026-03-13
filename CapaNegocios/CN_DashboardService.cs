@@ -84,6 +84,7 @@ namespace CapaNegocios
             public string Estado { get; set; }
             public DateTime FechaEnvio { get; set; }
             public string TiempoRelativo { get; set; }
+            public string RevisorNombre { get; set; }
         }
 
         /// <summary>
@@ -187,6 +188,44 @@ namespace CapaNegocios
                 var random = new Random();
 
                 return db.tbl_Usuarios
+                    .OrderByDescending(u => u.usu_FechaRegistro)
+                    .Take(cantidad)
+                    .Select(u => new
+                    {
+                        u.usu_IdUsuario,
+                        u.usu_Nombre,
+                        u.usu_Apellido,
+                        u.usu_Email,
+                        u.usu_Estado,
+                        RolNombre = u.tbl_Roles.rol_Nombre
+                    })
+                    .ToList()
+                    .Select((u, index) => new UsuarioReciente
+                    {
+                        IdUsuario = u.usu_IdUsuario,
+                        Nombre = u.usu_Nombre,
+                        Apellido = u.usu_Apellido ?? "",
+                        Email = u.usu_Email,
+                        Rol = TraducirRol(u.RolNombre),
+                        EstadoActivo = u.usu_Estado ?? false,
+                        Iniciales = ObtenerIniciales(u.usu_Nombre, u.usu_Apellido),
+                        ColorAvatar = coloresAvatar[index % coloresAvatar.Length]
+                    })
+                    .ToList();
+            }
+        }
+
+        /// <summary>
+        /// Obtiene los usuarios recientes de un refugio específico
+        /// </summary>
+        public List<UsuarioReciente> ObtenerUsuariosRecientesPorRefugio(int idRefugio, int cantidad = 5)
+        {
+            using (var db = new DataClasses1DataContext())
+            {
+                var coloresAvatar = new[] { "#FF6B6B", "#FF6B35", "#27AE60", "#3498DB", "#9B59B6" };
+
+                return db.tbl_Usuarios
+                    .Where(u => u.usu_IdRefugio == idRefugio)
                     .OrderByDescending(u => u.usu_FechaRegistro)
                     .Take(cantidad)
                     .Select(u => new
@@ -332,6 +371,149 @@ namespace CapaNegocios
                         Tipo = "user",
                         Titulo = "Sin actividad reciente",
                         Descripcion = "El sistema está listo",
+                        Fecha = DateTime.Now,
+                        TiempoRelativo = "Ahora"
+                    });
+                }
+
+                return actividades.OrderByDescending(a => a.Fecha).Take(cantidad).ToList();
+            }
+        }
+
+        /// <summary>
+        /// Obtiene actividad reciente filtrada por un refugio específico
+        /// </summary>
+        public List<ActividadReciente> ObtenerActividadRecienteRefugio(int idRefugio, int cantidad = 6)
+        {
+            using (var db = new DataClasses1DataContext())
+            {
+                var actividades = new List<ActividadReciente>();
+
+                // IDs de usuarios que pertenecen a este refugio
+                var idsUsuariosRefugio = db.tbl_Usuarios
+                    .Where(u => u.usu_IdRefugio == idRefugio)
+                    .Select(u => u.usu_IdUsuario)
+                    .ToList();
+
+                // 1. Auditoría del personal del refugio
+                var auditoria = db.tbl_Auditoria
+                    .Where(a => a.aud_IdUsuario.HasValue && idsUsuariosRefugio.Contains(a.aud_IdUsuario.Value))
+                    .OrderByDescending(a => a.aud_Fecha)
+                    .Take(cantidad * 2)
+                    .ToList();
+
+                foreach (var aud in auditoria.Take(cantidad))
+                {
+                    var actividad = new ActividadReciente
+                    {
+                        Fecha = aud.aud_Fecha ?? DateTime.Now,
+                        TiempoRelativo = CalcularTiempoRelativo(aud.aud_Fecha ?? DateTime.Now)
+                    };
+
+                    switch (aud.aud_Accion)
+                    {
+                        case "LOGIN":
+                            actividad.Tipo = "user";
+                            actividad.Titulo = "Inicio de sesión";
+                            actividad.Descripcion = ObtenerNombreUsuario(db, aud.aud_IdUsuario);
+                            break;
+                        case "INSERT":
+                            if (aud.aud_Tabla == "tbl_Mascotas")
+                            {
+                                actividad.Tipo = "pet";
+                                actividad.Titulo = "Nueva mascota registrada";
+                                actividad.Descripcion = "Mascota agregada al refugio";
+                            }
+                            else if (aud.aud_Tabla == "tbl_SolicitudesAdopcion")
+                            {
+                                actividad.Tipo = "adoption";
+                                actividad.Titulo = "Nueva solicitud de adopción";
+                                actividad.Descripcion = "Solicitud recibida";
+                            }
+                            else if (aud.aud_Tabla == "tbl_ReportesMascotas")
+                            {
+                                actividad.Tipo = "report";
+                                actividad.Titulo = "Nuevo reporte";
+                                actividad.Descripcion = "Reporte de mascota registrado";
+                            }
+                            else
+                            {
+                                actividad.Tipo = "user";
+                                actividad.Titulo = "Registro nuevo";
+                                actividad.Descripcion = ConstruirDescripcionAmigable(aud.aud_Tabla, "creado");
+                            }
+                            break;
+                        case "UPDATE":
+                            actividad.Tipo = "user";
+                            actividad.Titulo = "Actualización";
+                            actividad.Descripcion = ConstruirDescripcionAmigable(aud.aud_Tabla, "actualizado");
+                            break;
+                        case "DELETE":
+                            actividad.Tipo = "report";
+                            actividad.Titulo = "Eliminación";
+                            actividad.Descripcion = ConstruirDescripcionAmigable(aud.aud_Tabla, "eliminado");
+                            break;
+                        default:
+                            actividad.Tipo = "user";
+                            actividad.Titulo = aud.aud_Accion;
+                            actividad.Descripcion = aud.aud_Tabla ?? "Sistema";
+                            break;
+                    }
+                    actividades.Add(actividad);
+                }
+
+                // 2. Si faltan registros, agregar mascotas recientes del refugio
+                if (actividades.Count < cantidad)
+                {
+                    var mascotasRecientes = db.tbl_Mascotas
+                        .Where(m => m.mas_IdRefugio == idRefugio)
+                        .OrderByDescending(m => m.mas_FechaRegistro)
+                        .Take(cantidad - actividades.Count)
+                        .ToList();
+
+                    foreach (var mascota in mascotasRecientes)
+                    {
+                        actividades.Add(new ActividadReciente
+                        {
+                            Tipo = "pet",
+                            Titulo = "Mascota registrada",
+                            Descripcion = mascota.mas_Nombre,
+                            Fecha = mascota.mas_FechaRegistro ?? DateTime.Now,
+                            TiempoRelativo = CalcularTiempoRelativo(mascota.mas_FechaRegistro ?? DateTime.Now)
+                        });
+                    }
+                }
+
+                // 3. Si faltan, agregar solicitudes recientes de mascotas del refugio
+                if (actividades.Count < cantidad)
+                {
+                    var solicitudesRecientes = db.tbl_SolicitudesAdopcion
+                        .Where(s => s.tbl_Mascotas.mas_IdRefugio == idRefugio)
+                        .OrderByDescending(s => s.sol_FechaSolicitud)
+                        .Take(cantidad - actividades.Count)
+                        .ToList();
+
+                    foreach (var sol in solicitudesRecientes)
+                    {
+                        actividades.Add(new ActividadReciente
+                        {
+                            Tipo = "adoption",
+                            Titulo = "Solicitud de adopción",
+                            Descripcion = sol.tbl_Mascotas.mas_Nombre + " - " + sol.sol_Estado,
+                            Fecha = sol.sol_FechaSolicitud ?? DateTime.Now,
+                            TiempoRelativo = CalcularTiempoRelativo(sol.sol_FechaSolicitud ?? DateTime.Now)
+                        });
+                    }
+                }
+
+                // 4. Si aún no hay actividad
+                if (actividades.Count == 0)
+                {
+                    actividades.Add(new ActividadReciente
+                    {
+                        Tipo = "user",
+                        Titulo = "Sin actividad reciente",
+                        Descripcion = "El refugio está listo para operar",
                         Fecha = DateTime.Now,
                         TiempoRelativo = "Ahora"
                     });
@@ -502,7 +684,8 @@ namespace CapaNegocios
                         FotoMascota = s.tbl_Mascotas.tbl_FotosMascotas.Where(f => f.fot_EsPrincipal == true).Select(f => f.fot_Url).FirstOrDefault() ?? "../Images/pepery.jpg",
                         Estado = s.sol_Estado,
                         FechaEnvio = s.sol_FechaSolicitud ?? DateTime.Now,
-                        TiempoRelativo = CalcularTiempoRelativo(s.sol_FechaSolicitud ?? DateTime.Now)
+                        TiempoRelativo = CalcularTiempoRelativo(s.sol_FechaSolicitud ?? DateTime.Now),
+                        RevisorNombre = s.tbl_Usuarios1 != null ? s.tbl_Usuarios1.usu_Nombre + " " + (s.tbl_Usuarios1.usu_Apellido ?? "") : "Pendiente"
                     })
                     .ToList();
             }

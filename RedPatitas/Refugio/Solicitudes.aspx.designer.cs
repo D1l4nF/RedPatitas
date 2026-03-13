@@ -15,6 +15,26 @@ namespace RedPatitas.Refugio
     {
 
         /// <summary>
+        /// Control btnFiltroTodas.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.LinkButton btnFiltroTodas;
+
+        /// <summary>
+        /// Control btnFiltroPendientes.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.LinkButton btnFiltroPendientes;
+
+        /// <summary>
+        /// Control btnFiltroAprobadas.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.LinkButton btnFiltroAprobadas;
+
+        /// <summary>
+        /// Control btnFiltroRechazadas.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.LinkButton btnFiltroRechazadas;
+
+        /// <summary>
         /// Control rptSolicitudes.
         /// </summary>
         /// <remarks>

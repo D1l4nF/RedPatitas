@@ -17,9 +17,10 @@
     </asp:Content>
 
     <asp:Content ID="Content3" ContentPlaceHolderID="MainContent" runat="server">
-        <div class="review-container">
+        <div class="recent-section">
+            <div class="review-container">
 
-            <a href="Solicitudes.aspx" class="back-btn">
+                <a href="Solicitudes.aspx" class="back-btn">
                 <i class="fas fa-arrow-left"></i> Volver a Solicitudes
             </a>
 
@@ -57,6 +58,16 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Motivo de Rechazo (Visible solo si rechazada) -->
+                <asp:Panel ID="pnlMotivoRechazo" runat="server" Visible="false" CssClass="alert alert-error" style="margin-top: 1rem; border-left: 4px solid #E74C3C;">
+                    <div>
+                        <h4 style="margin: 0 0 0.5rem 0; color: #C0392B;"><i class="fas fa-times-circle"></i> Solicitud Rechazada</h4>
+                        <p style="margin: 0; color: #721C24;">
+                            <strong>Motivo:</strong> <asp:Literal ID="litMotivoRechazoMostrado" runat="server"></asp:Literal>
+                        </p>
+                    </div>
+                </asp:Panel>
 
                 <!-- SECCIÓN 1: Datos del Adoptante (solo info) -->
                 <div class="eval-section info-only">
@@ -198,8 +209,8 @@
                                     <div class="photos-grid">
                                 </HeaderTemplate>
                                 <ItemTemplate>
-                                    <div class="photo-card" onclick="window.open('<%# Eval(" fos_Url") %>', '_blank')">
-                                        <img src='<%# Eval("fos_Url") %>' alt='<%# Eval("fos_TipoFoto") %>' />
+                                    <div class="photo-card" onclick="window.open('<%# ResolveUrl(Eval("fos_Url").ToString()) %>', '_blank')">
+                                        <img src='<%# ResolveUrl(Eval("fos_Url").ToString()) %>' alt='<%# Eval("fos_TipoFoto") %>' />
                                     </div>
                                 </ItemTemplate>
                                 <FooterTemplate>
@@ -362,19 +373,20 @@
         <asp:HiddenField ID="hfTextoExperiencia" runat="server" />
 
         <!-- Botones de Acción -->
-        <div class="actions-row">
+        <asp:Panel ID="pnlAcciones" runat="server" CssClass="actions-row">
             <asp:Button ID="btnAprobar" runat="server" CssClass="btn-action btn-approve" Text="✅ Aprobar Adopción"
-                OnClick="btnAprobar_Click"
-                OnClientClick="return prepararEnvio() && confirm('¿Aprobar esta adopción? La mascota pasará a estado ADOPTADO.');" />
-            <asp:Button ID="btnRechazar" runat="server" CssClass="btn-action btn-reject" Text="❌ Rechazar Solicitud"
-                OnClick="btnRechazar_Click" OnClientClick="return prepararEnvio();" />
-        </div>
-
+                OnClick="btnAprobar_Click" CausesValidation="false"
+                OnClientClick="return prepararEnvio() &amp;&amp; confirm('¿Aprobar esta adopción? La mascota pasará a estado ADOPTADO.');" />
+            <button type="button" class="btn-action btn-reject" onclick="prepararEnvio(); mostrarModalRechazo();">❌ Rechazar Solicitud</button>
         </asp:Panel>
 
-        <!-- Modal Rechazo -->
-        <asp:Panel ID="pnlModalRechazo" runat="server" Visible="false" CssClass="modal-overlay">
-            <div class="modal-content">
+        </asp:Panel> <!-- Cierra pnlContenido -->
+        </div> <!-- Cierra review-container -->
+        </div> <!-- Cierra recent-section -->
+
+        <!-- Modal Rechazo (FUERA DEL CONTENEDOR PARA EVITAR CLIPPING) -->
+        <div id="modalRechazo" class="modal-overlay" style="display:none;">
+            <div class="modal-content modal">
                 <h3 style="margin-bottom: 1rem;"><i class="fas fa-comment-alt"></i> Motivo del Rechazo</h3>
                 <p style="color: #666; margin-bottom: 1rem;">Esta información será enviada al adoptante.</p>
                 <asp:TextBox ID="txtMotivoRechazo" runat="server" CssClass="modal-textarea" TextMode="MultiLine"
@@ -383,14 +395,13 @@
                     ErrorMessage="El motivo es requerido" ForeColor="Red" ValidationGroup="Rechazo" Display="Dynamic">
                 </asp:RequiredFieldValidator>
                 <div class="modal-actions">
-                    <asp:Button ID="btnCancelarRechazo" runat="server" Text="Cancelar" CssClass="btn-cancel"
-                        OnClick="btnCancelarRechazo_Click" CausesValidation="false" />
+                    <button type="button" class="btn-cancel" onclick="ocultarModalRechazo();">Cancelar</button>
                     <asp:Button ID="btnConfirmarRechazo" runat="server" Text="Confirmar Rechazo"
                         CssClass="btn-action btn-reject" OnClick="btnConfirmarRechazo_Click"
+                        OnClientClick="return prepararEnvio();"
                         ValidationGroup="Rechazo" />
                 </div>
             </div>
-        </asp:Panel>
         </div>
 
         <script type="text/javascript">
@@ -585,5 +596,24 @@
                 document.getElementById('<%= hfEvaluaciones.ClientID %>').value = JSON.stringify(evaluaciones);
                 return true;
             }
+
+            function mostrarModalRechazo() {
+                var modal = document.getElementById('modalRechazo');
+                modal.style.display = 'flex';
+                // Un pequeño retraso para que CSS reconozca el display antes de animar
+                setTimeout(function() {
+                    modal.classList.add('active');
+                }, 10);
+            }
+
+            function ocultarModalRechazo() {
+                var modal = document.getElementById('modalRechazo');
+                modal.classList.remove('active');
+                // Esperar a que la transición termine (aprox 300ms) para esconderlo
+                setTimeout(function() {
+                    modal.style.display = 'none';
+                }, 300);
+            }
         </script>
+        </div>
     </asp:Content>

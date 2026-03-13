@@ -131,6 +131,8 @@
     <Content Include="Adoptante\MisSeguimientos.aspx" />
     <Content Include="Adoptante\CompletarSeguimiento.aspx" />
     <Content Include="AdminRefugio\AuditoriaSeguimientos.aspx" />
+    <Content Include="AdminRefugio\HistorialSolicitudes.aspx" />
+    <Content Include="AdminRefugio\Actividad.aspx" />
     <Content Include="AdminRefugio\VerSeguimiento.aspx" />
     <Content Include="Style\estilos-base.css" />
     <Content Include="Style\estilos-publicos.css" />
@@ -201,6 +203,13 @@
     </Compile>
     <Compile Include="AdminRefugio\Solicitudes.aspx.designer.cs">
       <DependentUpon>Solicitudes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminRefugio\HistorialSolicitudes.aspx.cs">
+      <DependentUpon>HistorialSolicitudes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminRefugio\HistorialSolicitudes.aspx.designer.cs">
+      <DependentUpon>HistorialSolicitudes.aspx</DependentUpon>
     </Compile>
     <Compile Include="AdminRefugio\Usuarios.aspx.cs">
       <DependentUpon>Usuarios.aspx</DependentUpon>
@@ -549,6 +558,13 @@
     </Compile>
     <Compile Include="AdminRefugio\AuditoriaSeguimientos.aspx.designer.cs">
       <DependentUpon>AuditoriaSeguimientos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminRefugio\Actividad.aspx.cs">
+      <DependentUpon>Actividad.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminRefugio\Actividad.aspx.designer.cs">
+      <DependentUpon>Actividad.aspx</DependentUpon>
     </Compile>
     <Compile Include="AdminRefugio\VerSeguimiento.aspx.cs">
       <DependentUpon>VerSeguimiento.aspx</DependentUpon>

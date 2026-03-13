@@ -72,6 +72,15 @@
                     Solicitudes de Adopción
                 </asp:HyperLink>
                 
+                <asp:HyperLink ID="lnkHistorialSolicitudes" runat="server" NavigateUrl="~/AdminRefugio/HistorialSolicitudes.aspx" CssClass="nav-link">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polyline points="12 6 12 12 16 14"></polyline>
+                    </svg>
+                    Historial de Solicitudes
+                </asp:HyperLink>
+                
                 <asp:HyperLink ID="lnkCampanias" runat="server" NavigateUrl="~/AdminRefugio/Campanias.aspx" CssClass="nav-link">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
@@ -88,7 +97,13 @@
                     </svg>
                     Auditar Seguimientos
                 </asp:HyperLink>
-                
+
+                <asp:HyperLink ID="lnkHistorialStaff" runat="server" NavigateUrl="~/AdminRefugio/Actividad.aspx" CssClass="nav-link">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                    </svg>
+                    Historial Staff
+                </asp:HyperLink>
 
                 <div class="menu-category" role="heading" aria-level="2">Administración</div>
 

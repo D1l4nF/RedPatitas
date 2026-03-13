@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web;
 using CapaDatos;
 
 namespace CapaNegocios
@@ -294,6 +295,11 @@ namespace CapaNegocios
                 mascota.mas_FechaRegistro = DateTime.Now;
                 db.tbl_Mascotas.InsertOnSubmit(mascota);
                 db.SubmitChanges();
+
+                // Auditoría de registro de mascota
+                int? idUsuario = HttpContext.Current?.Session["UsuarioId"] != null ? (int?)Convert.ToInt32(HttpContext.Current.Session["UsuarioId"]) : mascota.mas_IdUsuarioRegistro;
+                CN_AuditoriaService.RegistrarAccion(idUsuario, "INSERT", "tbl_Mascotas", mascota.mas_IdMascota);
+
                 return mascota.mas_IdMascota;
             }
         }
@@ -341,6 +347,11 @@ namespace CapaNegocios
                 mascota.mas_EstadoAdopcion = mascotaActualizada.mas_EstadoAdopcion;
 
                 db.SubmitChanges();
+
+                // Auditoría de actualización
+                int? idUsuario = HttpContext.Current?.Session["UsuarioId"] != null ? (int?)Convert.ToInt32(HttpContext.Current.Session["UsuarioId"]) : null;
+                CN_AuditoriaService.RegistrarAccion(idUsuario, "UPDATE", "tbl_Mascotas", mascotaActualizada.mas_IdMascota);
+
                 return true;
             }
         }
@@ -358,6 +369,11 @@ namespace CapaNegocios
                 {
                     mascota.mas_Estado = false; // Eliminación lógica
                     db.SubmitChanges();
+
+                    // Auditoría de eliminación
+                    int? idUsuario = HttpContext.Current?.Session["UsuarioId"] != null ? (int?)Convert.ToInt32(HttpContext.Current.Session["UsuarioId"]) : null;
+                    CN_AuditoriaService.RegistrarAccion(idUsuario, "DELETE", "tbl_Mascotas", idMascota);
+
                     return true;
                 }
                 return false;

@@ -32,56 +32,6 @@
                 color: #333;
             }
 
-            /* Header */
-            .solicitud-header {
-                background: linear-gradient(135deg, #FF8C42 0%, #FF6B35 100%);
-                border-radius: 16px;
-                padding: 2rem;
-                color: white;
-                display: flex;
-                gap: 1.5rem;
-                align-items: center;
-                margin-bottom: 1.5rem;
-                box-shadow: 0 4px 20px rgba(255, 107, 53, 0.3);
-            }
-
-            .mascota-img {
-                width: 100px;
-                height: 100px;
-                border-radius: 12px;
-                object-fit: cover;
-                border: 3px solid rgba(255, 255, 255, 0.3);
-            }
-
-            .mascota-emoji {
-                width: 100px;
-                height: 100px;
-                border-radius: 12px;
-                background: rgba(255, 255, 255, 0.2);
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-size: 3rem;
-            }
-
-            .solicitud-header-info h2 {
-                margin: 0 0 0.5rem 0;
-                font-size: 1.5rem;
-            }
-
-            .solicitud-meta {
-                display: flex;
-                flex-wrap: wrap;
-                gap: 1rem;
-                font-size: 0.9rem;
-                opacity: 0.9;
-            }
-
-            .solicitud-meta span {
-                display: flex;
-                align-items: center;
-                gap: 0.35rem;
-            }
 
             /* Sección Evaluable */
             .eval-section {
@@ -510,6 +460,7 @@
     </asp:Content>
 
     <asp:Content ID="Content3" ContentPlaceHolderID="MainContent" runat="server">
+        <div class="recent-section">
         <div class="review-container">
 
             <a href="Solicitudes.aspx" class="back-btn">
@@ -550,6 +501,16 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Motivo de Rechazo (Visible solo si rechazada) -->
+                <asp:Panel ID="pnlMotivoRechazo" runat="server" Visible="false" CssClass="alert alert-error" style="margin-top: 1rem; border-left: 4px solid #E74C3C;">
+                    <div>
+                        <h4 style="margin: 0 0 0.5rem 0; color: #C0392B;"><i class="fas fa-times-circle"></i> Solicitud Rechazada</h4>
+                        <p style="margin: 0; color: #721C24;">
+                            <strong>Motivo:</strong> <asp:Literal ID="litMotivoRechazoMostrado" runat="server"></asp:Literal>
+                        </p>
+                    </div>
+                </asp:Panel>
 
                 <!-- SECCIÓN 1: Datos del Adoptante (solo info) -->
                 <div class="eval-section info-only">
@@ -691,8 +652,8 @@
                                     <div class="photos-grid">
                                 </HeaderTemplate>
                                 <ItemTemplate>
-                                    <div class="photo-card" onclick="window.open('<%# Eval(" fos_Url") %>', '_blank')">
-                                        <img src='<%# Eval("fos_Url") %>' alt='<%# Eval("fos_TipoFoto") %>' />
+                                    <div class="photo-card" onclick="window.open('<%# ResolveUrl(Eval("fos_Url").ToString()) %>', '_blank')">
+                                        <img src='<%# ResolveUrl(Eval("fos_Url").ToString()) %>' alt='<%# Eval("fos_TipoFoto") %>' />
                                     </div>
                                 </ItemTemplate>
                                 <FooterTemplate>

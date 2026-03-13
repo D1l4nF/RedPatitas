@@ -173,6 +173,20 @@ namespace RedPatitas.AdminRefugio
 
                     // Fotos de vivienda
                     CargarFotosVivienda();
+
+                    // Si la solicitud ya fue procesada, ocultar botones de acción (si existen)
+                    string estado = solicitud.Solicitud.sol_Estado;
+                    if (estado != "Pendiente")
+                    {
+                        var pnlAcciones = (System.Web.UI.WebControls.Panel)FindControl("pnlAcciones");
+                        if (pnlAcciones != null) pnlAcciones.Visible = false;
+                        
+                        if (estado == "Rechazada")
+                        {
+                            pnlMotivoRechazo.Visible = true;
+                            litMotivoRechazoMostrado.Text = solicitud.Solicitud.sol_ComentariosRevision ?? "Motivo no especificado";
+                        }
+                    }
                 }
             }
             catch (Exception ex)

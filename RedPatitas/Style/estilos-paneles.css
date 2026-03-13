@@ -368,6 +368,11 @@ body {
     box-shadow: var(--shadow-sm);
 }
 
+.container-centered {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
 .section-header {
     display: flex;
     justify-content: space-between;
@@ -886,7 +891,7 @@ form#form1 {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    /* Tu correcci�n de altura */
+    /* Tu corrección de altura */
     min-height: 220px;
     margin-bottom: 2rem;
 }
@@ -910,7 +915,7 @@ form#form1 {
     line-height: 1.5;
 }
 
-/* Bot�n blanco espec�fico del banner */
+/* Botón blanco específico del banner */
 .btn-white {
     background: white;
     color: var(--primary-color, #FF8C42);
@@ -1021,7 +1026,7 @@ form#form1 {
     font-weight: 500;
 }
 
-/* T�tulos de secci�n */
+/* Títulos de sección */
 .section-title {
     font-size: 1.4rem;
     font-weight: 600;
@@ -1840,7 +1845,7 @@ body.theme-admin-refugio .page-title::after {
     border-color: #D1D5DB;
 }
 
-/* Estilos específicos para Select/Dropdown */
+/* Estilos especÃ­ficos para Select/Dropdown */
 select.form-control {
     padding-right: 2.5rem;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23666666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
@@ -1860,7 +1865,7 @@ select.form-control:focus {
     font-style: normal;
 }
 
-/* Estados de validación */
+/* Estados de validaciÃ³n */
 .form-control.error,
 .form-group.error .form-control {
     border-color: #EF4444;
@@ -1987,7 +1992,7 @@ select.form-control:focus {
     color: white;
 }
 
-/* Container para múltiples botones de acción */
+/* Container para mÃºltiples botones de acciÃ³n */
 .action-buttons,
 td .table-action-btn + .table-action-btn {
     margin-left: 0.35rem;
@@ -2024,7 +2029,7 @@ select.form-control option {
 
 /* ========================================
    FIX: TABLE ACTION BUTTONS AS LINKS (LinkButton ASP.NET)
-   Los LinkButton renderizan como <a>, necesitan estilos específicos
+   Los LinkButton renderizan como <a>, necesitan estilos especÃ­ficos
    ======================================== */
 a.table-action-btn,
 .admin-table td a.table-action-btn {
@@ -2110,10 +2115,10 @@ select.form-control::-ms-expand {
 }
 
 /* ========================================
-   FIX FINAL: Estilos con máxima especificidad
+   FIX FINAL: Estilos con mÃ¡xima especificidad
    ======================================== */
 
-/* Dropdowns en tabla admin - eliminar patrón */
+/* Dropdowns en tabla admin - eliminar patrÃ³n */
 .admin-panel select.form-control,
 .filter-row select.form-control,
 select.form-control {
@@ -2124,7 +2129,7 @@ select.form-control {
     background-size: 12px !important;
 }
 
-/* Botones de acción en tabla - selectores muy específicos */
+/* Botones de acciÃ³n en tabla - selectores muy especÃ­ficos */
 .admin-table tbody tr td a,
 .admin-table td a[id*="btn"],
 table.admin-table a {
@@ -2143,7 +2148,7 @@ table.admin-table a {
     color: #374151 !important;
 }
 
-/* Clases específicas para cada tipo */
+/* Clases especÃ­ficas para cada tipo */
 .admin-table td a.table-action-btn.delete,
 .admin-table a[class*="delete"],
 a[id*="CambiarEstado"][class*="delete"] {
@@ -2169,7 +2174,7 @@ a[id*="btn"][class*="success"] {
 }
 
 /* ========================================
-   FIX: Alineación del botón en filter-row
+   FIX: AlineaciÃ³n del botÃ³n en filter-row
    ======================================== */
 .filter-row {
     display: flex;
@@ -2192,7 +2197,7 @@ a[id*="btn"][class*="success"] {
 }
 
 /* ========================================
-   FIX FINAL: Botones de acción - forzar estilos
+   FIX FINAL: Botones de acciÃ³n - forzar estilos
    ======================================== */
 /* Aplicar a TODOS los links en la columna de acciones */
 .admin-table td:last-child a {
@@ -2213,7 +2218,7 @@ a[id*="btn"][class*="success"] {
     color: #374151 !important;
 }
 
-/* Botón delete/desactivar - Detectar por clase O por texto */
+/* BotÃ³n delete/desactivar - Detectar por clase O por texto */
 .admin-table td:last-child a[class*="delete"],
 .admin-table td:last-child a:contains("Desactivar") {
     background: linear-gradient(135deg, #FEF2F2, #FEE2E2) !important;
@@ -2221,14 +2226,14 @@ a[id*="btn"][class*="success"] {
     border-color: rgba(220, 38, 38, 0.3) !important;
 }
 
-/* Botón edit/asignar */
+/* BotÃ³n edit/asignar */
 .admin-table td:last-child a[class*="edit"] {
     background: linear-gradient(135deg, #FFF7ED, #FFEDD5) !important;
     color: #EA580C !important;
     border-color: rgba(234, 88, 12, 0.3) !important;
 }
 
-/* Botón success/gestionar */
+/* BotÃ³n success/gestionar */
 .admin-table td:last-child a[class*="success"] {
     background: linear-gradient(135deg, #F0FDF4, #DCFCE7) !important;
     color: #059669 !important;
@@ -2242,7 +2247,7 @@ a[id*="btn"][class*="success"] {
 }
 
 /* ========================================
-   OVERRIDE FINAL - Botones acción tabla
+   OVERRIDE FINAL - Botones acciÃ³n tabla
    ======================================== */
 a.table-action-btn {
     display: inline-block !important;
@@ -2348,7 +2353,7 @@ a.table-action-btn.success:hover {
     color: white !important;
 }
 
-/* Botón en filter-row */
+/* BotÃ³n en filter-row */
 .filter-row .btn {
     height: auto;
     min-height: 38px;
@@ -2378,7 +2383,7 @@ a.table-action-btn,
 }
 
 /* ========================================
-   OVERRIDE: Botón primario forzado
+   OVERRIDE: BotÃ³n primario forzado
    ======================================== */
 .btn.btn-primary,
 input.btn-primary,
@@ -2399,7 +2404,7 @@ input[type="submit"].btn-primary:hover {
 }
 
 /* ========================================
-   FIX: Columna de acciones - más espacio
+   FIX: Columna de acciones - mÃ¡s espacio
    ======================================== */
 .admin-table th:last-child,
 .admin-table td:last-child {
@@ -2408,7 +2413,7 @@ input[type="submit"].btn-primary:hover {
     white-space: normal !important;
 }
 
-/* Botones de acción - layout vertical */
+/* Botones de acciÃ³n - layout vertical */
 .admin-table td:last-child {
     display: flex !important;
     flex-wrap: wrap !important;
@@ -2416,7 +2421,7 @@ input[type="submit"].btn-primary:hover {
     align-items: center !important;
 }
 
-/* Reset y estilo limpio para botones de acción */
+/* Reset y estilo limpio para botones de acciÃ³n */
 .admin-table td:last-child a.table-action-btn {
     display: inline-flex !important;
     align-items: center !important;
@@ -2624,15 +2629,17 @@ input[type="submit"].btn-primary:hover {
 
             /* Header */
             .solicitud-header {
-                background: linear-gradient(135deg, #FF8C42 0%, #FF6B35 100%);
+                background-color: #ffffff;
+                border: 1px solid #e2e8f0;
+                border-left: 5px solid var(--primary-color);
                 border-radius: 16px;
                 padding: 2rem;
-                color: white;
+                color: #334155;
                 display: flex;
                 gap: 1.5rem;
                 align-items: center;
                 margin-bottom: 1.5rem;
-                box-shadow: 0 4px 20px rgba(255, 107, 53, 0.3);
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
             }
 
             .mascota-img {
@@ -2640,14 +2647,14 @@ input[type="submit"].btn-primary:hover {
                 height: 100px;
                 border-radius: 12px;
                 object-fit: cover;
-                border: 3px solid rgba(255, 255, 255, 0.3);
+                border: 3px solid #e2e8f0;
             }
 
             .mascota-emoji {
                 width: 100px;
                 height: 100px;
                 border-radius: 12px;
-                background: rgba(255, 255, 255, 0.2);
+                background: #f8fafc;
                 display: flex;
                 align-items: center;
                 justify-content: center;
@@ -2657,6 +2664,7 @@ input[type="submit"].btn-primary:hover {
             .solicitud-header-info h2 {
                 margin: 0 0 0.5rem 0;
                 font-size: 1.5rem;
+                color: #1e293b;
             }
 
             .solicitud-meta {
@@ -2664,7 +2672,7 @@ input[type="submit"].btn-primary:hover {
                 flex-wrap: wrap;
                 gap: 1rem;
                 font-size: 0.9rem;
-                opacity: 0.9;
+                color: #64748b;
             }
 
             .solicitud-meta span {
@@ -2673,7 +2681,7 @@ input[type="submit"].btn-primary:hover {
                 gap: 0.35rem;
             }
 
-            /* Sección Evaluable */
+            /* SecciÃ³n Evaluable */
             .eval-section {
                 background: white;
                 border-radius: 16px;
@@ -2763,7 +2771,7 @@ input[type="submit"].btn-primary:hover {
                 margin-bottom: 1rem;
             }
 
-            /* Evaluación inline */
+            /* EvaluaciÃ³n inline */
             .eval-box {
                 background: linear-gradient(135deg, #FFF8E1 0%, #FFFDE7 100%);
                 border: 2px solid #FFD54F;
@@ -2946,7 +2954,7 @@ input[type="submit"].btn-primary:hover {
                 color: #C0392B;
             }
 
-            /* Botones de acción */
+            /* Botones de acciÃ³n */
             .actions-row {
                 display: flex;
                 gap: 1rem;
@@ -3060,7 +3068,7 @@ input[type="submit"].btn-primary:hover {
                 border: 1px solid #A7F3D0;
             }
 
-            /* Solo info (sin evaluación) */
+            /* Solo info (sin evaluaciÃ³n) */
             .info-only .eval-weight {
                 display: none;
             }
@@ -3211,15 +3219,17 @@ input[type="submit"].btn-primary:hover {
 
             /* Header */
             .solicitud-header {
-                background: linear-gradient(135deg, #FF8C42 0%, #FF6B35 100%);
+                background-color: #ffffff;
+                border: 1px solid #e2e8f0;
+                border-left: 5px solid var(--primary-color);
                 border-radius: 16px;
                 padding: 2rem;
-                color: white;
+                color: #334155;
                 display: flex;
                 gap: 1.5rem;
                 align-items: center;
                 margin-bottom: 1.5rem;
-                box-shadow: 0 4px 20px rgba(255, 107, 53, 0.3);
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
             }
 
             .mascota-img {
@@ -3227,14 +3237,14 @@ input[type="submit"].btn-primary:hover {
                 height: 100px;
                 border-radius: 12px;
                 object-fit: cover;
-                border: 3px solid rgba(255, 255, 255, 0.3);
+                border: 3px solid #e2e8f0;
             }
 
             .mascota-emoji {
                 width: 100px;
                 height: 100px;
                 border-radius: 12px;
-                background: rgba(255, 255, 255, 0.2);
+                background: #f8fafc;
                 display: flex;
                 align-items: center;
                 justify-content: center;
@@ -3244,6 +3254,7 @@ input[type="submit"].btn-primary:hover {
             .solicitud-header-info h2 {
                 margin: 0 0 0.5rem 0;
                 font-size: 1.5rem;
+                color: #1e293b;
             }
 
             .solicitud-meta {
@@ -3251,7 +3262,7 @@ input[type="submit"].btn-primary:hover {
                 flex-wrap: wrap;
                 gap: 1rem;
                 font-size: 0.9rem;
-                opacity: 0.9;
+                color: #64748b;
             }
 
             .solicitud-meta span {
@@ -3260,7 +3271,7 @@ input[type="submit"].btn-primary:hover {
                 gap: 0.35rem;
             }
 
-            /* Sección Evaluable */
+            /* SecciÃ³n Evaluable */
             .eval-section {
                 background: white;
                 border-radius: 16px;
@@ -3350,7 +3361,7 @@ input[type="submit"].btn-primary:hover {
                 margin-bottom: 1rem;
             }
 
-            /* Evaluación inline */
+            /* EvaluaciÃ³n inline */
             .eval-box {
                 background: linear-gradient(135deg, #FFF8E1 0%, #FFFDE7 100%);
                 border: 2px solid #FFD54F;
@@ -3533,7 +3544,7 @@ input[type="submit"].btn-primary:hover {
                 color: #C0392B;
             }
 
-            /* Botones de acción */
+            /* Botones de acciÃ³n */
             .actions-row {
                 display: flex;
                 gap: 1rem;
@@ -3647,7 +3658,7 @@ input[type="submit"].btn-primary:hover {
                 border: 1px solid #A7F3D0;
             }
 
-            /* Solo info (sin evaluación) */
+            /* Solo info (sin evaluaciÃ³n) */
             .info-only .eval-weight {
                 display: none;
             }
@@ -3745,7 +3756,7 @@ input[type="submit"].btn-primary:hover {
 .trend-down { color: #E74C3C; }
 .trend-neutral { color: #7F8C8D; }
 /* =========================================
-   ESTILOS EXTRAÍDOS DE MASCOTAS.ASPX
+   ESTILOS EXTRAÃDOS DE MASCOTAS.ASPX
    ========================================= */
 .page-header {
     display: flex;
@@ -4127,3 +4138,46 @@ input[type="submit"].btn-primary:hover {
 .submit-container { margin-top: 2rem; display: flex; justify-content: flex-end; gap: 1rem; }
 .table-action-btn.info { background: #DBEAFE; color: #2563EB; }
 .table-action-btn.info:hover { background: #2563EB; color: white; }
+
+/* === Filter Tabs === */
+.filter-tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.filter-tab {
+    padding: 0.5rem 1.25rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #666;
+    background: #f0f0f0;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.filter-tab:hover {
+    background: #e0e0e0;
+    color: #333;
+    text-decoration: none;
+}
+
+.filter-tab.active {
+    background: #FF8C42;
+    color: #fff;
+}
+
+/* === Status badge: Rejected === */
+.status-badge.rejected {
+    background: #fde8e8;
+    color: #e74c3c;
+}
+
+/* === Request card estado row === */
+.request-estado {
+    margin-top: 0.35rem;
+}

@@ -107,7 +107,7 @@
                         <tbody>
                             <asp:Repeater ID="rptSolicitudesRecientes" runat="server">
                                 <ItemTemplate>
-                                    <tr>
+                                    <tr onclick='window.location="RevisarSolicitud.aspx?id=<%# Eval("IdSolicitud") %>"' style="cursor: pointer;">
                                         <td>
                                             <div class="pet-cell">
                                                 <div class="avatar avatar-dynamic">
