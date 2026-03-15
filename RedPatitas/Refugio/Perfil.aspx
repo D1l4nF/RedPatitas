@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Refugio/Refugio.Master" AutoEventWireup="true"
+<%@ Page Title="" Language="C#" MasterPageFile="~/Refugio/Refugio.Master" AutoEventWireup="true"
     CodeBehind="Perfil.aspx.cs" Inherits="RedPatitas.Refugio.Perfil" %>
 
     <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
@@ -7,7 +7,6 @@
 
     <asp:Content ID="Content2" ContentPlaceHolderID="head" runat="server">
         <link rel="stylesheet" href="~/Style/forms.css" />
-        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
         <style>
             .avatar-img {
                 width: 100px;
@@ -83,37 +82,6 @@
                 <asp:TextBox ID="txtTelefono" runat="server" CssClass="form-control" TextMode="Phone"></asp:TextBox>
             </div>
 
-            <div class="form-group">
-                <label>Ubicación</label>
-
-                <div class="form-grid" style="margin-bottom: 15px;">
-                    <div class="form-group">
-                        <label for="txtCiudad">Ciudad</label>
-                        <asp:TextBox ID="txtCiudad" runat="server" CssClass="form-control" placeholder="Ej: Quito">
-                        </asp:TextBox>
-                    </div>
-                    <div class="form-group">
-                        <label for="txtDireccion">Dirección</label>
-                        <div class="input-with-button" style="display: flex; gap: 10px;">
-                            <asp:TextBox ID="txtDireccion" runat="server" CssClass="form-control"
-                                placeholder="Ej: Av. Principal 123"></asp:TextBox>
-                            <button type="button" class="btn-secondary" onclick="buscarDireccion()"
-                                style="padding: 0 15px; white-space: nowrap;">
-                                🔍 Buscar
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <div id="mapPerfil"
-                    style="height: 300px; border-radius: 8px; margin-bottom: 10px; border: 1px solid #ddd;"></div>
-                <asp:HiddenField ID="hfLatitud" runat="server" />
-                <asp:HiddenField ID="hfLongitud" runat="server" />
-                <p style="font-size: 0.85rem; color: #666; margin-bottom: 10px;">
-                    📍 Haz clic en el mapa para obtener la dirección automáticamente, o escribe la dirección y pulsa
-                    "Buscar" para ubicarte en el mapa.
-                </p>
-            </div>
 
             <div class="form-divider"></div>
 
@@ -265,11 +233,7 @@
                 valoresOriginales = {
                     nombre: document.getElementById('<%= txtNombre.ClientID %>').value,
                     apellido: document.getElementById('<%= txtApellido.ClientID %>').value,
-                    telefono: document.getElementById('<%= txtTelefono.ClientID %>').value,
-                    ciudad: document.getElementById('<%= txtCiudad.ClientID %>').value,
-                    direccion: document.getElementById('<%= txtDireccion.ClientID %>').value,
-                    latitud: document.getElementById('<%= hfLatitud.ClientID %>').value,
-                    longitud: document.getElementById('<%= hfLongitud.ClientID %>').value
+                    telefono: document.getElementById('<%= txtTelefono.ClientID %>').value
                 };
             }
 
@@ -287,10 +251,6 @@
                     document.getElementById('<%= txtNombre.ClientID %>').value !== valoresOriginales.nombre ||
                     document.getElementById('<%= txtApellido.ClientID %>').value !== valoresOriginales.apellido ||
                     document.getElementById('<%= txtTelefono.ClientID %>').value !== valoresOriginales.telefono ||
-                    document.getElementById('<%= txtCiudad.ClientID %>').value !== valoresOriginales.ciudad ||
-                    document.getElementById('<%= txtDireccion.ClientID %>').value !== valoresOriginales.direccion ||
-                    document.getElementById('<%= hfLatitud.ClientID %>').value !== valoresOriginales.latitud ||
-                    document.getElementById('<%= hfLongitud.ClientID %>').value !== valoresOriginales.longitud ||
                     nueva !== '';
 
                 var fotoInput = document.getElementById('<%= fuFotoPerfil.ClientID %>');
@@ -305,8 +265,7 @@
                 document.getElementById('<%= btnGuardar.ClientID %>').disabled = true;
                 guardarValoresOriginales();
 
-                var campos = ['<%= txtNombre.ClientID %>', '<%= txtApellido.ClientID %>', '<%= txtTelefono.ClientID %>',
-                    '<%= txtCiudad.ClientID %>', '<%= txtDireccion.ClientID %>'];
+                var campos = ['<%= txtNombre.ClientID %>', '<%= txtApellido.ClientID %>', '<%= txtTelefono.ClientID %>'];
 
                 campos.forEach(function (id) {
                     var campo = document.getElementById(id);
@@ -319,107 +278,6 @@
                 if (fotoInput) {
                     fotoInput.addEventListener('change', verificarCambios);
                 }
-
-                initMap();
             });
-
-            var map, marker;
-
-            function initMap() {
-                var latGuardada = document.getElementById('<%= hfLatitud.ClientID %>').value;
-                var lngGuardada = document.getElementById('<%= hfLongitud.ClientID %>').value;
-
-                var lat = latGuardada ? parseFloat(latGuardada) : -0.1807;
-                var lng = lngGuardada ? parseFloat(lngGuardada) : -78.4678;
-                var zoom = latGuardada ? 16 : 13;
-
-                map = L.map('mapPerfil').setView([lat, lng], zoom);
-
-                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                    attribution: '© OpenStreetMap'
-                }).addTo(map);
-
-                if (latGuardada && lngGuardada) {
-                    marker = L.marker([lat, lng], { draggable: true }).addTo(map);
-
-                    marker.on('dragend', function (e) {
-                        actualizarPosicion(e.target.getLatLng());
-                    });
-                }
-
-                map.on('click', function (e) {
-                    actualizarPosicion(e.latlng);
-                });
-            }
-
-            function actualizarPosicion(latlng) {
-                if (marker) map.removeLayer(marker);
-                marker = L.marker(latlng, { draggable: true }).addTo(map);
-
-                document.getElementById('<%= hfLatitud.ClientID %>').value = latlng.lat;
-                document.getElementById('<%= hfLongitud.ClientID %>').value = latlng.lng;
-
-                marker.on('dragend', function (e) {
-                    actualizarPosicion(e.target.getLatLng());
-                });
-
-                obtenerDireccion(latlng.lat, latlng.lng);
-                verificarCambios();
-            }
-
-            function obtenerDireccion(lat, lng) {
-                var url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`;
-
-                fetch(url, { headers: { 'User-Agent': 'RedPatitas/1.0' } })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data && data.address) {
-                            var ciudad = data.address.city || data.address.town || data.address.village || data.address.county || "";
-                            document.getElementById('<%= txtCiudad.ClientID %>').value = ciudad;
-
-                            var calle = data.address.road || "";
-                            var numero = data.address.house_number || "";
-                            var barrio = data.address.suburb || "";
-
-                            var direccionCompleta = calle;
-                            if (numero) direccionCompleta += " " + numero;
-                            if (barrio && barrio !== ciudad) direccionCompleta += ", " + barrio;
-
-                            document.getElementById('<%= txtDireccion.ClientID %>').value = direccionCompleta;
-                            verificarCambios();
-                        }
-                    })
-                    .catch(error => console.error('Error en geocoding:', error));
-            }
-
-            function buscarDireccion() {
-                var ciudad = document.getElementById('<%= txtCiudad.ClientID %>').value;
-                var direccion = document.getElementById('<%= txtDireccion.ClientID %>').value;
-
-                if (!direccion && !ciudad) return;
-
-                var query = direccion;
-                if (ciudad) query += ", " + ciudad;
-                if (!query.toLowerCase().includes("ecuador")) query += ", Ecuador";
-
-                var url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}`;
-
-                fetch(url, { headers: { 'User-Agent': 'RedPatitas/1.0' } })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data && data.length > 0) {
-                            var lat = parseFloat(data[0].lat);
-                            var lon = parseFloat(data[0].lon);
-                            var latlng = L.latLng(lat, lon);
-
-                            map.setView(latlng, 16);
-                            actualizarPosicion(latlng);
-                        } else {
-                            alert("No se encontró la dirección. Intenta ser más específico.");
-                        }
-                    })
-                    .catch(error => console.error('Error en búsqueda:', error));
-            }
         </script>
-        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     </asp:Content>

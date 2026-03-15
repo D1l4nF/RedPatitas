@@ -5,7 +5,7 @@ using System.Web.UI;
 using CapaDatos;
 using System.Web.Script.Serialization;
 
-namespace RedPatitas.AdminRefugio
+namespace RedPatitas.Refugio
 {
     public partial class RevisarSolicitud : System.Web.UI.Page
     {
@@ -24,7 +24,7 @@ namespace RedPatitas.AdminRefugio
 
             if (!int.TryParse(Request.QueryString["id"], out IdSolicitud))
             {
-                Response.Redirect("Solicitudes.aspx");
+                Response.Redirect("~/Refugio/Solicitudes.aspx");
                 return;
             }
 
@@ -174,12 +174,11 @@ namespace RedPatitas.AdminRefugio
                     // Fotos de vivienda
                     CargarFotosVivienda();
 
-                    // Si la solicitud ya fue procesada, ocultar botones de acción (si existen)
+                    // Si la solicitud ya fue procesada, ocultar botones de acción
                     string estado = solicitud.Solicitud.sol_Estado;
                     if (estado != "Pendiente")
                     {
-                        var pnlAcciones = (System.Web.UI.WebControls.Panel)FindControl("pnlAcciones");
-                        if (pnlAcciones != null) pnlAcciones.Visible = false;
+                        pnlAcciones.Visible = false;
                         
                         if (estado == "Rechazada")
                         {
@@ -285,7 +284,10 @@ namespace RedPatitas.AdminRefugio
                     pnlSuccess.Visible = true;
                     litSuccess.Text = "¡Adopción aprobada exitosamente! La mascota ha sido marcada como adoptada.";
                     btnAprobar.Enabled = false;
-                    btnRechazar.Enabled = false;
+
+                    // PRG: Redirect to prevent form resubmission on page reload
+                    Response.Redirect("Solicitudes.aspx", false);
+                    Context.ApplicationInstance.CompleteRequest();
                 }
             }
             catch (Exception ex)
@@ -294,15 +296,7 @@ namespace RedPatitas.AdminRefugio
             }
         }
 
-        protected void btnRechazar_Click(object sender, EventArgs e)
-        {
-            pnlModalRechazo.Visible = true;
-        }
 
-        protected void btnCancelarRechazo_Click(object sender, EventArgs e)
-        {
-            pnlModalRechazo.Visible = false;
-        }
 
         protected void btnConfirmarRechazo_Click(object sender, EventArgs e)
         {
@@ -341,11 +335,13 @@ namespace RedPatitas.AdminRefugio
 
                     db.SubmitChanges();
 
-                    pnlModalRechazo.Visible = false;
                     pnlSuccess.Visible = true;
                     litSuccess.Text = "Solicitud rechazada. El adoptante será notificado.";
                     btnAprobar.Enabled = false;
-                    btnRechazar.Enabled = false;
+
+                    // PRG: Redirect to prevent form resubmission on page reload
+                    Response.Redirect("Solicitudes.aspx", false);
+                    Context.ApplicationInstance.CompleteRequest();
                 }
             }
             catch (Exception ex)

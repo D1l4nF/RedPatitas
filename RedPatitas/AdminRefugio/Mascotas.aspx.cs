@@ -292,14 +292,18 @@ namespace RedPatitas.AdminRefugio
                     // Sexo
                     if (mascota.mas_Sexo.HasValue)
                     {
-                        ddlSexo.SelectedValue = mascota.mas_Sexo.Value.ToString();
+                        string strSexo = mascota.mas_Sexo.Value.ToString().ToUpper();
+                        if (ddlSexo.Items.FindByValue(strSexo) != null)
+                        {
+                            ddlSexo.SelectedValue = strSexo;
+                        }
                     }
 
                     // Tamaño
                     if (!string.IsNullOrEmpty(mascota.mas_Tamano))
                     {
-                        ListItem item = ddlTamano.Items.FindByValue(mascota.mas_Tamano);
-                        if (item != null) ddlTamano.SelectedValue = mascota.mas_Tamano;
+                        ListItem item = ddlTamano.Items.FindByText(mascota.mas_Tamano) ?? ddlTamano.Items.FindByValue(mascota.mas_Tamano);
+                        if (item != null) ddlTamano.SelectedValue = item.Value;
                     }
 
                     // Checkboxes

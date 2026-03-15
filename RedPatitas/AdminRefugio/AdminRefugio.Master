@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="AdminRefugio.master.cs" Inherits="RedPatitas.AdminRefugio.AdminRefugio" %>
+<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="AdminRefugio.master.cs" Inherits="RedPatitas.AdminRefugio.AdminRefugio" %>
 
 <!DOCTYPE html>
 
@@ -11,9 +11,9 @@
             Panel Refugio | RedPatitas
         </asp:ContentPlaceHolder>
     </title>
-    <link href="../Style/estilos-base.css" rel="stylesheet" type="text/css" />
-    <link href="../Style/estilos-paneles.css" rel="stylesheet" type="text/css" />
-    <link href="../Style/forms.css" rel="stylesheet" type="text/css" />
+    <link href="../Style/estilos-base.css?v=1.1" rel="stylesheet" type="text/css" />
+    <link href="../Style/estilos-paneles.css?v=1.1" rel="stylesheet" type="text/css" />
+    <link href="../Style/forms.css?v=1.1" rel="stylesheet" type="text/css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -72,6 +72,15 @@
                     Solicitudes de Adopción
                 </asp:HyperLink>
                 
+                <asp:HyperLink ID="lnkHistorialSolicitudes" runat="server" NavigateUrl="~/AdminRefugio/HistorialSolicitudes.aspx" CssClass="nav-link">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polyline points="12 6 12 12 16 14"></polyline>
+                    </svg>
+                    Historial de Solicitudes
+                </asp:HyperLink>
+                
                 <asp:HyperLink ID="lnkCampanias" runat="server" NavigateUrl="~/AdminRefugio/Campanias.aspx" CssClass="nav-link">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
@@ -88,7 +97,13 @@
                     </svg>
                     Auditar Seguimientos
                 </asp:HyperLink>
-                
+
+                <asp:HyperLink ID="lnkHistorialStaff" runat="server" NavigateUrl="~/AdminRefugio/Actividad.aspx" CssClass="nav-link">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                    </svg>
+                    Historial Staff
+                </asp:HyperLink>
 
                 <div class="menu-category" role="heading" aria-level="2">Administración</div>
 

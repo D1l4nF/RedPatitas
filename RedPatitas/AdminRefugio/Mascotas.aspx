@@ -4,121 +4,7 @@
         Gestión de Mascotas | RedPatitas
     </asp:Content>
     <asp:Content ID="Content2" ContentPlaceHolderID="head" runat="server">
-        <style>
-            .form-grid {
-                display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-                gap: 1.5rem;
-                margin-bottom: 2rem;
-            }
 
-            .form-group {
-                display: flex;
-                flex-direction: column;
-                gap: 0.5rem;
-            }
-
-            .form-group label {
-                font-weight: 600;
-                color: var(--secondary-color);
-                font-size: 0.9rem;
-            }
-
-            .form-control {
-                padding: 0.75rem;
-                border: 1px solid #ddd;
-                border-radius: 8px;
-                font-family: inherit;
-            }
-
-            .btn-toolbar {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                margin-bottom: 1.5rem;
-            }
-
-            /* Estilos para subida de fotos */
-            .photo-upload-box {
-                position: relative;
-                aspect-ratio: 1;
-                border: 2px dashed #ddd;
-                border-radius: 12px;
-                background: #fafafa;
-                cursor: pointer;
-                overflow: hidden;
-                transition: all 0.2s ease;
-            }
-
-            .photo-upload-box:hover {
-                border-color: var(--primary-color);
-                background: #fff5f0;
-            }
-
-            .photo-placeholder {
-                position: absolute;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                color: #aaa;
-                font-size: 0.85rem;
-                text-align: center;
-                padding: 0.5rem;
-            }
-
-            .photo-placeholder i {
-                font-size: 2rem;
-                margin-bottom: 0.5rem;
-                color: #ccc;
-            }
-
-            .photo-placeholder small {
-                font-size: 0.7rem;
-                color: #bbb;
-            }
-
-            .photo-input {
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                opacity: 0;
-                cursor: pointer;
-            }
-
-            .photo-preview {
-                width: 100%;
-                height: 100%;
-            }
-
-            .photo-preview img,
-            .preview-img {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-            }
-
-            .preview-client {
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                display: none;
-            }
-
-            .preview-client img {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-            }
-        </style>
     </asp:Content>
     <asp:Content ID="Content4" ContentPlaceHolderID="PageHeader" runat="server">
         <div class="page-header">
@@ -155,7 +41,7 @@
                                 <td>
                                     <div class="pet-cell">
                                         <img src='<%# Eval("FotoPrincipal") %>' alt="Foto" class="pet-img"
-                                            onerror="this.src='https://via.placeholder.com/40'">
+                                            onerror="this.src='../Images/Default/default-pet.png'">
                                         <span>
                                             <%# Eval("Nombre") %>
                                         </span>
@@ -195,7 +81,7 @@
                             </table>
                             <div id="noData" runat="server"
                                 visible='<%# ((Repeater)Container.Parent).Items.Count == 0 %>'
-                                style="padding: 2rem; text-align: center; color: #666;">
+                                class="no-data-msg">
                                 No hay mascotas registradas.
                             </div>
                         </FooterTemplate>
@@ -210,8 +96,8 @@
                     <h2 class="section-title">
                         <asp:Literal ID="litTituloFormulario" runat="server">Nueva Mascota</asp:Literal>
                     </h2>
-                    <asp:Button ID="btnCancelar" runat="server" Text="Cancelar" CssClass="btn-link"
-                        OnClick="btnCancelar_Click" style="background:none; border:none; cursor:pointer;" />
+                    <asp:Button ID="btnCancelar" runat="server" Text="Cancelar" CssClass="btn-link btn-cancel-admin"
+                        OnClick="btnCancelar_Click" />
                 </div>
 
                 <asp:HiddenField ID="hfIdMascota" runat="server" />
@@ -273,10 +159,9 @@
 
                 <!-- Sección de Fotos de la Mascota -->
                 <div class="form-group" style="margin-top: 1.5rem;">
-                    <label style="font-size: 1rem; margin-bottom: 0.5rem;">📸 Fotos de la Mascota <span
-                            style="color: #888; font-weight: 400;">(Foto principal requerida)</span></label>
-                    <div
-                        style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; margin-top: 0.75rem;">
+                    <label class="fotos-title">📸 Fotos de la Mascota <span
+                            class="fotos-subtitle">(Foto principal requerida)</span></label>
+                    <div class="fotos-grid">
 
                         <!-- Foto 1 - Principal -->
                         <div class="photo-upload-box" id="photoBox1">
@@ -331,18 +216,18 @@
                     </div>
 
                     <div class="form-group" style="margin-top: 1rem; flex-direction: row; gap: 2rem;">
-                        <label style="display:flex; align-items:center; gap:0.5rem; cursor:pointer;">
+                        <label class="checkbox-label">
                             <asp:CheckBox ID="chkVacunado" runat="server" /> Vacunado
                         </label>
-                        <label style="display:flex; align-items:center; gap:0.5rem; cursor:pointer;">
+                        <label class="checkbox-label">
                             <asp:CheckBox ID="chkEsterilizado" runat="server" /> Esterilizado
                         </label>
-                        <label style="display:flex; align-items:center; gap:0.5rem; cursor:pointer;">
+                        <label class="checkbox-label">
                             <asp:CheckBox ID="chkDesparasitado" runat="server" /> Desparasitado
                         </label>
                     </div>
 
-                    <div style="margin-top: 2rem; display: flex; justify-content: flex-end; gap: 1rem;">
+                    <div class="submit-container">
                         <asp:Button ID="btnGuardar" runat="server" Text="Guardar Mascota" CssClass="quick-action-btn"
                             OnClick="btnGuardar_Click" ValidationGroup="Mascota" />
                     </div>
@@ -351,18 +236,6 @@
 
         <!-- FontAwesome for Icons -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-        <style>
-            .table-action-btn.info {
-                background: #DBEAFE;
-                color: #2563EB;
-            }
-
-            .table-action-btn.info:hover {
-                background: #2563EB;
-                color: white;
-            }
-        </style>
 
         <script type="text/javascript">
             function previewMascotaImage(input, num) {

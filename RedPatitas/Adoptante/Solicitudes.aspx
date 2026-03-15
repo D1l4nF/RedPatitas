@@ -93,6 +93,42 @@
                 display: flex;
                 gap: 0.5rem;
             }
+
+            .motivo-rechazo {
+                background: #FFF0F0;
+                border: 1px solid #FECACA;
+                border-radius: 10px;
+                padding: 0.75rem 1rem;
+                margin-top: 0.75rem;
+                font-size: 0.88rem;
+                color: #991B1B;
+                width: 100%;
+            }
+
+            .motivo-rechazo strong {
+                display: block;
+                margin-bottom: 0.25rem;
+                font-size: 0.8rem;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+                color: #B91C1C;
+            }
+
+            .btn-edit-sol {
+                padding: 0.5rem 1rem;
+                font-size: 0.85rem;
+                background: #FFF3CD;
+                color: #856404;
+                border: 1px solid #FFE69C;
+                border-radius: 8px;
+                text-decoration: none;
+                font-weight: 600;
+                transition: all 0.2s;
+            }
+
+            .btn-edit-sol:hover {
+                background: #FFE69C;
+            }
         </style>
     </asp:Content>
 
@@ -155,7 +191,7 @@
         <asp:Panel ID="pnlSolicitudes" runat="server">
             <asp:Repeater ID="rptSolicitudes" runat="server">
                 <ItemTemplate>
-                    <div class="solicitud-card">
+                    <div class="solicitud-card" style="flex-wrap: wrap;">
                         <div class="solicitud-mascota">
                             <%# GetEmojiEspecie(Convert.ToString(Eval("tbl_Mascotas.tbl_Razas.tbl_Especies.esp_Nombre")))
                                 %>
@@ -173,7 +209,7 @@
                                     Convert.ToDateTime(Eval("sol_FechaSolicitud")).ToString("dd/MM/yyyy") : "" %>
                             </div>
                         </div>
-                        <div class="solicitud-estado <%# GetEstadoClass(Convert.ToString(Eval(" sol_Estado"))) %>">
+                        <div class="solicitud-estado <%# GetEstadoClass(Convert.ToString(Eval("sol_Estado"))) %>">
                             <%# GetEstadoTexto(Convert.ToString(Eval("sol_Estado"))) %>
                         </div>
                         <div class="solicitud-actions">
@@ -181,7 +217,13 @@
                                 class="btn-view-pet" style="padding: 0.5rem 1rem; font-size: 0.85rem;">
                                 Ver mascota
                             </a>
+                            <%# Convert.ToString(Eval("sol_Estado")) == "Pendiente" ? 
+                                "<a href='" + ResolveUrl("~/Adoptante/SolicitudAdopcion.aspx?id=" + Eval("sol_IdMascota") + "&edit=" + Eval("sol_IdSolicitud")) + "' class='btn-edit-sol'>✏️ Editar</a>" 
+                                : "" %>
                         </div>
+                        <%# !string.IsNullOrEmpty(Convert.ToString(Eval("sol_ComentariosRevision"))) && Convert.ToString(Eval("sol_Estado")) == "Rechazada" ?
+                            "<div class='motivo-rechazo'><strong>📋 Motivo del rechazo:</strong>" + Eval("sol_ComentariosRevision") + "</div>" 
+                            : "" %>
                     </div>
                 </ItemTemplate>
             </asp:Repeater>

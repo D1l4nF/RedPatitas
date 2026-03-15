@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AdminRefugio/AdminRefugio.Master" AutoEventWireup="true"
+<%@ Page Title="" Language="C#" MasterPageFile="~/AdminRefugio/AdminRefugio.Master" AutoEventWireup="true"
     CodeBehind="Dashboard.aspx.cs" Inherits="RedPatitas.AdminRefugio.Dashboard" %>
     <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
         Panel Refugio | RedPatitas
@@ -24,7 +24,7 @@
                     <h3>
                         <asp:Literal ID="litTotalUsuarios" runat="server">0</asp:Literal>
                     </h3>
-                    <p>Usuarios Registrados</p>
+                    <p>Solicitudes Pendientes</p>
                     <div class="trend" id="divTrendUsuarios" runat="server">
                         <small>
                             <asp:Literal ID="litTrendUsuarios" runat="server">0%</asp:Literal>
@@ -42,7 +42,7 @@
                     <h3>
                         <asp:Literal ID="litTotalMascotas" runat="server">0</asp:Literal>
                     </h3>
-                    <p>Mascotas del Sistema</p>
+                    <p>Mascotas Publicadas</p>
                     <div class="trend" id="divTrendMascotas" runat="server">
                         <small>
                             <asp:Literal ID="litTrendMascotas" runat="server">0%</asp:Literal>
@@ -92,10 +92,10 @@
             <!-- Usuarios Recientes -->
             <div class="recent-section">
                 <div class="section-header">
-                    <h2 class="section-title">Usuarios Recientes</h2>
+                    <h2 class="section-title">Personal del Refugio</h2>
                     <a href="Usuarios.aspx" class="btn-link">Ver Todos</a>
                 </div>
-                <div class="table-container">
+                <div class="table-container" style="max-height: 400px; overflow-y: auto;">
                     <table>
                         <thead>
                             <tr>
@@ -170,6 +170,60 @@
                             </div>
                         </ItemTemplate>
                     </asp:Repeater>
+                </div>
+            </div>
+
+            <!-- Solicitudes Recientes -->
+            <div class="recent-section">
+                <div class="section-header">
+                    <h2 class="section-title">Últimas Solicitudes</h2>
+                    <a href="Solicitudes.aspx" class="btn-link">Ver Todas</a>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Solicitante</th>
+                                <th>Detalle</th>
+                                <th>Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <asp:Repeater ID="rptSolicitudesRecientes" runat="server">
+                                <ItemTemplate>
+                                    <tr onclick='window.location="RevisarSolicitud.aspx?id=<%# Eval("IdSolicitud") %>"' style="cursor: pointer;">
+                                        <td>
+                                            <div class="pet-cell">
+                                                <div class="avatar avatar-dynamic">
+                                                    <i class="fas fa-paw"></i>
+                                                </div>
+                                                <div>
+                                                    <div class="user-name">
+                                                        <%# Eval("NombreAdoptante") %>
+                                                    </div>
+                                                    <div class="user-email">
+                                                        Mascota: <%# Eval("NombreMascota") %>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <span class="role-badge" style="margin-bottom: 4px; display: inline-block;">
+                                                <%# Eval("TiempoRelativo") %>
+                                            </span>
+                                            <%# Eval("Estado").ToString() != "Pendiente" ? "<div style='font-size: 0.8rem; color: #666; margin-top: 4px;'><i class='fas fa-user-check' style='font-size:0.75rem; margin-right:4px;'></i>" + Eval("RevisorNombre") + "</div>" : "" %>
+                                        </td>
+                                        <td>
+                                            <span
+                                                class='status-badge <%# string.Equals(Eval("Estado").ToString(), "Aprobada", StringComparison.OrdinalIgnoreCase) ? "available" : (string.Equals(Eval("Estado").ToString(), "Rechazada", StringComparison.OrdinalIgnoreCase) ? "reject" : "pending") %>'>
+                                                <%# Eval("Estado") %>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                </ItemTemplate>
+                            </asp:Repeater>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
