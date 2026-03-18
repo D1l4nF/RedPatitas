@@ -7,31 +7,11 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace RedPatitas.Refugio
-{
-
-
-    public partial class Refugio
-    {
-
-        /// <summary>
-        /// Control TitleContent.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder TitleContent;
-
-        /// <summary>
-        /// Control head.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder head;
-
+namespace RedPatitas {
+    
+    
+    public partial class VerCertificado {
+        
         /// <summary>
         /// Control form1.
         /// </summary>
@@ -40,88 +20,95 @@ namespace RedPatitas.Refugio
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
-
+        
         /// <summary>
-        /// Control lnkInicio.
+        /// Control pnlCertificadoExito.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink lnkInicio;
-
+        protected global::System.Web.UI.WebControls.Panel pnlCertificadoExito;
+        
         /// <summary>
-        /// Control lnkMascotas.
+        /// Control litNombreAdoptante.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink lnkMascotas;
-
+        protected global::System.Web.UI.WebControls.Literal litNombreAdoptante;
+        
         /// <summary>
-        /// Control lnkSolicitudes.
+        /// Control litNombreMascota.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink lnkSolicitudes;
-
+        protected global::System.Web.UI.WebControls.Literal litNombreMascota;
+        
         /// <summary>
-        /// Control lnkPerfil.
+        /// Control litEspecie.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink lnkPerfil;
-
+        protected global::System.Web.UI.WebControls.Literal litEspecie;
+        
         /// <summary>
-        /// Control imgPerfilUsuario.
+        /// Control litRaza.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image imgPerfilUsuario;
-
+        protected global::System.Web.UI.WebControls.Literal litRaza;
+        
         /// <summary>
-        /// Control lblNombreUsuario.
+        /// Control litNombreRefugio.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblNombreUsuario;
-
+        protected global::System.Web.UI.WebControls.Literal litNombreRefugio;
+        
         /// <summary>
-        /// Control btnLogout.
+        /// Control litFirmaAdoptante.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnLogout;
-
+        protected global::System.Web.UI.WebControls.Literal litFirmaAdoptante;
+        
         /// <summary>
-        /// Control PageHeader.
+        /// Control litCodigo.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder PageHeader;
-
+        protected global::System.Web.UI.WebControls.Literal litCodigo;
+        
         /// <summary>
-        /// Control MainContent.
+        /// Control litFechaEmision.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder MainContent;
-
-        protected global::System.Web.UI.WebControls.Label lblBadgeNotificaciones;
+        protected global::System.Web.UI.WebControls.Literal litFechaEmision;
+        
+        /// <summary>
+        /// Control pnlError.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlError;
     }
 }

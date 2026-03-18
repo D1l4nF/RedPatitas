@@ -820,14 +820,13 @@
             <asp:Button ID="btnAprobar" runat="server" CssClass="btn-action btn-approve" Text="✅ Aprobar Adopción"
                 OnClick="btnAprobar_Click"
                 OnClientClick="return prepararEnvio() && confirm('¿Aprobar esta adopción? La mascota pasará a estado ADOPTADO.');" />
-            <asp:Button ID="btnRechazar" runat="server" CssClass="btn-action btn-reject" Text="❌ Rechazar Solicitud"
-                OnClick="btnRechazar_Click" OnClientClick="return prepararEnvio();" />
+            <button type="button" class="btn-action btn-reject" onclick="abrirModalRechazo();">❌ Rechazar Solicitud</button>
         </div>
 
         </asp:Panel>
 
-        <!-- Modal Rechazo -->
-        <asp:Panel ID="pnlModalRechazo" runat="server" Visible="false" CssClass="modal-overlay">
+        <!-- Modal Rechazo (div HTML puro, controlado por JS) -->
+        <div id="modalRechazoDiv" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.5); z-index:9999; align-items:center; justify-content:center;">
             <div class="modal-content">
                 <h3 style="margin-bottom: 1rem;"><i class="fas fa-comment-alt"></i> Motivo del Rechazo</h3>
                 <p style="color: #666; margin-bottom: 1rem;">Esta información será enviada al adoptante.</p>
@@ -837,17 +836,25 @@
                     ErrorMessage="El motivo es requerido" ForeColor="Red" ValidationGroup="Rechazo" Display="Dynamic">
                 </asp:RequiredFieldValidator>
                 <div class="modal-actions">
-                    <asp:Button ID="btnCancelarRechazo" runat="server" Text="Cancelar" CssClass="btn-cancel"
-                        OnClick="btnCancelarRechazo_Click" CausesValidation="false" />
+                    <button type="button" class="btn-cancel" onclick="cerrarModalRechazo();">Cancelar</button>
                     <asp:Button ID="btnConfirmarRechazo" runat="server" Text="Confirmar Rechazo"
                         CssClass="btn-action btn-reject" OnClick="btnConfirmarRechazo_Click"
                         ValidationGroup="Rechazo" />
                 </div>
             </div>
-        </asp:Panel>
+        </div>
         </div>
 
         <script type="text/javascript">
+            function abrirModalRechazo() {
+                var m = document.getElementById('modalRechazoDiv');
+                m.style.display = 'flex';
+            }
+            function cerrarModalRechazo() {
+                var m = document.getElementById('modalRechazoDiv');
+                m.style.display = 'none';
+            }
+
             // Pesos de cada criterio
             var pesos = {
                 motivacion: 15,

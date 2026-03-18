@@ -1,4 +1,4 @@
-﻿//------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 // <generado automáticamente>
 //     Este código fue generado por una herramienta.
 //
@@ -134,5 +134,7 @@ namespace RedPatitas.AdminRefugio
         protected global::System.Web.UI.WebControls.Image imgPerfilUsuario;
 
         protected global::System.Web.UI.WebControls.Label lblNombreUsuario;
+
+        protected global::System.Web.UI.WebControls.Label lblBadgeNotificaciones;
     }
 }

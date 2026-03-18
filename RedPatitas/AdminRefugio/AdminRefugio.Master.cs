@@ -1,4 +1,4 @@
-﻿using CapaDatos;
+using CapaDatos;
 using System;
 using System.Linq;
 using System.Web.UI;
@@ -43,7 +43,34 @@ namespace RedPatitas.AdminRefugio
             }
 
             // Cargar datos siempre (no solo en !IsPostBack)
-            CargarDatosPerfil();
+            if (!IsPostBack)
+            {
+                CargarDatosPerfil();
+                CargarNotificaciones();
+            }
+        }
+
+        private void CargarNotificaciones()
+        {
+            try
+            {
+                int idUsuario = Convert.ToInt32(Session["UsuarioId"]);
+                int noLeidas = CapaNegocios.CN_NotificacionService.ContarNoLeidas(idUsuario);
+                
+                if (noLeidas > 0)
+                {
+                    lblBadgeNotificaciones.Text = noLeidas > 9 ? "9+" : noLeidas.ToString();
+                    lblBadgeNotificaciones.Visible = true;
+                }
+                else
+                {
+                    lblBadgeNotificaciones.Visible = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Error al cargar notificaciones AdminRefugio: " + ex.Message);
+            }
         }
 
         private void CargarDatosPerfil()

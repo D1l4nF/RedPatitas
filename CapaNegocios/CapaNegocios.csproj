@@ -57,6 +57,8 @@
     <Compile Include="CN_RegistroResultado.cs" />
     <Compile Include="CN_SeguimientoService.cs" />
     <Compile Include="CN_UsuarioService.cs" />
+    <Compile Include="CN_CertificadoService.cs" />
+    <Compile Include="CN_NotificacionService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

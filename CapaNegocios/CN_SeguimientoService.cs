@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using CapaDatos;
@@ -125,6 +125,22 @@ namespace CapaNegocios
                 // Usamos el Stored Procedure creado en la base de datos
                 var rpt = db.sp_EnviarSeguimiento(idSeguimiento, latitud, longitud, fotoUrl, urlArchivoAdjunto, respuestasJson);
 
+                // NOTIFICACIÓN: Seguimiento enviado para el refugio
+                var segInfo = (from s in db.tbl_SeguimientosAdopcion
+                               join sol in db.tbl_SolicitudesAdopcion on s.seg_IdSolicitud equals sol.sol_IdSolicitud
+                               join m in db.tbl_Mascotas on sol.sol_IdMascota equals m.mas_IdMascota
+                               where s.seg_IdSeguimiento == idSeguimiento
+                               select new { m.mas_IdRefugio, m.mas_Nombre }).FirstOrDefault();
+
+                if (segInfo != null)
+                {
+                    var adminsRefugio = CN_NotificacionService.ObtenerUsuariosRefugio(segInfo.mas_IdRefugio);
+                    foreach(int adminId in adminsRefugio)
+                    {
+                        CN_NotificacionService.Crear(adminId, "Seguimiento Recibido", $"Se ha recibido el formulario de seguimiento para {segInfo.mas_Nombre}.", "Seguimiento", "/AdminRefugio/AuditoriaSeguimientos.aspx", "fas fa-clipboard-check");
+                    }
+                }
+
                 return true;
             }
             catch (Exception ex)
@@ -163,6 +179,20 @@ namespace CapaNegocios
             {
                 // nuevoEstado = "Aprobado" ó "Rechazado" (Que significa corregir/repetir)
                 db.sp_RevisarSeguimiento(idSeguimiento, idUsuarioRevision, nuevoEstado, comentarios);
+
+                // NOTIFICACIÓN: Seguimiento revisado para el adoptante
+                var segInfo = (from s in db.tbl_SeguimientosAdopcion
+                               join sol in db.tbl_SolicitudesAdopcion on s.seg_IdSolicitud equals sol.sol_IdSolicitud
+                               join m in db.tbl_Mascotas on sol.sol_IdMascota equals m.mas_IdMascota
+                               where s.seg_IdSeguimiento == idSeguimiento
+                               select new { sol.sol_IdUsuario, m.mas_Nombre }).FirstOrDefault();
+
+                if (segInfo != null)
+                {
+                    string mensaje = nuevoEstado == "Aprobado" ? $"Tu seguimiento para {segInfo.mas_Nombre} ha sido aprobado." : $"Tu seguimiento para {segInfo.mas_Nombre} requiere correcciones.";
+                    CN_NotificacionService.Crear(segInfo.sol_IdUsuario, "Seguimiento Revisado", mensaje, "Seguimiento", "/Adoptante/MisSeguimientos.aspx", nuevoEstado == "Aprobado" ? "fas fa-check" : "fas fa-exclamation-triangle");
+                }
+
                 return true;
             }
             catch (Exception ex)

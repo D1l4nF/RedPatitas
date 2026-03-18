@@ -39,6 +39,9 @@ namespace CapaDatos
     partial void Inserttbl_Campanias(tbl_Campanias instance);
     partial void Updatetbl_Campanias(tbl_Campanias instance);
     partial void Deletetbl_Campanias(tbl_Campanias instance);
+    partial void Inserttbl_CertificadosAdopcion(tbl_CertificadosAdopcion instance);
+    partial void Updatetbl_CertificadosAdopcion(tbl_CertificadosAdopcion instance);
+    partial void Deletetbl_CertificadosAdopcion(tbl_CertificadosAdopcion instance);
     partial void Inserttbl_CriteriosEvaluacion(tbl_CriteriosEvaluacion instance);
     partial void Updatetbl_CriteriosEvaluacion(tbl_CriteriosEvaluacion instance);
     partial void Deletetbl_CriteriosEvaluacion(tbl_CriteriosEvaluacion instance);
@@ -57,6 +60,9 @@ namespace CapaDatos
     partial void Inserttbl_FotosReportes(tbl_FotosReportes instance);
     partial void Updatetbl_FotosReportes(tbl_FotosReportes instance);
     partial void Deletetbl_FotosReportes(tbl_FotosReportes instance);
+    partial void Inserttbl_FotosSolicitud(tbl_FotosSolicitud instance);
+    partial void Updatetbl_FotosSolicitud(tbl_FotosSolicitud instance);
+    partial void Deletetbl_FotosSolicitud(tbl_FotosSolicitud instance);
     partial void Inserttbl_Mascotas(tbl_Mascotas instance);
     partial void Updatetbl_Mascotas(tbl_Mascotas instance);
     partial void Deletetbl_Mascotas(tbl_Mascotas instance);
@@ -75,6 +81,9 @@ namespace CapaDatos
     partial void Inserttbl_Roles(tbl_Roles instance);
     partial void Updatetbl_Roles(tbl_Roles instance);
     partial void Deletetbl_Roles(tbl_Roles instance);
+    partial void Inserttbl_SeguimientosAdopcion(tbl_SeguimientosAdopcion instance);
+    partial void Updatetbl_SeguimientosAdopcion(tbl_SeguimientosAdopcion instance);
+    partial void Deletetbl_SeguimientosAdopcion(tbl_SeguimientosAdopcion instance);
     partial void Inserttbl_SolicitudesAdopcion(tbl_SolicitudesAdopcion instance);
     partial void Updatetbl_SolicitudesAdopcion(tbl_SolicitudesAdopcion instance);
     partial void Deletetbl_SolicitudesAdopcion(tbl_SolicitudesAdopcion instance);
@@ -84,9 +93,6 @@ namespace CapaDatos
     partial void Inserttbl_Usuarios(tbl_Usuarios instance);
     partial void Updatetbl_Usuarios(tbl_Usuarios instance);
     partial void Deletetbl_Usuarios(tbl_Usuarios instance);
-    partial void Inserttbl_SeguimientosAdopcion(tbl_SeguimientosAdopcion instance);
-    partial void Updatetbl_SeguimientosAdopcion(tbl_SeguimientosAdopcion instance);
-    partial void Deletetbl_SeguimientosAdopcion(tbl_SeguimientosAdopcion instance);
     #endregion
 		
 		public DataClasses1DataContext() : 
@@ -143,6 +149,14 @@ namespace CapaDatos
 			}
 		}
 		
+		public System.Data.Linq.Table<tbl_CertificadosAdopcion> tbl_CertificadosAdopcion
+		{
+			get
+			{
+				return this.GetTable<tbl_CertificadosAdopcion>();
+			}
+		}
+		
 		public System.Data.Linq.Table<tbl_CriteriosEvaluacion> tbl_CriteriosEvaluacion
 		{
 			get
@@ -188,6 +202,14 @@ namespace CapaDatos
 			get
 			{
 				return this.GetTable<tbl_FotosReportes>();
+			}
+		}
+		
+		public System.Data.Linq.Table<tbl_FotosSolicitud> tbl_FotosSolicitud
+		{
+			get
+			{
+				return this.GetTable<tbl_FotosSolicitud>();
 			}
 		}
 		
@@ -239,6 +261,14 @@ namespace CapaDatos
 			}
 		}
 		
+		public System.Data.Linq.Table<tbl_SeguimientosAdopcion> tbl_SeguimientosAdopcion
+		{
+			get
+			{
+				return this.GetTable<tbl_SeguimientosAdopcion>();
+			}
+		}
+		
 		public System.Data.Linq.Table<tbl_SolicitudesAdopcion> tbl_SolicitudesAdopcion
 		{
 			get
@@ -263,27 +293,11 @@ namespace CapaDatos
 			}
 		}
 		
-		public System.Data.Linq.Table<vw_AdopcionesMensuales> vw_AdopcionesMensuales
+		public System.Data.Linq.Table<vw_SolicitudesCompleta> vw_SolicitudesCompleta
 		{
 			get
 			{
-				return this.GetTable<vw_AdopcionesMensuales>();
-			}
-		}
-		
-		public System.Data.Linq.Table<vw_EstadisticasGenerales> vw_EstadisticasGenerales
-		{
-			get
-			{
-				return this.GetTable<vw_EstadisticasGenerales>();
-			}
-		}
-		
-		public System.Data.Linq.Table<vw_EstadisticasPorRefugio> vw_EstadisticasPorRefugio
-		{
-			get
-			{
-				return this.GetTable<vw_EstadisticasPorRefugio>();
+				return this.GetTable<vw_SolicitudesCompleta>();
 			}
 		}
 		
@@ -295,20 +309,78 @@ namespace CapaDatos
 			}
 		}
 		
-		public System.Data.Linq.Table<vw_SolicitudesCompleta> vw_SolicitudesCompleta
+		public System.Data.Linq.Table<vw_EstadisticasPorRefugio> vw_EstadisticasPorRefugio
 		{
 			get
 			{
-				return this.GetTable<vw_SolicitudesCompleta>();
+				return this.GetTable<vw_EstadisticasPorRefugio>();
 			}
 		}
 		
-		public System.Data.Linq.Table<tbl_SeguimientosAdopcion> tbl_SeguimientosAdopcion
+		public System.Data.Linq.Table<vw_EstadisticasGenerales> vw_EstadisticasGenerales
 		{
 			get
 			{
-				return this.GetTable<tbl_SeguimientosAdopcion>();
+				return this.GetTable<vw_EstadisticasGenerales>();
 			}
+		}
+		
+		public System.Data.Linq.Table<vw_AdopcionesMensuales> vw_AdopcionesMensuales
+		{
+			get
+			{
+				return this.GetTable<vw_AdopcionesMensuales>();
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_CalcularEvaluacionAdopcion")]
+		public ISingleResult<sp_CalcularEvaluacionAdopcionResult> sp_CalcularEvaluacionAdopcion([global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdSolicitud", DbType="Int")] System.Nullable<int> idSolicitud)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idSolicitud);
+			return ((ISingleResult<sp_CalcularEvaluacionAdopcionResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_ConfirmarDevolucionRetorno")]
+		public ISingleResult<sp_ConfirmarDevolucionRetornoResult> sp_ConfirmarDevolucionRetorno([global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdSolicitud", DbType="Int")] System.Nullable<int> idSolicitud, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdMascota", DbType="Int")] System.Nullable<int> idMascota, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdUsuarioAdmin", DbType="Int")] System.Nullable<int> idUsuarioAdmin, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ComentariosFinales", DbType="Text")] string comentariosFinales, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="EsMaltrato", DbType="Bit")] System.Nullable<bool> esMaltrato)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idSolicitud, idMascota, idUsuarioAdmin, comentariosFinales, esMaltrato);
+			return ((ISingleResult<sp_ConfirmarDevolucionRetornoResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_DesbloquearCuenta")]
+		public ISingleResult<sp_DesbloquearCuentaResult> sp_DesbloquearCuenta([global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdUsuario", DbType="Int")] System.Nullable<int> idUsuario, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdAdminUsuario", DbType="Int")] System.Nullable<int> idAdminUsuario)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idUsuario, idAdminUsuario);
+			return ((ISingleResult<sp_DesbloquearCuentaResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_EnviarSeguimiento")]
+		public ISingleResult<sp_EnviarSeguimientoResult> sp_EnviarSeguimiento([global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdSeguimiento", DbType="Int")] System.Nullable<int> idSeguimiento, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Latitud", DbType="Decimal(10,8)")] System.Nullable<decimal> latitud, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Longitud", DbType="Decimal(11,8)")] System.Nullable<decimal> longitud, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="FotoUrlEnVivo", DbType="VarChar(500)")] string fotoUrlEnVivo, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ArchivoAdjuntoUrl", DbType="VarChar(500)")] string archivoAdjuntoUrl, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="RespuestasJSON", DbType="Text")] string respuestasJSON)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idSeguimiento, latitud, longitud, fotoUrlEnVivo, archivoAdjuntoUrl, respuestasJSON);
+			return ((ISingleResult<sp_EnviarSeguimientoResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_GenerarCertificadoAdopcion")]
+		public ISingleResult<sp_GenerarCertificadoAdopcionResult> sp_GenerarCertificadoAdopcion([global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdSolicitud", DbType="Int")] System.Nullable<int> idSolicitud)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idSolicitud);
+			return ((ISingleResult<sp_GenerarCertificadoAdopcionResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_GenerarTokenRecuperacion")]
+		public ISingleResult<sp_GenerarTokenRecuperacionResult> sp_GenerarTokenRecuperacion([global::System.Data.Linq.Mapping.ParameterAttribute(Name="Email", DbType="VarChar(100)")] string email, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Token", DbType="VarChar(255)")] ref string token)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), email, token);
+			token = ((string)(result.GetParameterValue(1)));
+			return ((ISingleResult<sp_GenerarTokenRecuperacionResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_ObtenerEstadisticasDashboard")]
+		public ISingleResult<sp_ObtenerEstadisticasDashboardResult> sp_ObtenerEstadisticasDashboard([global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdRefugio", DbType="Int")] System.Nullable<int> idRefugio)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idRefugio);
+			return ((ISingleResult<sp_ObtenerEstadisticasDashboardResult>)(result.ReturnValue));
 		}
 		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_ProgramarSeguimientosAdopcion")]
@@ -318,11 +390,11 @@ namespace CapaDatos
 			return ((ISingleResult<sp_ProgramarSeguimientosAdopcionResult>)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_EnviarSeguimiento")]
-		public ISingleResult<sp_EnviarSeguimientoResult> sp_EnviarSeguimiento([global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdSeguimiento", DbType="Int")] System.Nullable<int> idSeguimiento, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Latitud", DbType="Decimal(10,8)")] System.Nullable<decimal> latitud, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Longitud", DbType="Decimal(11,8)")] System.Nullable<decimal> longitud, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="FotoUrlEnVivo", DbType="VarChar(500)")] string fotoUrlEnVivo, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ArchivoAdjuntoUrl", DbType="VarChar(500)")] string archivoAdjuntoUrl, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="RespuestasJSON", DbType="Text")] string respuestasJSON)
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_RegistrarAuditoria")]
+		public int sp_RegistrarAuditoria([global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdUsuario", DbType="Int")] System.Nullable<int> idUsuario, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Accion", DbType="VarChar(50)")] string accion, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Tabla", DbType="VarChar(50)")] string tabla, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdRegistro", DbType="Int")] System.Nullable<int> idRegistro, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ValorAnterior", DbType="Text")] string valorAnterior, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ValorNuevo", DbType="Text")] string valorNuevo, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="DireccionIP", DbType="VarChar(50)")] string direccionIP)
 		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idSeguimiento, latitud, longitud, fotoUrlEnVivo, archivoAdjuntoUrl, respuestasJSON);
-			return ((ISingleResult<sp_EnviarSeguimientoResult>)(result.ReturnValue));
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idUsuario, accion, tabla, idRegistro, valorAnterior, valorNuevo, direccionIP);
+			return ((int)(result.ReturnValue));
 		}
 		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_RevisarSeguimiento")]
@@ -339,11 +411,25 @@ namespace CapaDatos
 			return ((ISingleResult<sp_SolicitarDevolucionResult>)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_ConfirmarDevolucionRetorno")]
-		public ISingleResult<sp_ConfirmarDevolucionRetornoResult> sp_ConfirmarDevolucionRetorno([global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdSolicitud", DbType="Int")] System.Nullable<int> idSolicitud, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdMascota", DbType="Int")] System.Nullable<int> idMascota, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdUsuarioAdmin", DbType="Int")] System.Nullable<int> idUsuarioAdmin, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="ComentariosFinales", DbType="Text")] string comentariosFinales, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="EsMaltrato", DbType="Bit")] System.Nullable<bool> esMaltrato)
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_ValidarLogin")]
+		public ISingleResult<sp_ValidarLoginResult> sp_ValidarLogin([global::System.Data.Linq.Mapping.ParameterAttribute(Name="Email", DbType="VarChar(100)")] string email, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Contrasena", DbType="VarChar(255)")] string contrasena, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="DireccionIP", DbType="VarChar(50)")] string direccionIP)
 		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idSolicitud, idMascota, idUsuarioAdmin, comentariosFinales, esMaltrato);
-			return ((ISingleResult<sp_ConfirmarDevolucionRetornoResult>)(result.ReturnValue));
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), email, contrasena, direccionIP);
+			return ((ISingleResult<sp_ValidarLoginResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_ValidarTokenRecuperacion")]
+		public ISingleResult<sp_ValidarTokenRecuperacionResult> sp_ValidarTokenRecuperacion([global::System.Data.Linq.Mapping.ParameterAttribute(Name="Token", DbType="VarChar(255)")] string token, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="NuevaContrasena", DbType="VarChar(255)")] string nuevaContrasena)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), token, nuevaContrasena);
+			return ((ISingleResult<sp_ValidarTokenRecuperacionResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_GenerarCertificadoAdopcion")]
+		public ISingleResult<sp_GenerarCertificadoAdopcionResult1> sp_GenerarCertificadoAdopcion1([global::System.Data.Linq.Mapping.ParameterAttribute(Name="IdSolicitud", DbType="Int")] System.Nullable<int> idSolicitud)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idSolicitud);
+			return ((ISingleResult<sp_GenerarCertificadoAdopcionResult1>)(result.ReturnValue));
 		}
 	}
 	
@@ -662,6 +748,12 @@ namespace CapaDatos
 		
 		private System.Nullable<System.DateTime> _avi_FechaReporte;
 		
+		private System.Nullable<decimal> _avi_Latitud;
+		
+		private System.Nullable<decimal> _avi_Longitud;
+		
+		private string _avi_FotoUrl;
+		
 		private EntityRef<tbl_ReportesMascotas> _tbl_ReportesMascotas;
 		
 		private EntityRef<tbl_Usuarios> _tbl_Usuarios;
@@ -684,6 +776,12 @@ namespace CapaDatos
     partial void Onavi_FechaAvistamientoChanged();
     partial void Onavi_FechaReporteChanging(System.Nullable<System.DateTime> value);
     partial void Onavi_FechaReporteChanged();
+    partial void Onavi_LatitudChanging(System.Nullable<decimal> value);
+    partial void Onavi_LatitudChanged();
+    partial void Onavi_LongitudChanging(System.Nullable<decimal> value);
+    partial void Onavi_LongitudChanged();
+    partial void Onavi_FotoUrlChanging(string value);
+    partial void Onavi_FotoUrlChanged();
     #endregion
 		
 		public tbl_Avistamientos()
@@ -837,6 +935,66 @@ namespace CapaDatos
 					this._avi_FechaReporte = value;
 					this.SendPropertyChanged("avi_FechaReporte");
 					this.Onavi_FechaReporteChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_avi_Latitud", DbType="Decimal(10,8)")]
+		public System.Nullable<decimal> avi_Latitud
+		{
+			get
+			{
+				return this._avi_Latitud;
+			}
+			set
+			{
+				if ((this._avi_Latitud != value))
+				{
+					this.Onavi_LatitudChanging(value);
+					this.SendPropertyChanging();
+					this._avi_Latitud = value;
+					this.SendPropertyChanged("avi_Latitud");
+					this.Onavi_LatitudChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_avi_Longitud", DbType="Decimal(11,8)")]
+		public System.Nullable<decimal> avi_Longitud
+		{
+			get
+			{
+				return this._avi_Longitud;
+			}
+			set
+			{
+				if ((this._avi_Longitud != value))
+				{
+					this.Onavi_LongitudChanging(value);
+					this.SendPropertyChanging();
+					this._avi_Longitud = value;
+					this.SendPropertyChanged("avi_Longitud");
+					this.Onavi_LongitudChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_avi_FotoUrl", DbType="VarChar(500)")]
+		public string avi_FotoUrl
+		{
+			get
+			{
+				return this._avi_FotoUrl;
+			}
+			set
+			{
+				if ((this._avi_FotoUrl != value))
+				{
+					this.Onavi_FotoUrlChanging(value);
+					this.SendPropertyChanging();
+					this._avi_FotoUrl = value;
+					this.SendPropertyChanged("avi_FotoUrl");
+					this.Onavi_FotoUrlChanged();
 				}
 			}
 		}
@@ -1248,6 +1406,349 @@ namespace CapaDatos
 						this._cam_IdRefugio = default(int);
 					}
 					this.SendPropertyChanged("tbl_Refugios");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tbl_CertificadosAdopcion")]
+	public partial class tbl_CertificadosAdopcion : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _cer_IdCertificado;
+		
+		private int _cer_IdSolicitud;
+		
+		private string _cer_CodigoCertificado;
+		
+		private System.Nullable<System.DateTime> _cer_FechaEmision;
+		
+		private string _cer_NombreAdoptante;
+		
+		private string _cer_CedulaAdoptante;
+		
+		private string _cer_NombreMascota;
+		
+		private string _cer_EspecieMascota;
+		
+		private string _cer_RazaMascota;
+		
+		private string _cer_NombreRefugio;
+		
+		private string _cer_Estado;
+		
+		private EntityRef<tbl_SolicitudesAdopcion> _tbl_SolicitudesAdopcion;
+		
+    #region Definiciones de métodos de extensibilidad
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void Oncer_IdCertificadoChanging(int value);
+    partial void Oncer_IdCertificadoChanged();
+    partial void Oncer_IdSolicitudChanging(int value);
+    partial void Oncer_IdSolicitudChanged();
+    partial void Oncer_CodigoCertificadoChanging(string value);
+    partial void Oncer_CodigoCertificadoChanged();
+    partial void Oncer_FechaEmisionChanging(System.Nullable<System.DateTime> value);
+    partial void Oncer_FechaEmisionChanged();
+    partial void Oncer_NombreAdoptanteChanging(string value);
+    partial void Oncer_NombreAdoptanteChanged();
+    partial void Oncer_CedulaAdoptanteChanging(string value);
+    partial void Oncer_CedulaAdoptanteChanged();
+    partial void Oncer_NombreMascotaChanging(string value);
+    partial void Oncer_NombreMascotaChanged();
+    partial void Oncer_EspecieMascotaChanging(string value);
+    partial void Oncer_EspecieMascotaChanged();
+    partial void Oncer_RazaMascotaChanging(string value);
+    partial void Oncer_RazaMascotaChanged();
+    partial void Oncer_NombreRefugioChanging(string value);
+    partial void Oncer_NombreRefugioChanged();
+    partial void Oncer_EstadoChanging(string value);
+    partial void Oncer_EstadoChanged();
+    #endregion
+		
+		public tbl_CertificadosAdopcion()
+		{
+			this._tbl_SolicitudesAdopcion = default(EntityRef<tbl_SolicitudesAdopcion>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_cer_IdCertificado", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int cer_IdCertificado
+		{
+			get
+			{
+				return this._cer_IdCertificado;
+			}
+			set
+			{
+				if ((this._cer_IdCertificado != value))
+				{
+					this.Oncer_IdCertificadoChanging(value);
+					this.SendPropertyChanging();
+					this._cer_IdCertificado = value;
+					this.SendPropertyChanged("cer_IdCertificado");
+					this.Oncer_IdCertificadoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_cer_IdSolicitud", DbType="Int NOT NULL")]
+		public int cer_IdSolicitud
+		{
+			get
+			{
+				return this._cer_IdSolicitud;
+			}
+			set
+			{
+				if ((this._cer_IdSolicitud != value))
+				{
+					if (this._tbl_SolicitudesAdopcion.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Oncer_IdSolicitudChanging(value);
+					this.SendPropertyChanging();
+					this._cer_IdSolicitud = value;
+					this.SendPropertyChanged("cer_IdSolicitud");
+					this.Oncer_IdSolicitudChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_cer_CodigoCertificado", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string cer_CodigoCertificado
+		{
+			get
+			{
+				return this._cer_CodigoCertificado;
+			}
+			set
+			{
+				if ((this._cer_CodigoCertificado != value))
+				{
+					this.Oncer_CodigoCertificadoChanging(value);
+					this.SendPropertyChanging();
+					this._cer_CodigoCertificado = value;
+					this.SendPropertyChanged("cer_CodigoCertificado");
+					this.Oncer_CodigoCertificadoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_cer_FechaEmision", DbType="DateTime")]
+		public System.Nullable<System.DateTime> cer_FechaEmision
+		{
+			get
+			{
+				return this._cer_FechaEmision;
+			}
+			set
+			{
+				if ((this._cer_FechaEmision != value))
+				{
+					this.Oncer_FechaEmisionChanging(value);
+					this.SendPropertyChanging();
+					this._cer_FechaEmision = value;
+					this.SendPropertyChanged("cer_FechaEmision");
+					this.Oncer_FechaEmisionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_cer_NombreAdoptante", DbType="VarChar(200) NOT NULL", CanBeNull=false)]
+		public string cer_NombreAdoptante
+		{
+			get
+			{
+				return this._cer_NombreAdoptante;
+			}
+			set
+			{
+				if ((this._cer_NombreAdoptante != value))
+				{
+					this.Oncer_NombreAdoptanteChanging(value);
+					this.SendPropertyChanging();
+					this._cer_NombreAdoptante = value;
+					this.SendPropertyChanged("cer_NombreAdoptante");
+					this.Oncer_NombreAdoptanteChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_cer_CedulaAdoptante", DbType="VarChar(20)")]
+		public string cer_CedulaAdoptante
+		{
+			get
+			{
+				return this._cer_CedulaAdoptante;
+			}
+			set
+			{
+				if ((this._cer_CedulaAdoptante != value))
+				{
+					this.Oncer_CedulaAdoptanteChanging(value);
+					this.SendPropertyChanging();
+					this._cer_CedulaAdoptante = value;
+					this.SendPropertyChanged("cer_CedulaAdoptante");
+					this.Oncer_CedulaAdoptanteChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_cer_NombreMascota", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
+		public string cer_NombreMascota
+		{
+			get
+			{
+				return this._cer_NombreMascota;
+			}
+			set
+			{
+				if ((this._cer_NombreMascota != value))
+				{
+					this.Oncer_NombreMascotaChanging(value);
+					this.SendPropertyChanging();
+					this._cer_NombreMascota = value;
+					this.SendPropertyChanged("cer_NombreMascota");
+					this.Oncer_NombreMascotaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_cer_EspecieMascota", DbType="VarChar(50)")]
+		public string cer_EspecieMascota
+		{
+			get
+			{
+				return this._cer_EspecieMascota;
+			}
+			set
+			{
+				if ((this._cer_EspecieMascota != value))
+				{
+					this.Oncer_EspecieMascotaChanging(value);
+					this.SendPropertyChanging();
+					this._cer_EspecieMascota = value;
+					this.SendPropertyChanged("cer_EspecieMascota");
+					this.Oncer_EspecieMascotaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_cer_RazaMascota", DbType="VarChar(100)")]
+		public string cer_RazaMascota
+		{
+			get
+			{
+				return this._cer_RazaMascota;
+			}
+			set
+			{
+				if ((this._cer_RazaMascota != value))
+				{
+					this.Oncer_RazaMascotaChanging(value);
+					this.SendPropertyChanging();
+					this._cer_RazaMascota = value;
+					this.SendPropertyChanged("cer_RazaMascota");
+					this.Oncer_RazaMascotaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_cer_NombreRefugio", DbType="VarChar(150) NOT NULL", CanBeNull=false)]
+		public string cer_NombreRefugio
+		{
+			get
+			{
+				return this._cer_NombreRefugio;
+			}
+			set
+			{
+				if ((this._cer_NombreRefugio != value))
+				{
+					this.Oncer_NombreRefugioChanging(value);
+					this.SendPropertyChanging();
+					this._cer_NombreRefugio = value;
+					this.SendPropertyChanged("cer_NombreRefugio");
+					this.Oncer_NombreRefugioChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_cer_Estado", DbType="VarChar(20)")]
+		public string cer_Estado
+		{
+			get
+			{
+				return this._cer_Estado;
+			}
+			set
+			{
+				if ((this._cer_Estado != value))
+				{
+					this.Oncer_EstadoChanging(value);
+					this.SendPropertyChanging();
+					this._cer_Estado = value;
+					this.SendPropertyChanged("cer_Estado");
+					this.Oncer_EstadoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_SolicitudesAdopcion_tbl_CertificadosAdopcion", Storage="_tbl_SolicitudesAdopcion", ThisKey="cer_IdSolicitud", OtherKey="sol_IdSolicitud", IsForeignKey=true)]
+		public tbl_SolicitudesAdopcion tbl_SolicitudesAdopcion
+		{
+			get
+			{
+				return this._tbl_SolicitudesAdopcion.Entity;
+			}
+			set
+			{
+				tbl_SolicitudesAdopcion previousValue = this._tbl_SolicitudesAdopcion.Entity;
+				if (((previousValue != value) 
+							|| (this._tbl_SolicitudesAdopcion.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._tbl_SolicitudesAdopcion.Entity = null;
+						previousValue.tbl_CertificadosAdopcion.Remove(this);
+					}
+					this._tbl_SolicitudesAdopcion.Entity = value;
+					if ((value != null))
+					{
+						value.tbl_CertificadosAdopcion.Add(this);
+						this._cer_IdSolicitud = value.sol_IdSolicitud;
+					}
+					else
+					{
+						this._cer_IdSolicitud = default(int);
+					}
+					this.SendPropertyChanged("tbl_SolicitudesAdopcion");
 				}
 			}
 		}
@@ -2598,6 +3099,229 @@ namespace CapaDatos
 						this._fore_IdReporte = default(int);
 					}
 					this.SendPropertyChanged("tbl_ReportesMascotas");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tbl_FotosSolicitud")]
+	public partial class tbl_FotosSolicitud : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _fos_IdFoto;
+		
+		private int _fos_IdSolicitud;
+		
+		private string _fos_Url;
+		
+		private string _fos_TipoFoto;
+		
+		private string _fos_Descripcion;
+		
+		private System.Nullable<System.DateTime> _fos_FechaSubida;
+		
+		private EntityRef<tbl_SolicitudesAdopcion> _tbl_SolicitudesAdopcion;
+		
+    #region Definiciones de métodos de extensibilidad
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void Onfos_IdFotoChanging(int value);
+    partial void Onfos_IdFotoChanged();
+    partial void Onfos_IdSolicitudChanging(int value);
+    partial void Onfos_IdSolicitudChanged();
+    partial void Onfos_UrlChanging(string value);
+    partial void Onfos_UrlChanged();
+    partial void Onfos_TipoFotoChanging(string value);
+    partial void Onfos_TipoFotoChanged();
+    partial void Onfos_DescripcionChanging(string value);
+    partial void Onfos_DescripcionChanged();
+    partial void Onfos_FechaSubidaChanging(System.Nullable<System.DateTime> value);
+    partial void Onfos_FechaSubidaChanged();
+    #endregion
+		
+		public tbl_FotosSolicitud()
+		{
+			this._tbl_SolicitudesAdopcion = default(EntityRef<tbl_SolicitudesAdopcion>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fos_IdFoto", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int fos_IdFoto
+		{
+			get
+			{
+				return this._fos_IdFoto;
+			}
+			set
+			{
+				if ((this._fos_IdFoto != value))
+				{
+					this.Onfos_IdFotoChanging(value);
+					this.SendPropertyChanging();
+					this._fos_IdFoto = value;
+					this.SendPropertyChanged("fos_IdFoto");
+					this.Onfos_IdFotoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fos_IdSolicitud", DbType="Int NOT NULL")]
+		public int fos_IdSolicitud
+		{
+			get
+			{
+				return this._fos_IdSolicitud;
+			}
+			set
+			{
+				if ((this._fos_IdSolicitud != value))
+				{
+					if (this._tbl_SolicitudesAdopcion.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onfos_IdSolicitudChanging(value);
+					this.SendPropertyChanging();
+					this._fos_IdSolicitud = value;
+					this.SendPropertyChanged("fos_IdSolicitud");
+					this.Onfos_IdSolicitudChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fos_Url", DbType="VarChar(500) NOT NULL", CanBeNull=false)]
+		public string fos_Url
+		{
+			get
+			{
+				return this._fos_Url;
+			}
+			set
+			{
+				if ((this._fos_Url != value))
+				{
+					this.Onfos_UrlChanging(value);
+					this.SendPropertyChanging();
+					this._fos_Url = value;
+					this.SendPropertyChanged("fos_Url");
+					this.Onfos_UrlChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fos_TipoFoto", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string fos_TipoFoto
+		{
+			get
+			{
+				return this._fos_TipoFoto;
+			}
+			set
+			{
+				if ((this._fos_TipoFoto != value))
+				{
+					this.Onfos_TipoFotoChanging(value);
+					this.SendPropertyChanging();
+					this._fos_TipoFoto = value;
+					this.SendPropertyChanged("fos_TipoFoto");
+					this.Onfos_TipoFotoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fos_Descripcion", DbType="VarChar(200)")]
+		public string fos_Descripcion
+		{
+			get
+			{
+				return this._fos_Descripcion;
+			}
+			set
+			{
+				if ((this._fos_Descripcion != value))
+				{
+					this.Onfos_DescripcionChanging(value);
+					this.SendPropertyChanging();
+					this._fos_Descripcion = value;
+					this.SendPropertyChanged("fos_Descripcion");
+					this.Onfos_DescripcionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fos_FechaSubida", DbType="DateTime")]
+		public System.Nullable<System.DateTime> fos_FechaSubida
+		{
+			get
+			{
+				return this._fos_FechaSubida;
+			}
+			set
+			{
+				if ((this._fos_FechaSubida != value))
+				{
+					this.Onfos_FechaSubidaChanging(value);
+					this.SendPropertyChanging();
+					this._fos_FechaSubida = value;
+					this.SendPropertyChanged("fos_FechaSubida");
+					this.Onfos_FechaSubidaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_SolicitudesAdopcion_tbl_FotosSolicitud", Storage="_tbl_SolicitudesAdopcion", ThisKey="fos_IdSolicitud", OtherKey="sol_IdSolicitud", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
+		public tbl_SolicitudesAdopcion tbl_SolicitudesAdopcion
+		{
+			get
+			{
+				return this._tbl_SolicitudesAdopcion.Entity;
+			}
+			set
+			{
+				tbl_SolicitudesAdopcion previousValue = this._tbl_SolicitudesAdopcion.Entity;
+				if (((previousValue != value) 
+							|| (this._tbl_SolicitudesAdopcion.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._tbl_SolicitudesAdopcion.Entity = null;
+						previousValue.tbl_FotosSolicitud.Remove(this);
+					}
+					this._tbl_SolicitudesAdopcion.Entity = value;
+					if ((value != null))
+					{
+						value.tbl_FotosSolicitud.Add(this);
+						this._fos_IdSolicitud = value.sol_IdSolicitud;
+					}
+					else
+					{
+						this._fos_IdSolicitud = default(int);
+					}
+					this.SendPropertyChanged("tbl_SolicitudesAdopcion");
 				}
 			}
 		}
@@ -5386,6 +6110,510 @@ namespace CapaDatos
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tbl_SeguimientosAdopcion")]
+	public partial class tbl_SeguimientosAdopcion : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _seg_IdSeguimiento;
+		
+		private int _seg_IdSolicitud;
+		
+		private int _seg_NumeroEtapa;
+		
+		private string _seg_TituloEtapa;
+		
+		private System.DateTime _seg_FechaProgramada;
+		
+		private System.Nullable<decimal> _seg_Latitud;
+		
+		private System.Nullable<decimal> _seg_Longitud;
+		
+		private string _seg_FotoUrlEnVivo;
+		
+		private string _seg_ArchivoAdjuntoUrl;
+		
+		private string _seg_RespuestasJSON;
+		
+		private string _seg_Estado;
+		
+		private System.Nullable<System.DateTime> _seg_FechaEnvio;
+		
+		private System.Nullable<System.DateTime> _seg_FechaRevision;
+		
+		private System.Nullable<int> _seg_IdUsuarioRevision;
+		
+		private string _seg_ComentariosRevision;
+		
+		private System.Nullable<System.DateTime> _seg_FechaCreacion;
+		
+		private EntityRef<tbl_SolicitudesAdopcion> _tbl_SolicitudesAdopcion;
+		
+		private EntityRef<tbl_Usuarios> _tbl_Usuarios;
+		
+    #region Definiciones de métodos de extensibilidad
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void Onseg_IdSeguimientoChanging(int value);
+    partial void Onseg_IdSeguimientoChanged();
+    partial void Onseg_IdSolicitudChanging(int value);
+    partial void Onseg_IdSolicitudChanged();
+    partial void Onseg_NumeroEtapaChanging(int value);
+    partial void Onseg_NumeroEtapaChanged();
+    partial void Onseg_TituloEtapaChanging(string value);
+    partial void Onseg_TituloEtapaChanged();
+    partial void Onseg_FechaProgramadaChanging(System.DateTime value);
+    partial void Onseg_FechaProgramadaChanged();
+    partial void Onseg_LatitudChanging(System.Nullable<decimal> value);
+    partial void Onseg_LatitudChanged();
+    partial void Onseg_LongitudChanging(System.Nullable<decimal> value);
+    partial void Onseg_LongitudChanged();
+    partial void Onseg_FotoUrlEnVivoChanging(string value);
+    partial void Onseg_FotoUrlEnVivoChanged();
+    partial void Onseg_ArchivoAdjuntoUrlChanging(string value);
+    partial void Onseg_ArchivoAdjuntoUrlChanged();
+    partial void Onseg_RespuestasJSONChanging(string value);
+    partial void Onseg_RespuestasJSONChanged();
+    partial void Onseg_EstadoChanging(string value);
+    partial void Onseg_EstadoChanged();
+    partial void Onseg_FechaEnvioChanging(System.Nullable<System.DateTime> value);
+    partial void Onseg_FechaEnvioChanged();
+    partial void Onseg_FechaRevisionChanging(System.Nullable<System.DateTime> value);
+    partial void Onseg_FechaRevisionChanged();
+    partial void Onseg_IdUsuarioRevisionChanging(System.Nullable<int> value);
+    partial void Onseg_IdUsuarioRevisionChanged();
+    partial void Onseg_ComentariosRevisionChanging(string value);
+    partial void Onseg_ComentariosRevisionChanged();
+    partial void Onseg_FechaCreacionChanging(System.Nullable<System.DateTime> value);
+    partial void Onseg_FechaCreacionChanged();
+    #endregion
+		
+		public tbl_SeguimientosAdopcion()
+		{
+			this._tbl_SolicitudesAdopcion = default(EntityRef<tbl_SolicitudesAdopcion>);
+			this._tbl_Usuarios = default(EntityRef<tbl_Usuarios>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_seg_IdSeguimiento", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int seg_IdSeguimiento
+		{
+			get
+			{
+				return this._seg_IdSeguimiento;
+			}
+			set
+			{
+				if ((this._seg_IdSeguimiento != value))
+				{
+					this.Onseg_IdSeguimientoChanging(value);
+					this.SendPropertyChanging();
+					this._seg_IdSeguimiento = value;
+					this.SendPropertyChanged("seg_IdSeguimiento");
+					this.Onseg_IdSeguimientoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_seg_IdSolicitud", DbType="Int NOT NULL")]
+		public int seg_IdSolicitud
+		{
+			get
+			{
+				return this._seg_IdSolicitud;
+			}
+			set
+			{
+				if ((this._seg_IdSolicitud != value))
+				{
+					if (this._tbl_SolicitudesAdopcion.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onseg_IdSolicitudChanging(value);
+					this.SendPropertyChanging();
+					this._seg_IdSolicitud = value;
+					this.SendPropertyChanged("seg_IdSolicitud");
+					this.Onseg_IdSolicitudChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_seg_NumeroEtapa", DbType="Int NOT NULL")]
+		public int seg_NumeroEtapa
+		{
+			get
+			{
+				return this._seg_NumeroEtapa;
+			}
+			set
+			{
+				if ((this._seg_NumeroEtapa != value))
+				{
+					this.Onseg_NumeroEtapaChanging(value);
+					this.SendPropertyChanging();
+					this._seg_NumeroEtapa = value;
+					this.SendPropertyChanged("seg_NumeroEtapa");
+					this.Onseg_NumeroEtapaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_seg_TituloEtapa", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
+		public string seg_TituloEtapa
+		{
+			get
+			{
+				return this._seg_TituloEtapa;
+			}
+			set
+			{
+				if ((this._seg_TituloEtapa != value))
+				{
+					this.Onseg_TituloEtapaChanging(value);
+					this.SendPropertyChanging();
+					this._seg_TituloEtapa = value;
+					this.SendPropertyChanged("seg_TituloEtapa");
+					this.Onseg_TituloEtapaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_seg_FechaProgramada", DbType="DateTime NOT NULL")]
+		public System.DateTime seg_FechaProgramada
+		{
+			get
+			{
+				return this._seg_FechaProgramada;
+			}
+			set
+			{
+				if ((this._seg_FechaProgramada != value))
+				{
+					this.Onseg_FechaProgramadaChanging(value);
+					this.SendPropertyChanging();
+					this._seg_FechaProgramada = value;
+					this.SendPropertyChanged("seg_FechaProgramada");
+					this.Onseg_FechaProgramadaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_seg_Latitud", DbType="Decimal(10,8)")]
+		public System.Nullable<decimal> seg_Latitud
+		{
+			get
+			{
+				return this._seg_Latitud;
+			}
+			set
+			{
+				if ((this._seg_Latitud != value))
+				{
+					this.Onseg_LatitudChanging(value);
+					this.SendPropertyChanging();
+					this._seg_Latitud = value;
+					this.SendPropertyChanged("seg_Latitud");
+					this.Onseg_LatitudChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_seg_Longitud", DbType="Decimal(11,8)")]
+		public System.Nullable<decimal> seg_Longitud
+		{
+			get
+			{
+				return this._seg_Longitud;
+			}
+			set
+			{
+				if ((this._seg_Longitud != value))
+				{
+					this.Onseg_LongitudChanging(value);
+					this.SendPropertyChanging();
+					this._seg_Longitud = value;
+					this.SendPropertyChanged("seg_Longitud");
+					this.Onseg_LongitudChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_seg_FotoUrlEnVivo", DbType="VarChar(500)")]
+		public string seg_FotoUrlEnVivo
+		{
+			get
+			{
+				return this._seg_FotoUrlEnVivo;
+			}
+			set
+			{
+				if ((this._seg_FotoUrlEnVivo != value))
+				{
+					this.Onseg_FotoUrlEnVivoChanging(value);
+					this.SendPropertyChanging();
+					this._seg_FotoUrlEnVivo = value;
+					this.SendPropertyChanged("seg_FotoUrlEnVivo");
+					this.Onseg_FotoUrlEnVivoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_seg_ArchivoAdjuntoUrl", DbType="VarChar(500)")]
+		public string seg_ArchivoAdjuntoUrl
+		{
+			get
+			{
+				return this._seg_ArchivoAdjuntoUrl;
+			}
+			set
+			{
+				if ((this._seg_ArchivoAdjuntoUrl != value))
+				{
+					this.Onseg_ArchivoAdjuntoUrlChanging(value);
+					this.SendPropertyChanging();
+					this._seg_ArchivoAdjuntoUrl = value;
+					this.SendPropertyChanged("seg_ArchivoAdjuntoUrl");
+					this.Onseg_ArchivoAdjuntoUrlChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_seg_RespuestasJSON", DbType="Text", UpdateCheck=UpdateCheck.Never)]
+		public string seg_RespuestasJSON
+		{
+			get
+			{
+				return this._seg_RespuestasJSON;
+			}
+			set
+			{
+				if ((this._seg_RespuestasJSON != value))
+				{
+					this.Onseg_RespuestasJSONChanging(value);
+					this.SendPropertyChanging();
+					this._seg_RespuestasJSON = value;
+					this.SendPropertyChanged("seg_RespuestasJSON");
+					this.Onseg_RespuestasJSONChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_seg_Estado", DbType="VarChar(30)")]
+		public string seg_Estado
+		{
+			get
+			{
+				return this._seg_Estado;
+			}
+			set
+			{
+				if ((this._seg_Estado != value))
+				{
+					this.Onseg_EstadoChanging(value);
+					this.SendPropertyChanging();
+					this._seg_Estado = value;
+					this.SendPropertyChanged("seg_Estado");
+					this.Onseg_EstadoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_seg_FechaEnvio", DbType="DateTime")]
+		public System.Nullable<System.DateTime> seg_FechaEnvio
+		{
+			get
+			{
+				return this._seg_FechaEnvio;
+			}
+			set
+			{
+				if ((this._seg_FechaEnvio != value))
+				{
+					this.Onseg_FechaEnvioChanging(value);
+					this.SendPropertyChanging();
+					this._seg_FechaEnvio = value;
+					this.SendPropertyChanged("seg_FechaEnvio");
+					this.Onseg_FechaEnvioChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_seg_FechaRevision", DbType="DateTime")]
+		public System.Nullable<System.DateTime> seg_FechaRevision
+		{
+			get
+			{
+				return this._seg_FechaRevision;
+			}
+			set
+			{
+				if ((this._seg_FechaRevision != value))
+				{
+					this.Onseg_FechaRevisionChanging(value);
+					this.SendPropertyChanging();
+					this._seg_FechaRevision = value;
+					this.SendPropertyChanged("seg_FechaRevision");
+					this.Onseg_FechaRevisionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_seg_IdUsuarioRevision", DbType="Int")]
+		public System.Nullable<int> seg_IdUsuarioRevision
+		{
+			get
+			{
+				return this._seg_IdUsuarioRevision;
+			}
+			set
+			{
+				if ((this._seg_IdUsuarioRevision != value))
+				{
+					if (this._tbl_Usuarios.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onseg_IdUsuarioRevisionChanging(value);
+					this.SendPropertyChanging();
+					this._seg_IdUsuarioRevision = value;
+					this.SendPropertyChanged("seg_IdUsuarioRevision");
+					this.Onseg_IdUsuarioRevisionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_seg_ComentariosRevision", DbType="Text", UpdateCheck=UpdateCheck.Never)]
+		public string seg_ComentariosRevision
+		{
+			get
+			{
+				return this._seg_ComentariosRevision;
+			}
+			set
+			{
+				if ((this._seg_ComentariosRevision != value))
+				{
+					this.Onseg_ComentariosRevisionChanging(value);
+					this.SendPropertyChanging();
+					this._seg_ComentariosRevision = value;
+					this.SendPropertyChanged("seg_ComentariosRevision");
+					this.Onseg_ComentariosRevisionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_seg_FechaCreacion", DbType="DateTime")]
+		public System.Nullable<System.DateTime> seg_FechaCreacion
+		{
+			get
+			{
+				return this._seg_FechaCreacion;
+			}
+			set
+			{
+				if ((this._seg_FechaCreacion != value))
+				{
+					this.Onseg_FechaCreacionChanging(value);
+					this.SendPropertyChanging();
+					this._seg_FechaCreacion = value;
+					this.SendPropertyChanged("seg_FechaCreacion");
+					this.Onseg_FechaCreacionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_SolicitudesAdopcion_tbl_SeguimientosAdopcion", Storage="_tbl_SolicitudesAdopcion", ThisKey="seg_IdSolicitud", OtherKey="sol_IdSolicitud", IsForeignKey=true)]
+		public tbl_SolicitudesAdopcion tbl_SolicitudesAdopcion
+		{
+			get
+			{
+				return this._tbl_SolicitudesAdopcion.Entity;
+			}
+			set
+			{
+				tbl_SolicitudesAdopcion previousValue = this._tbl_SolicitudesAdopcion.Entity;
+				if (((previousValue != value) 
+							|| (this._tbl_SolicitudesAdopcion.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._tbl_SolicitudesAdopcion.Entity = null;
+						previousValue.tbl_SeguimientosAdopcion.Remove(this);
+					}
+					this._tbl_SolicitudesAdopcion.Entity = value;
+					if ((value != null))
+					{
+						value.tbl_SeguimientosAdopcion.Add(this);
+						this._seg_IdSolicitud = value.sol_IdSolicitud;
+					}
+					else
+					{
+						this._seg_IdSolicitud = default(int);
+					}
+					this.SendPropertyChanged("tbl_SolicitudesAdopcion");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Usuarios_tbl_SeguimientosAdopcion", Storage="_tbl_Usuarios", ThisKey="seg_IdUsuarioRevision", OtherKey="usu_IdUsuario", IsForeignKey=true)]
+		public tbl_Usuarios tbl_Usuarios
+		{
+			get
+			{
+				return this._tbl_Usuarios.Entity;
+			}
+			set
+			{
+				tbl_Usuarios previousValue = this._tbl_Usuarios.Entity;
+				if (((previousValue != value) 
+							|| (this._tbl_Usuarios.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._tbl_Usuarios.Entity = null;
+						previousValue.tbl_SeguimientosAdopcion.Remove(this);
+					}
+					this._tbl_Usuarios.Entity = value;
+					if ((value != null))
+					{
+						value.tbl_SeguimientosAdopcion.Add(this);
+						this._seg_IdUsuarioRevision = value.usu_IdUsuario;
+					}
+					else
+					{
+						this._seg_IdUsuarioRevision = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("tbl_Usuarios");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tbl_SolicitudesAdopcion")]
 	public partial class tbl_SolicitudesAdopcion : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -5434,7 +6662,11 @@ namespace CapaDatos
 		
 		private System.Nullable<System.DateTime> _sol_FechaRevision;
 		
+		private EntitySet<tbl_CertificadosAdopcion> _tbl_CertificadosAdopcion;
+		
 		private EntitySet<tbl_DetalleEvaluacion> _tbl_DetalleEvaluacion;
+		
+		private EntitySet<tbl_FotosSolicitud> _tbl_FotosSolicitud;
 		
 		private EntitySet<tbl_SeguimientosAdopcion> _tbl_SeguimientosAdopcion;
 		
@@ -5494,7 +6726,9 @@ namespace CapaDatos
 		
 		public tbl_SolicitudesAdopcion()
 		{
+			this._tbl_CertificadosAdopcion = new EntitySet<tbl_CertificadosAdopcion>(new Action<tbl_CertificadosAdopcion>(this.attach_tbl_CertificadosAdopcion), new Action<tbl_CertificadosAdopcion>(this.detach_tbl_CertificadosAdopcion));
 			this._tbl_DetalleEvaluacion = new EntitySet<tbl_DetalleEvaluacion>(new Action<tbl_DetalleEvaluacion>(this.attach_tbl_DetalleEvaluacion), new Action<tbl_DetalleEvaluacion>(this.detach_tbl_DetalleEvaluacion));
+			this._tbl_FotosSolicitud = new EntitySet<tbl_FotosSolicitud>(new Action<tbl_FotosSolicitud>(this.attach_tbl_FotosSolicitud), new Action<tbl_FotosSolicitud>(this.detach_tbl_FotosSolicitud));
 			this._tbl_SeguimientosAdopcion = new EntitySet<tbl_SeguimientosAdopcion>(new Action<tbl_SeguimientosAdopcion>(this.attach_tbl_SeguimientosAdopcion), new Action<tbl_SeguimientosAdopcion>(this.detach_tbl_SeguimientosAdopcion));
 			this._tbl_Mascotas = default(EntityRef<tbl_Mascotas>);
 			this._tbl_Usuarios = default(EntityRef<tbl_Usuarios>);
@@ -5934,6 +7168,19 @@ namespace CapaDatos
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_SolicitudesAdopcion_tbl_CertificadosAdopcion", Storage="_tbl_CertificadosAdopcion", ThisKey="sol_IdSolicitud", OtherKey="cer_IdSolicitud")]
+		public EntitySet<tbl_CertificadosAdopcion> tbl_CertificadosAdopcion
+		{
+			get
+			{
+				return this._tbl_CertificadosAdopcion;
+			}
+			set
+			{
+				this._tbl_CertificadosAdopcion.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_SolicitudesAdopcion_tbl_DetalleEvaluacion", Storage="_tbl_DetalleEvaluacion", ThisKey="sol_IdSolicitud", OtherKey="det_IdSolicitud")]
 		public EntitySet<tbl_DetalleEvaluacion> tbl_DetalleEvaluacion
 		{
@@ -5944,6 +7191,19 @@ namespace CapaDatos
 			set
 			{
 				this._tbl_DetalleEvaluacion.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_SolicitudesAdopcion_tbl_FotosSolicitud", Storage="_tbl_FotosSolicitud", ThisKey="sol_IdSolicitud", OtherKey="fos_IdSolicitud")]
+		public EntitySet<tbl_FotosSolicitud> tbl_FotosSolicitud
+		{
+			get
+			{
+				return this._tbl_FotosSolicitud;
+			}
+			set
+			{
+				this._tbl_FotosSolicitud.Assign(value);
 			}
 		}
 		
@@ -6082,6 +7342,18 @@ namespace CapaDatos
 			}
 		}
 		
+		private void attach_tbl_CertificadosAdopcion(tbl_CertificadosAdopcion entity)
+		{
+			this.SendPropertyChanging();
+			entity.tbl_SolicitudesAdopcion = this;
+		}
+		
+		private void detach_tbl_CertificadosAdopcion(tbl_CertificadosAdopcion entity)
+		{
+			this.SendPropertyChanging();
+			entity.tbl_SolicitudesAdopcion = null;
+		}
+		
 		private void attach_tbl_DetalleEvaluacion(tbl_DetalleEvaluacion entity)
 		{
 			this.SendPropertyChanging();
@@ -6089,6 +7361,18 @@ namespace CapaDatos
 		}
 		
 		private void detach_tbl_DetalleEvaluacion(tbl_DetalleEvaluacion entity)
+		{
+			this.SendPropertyChanging();
+			entity.tbl_SolicitudesAdopcion = null;
+		}
+		
+		private void attach_tbl_FotosSolicitud(tbl_FotosSolicitud entity)
+		{
+			this.SendPropertyChanging();
+			entity.tbl_SolicitudesAdopcion = this;
+		}
+		
+		private void detach_tbl_FotosSolicitud(tbl_FotosSolicitud entity)
 		{
 			this.SendPropertyChanging();
 			entity.tbl_SolicitudesAdopcion = null;
@@ -6390,13 +7674,13 @@ namespace CapaDatos
 		
 		private EntitySet<tbl_ReportesMascotas> _tbl_ReportesMascotas;
 		
+		private EntitySet<tbl_SeguimientosAdopcion> _tbl_SeguimientosAdopcion;
+		
 		private EntitySet<tbl_SolicitudesAdopcion> _tbl_SolicitudesAdopcion;
 		
 		private EntitySet<tbl_SolicitudesAdopcion> _tbl_SolicitudesAdopcion1;
 		
 		private EntitySet<tbl_TokensRecuperacion> _tbl_TokensRecuperacion;
-		
-		private EntitySet<tbl_SeguimientosAdopcion> _tbl_SeguimientosAdopcion;
 		
 		private EntityRef<tbl_Roles> _tbl_Roles;
 		
@@ -6458,10 +7742,10 @@ namespace CapaDatos
 			this._tbl_Mascotas = new EntitySet<tbl_Mascotas>(new Action<tbl_Mascotas>(this.attach_tbl_Mascotas), new Action<tbl_Mascotas>(this.detach_tbl_Mascotas));
 			this._tbl_Notificaciones = new EntitySet<tbl_Notificaciones>(new Action<tbl_Notificaciones>(this.attach_tbl_Notificaciones), new Action<tbl_Notificaciones>(this.detach_tbl_Notificaciones));
 			this._tbl_ReportesMascotas = new EntitySet<tbl_ReportesMascotas>(new Action<tbl_ReportesMascotas>(this.attach_tbl_ReportesMascotas), new Action<tbl_ReportesMascotas>(this.detach_tbl_ReportesMascotas));
+			this._tbl_SeguimientosAdopcion = new EntitySet<tbl_SeguimientosAdopcion>(new Action<tbl_SeguimientosAdopcion>(this.attach_tbl_SeguimientosAdopcion), new Action<tbl_SeguimientosAdopcion>(this.detach_tbl_SeguimientosAdopcion));
 			this._tbl_SolicitudesAdopcion = new EntitySet<tbl_SolicitudesAdopcion>(new Action<tbl_SolicitudesAdopcion>(this.attach_tbl_SolicitudesAdopcion), new Action<tbl_SolicitudesAdopcion>(this.detach_tbl_SolicitudesAdopcion));
 			this._tbl_SolicitudesAdopcion1 = new EntitySet<tbl_SolicitudesAdopcion>(new Action<tbl_SolicitudesAdopcion>(this.attach_tbl_SolicitudesAdopcion1), new Action<tbl_SolicitudesAdopcion>(this.detach_tbl_SolicitudesAdopcion1));
 			this._tbl_TokensRecuperacion = new EntitySet<tbl_TokensRecuperacion>(new Action<tbl_TokensRecuperacion>(this.attach_tbl_TokensRecuperacion), new Action<tbl_TokensRecuperacion>(this.detach_tbl_TokensRecuperacion));
-			this._tbl_SeguimientosAdopcion = new EntitySet<tbl_SeguimientosAdopcion>(new Action<tbl_SeguimientosAdopcion>(this.attach_tbl_SeguimientosAdopcion), new Action<tbl_SeguimientosAdopcion>(this.detach_tbl_SeguimientosAdopcion));
 			this._tbl_Roles = default(EntityRef<tbl_Roles>);
 			this._tbl_Refugios = default(EntityRef<tbl_Refugios>);
 			OnCreated();
@@ -6973,6 +8257,19 @@ namespace CapaDatos
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Usuarios_tbl_SeguimientosAdopcion", Storage="_tbl_SeguimientosAdopcion", ThisKey="usu_IdUsuario", OtherKey="seg_IdUsuarioRevision")]
+		public EntitySet<tbl_SeguimientosAdopcion> tbl_SeguimientosAdopcion
+		{
+			get
+			{
+				return this._tbl_SeguimientosAdopcion;
+			}
+			set
+			{
+				this._tbl_SeguimientosAdopcion.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Usuarios_tbl_SolicitudesAdopcion", Storage="_tbl_SolicitudesAdopcion", ThisKey="usu_IdUsuario", OtherKey="sol_IdUsuario")]
 		public EntitySet<tbl_SolicitudesAdopcion> tbl_SolicitudesAdopcion
 		{
@@ -7009,19 +8306,6 @@ namespace CapaDatos
 			set
 			{
 				this._tbl_TokensRecuperacion.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Usuarios_tbl_SeguimientosAdopcion", Storage="_tbl_SeguimientosAdopcion", ThisKey="usu_IdUsuario", OtherKey="seg_IdUsuarioRevision")]
-		public EntitySet<tbl_SeguimientosAdopcion> tbl_SeguimientosAdopcion
-		{
-			get
-			{
-				return this._tbl_SeguimientosAdopcion;
-			}
-			set
-			{
-				this._tbl_SeguimientosAdopcion.Assign(value);
 			}
 		}
 		
@@ -7185,6 +8469,18 @@ namespace CapaDatos
 			entity.tbl_Usuarios = null;
 		}
 		
+		private void attach_tbl_SeguimientosAdopcion(tbl_SeguimientosAdopcion entity)
+		{
+			this.SendPropertyChanging();
+			entity.tbl_Usuarios = this;
+		}
+		
+		private void detach_tbl_SeguimientosAdopcion(tbl_SeguimientosAdopcion entity)
+		{
+			this.SendPropertyChanging();
+			entity.tbl_Usuarios = null;
+		}
+		
 		private void attach_tbl_SolicitudesAdopcion(tbl_SolicitudesAdopcion entity)
 		{
 			this.SendPropertyChanging();
@@ -7220,276 +8516,216 @@ namespace CapaDatos
 			this.SendPropertyChanging();
 			entity.tbl_Usuarios = null;
 		}
-		
-		private void attach_tbl_SeguimientosAdopcion(tbl_SeguimientosAdopcion entity)
-		{
-			this.SendPropertyChanging();
-			entity.tbl_Usuarios = this;
-		}
-		
-		private void detach_tbl_SeguimientosAdopcion(tbl_SeguimientosAdopcion entity)
-		{
-			this.SendPropertyChanging();
-			entity.tbl_Usuarios = null;
-		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.vw_AdopcionesMensuales")]
-	public partial class vw_AdopcionesMensuales
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.vw_SolicitudesCompleta")]
+	public partial class vw_SolicitudesCompleta
 	{
 		
-		private System.Nullable<int> _Anio;
+		private int _sol_IdSolicitud;
 		
-		private System.Nullable<int> _Mes;
+		private System.Nullable<System.DateTime> _sol_FechaSolicitud;
 		
-		private System.Nullable<int> _TotalAdopciones;
+		private string _sol_Estado;
 		
-		public vw_AdopcionesMensuales()
-		{
-		}
+		private System.Nullable<decimal> _sol_PuntajeTotal;
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Anio", DbType="Int")]
-		public System.Nullable<int> Anio
-		{
-			get
-			{
-				return this._Anio;
-			}
-			set
-			{
-				if ((this._Anio != value))
-				{
-					this._Anio = value;
-				}
-			}
-		}
+		private int _IdAdoptante;
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Mes", DbType="Int")]
-		public System.Nullable<int> Mes
-		{
-			get
-			{
-				return this._Mes;
-			}
-			set
-			{
-				if ((this._Mes != value))
-				{
-					this._Mes = value;
-				}
-			}
-		}
+		private string _NombreAdoptante;
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TotalAdopciones", DbType="Int")]
-		public System.Nullable<int> TotalAdopciones
-		{
-			get
-			{
-				return this._TotalAdopciones;
-			}
-			set
-			{
-				if ((this._TotalAdopciones != value))
-				{
-					this._TotalAdopciones = value;
-				}
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.vw_EstadisticasGenerales")]
-	public partial class vw_EstadisticasGenerales
-	{
+		private string _EmailAdoptante;
 		
-		private System.Nullable<int> _TotalUsuarios;
+		private string _usu_Cedula;
 		
-		private System.Nullable<int> _TotalAdoptantes;
+		private string _TelefonoAdoptante;
 		
-		private System.Nullable<int> _TotalRefugios;
+		private int _mas_IdMascota;
 		
-		private System.Nullable<int> _RefugiosVerificados;
-		
-		private System.Nullable<int> _TotalMascotas;
-		
-		private System.Nullable<int> _MascotasDisponibles;
-		
-		private System.Nullable<int> _MascotasAdoptadas;
-		
-		private System.Nullable<int> _SolicitudesPendientes;
-		
-		private System.Nullable<int> _ReportesActivos;
-		
-		public vw_EstadisticasGenerales()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TotalUsuarios", DbType="Int")]
-		public System.Nullable<int> TotalUsuarios
-		{
-			get
-			{
-				return this._TotalUsuarios;
-			}
-			set
-			{
-				if ((this._TotalUsuarios != value))
-				{
-					this._TotalUsuarios = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TotalAdoptantes", DbType="Int")]
-		public System.Nullable<int> TotalAdoptantes
-		{
-			get
-			{
-				return this._TotalAdoptantes;
-			}
-			set
-			{
-				if ((this._TotalAdoptantes != value))
-				{
-					this._TotalAdoptantes = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TotalRefugios", DbType="Int")]
-		public System.Nullable<int> TotalRefugios
-		{
-			get
-			{
-				return this._TotalRefugios;
-			}
-			set
-			{
-				if ((this._TotalRefugios != value))
-				{
-					this._TotalRefugios = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RefugiosVerificados", DbType="Int")]
-		public System.Nullable<int> RefugiosVerificados
-		{
-			get
-			{
-				return this._RefugiosVerificados;
-			}
-			set
-			{
-				if ((this._RefugiosVerificados != value))
-				{
-					this._RefugiosVerificados = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TotalMascotas", DbType="Int")]
-		public System.Nullable<int> TotalMascotas
-		{
-			get
-			{
-				return this._TotalMascotas;
-			}
-			set
-			{
-				if ((this._TotalMascotas != value))
-				{
-					this._TotalMascotas = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MascotasDisponibles", DbType="Int")]
-		public System.Nullable<int> MascotasDisponibles
-		{
-			get
-			{
-				return this._MascotasDisponibles;
-			}
-			set
-			{
-				if ((this._MascotasDisponibles != value))
-				{
-					this._MascotasDisponibles = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MascotasAdoptadas", DbType="Int")]
-		public System.Nullable<int> MascotasAdoptadas
-		{
-			get
-			{
-				return this._MascotasAdoptadas;
-			}
-			set
-			{
-				if ((this._MascotasAdoptadas != value))
-				{
-					this._MascotasAdoptadas = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SolicitudesPendientes", DbType="Int")]
-		public System.Nullable<int> SolicitudesPendientes
-		{
-			get
-			{
-				return this._SolicitudesPendientes;
-			}
-			set
-			{
-				if ((this._SolicitudesPendientes != value))
-				{
-					this._SolicitudesPendientes = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ReportesActivos", DbType="Int")]
-		public System.Nullable<int> ReportesActivos
-		{
-			get
-			{
-				return this._ReportesActivos;
-			}
-			set
-			{
-				if ((this._ReportesActivos != value))
-				{
-					this._ReportesActivos = value;
-				}
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.vw_EstadisticasPorRefugio")]
-	public partial class vw_EstadisticasPorRefugio
-	{
+		private string _NombreMascota;
 		
 		private int _ref_IdRefugio;
 		
 		private string _NombreRefugio;
 		
-		private System.Nullable<bool> _ref_Verificado;
-		
-		private System.Nullable<int> _TotalMascotas;
-		
-		private System.Nullable<int> _Disponibles;
-		
-		private System.Nullable<int> _Adoptadas;
-		
-		private System.Nullable<int> _EnProceso;
-		
-		private System.Nullable<int> _TotalUsuarios;
-		
-		public vw_EstadisticasPorRefugio()
+		public vw_SolicitudesCompleta()
 		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_sol_IdSolicitud", DbType="Int NOT NULL")]
+		public int sol_IdSolicitud
+		{
+			get
+			{
+				return this._sol_IdSolicitud;
+			}
+			set
+			{
+				if ((this._sol_IdSolicitud != value))
+				{
+					this._sol_IdSolicitud = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_sol_FechaSolicitud", DbType="DateTime")]
+		public System.Nullable<System.DateTime> sol_FechaSolicitud
+		{
+			get
+			{
+				return this._sol_FechaSolicitud;
+			}
+			set
+			{
+				if ((this._sol_FechaSolicitud != value))
+				{
+					this._sol_FechaSolicitud = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_sol_Estado", DbType="VarChar(20)")]
+		public string sol_Estado
+		{
+			get
+			{
+				return this._sol_Estado;
+			}
+			set
+			{
+				if ((this._sol_Estado != value))
+				{
+					this._sol_Estado = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_sol_PuntajeTotal", DbType="Decimal(5,2)")]
+		public System.Nullable<decimal> sol_PuntajeTotal
+		{
+			get
+			{
+				return this._sol_PuntajeTotal;
+			}
+			set
+			{
+				if ((this._sol_PuntajeTotal != value))
+				{
+					this._sol_PuntajeTotal = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdAdoptante", DbType="Int NOT NULL")]
+		public int IdAdoptante
+		{
+			get
+			{
+				return this._IdAdoptante;
+			}
+			set
+			{
+				if ((this._IdAdoptante != value))
+				{
+					this._IdAdoptante = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NombreAdoptante", DbType="VarChar(201) NOT NULL", CanBeNull=false)]
+		public string NombreAdoptante
+		{
+			get
+			{
+				return this._NombreAdoptante;
+			}
+			set
+			{
+				if ((this._NombreAdoptante != value))
+				{
+					this._NombreAdoptante = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EmailAdoptante", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
+		public string EmailAdoptante
+		{
+			get
+			{
+				return this._EmailAdoptante;
+			}
+			set
+			{
+				if ((this._EmailAdoptante != value))
+				{
+					this._EmailAdoptante = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_usu_Cedula", DbType="VarChar(20)")]
+		public string usu_Cedula
+		{
+			get
+			{
+				return this._usu_Cedula;
+			}
+			set
+			{
+				if ((this._usu_Cedula != value))
+				{
+					this._usu_Cedula = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TelefonoAdoptante", DbType="VarChar(20)")]
+		public string TelefonoAdoptante
+		{
+			get
+			{
+				return this._TelefonoAdoptante;
+			}
+			set
+			{
+				if ((this._TelefonoAdoptante != value))
+				{
+					this._TelefonoAdoptante = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_mas_IdMascota", DbType="Int NOT NULL")]
+		public int mas_IdMascota
+		{
+			get
+			{
+				return this._mas_IdMascota;
+			}
+			set
+			{
+				if ((this._mas_IdMascota != value))
+				{
+					this._mas_IdMascota = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NombreMascota", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
+		public string NombreMascota
+		{
+			get
+			{
+				return this._NombreMascota;
+			}
+			set
+			{
+				if ((this._NombreMascota != value))
+				{
+					this._NombreMascota = value;
+				}
+			}
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ref_IdRefugio", DbType="Int NOT NULL")]
@@ -7520,102 +8756,6 @@ namespace CapaDatos
 				if ((this._NombreRefugio != value))
 				{
 					this._NombreRefugio = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ref_Verificado", DbType="Bit")]
-		public System.Nullable<bool> ref_Verificado
-		{
-			get
-			{
-				return this._ref_Verificado;
-			}
-			set
-			{
-				if ((this._ref_Verificado != value))
-				{
-					this._ref_Verificado = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TotalMascotas", DbType="Int")]
-		public System.Nullable<int> TotalMascotas
-		{
-			get
-			{
-				return this._TotalMascotas;
-			}
-			set
-			{
-				if ((this._TotalMascotas != value))
-				{
-					this._TotalMascotas = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Disponibles", DbType="Int")]
-		public System.Nullable<int> Disponibles
-		{
-			get
-			{
-				return this._Disponibles;
-			}
-			set
-			{
-				if ((this._Disponibles != value))
-				{
-					this._Disponibles = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Adoptadas", DbType="Int")]
-		public System.Nullable<int> Adoptadas
-		{
-			get
-			{
-				return this._Adoptadas;
-			}
-			set
-			{
-				if ((this._Adoptadas != value))
-				{
-					this._Adoptadas = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EnProceso", DbType="Int")]
-		public System.Nullable<int> EnProceso
-		{
-			get
-			{
-				return this._EnProceso;
-			}
-			set
-			{
-				if ((this._EnProceso != value))
-				{
-					this._EnProceso = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TotalUsuarios", DbType="Int")]
-		public System.Nullable<int> TotalUsuarios
-		{
-			get
-			{
-				return this._TotalUsuarios;
-			}
-			set
-			{
-				if ((this._TotalUsuarios != value))
-				{
-					this._TotalUsuarios = value;
 				}
 			}
 		}
@@ -7918,214 +9058,28 @@ namespace CapaDatos
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.vw_SolicitudesCompleta")]
-	public partial class vw_SolicitudesCompleta
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.vw_EstadisticasPorRefugio")]
+	public partial class vw_EstadisticasPorRefugio
 	{
-		
-		private int _sol_IdSolicitud;
-		
-		private System.Nullable<System.DateTime> _sol_FechaSolicitud;
-		
-		private string _sol_Estado;
-		
-		private System.Nullable<decimal> _sol_PuntajeTotal;
-		
-		private int _IdAdoptante;
-		
-		private string _NombreAdoptante;
-		
-		private string _EmailAdoptante;
-		
-		private string _usu_Cedula;
-		
-		private string _TelefonoAdoptante;
-		
-		private int _mas_IdMascota;
-		
-		private string _NombreMascota;
 		
 		private int _ref_IdRefugio;
 		
 		private string _NombreRefugio;
 		
-		public vw_SolicitudesCompleta()
-		{
-		}
+		private System.Nullable<bool> _ref_Verificado;
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_sol_IdSolicitud", DbType="Int NOT NULL")]
-		public int sol_IdSolicitud
-		{
-			get
-			{
-				return this._sol_IdSolicitud;
-			}
-			set
-			{
-				if ((this._sol_IdSolicitud != value))
-				{
-					this._sol_IdSolicitud = value;
-				}
-			}
-		}
+		private System.Nullable<int> _TotalMascotas;
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_sol_FechaSolicitud", DbType="DateTime")]
-		public System.Nullable<System.DateTime> sol_FechaSolicitud
-		{
-			get
-			{
-				return this._sol_FechaSolicitud;
-			}
-			set
-			{
-				if ((this._sol_FechaSolicitud != value))
-				{
-					this._sol_FechaSolicitud = value;
-				}
-			}
-		}
+		private System.Nullable<int> _Disponibles;
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_sol_Estado", DbType="VarChar(20)")]
-		public string sol_Estado
-		{
-			get
-			{
-				return this._sol_Estado;
-			}
-			set
-			{
-				if ((this._sol_Estado != value))
-				{
-					this._sol_Estado = value;
-				}
-			}
-		}
+		private System.Nullable<int> _Adoptadas;
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_sol_PuntajeTotal", DbType="Decimal(5,2)")]
-		public System.Nullable<decimal> sol_PuntajeTotal
-		{
-			get
-			{
-				return this._sol_PuntajeTotal;
-			}
-			set
-			{
-				if ((this._sol_PuntajeTotal != value))
-				{
-					this._sol_PuntajeTotal = value;
-				}
-			}
-		}
+		private System.Nullable<int> _EnProceso;
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdAdoptante", DbType="Int NOT NULL")]
-		public int IdAdoptante
-		{
-			get
-			{
-				return this._IdAdoptante;
-			}
-			set
-			{
-				if ((this._IdAdoptante != value))
-				{
-					this._IdAdoptante = value;
-				}
-			}
-		}
+		private System.Nullable<int> _TotalUsuarios;
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NombreAdoptante", DbType="VarChar(201) NOT NULL", CanBeNull=false)]
-		public string NombreAdoptante
+		public vw_EstadisticasPorRefugio()
 		{
-			get
-			{
-				return this._NombreAdoptante;
-			}
-			set
-			{
-				if ((this._NombreAdoptante != value))
-				{
-					this._NombreAdoptante = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EmailAdoptante", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
-		public string EmailAdoptante
-		{
-			get
-			{
-				return this._EmailAdoptante;
-			}
-			set
-			{
-				if ((this._EmailAdoptante != value))
-				{
-					this._EmailAdoptante = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_usu_Cedula", DbType="VarChar(20)")]
-		public string usu_Cedula
-		{
-			get
-			{
-				return this._usu_Cedula;
-			}
-			set
-			{
-				if ((this._usu_Cedula != value))
-				{
-					this._usu_Cedula = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TelefonoAdoptante", DbType="VarChar(20)")]
-		public string TelefonoAdoptante
-		{
-			get
-			{
-				return this._TelefonoAdoptante;
-			}
-			set
-			{
-				if ((this._TelefonoAdoptante != value))
-				{
-					this._TelefonoAdoptante = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_mas_IdMascota", DbType="Int NOT NULL")]
-		public int mas_IdMascota
-		{
-			get
-			{
-				return this._mas_IdMascota;
-			}
-			set
-			{
-				if ((this._mas_IdMascota != value))
-				{
-					this._mas_IdMascota = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NombreMascota", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
-		public string NombreMascota
-		{
-			get
-			{
-				return this._NombreMascota;
-			}
-			set
-			{
-				if ((this._NombreMascota != value))
-				{
-					this._NombreMascota = value;
-				}
-			}
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ref_IdRefugio", DbType="Int NOT NULL")]
@@ -8159,508 +9113,678 @@ namespace CapaDatos
 				}
 			}
 		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ref_Verificado", DbType="Bit")]
+		public System.Nullable<bool> ref_Verificado
+		{
+			get
+			{
+				return this._ref_Verificado;
+			}
+			set
+			{
+				if ((this._ref_Verificado != value))
+				{
+					this._ref_Verificado = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TotalMascotas", DbType="Int")]
+		public System.Nullable<int> TotalMascotas
+		{
+			get
+			{
+				return this._TotalMascotas;
+			}
+			set
+			{
+				if ((this._TotalMascotas != value))
+				{
+					this._TotalMascotas = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Disponibles", DbType="Int")]
+		public System.Nullable<int> Disponibles
+		{
+			get
+			{
+				return this._Disponibles;
+			}
+			set
+			{
+				if ((this._Disponibles != value))
+				{
+					this._Disponibles = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Adoptadas", DbType="Int")]
+		public System.Nullable<int> Adoptadas
+		{
+			get
+			{
+				return this._Adoptadas;
+			}
+			set
+			{
+				if ((this._Adoptadas != value))
+				{
+					this._Adoptadas = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EnProceso", DbType="Int")]
+		public System.Nullable<int> EnProceso
+		{
+			get
+			{
+				return this._EnProceso;
+			}
+			set
+			{
+				if ((this._EnProceso != value))
+				{
+					this._EnProceso = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TotalUsuarios", DbType="Int")]
+		public System.Nullable<int> TotalUsuarios
+		{
+			get
+			{
+				return this._TotalUsuarios;
+			}
+			set
+			{
+				if ((this._TotalUsuarios != value))
+				{
+					this._TotalUsuarios = value;
+				}
+			}
+		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tbl_SeguimientosAdopcion")]
-	public partial class tbl_SeguimientosAdopcion : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.vw_EstadisticasGenerales")]
+	public partial class vw_EstadisticasGenerales
 	{
 		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		private System.Nullable<int> _TotalUsuarios;
 		
-		private int _seg_IdSeguimiento;
+		private System.Nullable<int> _TotalAdoptantes;
 		
-		private int _seg_IdSolicitud;
+		private System.Nullable<int> _TotalRefugios;
 		
-		private int _seg_NumeroEtapa;
+		private System.Nullable<int> _RefugiosVerificados;
 		
-		private string _seg_TituloEtapa;
+		private System.Nullable<int> _TotalMascotas;
 		
-		private System.DateTime _seg_FechaProgramada;
+		private System.Nullable<int> _MascotasDisponibles;
 		
-		private System.Nullable<decimal> _seg_Latitud;
+		private System.Nullable<int> _MascotasAdoptadas;
 		
-		private System.Nullable<decimal> _seg_Longitud;
+		private System.Nullable<int> _SolicitudesPendientes;
 		
-		private string _seg_FotoUrlEnVivo;
+		private System.Nullable<int> _ReportesActivos;
 		
-		private string _seg_ArchivoAdjuntoUrl;
-		
-		private string _seg_RespuestasJSON;
-		
-		private string _seg_Estado;
-		
-		private System.Nullable<System.DateTime> _seg_FechaEnvio;
-		
-		private System.Nullable<System.DateTime> _seg_FechaRevision;
-		
-		private System.Nullable<int> _seg_IdUsuarioRevision;
-		
-		private string _seg_ComentariosRevision;
-		
-		private System.Nullable<System.DateTime> _seg_FechaCreacion;
-		
-		private EntityRef<tbl_SolicitudesAdopcion> _tbl_SolicitudesAdopcion;
-		
-		private EntityRef<tbl_Usuarios> _tbl_Usuarios;
-		
-    #region Definiciones de métodos de extensibilidad
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void Onseg_IdSeguimientoChanging(int value);
-    partial void Onseg_IdSeguimientoChanged();
-    partial void Onseg_IdSolicitudChanging(int value);
-    partial void Onseg_IdSolicitudChanged();
-    partial void Onseg_NumeroEtapaChanging(int value);
-    partial void Onseg_NumeroEtapaChanged();
-    partial void Onseg_TituloEtapaChanging(string value);
-    partial void Onseg_TituloEtapaChanged();
-    partial void Onseg_FechaProgramadaChanging(System.DateTime value);
-    partial void Onseg_FechaProgramadaChanged();
-    partial void Onseg_LatitudChanging(System.Nullable<decimal> value);
-    partial void Onseg_LatitudChanged();
-    partial void Onseg_LongitudChanging(System.Nullable<decimal> value);
-    partial void Onseg_LongitudChanged();
-    partial void Onseg_FotoUrlEnVivoChanging(string value);
-    partial void Onseg_FotoUrlEnVivoChanged();
-    partial void Onseg_ArchivoAdjuntoUrlChanging(string value);
-    partial void Onseg_ArchivoAdjuntoUrlChanged();
-    partial void Onseg_RespuestasJSONChanging(string value);
-    partial void Onseg_RespuestasJSONChanged();
-    partial void Onseg_EstadoChanging(string value);
-    partial void Onseg_EstadoChanged();
-    partial void Onseg_FechaEnvioChanging(System.Nullable<System.DateTime> value);
-    partial void Onseg_FechaEnvioChanged();
-    partial void Onseg_FechaRevisionChanging(System.Nullable<System.DateTime> value);
-    partial void Onseg_FechaRevisionChanged();
-    partial void Onseg_IdUsuarioRevisionChanging(System.Nullable<int> value);
-    partial void Onseg_IdUsuarioRevisionChanged();
-    partial void Onseg_ComentariosRevisionChanging(string value);
-    partial void Onseg_ComentariosRevisionChanged();
-    partial void Onseg_FechaCreacionChanging(System.Nullable<System.DateTime> value);
-    partial void Onseg_FechaCreacionChanged();
-    #endregion
-		
-		public tbl_SeguimientosAdopcion()
+		public vw_EstadisticasGenerales()
 		{
-			this._tbl_SolicitudesAdopcion = default(EntityRef<tbl_SolicitudesAdopcion>);
-			this._tbl_Usuarios = default(EntityRef<tbl_Usuarios>);
-			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_seg_IdSeguimiento", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int seg_IdSeguimiento
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TotalUsuarios", DbType="Int")]
+		public System.Nullable<int> TotalUsuarios
 		{
 			get
 			{
-				return this._seg_IdSeguimiento;
+				return this._TotalUsuarios;
 			}
 			set
 			{
-				if ((this._seg_IdSeguimiento != value))
+				if ((this._TotalUsuarios != value))
 				{
-					this.Onseg_IdSeguimientoChanging(value);
-					this.SendPropertyChanging();
-					this._seg_IdSeguimiento = value;
-					this.SendPropertyChanged("seg_IdSeguimiento");
-					this.Onseg_IdSeguimientoChanged();
+					this._TotalUsuarios = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_seg_IdSolicitud", DbType="Int NOT NULL")]
-		public int seg_IdSolicitud
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TotalAdoptantes", DbType="Int")]
+		public System.Nullable<int> TotalAdoptantes
 		{
 			get
 			{
-				return this._seg_IdSolicitud;
+				return this._TotalAdoptantes;
 			}
 			set
 			{
-				if ((this._seg_IdSolicitud != value))
+				if ((this._TotalAdoptantes != value))
 				{
-					if (this._tbl_SolicitudesAdopcion.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.Onseg_IdSolicitudChanging(value);
-					this.SendPropertyChanging();
-					this._seg_IdSolicitud = value;
-					this.SendPropertyChanged("seg_IdSolicitud");
-					this.Onseg_IdSolicitudChanged();
+					this._TotalAdoptantes = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_seg_NumeroEtapa", DbType="Int NOT NULL")]
-		public int seg_NumeroEtapa
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TotalRefugios", DbType="Int")]
+		public System.Nullable<int> TotalRefugios
 		{
 			get
 			{
-				return this._seg_NumeroEtapa;
+				return this._TotalRefugios;
 			}
 			set
 			{
-				if ((this._seg_NumeroEtapa != value))
+				if ((this._TotalRefugios != value))
 				{
-					this.Onseg_NumeroEtapaChanging(value);
-					this.SendPropertyChanging();
-					this._seg_NumeroEtapa = value;
-					this.SendPropertyChanged("seg_NumeroEtapa");
-					this.Onseg_NumeroEtapaChanged();
+					this._TotalRefugios = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_seg_TituloEtapa", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
-		public string seg_TituloEtapa
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RefugiosVerificados", DbType="Int")]
+		public System.Nullable<int> RefugiosVerificados
 		{
 			get
 			{
-				return this._seg_TituloEtapa;
+				return this._RefugiosVerificados;
 			}
 			set
 			{
-				if ((this._seg_TituloEtapa != value))
+				if ((this._RefugiosVerificados != value))
 				{
-					this.Onseg_TituloEtapaChanging(value);
-					this.SendPropertyChanging();
-					this._seg_TituloEtapa = value;
-					this.SendPropertyChanged("seg_TituloEtapa");
-					this.Onseg_TituloEtapaChanged();
+					this._RefugiosVerificados = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_seg_FechaProgramada", DbType="DateTime NOT NULL")]
-		public System.DateTime seg_FechaProgramada
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TotalMascotas", DbType="Int")]
+		public System.Nullable<int> TotalMascotas
 		{
 			get
 			{
-				return this._seg_FechaProgramada;
+				return this._TotalMascotas;
 			}
 			set
 			{
-				if ((this._seg_FechaProgramada != value))
+				if ((this._TotalMascotas != value))
 				{
-					this.Onseg_FechaProgramadaChanging(value);
-					this.SendPropertyChanging();
-					this._seg_FechaProgramada = value;
-					this.SendPropertyChanged("seg_FechaProgramada");
-					this.Onseg_FechaProgramadaChanged();
+					this._TotalMascotas = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_seg_Latitud", DbType="Decimal(10,8)")]
-		public System.Nullable<decimal> seg_Latitud
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MascotasDisponibles", DbType="Int")]
+		public System.Nullable<int> MascotasDisponibles
 		{
 			get
 			{
-				return this._seg_Latitud;
+				return this._MascotasDisponibles;
 			}
 			set
 			{
-				if ((this._seg_Latitud != value))
+				if ((this._MascotasDisponibles != value))
 				{
-					this.Onseg_LatitudChanging(value);
-					this.SendPropertyChanging();
-					this._seg_Latitud = value;
-					this.SendPropertyChanged("seg_Latitud");
-					this.Onseg_LatitudChanged();
+					this._MascotasDisponibles = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_seg_Longitud", DbType="Decimal(11,8)")]
-		public System.Nullable<decimal> seg_Longitud
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MascotasAdoptadas", DbType="Int")]
+		public System.Nullable<int> MascotasAdoptadas
 		{
 			get
 			{
-				return this._seg_Longitud;
+				return this._MascotasAdoptadas;
 			}
 			set
 			{
-				if ((this._seg_Longitud != value))
+				if ((this._MascotasAdoptadas != value))
 				{
-					this.Onseg_LongitudChanging(value);
-					this.SendPropertyChanging();
-					this._seg_Longitud = value;
-					this.SendPropertyChanged("seg_Longitud");
-					this.Onseg_LongitudChanged();
+					this._MascotasAdoptadas = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_seg_FotoUrlEnVivo", DbType="VarChar(500)")]
-		public string seg_FotoUrlEnVivo
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SolicitudesPendientes", DbType="Int")]
+		public System.Nullable<int> SolicitudesPendientes
 		{
 			get
 			{
-				return this._seg_FotoUrlEnVivo;
+				return this._SolicitudesPendientes;
 			}
 			set
 			{
-				if ((this._seg_FotoUrlEnVivo != value))
+				if ((this._SolicitudesPendientes != value))
 				{
-					this.Onseg_FotoUrlEnVivoChanging(value);
-					this.SendPropertyChanging();
-					this._seg_FotoUrlEnVivo = value;
-					this.SendPropertyChanged("seg_FotoUrlEnVivo");
-					this.Onseg_FotoUrlEnVivoChanged();
+					this._SolicitudesPendientes = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_seg_ArchivoAdjuntoUrl", DbType="VarChar(500)")]
-		public string seg_ArchivoAdjuntoUrl
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ReportesActivos", DbType="Int")]
+		public System.Nullable<int> ReportesActivos
 		{
 			get
 			{
-				return this._seg_ArchivoAdjuntoUrl;
+				return this._ReportesActivos;
 			}
 			set
 			{
-				if ((this._seg_ArchivoAdjuntoUrl != value))
+				if ((this._ReportesActivos != value))
 				{
-					this.Onseg_ArchivoAdjuntoUrlChanging(value);
-					this.SendPropertyChanging();
-					this._seg_ArchivoAdjuntoUrl = value;
-					this.SendPropertyChanged("seg_ArchivoAdjuntoUrl");
-					this.Onseg_ArchivoAdjuntoUrlChanged();
+					this._ReportesActivos = value;
+				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.vw_AdopcionesMensuales")]
+	public partial class vw_AdopcionesMensuales
+	{
+		
+		private System.Nullable<int> _Anio;
+		
+		private System.Nullable<int> _Mes;
+		
+		private System.Nullable<int> _TotalAdopciones;
+		
+		public vw_AdopcionesMensuales()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Anio", DbType="Int")]
+		public System.Nullable<int> Anio
+		{
+			get
+			{
+				return this._Anio;
+			}
+			set
+			{
+				if ((this._Anio != value))
+				{
+					this._Anio = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_seg_RespuestasJSON", DbType="Text", UpdateCheck=UpdateCheck.Never)]
-		public string seg_RespuestasJSON
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Mes", DbType="Int")]
+		public System.Nullable<int> Mes
 		{
 			get
 			{
-				return this._seg_RespuestasJSON;
+				return this._Mes;
 			}
 			set
 			{
-				if ((this._seg_RespuestasJSON != value))
+				if ((this._Mes != value))
 				{
-					this.Onseg_RespuestasJSONChanging(value);
-					this.SendPropertyChanging();
-					this._seg_RespuestasJSON = value;
-					this.SendPropertyChanged("seg_RespuestasJSON");
-					this.Onseg_RespuestasJSONChanged();
+					this._Mes = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_seg_Estado", DbType="VarChar(30)")]
-		public string seg_Estado
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TotalAdopciones", DbType="Int")]
+		public System.Nullable<int> TotalAdopciones
 		{
 			get
 			{
-				return this._seg_Estado;
+				return this._TotalAdopciones;
 			}
 			set
 			{
-				if ((this._seg_Estado != value))
+				if ((this._TotalAdopciones != value))
 				{
-					this.Onseg_EstadoChanging(value);
-					this.SendPropertyChanging();
-					this._seg_Estado = value;
-					this.SendPropertyChanged("seg_Estado");
-					this.Onseg_EstadoChanged();
+					this._TotalAdopciones = value;
+				}
+			}
+		}
+	}
+	
+	public partial class sp_CalcularEvaluacionAdopcionResult
+	{
+		
+		private System.Nullable<int> _IdSolicitud;
+		
+		private System.Nullable<decimal> _PuntajeTotal;
+		
+		private string _Resultado;
+		
+		public sp_CalcularEvaluacionAdopcionResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdSolicitud", DbType="Int")]
+		public System.Nullable<int> IdSolicitud
+		{
+			get
+			{
+				return this._IdSolicitud;
+			}
+			set
+			{
+				if ((this._IdSolicitud != value))
+				{
+					this._IdSolicitud = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_seg_FechaEnvio", DbType="DateTime")]
-		public System.Nullable<System.DateTime> seg_FechaEnvio
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PuntajeTotal", DbType="Decimal(5,2)")]
+		public System.Nullable<decimal> PuntajeTotal
 		{
 			get
 			{
-				return this._seg_FechaEnvio;
+				return this._PuntajeTotal;
 			}
 			set
 			{
-				if ((this._seg_FechaEnvio != value))
+				if ((this._PuntajeTotal != value))
 				{
-					this.Onseg_FechaEnvioChanging(value);
-					this.SendPropertyChanging();
-					this._seg_FechaEnvio = value;
-					this.SendPropertyChanged("seg_FechaEnvio");
-					this.Onseg_FechaEnvioChanged();
+					this._PuntajeTotal = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_seg_FechaRevision", DbType="DateTime")]
-		public System.Nullable<System.DateTime> seg_FechaRevision
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Resultado", DbType="VarChar(17) NOT NULL", CanBeNull=false)]
+		public string Resultado
 		{
 			get
 			{
-				return this._seg_FechaRevision;
+				return this._Resultado;
 			}
 			set
 			{
-				if ((this._seg_FechaRevision != value))
+				if ((this._Resultado != value))
 				{
-					this.Onseg_FechaRevisionChanging(value);
-					this.SendPropertyChanging();
-					this._seg_FechaRevision = value;
-					this.SendPropertyChanged("seg_FechaRevision");
-					this.Onseg_FechaRevisionChanged();
+					this._Resultado = value;
+				}
+			}
+		}
+	}
+	
+	public partial class sp_ConfirmarDevolucionRetornoResult
+	{
+		
+		private int _Exito;
+		
+		private string _Mensaje;
+		
+		public sp_ConfirmarDevolucionRetornoResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Exito", DbType="Int NOT NULL")]
+		public int Exito
+		{
+			get
+			{
+				return this._Exito;
+			}
+			set
+			{
+				if ((this._Exito != value))
+				{
+					this._Exito = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_seg_IdUsuarioRevision", DbType="Int")]
-		public System.Nullable<int> seg_IdUsuarioRevision
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Mensaje", DbType="VarChar(62) NOT NULL", CanBeNull=false)]
+		public string Mensaje
 		{
 			get
 			{
-				return this._seg_IdUsuarioRevision;
+				return this._Mensaje;
 			}
 			set
 			{
-				if ((this._seg_IdUsuarioRevision != value))
+				if ((this._Mensaje != value))
 				{
-					if (this._tbl_Usuarios.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.Onseg_IdUsuarioRevisionChanging(value);
-					this.SendPropertyChanging();
-					this._seg_IdUsuarioRevision = value;
-					this.SendPropertyChanged("seg_IdUsuarioRevision");
-					this.Onseg_IdUsuarioRevisionChanged();
+					this._Mensaje = value;
+				}
+			}
+		}
+	}
+	
+	public partial class sp_DesbloquearCuentaResult
+	{
+		
+		private int _Exito;
+		
+		private string _Mensaje;
+		
+		public sp_DesbloquearCuentaResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Exito", DbType="Int NOT NULL")]
+		public int Exito
+		{
+			get
+			{
+				return this._Exito;
+			}
+			set
+			{
+				if ((this._Exito != value))
+				{
+					this._Exito = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_seg_ComentariosRevision", DbType="Text", UpdateCheck=UpdateCheck.Never)]
-		public string seg_ComentariosRevision
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Mensaje", DbType="VarChar(33) NOT NULL", CanBeNull=false)]
+		public string Mensaje
 		{
 			get
 			{
-				return this._seg_ComentariosRevision;
+				return this._Mensaje;
 			}
 			set
 			{
-				if ((this._seg_ComentariosRevision != value))
+				if ((this._Mensaje != value))
 				{
-					this.Onseg_ComentariosRevisionChanging(value);
-					this.SendPropertyChanging();
-					this._seg_ComentariosRevision = value;
-					this.SendPropertyChanged("seg_ComentariosRevision");
-					this.Onseg_ComentariosRevisionChanged();
+					this._Mensaje = value;
+				}
+			}
+		}
+	}
+	
+	public partial class sp_EnviarSeguimientoResult
+	{
+		
+		private int _FilasActualizadas;
+		
+		public sp_EnviarSeguimientoResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FilasActualizadas", DbType="Int NOT NULL")]
+		public int FilasActualizadas
+		{
+			get
+			{
+				return this._FilasActualizadas;
+			}
+			set
+			{
+				if ((this._FilasActualizadas != value))
+				{
+					this._FilasActualizadas = value;
+				}
+			}
+		}
+	}
+	
+	public partial class sp_GenerarCertificadoAdopcionResult
+	{
+		
+		private int _Exito;
+		
+		private string _Mensaje;
+		
+		public sp_GenerarCertificadoAdopcionResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Exito", DbType="Int NOT NULL")]
+		public int Exito
+		{
+			get
+			{
+				return this._Exito;
+			}
+			set
+			{
+				if ((this._Exito != value))
+				{
+					this._Exito = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_seg_FechaCreacion", DbType="DateTime")]
-		public System.Nullable<System.DateTime> seg_FechaCreacion
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Mensaje", DbType="VarChar(60) NOT NULL", CanBeNull=false)]
+		public string Mensaje
 		{
 			get
 			{
-				return this._seg_FechaCreacion;
+				return this._Mensaje;
 			}
 			set
 			{
-				if ((this._seg_FechaCreacion != value))
+				if ((this._Mensaje != value))
 				{
-					this.Onseg_FechaCreacionChanging(value);
-					this.SendPropertyChanging();
-					this._seg_FechaCreacion = value;
-					this.SendPropertyChanged("seg_FechaCreacion");
-					this.Onseg_FechaCreacionChanged();
+					this._Mensaje = value;
+				}
+			}
+		}
+	}
+	
+	public partial class sp_GenerarTokenRecuperacionResult
+	{
+		
+		private string _Token;
+		
+		private System.Nullable<int> _IdUsuario;
+		
+		public sp_GenerarTokenRecuperacionResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Token", DbType="VarChar(255)")]
+		public string Token
+		{
+			get
+			{
+				return this._Token;
+			}
+			set
+			{
+				if ((this._Token != value))
+				{
+					this._Token = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_SolicitudesAdopcion_tbl_SeguimientosAdopcion", Storage="_tbl_SolicitudesAdopcion", ThisKey="seg_IdSolicitud", OtherKey="sol_IdSolicitud", IsForeignKey=true)]
-		public tbl_SolicitudesAdopcion tbl_SolicitudesAdopcion
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdUsuario", DbType="Int")]
+		public System.Nullable<int> IdUsuario
 		{
 			get
 			{
-				return this._tbl_SolicitudesAdopcion.Entity;
+				return this._IdUsuario;
 			}
 			set
 			{
-				tbl_SolicitudesAdopcion previousValue = this._tbl_SolicitudesAdopcion.Entity;
-				if (((previousValue != value) 
-							|| (this._tbl_SolicitudesAdopcion.HasLoadedOrAssignedValue == false)))
+				if ((this._IdUsuario != value))
 				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._tbl_SolicitudesAdopcion.Entity = null;
-						previousValue.tbl_SeguimientosAdopcion.Remove(this);
-					}
-					this._tbl_SolicitudesAdopcion.Entity = value;
-					if ((value != null))
-					{
-						value.tbl_SeguimientosAdopcion.Add(this);
-						this._seg_IdSolicitud = value.sol_IdSolicitud;
-					}
-					else
-					{
-						this._seg_IdSolicitud = default(int);
-					}
-					this.SendPropertyChanged("tbl_SolicitudesAdopcion");
+					this._IdUsuario = value;
+				}
+			}
+		}
+	}
+	
+	public partial class sp_ObtenerEstadisticasDashboardResult
+	{
+		
+		private System.Nullable<int> _TotalMascotas;
+		
+		private System.Nullable<int> _Disponibles;
+		
+		private System.Nullable<int> _EnProceso;
+		
+		private System.Nullable<int> _Adoptadas;
+		
+		public sp_ObtenerEstadisticasDashboardResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TotalMascotas", DbType="Int")]
+		public System.Nullable<int> TotalMascotas
+		{
+			get
+			{
+				return this._TotalMascotas;
+			}
+			set
+			{
+				if ((this._TotalMascotas != value))
+				{
+					this._TotalMascotas = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Usuarios_tbl_SeguimientosAdopcion", Storage="_tbl_Usuarios", ThisKey="seg_IdUsuarioRevision", OtherKey="usu_IdUsuario", IsForeignKey=true)]
-		public tbl_Usuarios tbl_Usuarios
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Disponibles", DbType="Int")]
+		public System.Nullable<int> Disponibles
 		{
 			get
 			{
-				return this._tbl_Usuarios.Entity;
+				return this._Disponibles;
 			}
 			set
 			{
-				tbl_Usuarios previousValue = this._tbl_Usuarios.Entity;
-				if (((previousValue != value) 
-							|| (this._tbl_Usuarios.HasLoadedOrAssignedValue == false)))
+				if ((this._Disponibles != value))
 				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._tbl_Usuarios.Entity = null;
-						previousValue.tbl_SeguimientosAdopcion.Remove(this);
-					}
-					this._tbl_Usuarios.Entity = value;
-					if ((value != null))
-					{
-						value.tbl_SeguimientosAdopcion.Add(this);
-						this._seg_IdUsuarioRevision = value.usu_IdUsuario;
-					}
-					else
-					{
-						this._seg_IdUsuarioRevision = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("tbl_Usuarios");
+					this._Disponibles = value;
 				}
 			}
 		}
 		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EnProceso", DbType="Int")]
+		public System.Nullable<int> EnProceso
 		{
-			if ((this.PropertyChanging != null))
+			get
 			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
+				return this._EnProceso;
+			}
+			set
+			{
+				if ((this._EnProceso != value))
+				{
+					this._EnProceso = value;
+				}
 			}
 		}
 		
-		protected virtual void SendPropertyChanged(String propertyName)
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Adoptadas", DbType="Int")]
+		public System.Nullable<int> Adoptadas
 		{
-			if ((this.PropertyChanged != null))
+			get
 			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+				return this._Adoptadas;
+			}
+			set
+			{
+				if ((this._Adoptadas != value))
+				{
+					this._Adoptadas = value;
+				}
 			}
 		}
 	}
@@ -8704,32 +9828,6 @@ namespace CapaDatos
 				if ((this._Mensaje != value))
 				{
 					this._Mensaje = value;
-				}
-			}
-		}
-	}
-	
-	public partial class sp_EnviarSeguimientoResult
-	{
-		
-		private int _FilasActualizadas;
-		
-		public sp_EnviarSeguimientoResult()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FilasActualizadas", DbType="Int NOT NULL")]
-		public int FilasActualizadas
-		{
-			get
-			{
-				return this._FilasActualizadas;
-			}
-			set
-			{
-				if ((this._FilasActualizadas != value))
-				{
-					this._FilasActualizadas = value;
 				}
 			}
 		}
@@ -8805,14 +9903,16 @@ namespace CapaDatos
 		}
 	}
 	
-	public partial class sp_ConfirmarDevolucionRetornoResult
+	public partial class sp_ValidarLoginResult
 	{
 		
 		private int _Exito;
 		
 		private string _Mensaje;
 		
-		public sp_ConfirmarDevolucionRetornoResult()
+		private System.Nullable<int> _IdUsuario;
+		
+		public sp_ValidarLoginResult()
 		{
 		}
 		
@@ -8832,7 +9932,111 @@ namespace CapaDatos
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Mensaje", DbType="VarChar(62) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Mensaje", DbType="VarChar(22) NOT NULL", CanBeNull=false)]
+		public string Mensaje
+		{
+			get
+			{
+				return this._Mensaje;
+			}
+			set
+			{
+				if ((this._Mensaje != value))
+				{
+					this._Mensaje = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdUsuario", DbType="Int")]
+		public System.Nullable<int> IdUsuario
+		{
+			get
+			{
+				return this._IdUsuario;
+			}
+			set
+			{
+				if ((this._IdUsuario != value))
+				{
+					this._IdUsuario = value;
+				}
+			}
+		}
+	}
+	
+	public partial class sp_ValidarTokenRecuperacionResult
+	{
+		
+		private int _Exito;
+		
+		private string _Mensaje;
+		
+		public sp_ValidarTokenRecuperacionResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Exito", DbType="Int NOT NULL")]
+		public int Exito
+		{
+			get
+			{
+				return this._Exito;
+			}
+			set
+			{
+				if ((this._Exito != value))
+				{
+					this._Exito = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Mensaje", DbType="VarChar(25) NOT NULL", CanBeNull=false)]
+		public string Mensaje
+		{
+			get
+			{
+				return this._Mensaje;
+			}
+			set
+			{
+				if ((this._Mensaje != value))
+				{
+					this._Mensaje = value;
+				}
+			}
+		}
+	}
+	
+	public partial class sp_GenerarCertificadoAdopcionResult1
+	{
+		
+		private int _Exito;
+		
+		private string _Mensaje;
+		
+		public sp_GenerarCertificadoAdopcionResult1()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Exito", DbType="Int NOT NULL")]
+		public int Exito
+		{
+			get
+			{
+				return this._Exito;
+			}
+			set
+			{
+				if ((this._Exito != value))
+				{
+					this._Exito = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Mensaje", DbType="VarChar(60) NOT NULL", CanBeNull=false)]
 		public string Mensaje
 		{
 			get

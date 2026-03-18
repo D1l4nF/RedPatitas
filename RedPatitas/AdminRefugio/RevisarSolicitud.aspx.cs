@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.UI;
 using CapaDatos;
+using CapaNegocios;
 using System.Web.Script.Serialization;
 
 namespace RedPatitas.AdminRefugio
@@ -282,10 +283,20 @@ namespace RedPatitas.AdminRefugio
                         System.Diagnostics.Debug.WriteLine("Error crítico al inicializar seguimientos: " + exSeg.Message);
                     }
 
+                    // NOTIFICACIÓN y CERTIFICADO
+                    try 
+                    {
+                        CN_NotificacionService.Crear(solicitud.sol_IdUsuario, "Solicitud Aprobada", $"Tu solicitud de adopción ha sido aprobada. ¡Felicidades! Ya puedes descargar tu certificado.", "Adopcion", "/Adoptante/MiCertificado.aspx?id=" + solicitud.sol_IdSolicitud, "fas fa-check-circle");
+                        CN_CertificadoService.GenerarCertificado(idSolicitud);
+                    }
+                    catch(Exception exAd)
+                    {
+                         System.Diagnostics.Debug.WriteLine("Error en Notificacion/Certificado: " + exAd.Message);
+                    }
+
                     pnlSuccess.Visible = true;
                     litSuccess.Text = "¡Adopción aprobada exitosamente! La mascota ha sido marcada como adoptada.";
                     btnAprobar.Enabled = false;
-                    btnRechazar.Enabled = false;
                 }
             }
             catch (Exception ex)
@@ -294,15 +305,7 @@ namespace RedPatitas.AdminRefugio
             }
         }
 
-        protected void btnRechazar_Click(object sender, EventArgs e)
-        {
-            pnlModalRechazo.Visible = true;
-        }
 
-        protected void btnCancelarRechazo_Click(object sender, EventArgs e)
-        {
-            pnlModalRechazo.Visible = false;
-        }
 
         protected void btnConfirmarRechazo_Click(object sender, EventArgs e)
         {
@@ -341,11 +344,35 @@ namespace RedPatitas.AdminRefugio
 
                     db.SubmitChanges();
 
-                    pnlModalRechazo.Visible = false;
+                    // NOTIFICACIÓN al adoptante
+                    try
+                    {
+                        string nombreMascota = mascota != null ? mascota.mas_Nombre : "la mascota";
+                        string mensajeNotif = string.IsNullOrEmpty(motivo)
+                            ? $"Tu solicitud de adopción para {nombreMascota} ha sido rechazada."
+                            : $"Tu solicitud de adopción para {nombreMascota} ha sido rechazada. Motivo: {motivo}";
+
+                        CN_NotificacionService.Crear(
+                            solicitud.sol_IdUsuario,
+                            "Solicitud Rechazada",
+                            mensajeNotif,
+                            "Adopcion",
+                            "/Adoptante/Solicitudes.aspx",
+                            "fas fa-times-circle"
+                        );
+                    }
+                    catch (Exception exNotif)
+                    {
+                        System.Diagnostics.Debug.WriteLine("Error al notificar rechazo: " + exNotif.Message);
+                    }
+
+                    // Cerrar modal via JS y mostrar éxito
+                    string jsClose = "document.getElementById('modalRechazoDiv').style.display='none';";
+                    ScriptManager.RegisterStartupScript(this, GetType(), "closeModal", jsClose, true);
+
                     pnlSuccess.Visible = true;
-                    litSuccess.Text = "Solicitud rechazada. El adoptante será notificado.";
+                    litSuccess.Text = "Solicitud rechazada. El adoptante ha sido notificado.";
                     btnAprobar.Enabled = false;
-                    btnRechazar.Enabled = false;
                 }
             }
             catch (Exception ex)
