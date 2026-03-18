@@ -26,8 +26,8 @@ namespace CapaNegocios
             {
                 var query = from c in db.tbl_Campanias
                             join r in db.tbl_Refugios on c.cam_IdRefugio equals r.ref_IdRefugio
-                            where c.cam_Estado == "Activa"
-                            orderby c.cam_FechaInicio descending
+                            where c.cam_Estado.Contains("Activ")
+                            orderby c.cam_IdCampania descending
                             select new CampaniaDTO
                             {
                                 IdCampania = c.cam_IdCampania,
@@ -36,7 +36,11 @@ namespace CapaNegocios
                                 Titulo = c.cam_Titulo,
                                 Descripcion = c.cam_Descripcion,
                                 Estado = c.cam_Estado,
-                                ImagenUrl = c.cam_ImagenUrl
+                                ImagenUrl = c.cam_ImagenUrl,
+                                FechaInicio = c.cam_FechaInicio,
+                                FechaFin = c.cam_FechaFin,
+                                Ubicacion = c.cam_Ubicacion,
+                                TipoCampania = c.cam_TipoCampania
                             };
                 return query.Take(limite).ToList();
             }
@@ -143,12 +147,19 @@ namespace CapaNegocios
         public string Descripcion { get; set; }
         public string Estado { get; set; }
         public string ImagenUrl { get; set; }
+        public DateTime? FechaInicio { get; set; }
+        public DateTime? FechaFin { get; set; }
+        public string Ubicacion { get; set; }
+        public string TipoCampania { get; set; }
 
-        public string GetImageUrlFallback()
+        public string ImagenUrlFallback
         {
-            if (string.IsNullOrEmpty(ImagenUrl) || ImagenUrl.EndsWith("null"))
-                return "../Images/Default/default-campaign.png";
-            return ImagenUrl;
+            get
+            {
+                if (string.IsNullOrEmpty(ImagenUrl) || ImagenUrl.EndsWith("null"))
+                    return "../Images/Default/default-campaign.png";
+                return ImagenUrl;
+            }
         }
     }
 }

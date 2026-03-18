@@ -21,7 +21,7 @@
                             </svg>
                             Adoptar
                         </a>
-                        <a href="~/Public/registro.aspx" runat="server" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                        <a href="~/Public/Reportar.aspx" runat="server" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="24" height="24">
                                 <circle cx="12" cy="12" r="10"></circle>
                                 <line x1="12" y1="8" x2="12" y2="16"></line>
@@ -102,6 +102,7 @@
             <asp:Panel ID="pnlSinMascotasHome" runat="server" Visible="false" CssClass="no-pets-message">
                 <p>Próximamente tendremos mascotas disponibles. ¡Vuelve pronto!</p>
             </asp:Panel>
+            </div>
         </section>
 
         <!-- Allied Shelters Section -->
@@ -159,10 +160,20 @@
                         <div class="campaigns-grid">
                     </HeaderTemplate>
                     <ItemTemplate>
-                        <div class="campaign-card" onclick="window.location.href='Campanias.aspx?id=<%# Eval("IdCampania") %>'">
+                        <div class="campaign-card" style="cursor: pointer;" onclick="showCampaniaModal(this)"
+                             data-id='<%# Eval("IdCampania") %>'
+                             data-refugioid='<%# Eval("IdRefugio") %>'
+                             data-titulo='<%# HttpUtility.HtmlAttributeEncode(Convert.ToString(Eval("Titulo"))) %>'
+                             data-refugio='<%# HttpUtility.HtmlAttributeEncode(Convert.ToString(Eval("NombreRefugio"))) %>'
+                             data-desc='<%# HttpUtility.HtmlAttributeEncode(Convert.ToString(Eval("Descripcion"))) %>'
+                             data-tipo='<%# HttpUtility.HtmlAttributeEncode(Convert.ToString(Eval("TipoCampania"))) %>'
+                             data-ubicacion='<%# HttpUtility.HtmlAttributeEncode(Convert.ToString(Eval("Ubicacion"))) %>'
+                             data-inicio='<%# Eval("FechaInicio", "{0:dd MMM yyyy}") %>'
+                             data-fin='<%# Eval("FechaFin", "{0:dd MMM yyyy}") %>'
+                             data-imagen='<%# Eval("ImagenUrlFallback") %>'>
                             <div class="campaign-card-image">
-                                <img src="<%# Eval("GetImageUrlFallback()") %>" 
-                                     alt="<%# Eval("Titulo") %>"
+                                <img src='<%# Eval("ImagenUrlFallback") %>' 
+                                     alt='<%# Eval("Titulo") %>'
                                      onerror="this.src='../Images/Default/default-campaign.png'" />
                                 <span class="campaign-badge active">Activa</span>
                             </div>
@@ -172,7 +183,7 @@
                                 <p class="campaign-description">
                                     <%# Eval("Descripcion") %>
                                 </p>
-                                <a href="Campanias.aspx?id=<%# Eval("IdCampania") %>" class="btn-view-profile">Ver Campaña</a>
+                                <span class="btn-view-profile">Ver Campaña</span>
                             </div>
                         </div>
                     </ItemTemplate>
@@ -202,7 +213,7 @@
 
                 <!-- Header -->
                 <div class="ally-modal-header">
-                    <img id="modalLogo" src="" alt="Logo" class="ally-modal-logo" />
+                    <img id="modalLogo" src="#" alt="Logo" class="ally-modal-logo" />
                     <h2 id="modalName" class="ally-modal-name">Nombre Refugio</h2>
                     <span id="modalCity" class="ally-modal-city">📍 Ciudad</span>
                     <span id="modalYear" class="ally-modal-year">🏛️ Desde 2026</span>
@@ -240,7 +251,7 @@
                         </div>
                         <div id="emailRow" class="ally-info-row" style="display: none;">
                             <span class="ally-info-icon">✉️</span>
-                            <a id="modalEmail" href="">email</a>
+                            <a id="modalEmail" href="javascript:void(0);">email</a>
                         </div>
                         <div id="horarioRow" class="ally-info-row" style="display: none;">
                             <span class="ally-info-icon">🕐</span>
@@ -666,6 +677,44 @@
             </div>
         </div>
 
+        <!-- Modal Campania -->
+        <div id="campaniaModal" class="ally-modal-overlay" role="dialog" aria-modal="true" aria-hidden="true" style="display: none;">
+            <div class="ally-modal-content" style="max-width: 600px; padding: 0; overflow: hidden; position: relative; border-radius: 12px;">
+                <button type="button" onclick="closeCustomModal('campaniaModal')" class="ally-modal-close" aria-label="Cerrar modal" style="position: absolute; top: 10px; right: 10px; background: rgba(255,255,255,0.8); border: none; border-radius: 50%; width: 32px; height: 32px; font-size: 1.5rem; line-height: 1; display: flex; align-items: center; justify-content: center; cursor: pointer; color: #333; z-index: 10; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">&times;</button>
+                
+                <img id="modalCampaniaImg" src="#" alt="Campaña" style="width: 100%; height: 300px; object-fit: cover; display: block; border-radius: 12px 12px 0 0;" />
+                
+                <div style="padding: 2rem;">
+                    <div class="ally-modal-header" style="margin-top: 0; border-bottom: none; padding-bottom: 0;">
+                        <span id="modalCampaniaRefugio" style="color: #0D9488; font-weight: 600; font-size: 0.9rem; letter-spacing: 0.5px; display: block; text-align: center;">🏠 Refugio</span>
+                        <h2 id="modalCampaniaTitulo" class="ally-modal-name" style="margin-top: 0.5rem; margin-bottom: 0; text-align: center;">Título de la Campaña</h2>
+                        <div style="text-align: center; margin-top: 0.5rem; margin-bottom: 1.5rem;">
+                            <span id="modalCampaniaTipo" style="display: inline-block; background: #DBEAFE; color: #1D4ED8; padding: 0.2rem 0.6rem; border-radius: 1rem; font-size: 0.8rem;">Campaña</span>
+                        </div>
+                    </div>
+                    <div class="ally-modal-body">
+                        <p id="modalCampaniaDesc" class="ally-modal-desc" style="white-space: pre-wrap; margin-bottom: 1.5rem; line-height: 1.6; color: #4B5563; font-size: 1.05rem;"></p>
+                        
+                        <div class="ally-info-card" style="background: #F9FAFB; border: 1px solid #F3F4F6; border-radius: 8px; padding: 1rem;">
+                            <div class="ally-info-row" style="margin-bottom: 0.5rem;">
+                                <span class="ally-info-icon" style="color: #DC2626; font-size: 1.2rem;">📍</span>
+                                <span id="modalCampaniaUbicacion" style="flex:1; color: #374151;">Ubicación</span>
+                            </div>
+                            <div class="ally-info-row">
+                                <span class="ally-info-icon" style="color: #059669; font-size: 1.2rem;">📅</span>
+                                <span id="modalCampaniaFechas" style="flex:1; color: #374151;">Fechas</span>
+                            </div>
+                        </div>
+
+                        <div class="ally-action-buttons" style="margin-top: 1.5rem; display: flex; flex-direction: column; gap: 0.75rem;">
+                           <a id="btnLlegarCampania" href="#" target="_blank" class="ally-action-btn secondary" style="width: 100%; text-align: center; background: #fff; border: 2px solid #0D9488; color: #0D9488; text-decoration: none; font-weight: 600; padding: 0.75rem; border-radius: 8px; display: none;">📍 Ver cómo llegar en el mapa</a>
+                           <a id="btnMascotasRef" href="#" class="ally-action-btn primary" style="width: 100%; text-align: center; background: #FF7052; color: white; border: none; text-decoration: none; font-weight: 600; padding: 0.75rem; border-radius: 8px;">🏠 Ver mascotas del refugio</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Javascript para Modales de Ayuda -->
         <script type="text/javascript">
             function openCustomModal(modalId) {
@@ -688,7 +737,7 @@
 
             // Cerrar modales si se hace clic afuera
             document.addEventListener('click', function (event) {
-                const modals = ['voluntarioModal', 'donarModal', 'difundirModal'];
+                const modals = ['voluntarioModal', 'donarModal', 'difundirModal', 'campaniaModal'];
                 modals.forEach(id => {
                     const modal = document.getElementById(id);
                     if (event.target === modal) {
@@ -703,8 +752,53 @@
                     closeCustomModal('voluntarioModal');
                     closeCustomModal('donarModal');
                     closeCustomModal('difundirModal');
+                    closeCustomModal('campaniaModal');
                 }
             });
+
+            window.showCampaniaModal = function (card) {
+                try {
+                    const modal = document.getElementById('campaniaModal');
+                    if (!modal) return;
+
+                    document.getElementById('modalCampaniaImg').src = card.dataset.imagen || '../Images/Default/default-campaign.png';
+                    document.getElementById('modalCampaniaTitulo').innerText = card.dataset.titulo || 'Campaña';
+                    document.getElementById('modalCampaniaRefugio').innerText = '🏠 ' + (card.dataset.refugio || 'Refugio');
+                    document.getElementById('modalCampaniaTipo').innerText = card.dataset.tipo || 'Campaña';
+                    document.getElementById('modalCampaniaDesc').innerText = card.dataset.desc || 'Sin descripción detallada.';
+                    
+                    let ubicacion = card.dataset.ubicacion;
+                    document.getElementById('modalCampaniaUbicacion').innerText = (ubicacion && ubicacion.trim() !== '') ? ubicacion : 'Ubicación no especificada';
+
+                    let fechaStr = '';
+                    if (card.dataset.inicio) fechaStr += card.dataset.inicio;
+                    if (card.dataset.fin) fechaStr += ' - ' + card.dataset.fin;
+                    document.getElementById('modalCampaniaFechas').innerText = fechaStr !== '' ? fechaStr : 'Fechas no definidas';
+
+                    let refugioId = card.dataset.refugioid;
+                    let btnRefugio = document.getElementById('btnMascotasRef');
+                    if (refugioId && refugioId !== '0') {
+                        btnRefugio.href = 'Adopta.aspx?refugio=' + refugioId;
+                        btnRefugio.style.display = 'block';
+                    } else {
+                        btnRefugio.style.display = 'none';
+                    }
+
+                    let btnLlegar = document.getElementById('btnLlegarCampania');
+                    if (ubicacion && ubicacion.trim() !== '') {
+                        btnLlegar.href = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(ubicacion + ', Ecuador');
+                        btnLlegar.style.display = 'block';
+                    } else {
+                        btnLlegar.style.display = 'none';
+                    }
+
+                    modal.style.setProperty('display', 'flex', 'important');
+                    modal.setAttribute('aria-hidden', 'false');
+                    document.body.style.overflow = 'hidden'; 
+                } catch (e) {
+                    console.error('Error showing campania modal:', e);
+                }
+            }
             // Scroll Reveal Animation Initialization
             document.addEventListener('DOMContentLoaded', function() {
                 const animateElements = document.querySelectorAll('.scroll-animate');

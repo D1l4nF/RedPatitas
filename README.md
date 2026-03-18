@@ -5,7 +5,7 @@
 [![.NET Framework](https://img.shields.io/badge/.NET%20Framework-4.8-purple)](https://dotnet.microsoft.com/)
 [![SQL Server](https://img.shields.io/badge/SQL%20Server-2019+-red)](https://www.microsoft.com/sql-server)
 [![License](https://img.shields.io/badge/License-Academic-blue)]()
-[![Status](https://img.shields.io/badge/Status-En%20Desarrollo-yellow)]()
+[![Status](https://img.shields.io/badge/Status-Estable-green)]()
 
 ---
 
@@ -46,18 +46,17 @@ RedPatitas/
 │
 ├── 📂 CapaNegocios/              # Capa de lógica de negocio
 │   ├── CN_UsuarioService.cs      # Servicios de usuario
-│   ├── CN_LoginResultado.cs      # Resultado de login
-│   └── CN_RegistroResultado.cs   # Resultado de registro
+│   ├── CN_MascotaService.cs      # Gestión de catálogo
+│   └── CN_CampaniaService.cs     # Módulo de eventos
 │
 ├── 📂 RedPatitas/                # Interfaz Web Forms
-│   ├── Login/                    # Login, Registro
+│   ├── Public/                   # Home, Adopta, Reportar
 │   ├── Admin/                    # Panel SuperAdmin
-│   ├── AdminRefugio/             # Panel Admin de Refugio
-│   ├── Refugio/                  # Panel Usuario Refugio
+│   ├── AdminRefugio/             # Panel Gestión de Refugio
 │   ├── Adoptante/                # Panel Adoptante
-│   └── Style/                    # CSS (dashboard.css, forms.css)
+│   └── Images/                   # Assets y Fotos
 │
-└── 📄 BD_RedPatitas.sql          # Script de base de datos
+└── 📄 BD_RedPatitas.sql          # Script UNIFICADO de base de datos
 ```
 
 ---
@@ -71,54 +70,23 @@ RedPatitas/
 | 🐕 **Refugio** | 3 | 30 | Usuario operativo de refugio |
 | 🐾 **Adoptante** | 4 | 10 | Solicita adopciones, reporta mascotas |
 
-### Permisos por Rol
-
-| Funcionalidad | SuperAdmin | AdminRefugio | Refugio | Adoptante |
-|---------------|:----------:|:------------:|:-------:|:---------:|
-| Gestión global de usuarios | ✅ | ❌ | ❌ | ❌ |
-| Aprobar refugios | ✅ | ❌ | ❌ | ❌ |
-| Gestionar mascotas del refugio | ❌ | ✅* | ✅ | ❌ |
-| Gestionar campañas | ❌ | ✅* | ❌ | ❌ |
-| Ver solicitudes de adopción | ❌ | ✅* | ✅ | ❌ |
-| Buscar mascotas | ❌ | ❌ | ❌ | ✅ |
-| Solicitar adopción | ❌ | ❌ | ❌ | ✅ |
-| Reportar mascota perdida | ❌ | ❌ | ❌ | ✅ |
-| Favoritos | ❌ | ❌ | ❌ | ✅ |
-
-**\* = Bloqueado si el refugio no está verificado**
-
 ---
 
 ## 🗄️ Base de Datos
 
-### Módulos Implementados
+### Módulos Consolidados en `BD_RedPatitas.sql`
 
 | Módulo | Tablas | Descripción |
 |--------|:------:|-------------|
-| 🔐 Seguridad | 4 | Usuarios, Roles, Tokens, Auditoría |
-| 🏠 Refugios | 1 | Gestión de organizaciones |
-| 🐾 Mascotas | 4 | Mascotas, Especies, Razas, Fotos |
-| ⭐ Favoritos | 1 | Mascotas favoritas de adoptantes |
-| 📝 Adopciones | 3 | Solicitudes, Criterios, Evaluación |
-| 🚨 Reportes | 3 | Mascotas perdidas/encontradas, Avistamientos, Fotos |
-| 🔔 Notificaciones | 1 | Alertas in-app |
-| 📢 Campañas | 1 | Eventos de refugios |
+| 🔐 Seguridad | 5 | Usuarios, Roles, Tokens, Auditoría |
+| 🐾 Catálogo | 5 | Mascotas, Especies, Razas, Fotos, Favoritos |
+| 📝 Adopción | 4 | Solicitudes, Criterios, Evaluación, FotosVivienda |
+| 📍 Seguimiento| 1 | Hitos post-adopción con ubicación GPS |
+| 📜 Docs | 2 | Certificados digitales y Notificaciones |
+| 🚨 Comunidad | 3 | Reportes extravío, Avistamientos, Fotos |
+| 📢 Campañas | 1 | Gestión de eventos y campañas |
 
-**Total: 18 tablas**
-
----
-
-## 🔐 Características de Seguridad
-
-- ✅ Protección de páginas por rol (Master Pages)
-- ✅ Sesiones de usuario (UsuarioId, RolId, RefugioId)
-- ✅ Verificación de refugios pendientes de aprobación
-- ✅ Bloqueo de funciones para refugios no verificados
-- ✅ Recuperación de contraseña por token
-- ✅ Auditoría de acciones del sistema
-- ✅ Protección contra SQL Injection (LINQ to SQL)
-- ✅ Hashing de contraseñas (SHA-256 + Salt)
-- ✅ Configuración de políticas de seguridad (JSON)
+**Total: 21 tablas unificadas en un solo script.**
 
 ---
 
@@ -136,62 +104,53 @@ El sistema utiliza una **matriz de evaluación ponderada** para calcular la apti
 | Estabilidad Económica | 15% |
 | Motivación | 15% |
 
-**Resultado:**
-- ≥ 70 puntos: ✅ APTO PARA ADOPCIÓN
-- 50-69 puntos: ⚠️ REQUIERE EVALUACIÓN ADICIONAL
-- < 50 puntos: ❌ NO APTO
-
 ---
 
-## 🚀 Instalación
+## 🚀 Instalación y Despliegue
 
 ### Prerrequisitos
 
 - Visual Studio 2022
-- SQL Server 2019 o superior
+- SQL Server Instance (Local o Cloud)
 - .NET Framework 4.8
 
-### Pasos
+### Pasos Rápidos
 
 1. **Clonar el repositorio**
    ```bash
    git clone https://github.com/D1l4nF/RedPatitas.git
    ```
 
-2. **Crear la base de datos**
-   ```sql
-   CREATE DATABASE RedPatitas;
-   GO
-   USE RedPatitas;
-   GO
-   -- Ejecutar el script BD_RedPatitas.sql
-   ```
+2. **Base de Datos Única**
+   - Abrir SQL Server Management Studio.
+   - Crear base de datos `RedPatitas`.
+   - Ejecutar el script `BD_RedPatitas.sql` (incluye Tablas, Vistas, SPs y SuperAdmin inicial).
 
-3. **Configurar conexión** en `CapaDatos/App.config`
+3. **Configuración de Conexión**
+   - Actualizar el `Web.config` de la aplicación con sus credenciales de SQL local.
+   - Ajustar el `App.config` en `CapaDatos` para el asistente de LINQ.
 
-4. **Ejecutar el proyecto**
-   - Abrir `RedPatitas.sln` en Visual Studio
-   - Presionar F5 para ejecutar
+4. **Credenciales Iniciales**
+   - **Usuario:** `admin@test.com`
+   - **Clave:** `admin123`
 
 ---
 
-## 📅 Roadmap
+## 📅 Roadmap (Status Actual)
 
-- [x] Módulo de Seguridad y Autenticación
-- [x] Protección de páginas por rol
+- [x] Módulo de Seguridad y Autenticación con Hashing
+- [x] Protección de páginas por rol y Master Pages
 - [x] Sistema de registro (Adoptante y Refugio)
-- [x] Verificación de refugios
-- [x] Verificación automática de adoptantes (perfil completo)
-- [x] Perfil de usuario
-- [x] Estructura de Master Pages con menús dinámicos
-- [x] Panel SuperAdmin completo (Dashboard, Usuarios, Refugios, Reportes, Configuración, Auditoría, Notificaciones, MascotasPerdidas)
-- [x] CRUD de Mascotas (Adoptante)
-- [x] Sistema de Solicitudes de Adopción
-- [x] Reportar Mascotas Perdidas/Encontradas
-- [x] Sistema de Favoritos
-- [x] Mapa interactivo de extravíos con Leaflet.js
-- [ ] CRUD de Mascotas (Refugio - Panel completo)
-- [ ] Evaluación de Adopciones (UI de matriz de criterios)
+- [x] Panel SuperAdmin completo (Estadísticas Reales)
+- [x] Gestión de Mascotas por Refugio
+- [x] Sistema de Favoritos y Búsqueda Avanzada
+- [x] **MATRIZ DE EVALUACIÓN** de solicitudes (Criterios Automáticos)
+- [x] **SEGUIMIENTO POST-ADOPCIÓN** (Hitos con evidencia GPS)
+- [x] **MODULO DE CAMPAÑAS** (Mapa interactivo y Verificación)
+- [x] **CERTIFICADOS DIGITALES** (Generación en PDF/Print)
+- [x] Mapa de extravíos interactivo (Leaflet.js)
+- [ ] Integración de Notificaciones Push (Roadmap Futuro)
+- [ ] App Móvil PWA (Roadmap Futuro)
 
 ---
 
@@ -209,9 +168,7 @@ El sistema utiliza una **matriz de evaluación ponderada** para calcular la apti
 
 ## 📝 Licencia
 
-Este proyecto fue desarrollado con fines académicos como parte del **Proyecto Integrador de Tercer Nivel** (Periodo 2025-2026).
-
----
+Desarrollado para el **Proyecto Integrador de Tercer Nivel** - Periodo 2025-2026.
 
 <p align="center">
   <strong>🐾 Porque cada mascota merece un hogar 🏠</strong>

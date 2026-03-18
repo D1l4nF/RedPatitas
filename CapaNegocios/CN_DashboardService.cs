@@ -65,6 +65,9 @@ namespace CapaNegocios
             public int MascotasAdoptadas { get; set; }
             public int HogaresFelices { get; set; }
             public int RefugiosAliados { get; set; }
+        }
+
+        /// <summary>
         /// DTO para estadísticas del dashboard para Personal de Refugio
         /// </summary>
         public class EstadisticasRefugioStaff

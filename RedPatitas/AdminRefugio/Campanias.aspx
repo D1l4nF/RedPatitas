@@ -81,6 +81,8 @@
                 margin-bottom: 1rem;
             }
         </style>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     </asp:Content>
     <asp:Content ID="Content4" ContentPlaceHolderID="PageHeader" runat="server">
         <div class="page-header">
@@ -188,10 +190,20 @@
                         </asp:DropDownList>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group" style="grid-column: span 2;">
                         <label>Ubicación</label>
-                        <asp:TextBox ID="txtUbicacion" runat="server" CssClass="form-control"
-                            placeholder="Ej. Parque Central"></asp:TextBox>
+                        <div class="input-with-button" style="display: flex; gap: 10px; margin-bottom: 10px;">
+                            <asp:TextBox ID="txtUbicacion" runat="server" CssClass="form-control" style="flex: 1;"
+                                placeholder="Ej: La Carolina, Quito"></asp:TextBox>
+                            <button type="button" class="btn-secondary" onclick="buscarDireccionCampania()"
+                                style="padding: 0 15px; white-space: nowrap;">
+                                🔍 Buscar
+                            </button>
+                        </div>
+                        <div id="mapCampania" style="height: 300px; border-radius: 8px; border: 1px solid #ddd; display: none;"></div>
+                        <p style="font-size: 0.85rem; color: #666; margin-top: 5px;">
+                            📍 Haz clic en el mapa para fijar la ubicación, o escribe la dirección y pulsa "Buscar".
+                        </p>
                     </div>
 
                     <div class="form-group">
@@ -213,7 +225,21 @@
 
                     <div class="form-group" style="grid-column: span 2;">
                         <label>Imagen Promocional</label>
-                        <asp:FileUpload ID="fuImagen" runat="server" CssClass="form-control" accept="image/*" />
+                        <!-- Vista Previa de Imagen Actual -->
+                        <div id="divPreviewFotoActual" style="margin-bottom: 15px; display: none;">
+                            <label style="color:#666; font-size:0.9rem;">Imagen actual de la campaña:</label><br />
+                            <img id="imgFotoActual" src="" style="max-width:300px; max-height:200px; border-radius:8px; object-fit:cover; margin-top:5px; border:1px solid #ddd;" />
+                        </div>
+                        
+                        <label id="lblActionImage">Subir o Cambiar Imagen (Opcional si ya existe)</label>
+                        <asp:FileUpload ID="fuImagen" runat="server" CssClass="form-control" accept="image/*" onchange="previewNewImage(this)" />
+                        
+                        <!-- Vista Previa Recién Subida -->
+                        <div id="divNewImagePreview" style="margin-top: 10px; display:none;">
+                            <label style="color:#666; font-size:0.9rem;">Vista previa de nueva imagen a subir:</label><br />
+                            <img id="imgNewPreview" src="" style="max-width:300px; max-height:200px; border-radius:8px; object-fit:cover; border:1px solid #ddd;" />
+                        </div>
+                        
                         <asp:HiddenField ID="hfImagenUrl" runat="server" />
                     </div>
 
@@ -262,4 +288,154 @@
                 color: white;
             }
         </style>
+        <script type="text/javascript">
+            // FOTO PREVIEW HANDLING
+            function previewNewImage(input) {
+                var previewDiv = document.getElementById('divNewImagePreview');
+                var imgPreview = document.getElementById('imgNewPreview');
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function(e) {
+                        imgPreview.src = e.target.result;
+                        previewDiv.style.display = 'block';
+                    }
+                    reader.readAsDataURL(input.files[0]);
+                } else {
+                    previewDiv.style.display = 'none';
+                }
+            }
+
+            function setupImagePreview() {
+                var hfUrl = document.getElementById('<%= hfImagenUrl.ClientID %>');
+                var currentPreviewDiv = document.getElementById('divPreviewFotoActual');
+                var imgFotoActual = document.getElementById('imgFotoActual');
+
+                if (hfUrl && hfUrl.value && hfUrl.value.trim() !== '') {
+                    imgFotoActual.src = hfUrl.value;
+                    currentPreviewDiv.style.display = 'block';
+                } else {
+                    currentPreviewDiv.style.display = 'none';
+                }
+            }
+
+            // MAP HANDLING
+            var mapCampania, markerCampania;
+            
+            function initMapCampania() {
+                // Remove map if exists because panel can be hidden/shown via UpdatePanels or JS
+                const mapContainer = document.getElementById('mapCampania');
+                mapContainer.style.display = 'block';
+                
+                if (mapCampania) {
+                    mapCampania.remove();
+                }
+
+                var lat = -0.1807;
+                var lng = -78.4678;
+                var zoom = 12;
+
+                mapCampania = L.map('mapCampania').setView([lat, lng], zoom);
+
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '© OpenStreetMap'
+                }).addTo(mapCampania);
+
+                // Check text input if we should geocode it initially
+                var currentAddress = document.getElementById('<%= txtUbicacion.ClientID %>').value;
+                if(currentAddress && currentAddress.trim() !== '') {
+                    buscarDireccionCampania(true);
+                }
+
+                mapCampania.on('click', function (e) {
+                    actualizarPosicionCampania(e.latlng);
+                });
+                
+                setTimeout(function(){ mapCampania.invalidateSize(); }, 500);
+            }
+
+            function actualizarPosicionCampania(latlng) {
+                if (markerCampania) mapCampania.removeLayer(markerCampania);
+                markerCampania = L.marker(latlng, { draggable: true }).addTo(mapCampania);
+
+                markerCampania.on('dragend', function (e) {
+                    actualizarPosicionCampania(e.target.getLatLng());
+                });
+
+                obtenerDireccionCampania(latlng.lat, latlng.lng);
+            }
+
+            function obtenerDireccionCampania(lat, lng) {
+                var url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`;
+
+                fetch(url, { headers: { 'User-Agent': 'RedPatitas/1.0' } })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data && data.address) {
+                            var ciudad = data.address.city || data.address.town || data.address.village || data.address.county || "";
+                            var calle = data.address.road || "";
+                            var numero = data.address.house_number || "";
+                            var barrio = data.address.suburb || "";
+
+                            var direccionCompleta = calle;
+                            if (numero) direccionCompleta += " " + numero;
+                            if (barrio && barrio !== ciudad) direccionCompleta += ", " + barrio;
+                            if (ciudad) direccionCompleta += ", " + ciudad;
+
+                            document.getElementById('<%= txtUbicacion.ClientID %>').value = direccionCompleta;
+                        }
+                    })
+                    .catch(error => console.error('Error en geocoding:', error));
+            }
+
+            function buscarDireccionCampania(isInit = false) {
+                var direccion = document.getElementById('<%= txtUbicacion.ClientID %>').value;
+                if (!direccion) return;
+
+                var url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(direccion + ', Ecuador')}&limit=1`;
+
+                fetch(url, { headers: { 'User-Agent': 'RedPatitas/1.0' } })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data && data.length > 0) {
+                            var lat = parseFloat(data[0].lat);
+                            var lon = parseFloat(data[0].lon);
+                            var latlng = L.latLng(lat, lon);
+
+                            mapCampania.setView(latlng, 15);
+                            
+                            if (markerCampania) mapCampania.removeLayer(markerCampania);
+                            markerCampania = L.marker(latlng, { draggable: true }).addTo(mapCampania);
+                            
+                            markerCampania.on('dragend', function (e) {
+                                actualizarPosicionCampania(e.target.getLatLng());
+                            });
+                        } else if (!isInit) {
+                            alert("No se encontró la dirección en el mapa. Intenta ajustar el texto.");
+                        }
+                    })
+                    .catch(error => console.error('Error en búsqueda:', error));
+            }
+
+            // Bind events on page load / form visible
+            var pnlFormVisible = '<%= pnlFormulario.Visible %>';
+            document.addEventListener("DOMContentLoaded", function () {
+                var pnl = document.getElementById('<%= pnlFormulario.ClientID %>');
+                if (pnl && pnlFormVisible === 'True') {
+                    setupImagePreview();
+                    initMapCampania();
+                }
+            });
+            
+            // To ensure map initializes properly if shown via PostBack (ASP.NET lifecycle)
+            var prm = Sys.WebForms.PageRequestManager.getInstance();
+            if (prm != null) {
+                prm.add_endRequest(function (sender, e) {
+                    var isVisible = document.getElementById('<%= pnlFormulario.ClientID %>') !== null;
+                    if (isVisible) {
+                        setupImagePreview();
+                        initMapCampania();
+                    }
+                });
+            }
+        </script>
     </asp:Content>
