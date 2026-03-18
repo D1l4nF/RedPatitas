@@ -58,6 +58,16 @@ namespace CapaNegocios
         }
 
         /// <summary>
+        /// DTO para el Impacto Social en la página Home
+        /// </summary>
+        public class ImpactoSocialDTO
+        {
+            public int MascotasAdoptadas { get; set; }
+            public int HogaresFelices { get; set; }
+            public int RefugiosAliados { get; set; }
+        }
+
+        /// <summary>
         /// DTO para estadísticas del dashboard para Personal de Refugio
         /// </summary>
         public class EstadisticasRefugioStaff
@@ -174,6 +184,25 @@ namespace CapaNegocios
                 stats.TendenciaAdopciones = CalcularTendencia(adopcionesMesActual, adopcionesMesAnterior);
 
                 return stats;
+            }
+        }
+
+        /// <summary>
+        /// Obtiene los números para la sección de Impacto Social del Home
+        /// </summary>
+        public ImpactoSocialDTO ObtenerImpactoSocialGeneral()
+        {
+            using (var db = new DataClasses1DataContext())
+            {
+                int adoptadas = db.tbl_Mascotas.Count(m => m.mas_EstadoAdopcion == "Adoptado");
+                int refugios = db.tbl_Refugios.Count(r => r.ref_Estado == true && r.ref_Verificado == true);
+
+                return new ImpactoSocialDTO
+                {
+                    MascotasAdoptadas = adoptadas,
+                    HogaresFelices = adoptadas, // Asumimos un hogar feliz por mascota adoptada
+                    RefugiosAliados = refugios
+                };
             }
         }
 

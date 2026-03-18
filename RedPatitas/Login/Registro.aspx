@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Registro.aspx.cs" Inherits="RedPatitas.Login.Registro" %>
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Registro.aspx.cs" Inherits="RedPatitas.Login.Registro" %>
 
     <!DOCTYPE html>
 
@@ -22,7 +22,16 @@
     <body>
         <form id="form1" runat="server">
             <div class="container">
-                <div class="login-card" style="max-width: 600px;">
+                <div class="login-card" style="max-width: 600px; position: relative;">
+                    <!-- Botón Volver -->
+                    <a href="javascript:history.back()" style="position: absolute; top: 1.5rem; left: 1.5rem; display: flex; align-items: center; gap: 0.5rem; color: #666; text-decoration: none; font-weight: 500; font-size: 0.9rem; transition: color 0.3s;" onmouseover="this.style.color='#FF8C42'" onmouseout="this.style.color='#666'">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18">
+                            <line x1="19" y1="12" x2="5" y2="12"></line>
+                            <polyline points="12 19 5 12 12 5"></polyline>
+                        </svg>
+                        Volver
+                    </a>
+
                     <div class="login-header">
                         <div class="logo-container">
                             <div class="logo-icon">

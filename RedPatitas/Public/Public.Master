@@ -12,7 +12,7 @@
         </asp:ContentPlaceHolder>
     </title>
     <link href="../Style/estilos-base.css" rel="stylesheet" type="text/css" />
-    <link href="../Style/estilos-publicos.css" rel="stylesheet" type="text/css" />
+    <link href="../Style/estilos-publicos.css?v=1.1" rel="stylesheet" type="text/css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
@@ -142,6 +142,24 @@
             } else {
                 header.classList.remove('scrolled');
             }
+        });
+
+        // Add 'active' class to current nav link
+        document.addEventListener('DOMContentLoaded', () => {
+            const currentPath = window.location.pathname.toLowerCase();
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            navLinks.forEach(link => {
+                const linkHref = link.getAttribute('href').toLowerCase();
+                // Ensure we handle absolute and relative paths correctly
+                // e.g., linkHref might be ~/Public/Home.aspx, so we check if it's contained in the currentPath
+                const normalizedHref = linkHref.replace('~/', '/').toLowerCase();
+                
+                if (currentPath.includes(normalizedHref) || 
+                   (currentPath === '/' && normalizedHref.includes('home.aspx'))) {
+                    link.classList.add('active');
+                }
+            });
         });
     </script>
     <script src="<%= ResolveUrl("~/Js/ux-components.js") %>"></script>

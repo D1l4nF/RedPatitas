@@ -12,6 +12,39 @@ body.page-404 {
 }
 
 /* ===========================================
+   GLOBAL TYPOGRAPHY STANDARDIZATION
+   =========================================== */
+h1, h2, h3, p {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    line-height: 1.5;
+}
+
+h1 {
+    font-size: clamp(48px, 5vw, 56px);
+    font-weight: 800;
+    line-height: 1.2;
+}
+
+h2 {
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+h3 {
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+p {
+    font-size: clamp(16px, 1.5vw, 18px);
+    font-weight: 400;
+    line-height: 1.6;
+}
+
+/* ===========================================
    COMMON HERO STYLES
    =========================================== */
 .adopta-hero,
@@ -53,6 +86,17 @@ body.page-404 {
 
 .reports-hero p {
     font-size: 1rem;
+}
+.hero-pets-image {
+    width: 180%;
+    max-width: 700px;
+    height: auto;
+    object-fit: contain;
+    display: block;
+    background: transparent;
+    filter: drop-shadow(0px 25px 40px rgba(0,0,0,0.15));
+    transform: scale(1.15);
+    transform-origin: center right;
 }
 
 /* ===========================================
@@ -2360,38 +2404,53 @@ body.public-page {
     }
 }
 
-.hero-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    text-align: center;
-    position: relative;
-    z-index: 1;
-}
 
 .hero-title {
-    font-size: 3.5rem;
+    font-size: clamp(48px, 5vw, 56px);
     font-weight: 800;
     color: var(--secondary-color);
-    margin-bottom: 1.5rem;
-    line-height: 1.2;
+    margin-bottom: 1.2rem;
+    line-height: 1.1;
     background: linear-gradient(135deg, var(--secondary-color) 0%, var(--primary-color) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
 }
 
+.hero-title-accent {
+    color: var(--primary-color);
+}
+
 .hero-subtitle {
-    font-size: 1.5rem;
+    font-size: clamp(16px, 1.5vw, 18px);
     color: var(--text-light);
-    margin-bottom: 3rem;
+    margin-bottom: 2.5rem;
     font-weight: 400;
+    line-height: 1.6;
+}
+
+/* Scroll Reveal Animations */
+.scroll-animate {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.scroll-animate.fade-in-right {
+    transform: translateX(30px);
+}
+
+.scroll-animate.visible {
+    opacity: 1;
+    transform: translate(0, 0);
 }
 
 .hero-actions {
     display: flex;
     gap: 1.5rem;
-    justify-content: center;
+    justify-content: flex-start;
     flex-wrap: wrap;
+    align-items: center;
 }
 
 .btn {
@@ -2626,6 +2685,174 @@ body.public-page {
     transform: scale(1.02);
 }
 
+/* ===========================================
+   CAMPAIGNS SECTION
+   Principios aplicados:
+   - Nielsen #4: Consistencia con Mascotas Destacadas
+   - Nielsen #8: Diseño estético y minimalista
+   - Gestalt: Enclosure (bordes), Proximity (spacing), Similarity (mismas cards)
+   =========================================== */
+.campaigns {
+    padding: 5rem 2rem;
+    background: linear-gradient(135deg, #F8F9FA 0%, #FFFFFF 100%);
+}
+
+.campaigns-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.campaigns-intro {
+    text-align: center;
+    font-size: 1.05rem;
+    color: var(--text-light);
+    max-width: 550px;
+    margin: -1rem auto 2.5rem;
+    line-height: 1.6;
+}
+
+/* Grid — mismo sistema que .pets-grid */
+.campaigns-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+}
+
+@media (max-width: 1024px) {
+    .campaigns-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .campaigns-grid {
+        grid-template-columns: 1fr;
+        max-width: 350px;
+        margin: 0 auto;
+    }
+}
+
+/* Card — Gestalt: Enclosure (borde + sombra = agrupación visual) */
+.campaign-card {
+    background: var(--white);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+    transition: all 0.3s ease;
+    border: 1px solid #EEE;
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Gestalt: Similarity — mismo hover que .pet-card e .impact-card */
+.campaign-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary-color) 0%, var(--accent-color) 100%);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+    z-index: 2;
+}
+
+.campaign-card:hover::before {
+    transform: scaleX(1);
+}
+
+.campaign-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.12);
+    border-color: var(--primary-color);
+}
+
+/* Image container — Nielsen #4: Consistencia con .pet-image */
+.campaign-card-image {
+    width: 100%;
+    height: 180px;
+    background: linear-gradient(135deg, #FFE8CC 0%, #FFD275 100%);
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.campaign-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+}
+
+.campaign-card:hover .campaign-card-image img {
+    transform: scale(1.05);
+}
+
+/* Badge — Nielsen #1: Visibilidad del estado del sistema */
+.campaign-badge {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    padding: 0.3rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: white;
+    background: #27AE60;
+    z-index: 1;
+    letter-spacing: 0.3px;
+}
+
+.campaign-badge.finalizada {
+    background: #95A5A6;
+}
+
+/* Card body — Gestalt: Proximity (espaciado interno coherente) */
+.campaign-card-body {
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+/* Visual hierarchy: shelter → title → description → CTA */
+.campaign-shelter-name {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.8rem;
+    color: var(--text-light);
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.campaign-name {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--secondary-color);
+    margin-bottom: 0.5rem;
+    line-height: 1.3;
+}
+
+.campaign-description {
+    color: var(--text-light);
+    font-size: 0.88rem;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+    flex-grow: 1;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* CTA — reutiliza .btn-view-profile (ya definido globalmente) */
+
 /* How to Help Section */
 .how-to-help {
     padding: 5rem 2rem;
@@ -2811,15 +3038,17 @@ body.public-page {
     }
 
     .hero-title {
-        font-size: 2.5rem;
+        font-size: clamp(36px, 8vw, 48px);
     }
 
     .hero-subtitle {
-        font-size: 1.2rem;
+        font-size: 16px;
     }
 
     .hero-actions {
         flex-direction: column;
+        justify-content: center;
+        align-items: stretch;
     }
 
     .btn {
@@ -2853,22 +3082,31 @@ body.public-page {
 
 /* Hero with Image/Illustration */
 .hero-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 3rem;
+    gap: 2rem;
+    padding: 0 2rem;
 }
 
 .hero-content {
-    flex: 1;
+    flex: 1 1 50%;
     text-align: left;
+    min-width: 320px;
+    max-width: 550px;
 }
 
 .hero-image {
-    flex: 1;
+    flex: 1 1 50%;
     display: flex;
     justify-content: center;
     align-items: center;
+    min-width: 0;
+    max-width: 600px;
 }
 
 .hero-pets-illustration {
@@ -2907,6 +3145,8 @@ body.public-page {
 
     .hero-content {
         text-align: center;
+        min-width: auto;
+        max-width: 100%;
     }
 
     .hero-image {
@@ -4265,4 +4505,93 @@ html {
     background: var(--primary-color);
     border-color: var(--primary-color);
     color: white;
+}
+
+/* ===========================================
+   NUEVAS ANIMACIONES Y ESTÉTICAS HOME (UX/UI Polish)
+   =========================================== */
+
+/* Animaciones al hacer Scroll */
+.scroll-animate {
+    opacity: 0;
+    transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+    will-change: opacity, transform;
+}
+
+.fade-in-up {
+    transform: translateY(40px);
+}
+
+.fade-in-right {
+    transform: translateX(40px);
+}
+
+.scroll-animate.visible {
+    opacity: 1;
+    transform: translate(0, 0);
+}
+
+/* Mejoras Mascotas Destacadas (Pet Card) */
+.pet-card {
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+    border-radius: 16px; /* Más moderno */
+    overflow: hidden;
+    position: relative;
+    background: white;
+}
+
+.pets-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); /* Tarjetas un poco más grandes */
+    gap: 2rem;
+}
+
+.pet-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+}
+
+/* Animación de botones */
+.btn-view-profile, .btn, .ally-action-btn {
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.btn-view-profile:hover, .btn:hover, .ally-action-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(255, 107, 53, 0.25); /* Sombra naranja sutil en hover */
+}
+
+/* Animación sutil de los iconos SVG en los botones */
+.btn:hover svg, .ally-action-btn:hover svg {
+    transform: scale(1.1) rotate(5deg);
+    transition: transform 0.3s;
+}
+
+/* RESPONSIVE HERO */
+@media (max-width: 991px) {
+    .hero-container {
+        flex-direction: column !important;
+        text-align: center;
+        padding-top: 2rem;
+        gap: 3rem;
+    }
+
+    .hero-content {
+        min-width: auto;
+        max-width: 100%;
+    }
+    
+    .hero-actions {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    
+    .cta-container h2 {
+        font-size: 2rem !important;
+    }
+    
+    .cta-emotional {
+        font-size: 1rem !important;
+    }
 }

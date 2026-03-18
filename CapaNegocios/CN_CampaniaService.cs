@@ -20,6 +20,32 @@ namespace CapaNegocios
             }
         }
 
+        public List<CampaniaDTO> ObtenerCampaniasActivas(int limite = 3)
+        {
+            using (DataClasses1DataContext db = new DataClasses1DataContext())
+            {
+                var query = from c in db.tbl_Campanias
+                            join r in db.tbl_Refugios on c.cam_IdRefugio equals r.ref_IdRefugio
+                            where c.cam_Estado.Contains("Activ")
+                            orderby c.cam_IdCampania descending
+                            select new CampaniaDTO
+                            {
+                                IdCampania = c.cam_IdCampania,
+                                IdRefugio = c.cam_IdRefugio,
+                                NombreRefugio = r.ref_Nombre,
+                                Titulo = c.cam_Titulo,
+                                Descripcion = c.cam_Descripcion,
+                                Estado = c.cam_Estado,
+                                ImagenUrl = c.cam_ImagenUrl,
+                                FechaInicio = c.cam_FechaInicio,
+                                FechaFin = c.cam_FechaFin,
+                                Ubicacion = c.cam_Ubicacion,
+                                TipoCampania = c.cam_TipoCampania
+                            };
+                return query.Take(limite).ToList();
+            }
+        }
+
         public tbl_Campanias ObtenerCampaniaPorId(int idCampania)
         {
             using (DataClasses1DataContext db = new DataClasses1DataContext())
@@ -108,6 +134,31 @@ namespace CapaNegocios
             {
                 System.Diagnostics.Debug.WriteLine("Error Eliminar Campania: " + ex.Message);
                 return false;
+            }
+        }
+    }
+
+    public class CampaniaDTO
+    {
+        public int IdCampania { get; set; }
+        public int IdRefugio { get; set; }
+        public string NombreRefugio { get; set; }
+        public string Titulo { get; set; }
+        public string Descripcion { get; set; }
+        public string Estado { get; set; }
+        public string ImagenUrl { get; set; }
+        public DateTime? FechaInicio { get; set; }
+        public DateTime? FechaFin { get; set; }
+        public string Ubicacion { get; set; }
+        public string TipoCampania { get; set; }
+
+        public string ImagenUrlFallback
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(ImagenUrl) || ImagenUrl.EndsWith("null"))
+                    return "../Images/Default/default-campaign.png";
+                return ImagenUrl;
             }
         }
     }

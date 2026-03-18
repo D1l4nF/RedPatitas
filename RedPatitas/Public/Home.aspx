@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Public/Public.Master" AutoEventWireup="true" CodeBehind="Home.aspx.cs"
+<%@ Page Title="" Language="C#" MasterPageFile="~/Public/Public.Master" AutoEventWireup="true" CodeBehind="Home.aspx.cs"
     Inherits="RedPatitas.Public.Home" %>
 
     <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
@@ -9,35 +9,32 @@
     <asp:Content ID="Content3" ContentPlaceHolderID="MainContent" runat="server">
         <section class="hero" id="inicio">
             <div class="hero-container">
-                <div class="hero-content">
-                    <h1 class="hero-title">Una red que une hogares y corazones</h1>
+                <div class="hero-content scroll-animate fade-in-up">
+                    <h1 class="hero-title">Una red que une <span class="hero-title-accent">hogares y corazones</span></h1>
                     <p class="hero-subtitle">
                         Conectamos mascotas con familias que les darán amor y cuidado para toda la vida
                     </p>
                     <div class="hero-actions">
-                        <a href="~/Public/Adopta.aspx" runat="server" class="btn btn-primary">
-                            <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
-                                <path
-                                    d="M12,11.36C12.55,11.36 13,10.91 13,10.36V8.36C13,7.81 12.55,7.36 12,7.36C11.45,7.36 11,7.81 11,8.36V10.36C11,10.91 11.45,11.36 12,11.36M12,12.36C10.5,12.36 9.1,12.76 7.9,13.46C7.3,12.86 6.4,12.36 5.5,12.36C3.5,12.36 2,13.86 2,15.86C2,17.86 3.5,19.36 5.5,19.36C6.5,19.36 7.4,18.96 8.1,18.26C9,19.56 10.4,20.36 12,20.36C13.6,20.36 15,19.56 15.9,18.26C16.6,18.96 17.5,19.36 18.5,19.36C20.5,19.36 22,17.86 22,15.86C22,13.86 20.5,12.36 18.5,12.36C17.6,12.36 16.7,12.86 16.1,13.46C14.9,12.76 13.5,12.36 12,12.36Z" />
+                        <a href="~/Public/Adopta.aspx" runat="server" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px;">
+                            <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
+                                <path d="M12,11.36C12.55,11.36 13,10.91 13,10.36V8.36C13,7.81 12.55,7.36 12,7.36C11.45,7.36 11,7.81 11,8.36V10.36C11,10.91 11.45,11.36 12,11.36M12,12.36C10.5,12.36 9.1,12.76 7.9,13.46C7.3,12.86 6.4,12.36 5.5,12.36C3.5,12.36 2,13.86 2,15.86C2,17.86 3.5,19.36 5.5,19.36C6.5,19.36 7.4,18.96 8.1,18.26C9,19.56 10.4,20.36 12,20.36C13.6,20.36 15,19.56 15.9,18.26C16.6,18.96 17.5,19.36 18.5,19.36C20.5,19.36 22,17.86 22,15.86C22,13.86 20.5,12.36 18.5,12.36C17.6,12.36 16.7,12.86 16.1,13.46C14.9,12.76 13.5,12.36 12,12.36Z" />
                             </svg>
                             Adoptar
                         </a>
-                        <a href="~/Public/registro.aspx" runat="server" class="btn btn-secondary">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                stroke-linecap="round" stroke-linejoin="round" width="20" height="20">
-                                <path d="M12 5v14M5 12h14" />
+                        <a href="~/Public/Reportar.aspx" runat="server" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="24" height="24">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <line x1="12" y1="8" x2="12" y2="16"></line>
+                                <line x1="8" y1="12" x2="16" y2="12"></line>
                             </svg>
-                            Publicar Mascota
+                            Reportar Mascota
                         </a>
                     </div>
                 </div>
-                <div class="hero-image">
-                    <div class="hero-pets-illustration">
-                        <span class="floating-pet" style="--delay: 0s; --x: 0; --y: -40px;">🐕</span>
-                        <span class="floating-pet" style="--delay: 0.5s; --x: 100px; --y: -20px;">🐱</span>
-                        <span class="floating-pet" style="--delay: 1s; --x: -20px; --y: 60px;">🐰</span>
-                        <span class="floating-pet" style="--delay: 1.5s; --x: 80px; --y: 80px;">🐦</span>
-                    </div>
+                <div class="hero-image scroll-animate fade-in-right">
+                    <img src="../Images/Default/hero-pets.png" 
+                         alt="Perro y gato felices esperando adopción"
+                         class="hero-pets-image" />
                 </div>
             </div>
         </section>
@@ -48,17 +45,17 @@
                 <div class="impact-grid">
                     <div class="impact-card">
                         <div class="impact-icon">🐾</div>
-                        <div class="impact-number">1,247</div>
+                        <div class="impact-number"><asp:Literal ID="litMascotasAdoptadas" runat="server"><span class="counter" data-target="1247">0</span>+</asp:Literal></div>
                         <div class="impact-label">Mascotas adoptadas</div>
                     </div>
                     <div class="impact-card">
                         <div class="impact-icon">🏠</div>
-                        <div class="impact-number">892</div>
+                        <div class="impact-number"><asp:Literal ID="litHogaresFelices" runat="server"><span class="counter" data-target="892">0</span>+</asp:Literal></div>
                         <div class="impact-label">Hogares felices</div>
                     </div>
                     <div class="impact-card">
                         <div class="impact-icon">🤝</div>
-                        <div class="impact-number">34</div>
+                        <div class="impact-number"><asp:Literal ID="litRefugiosAliados" runat="server"><span class="counter" data-target="34">0</span></asp:Literal></div>
                         <div class="impact-label">Refugios aliados</div>
                     </div>
                 </div>
@@ -66,7 +63,7 @@
         </section>
 
         <!-- Featured Pets Section -->
-        <section class="featured-pets">
+        <section class="featured-pets scroll-animate fade-in-up">
             <div class="featured-container">
                 <h2 class="section-title">Mascotas Destacadas</h2>
                 <asp:Repeater ID="rptMascotasDestacadas" runat="server">
@@ -94,7 +91,7 @@
                                     <%# Eval("Raza") %> • <%# Eval("EdadFormateada") %> • <%# Eval("Sexo") %>
                                 </p>
                                 <a href='<%# "~/Public/PerfilMascota.aspx?id=" + Eval("IdMascota") %>' runat="server"
-                                    class="btn-view-profile">Ver perfil</a>
+                                    class="btn-view-profile">Ver Mascota</a>
                             </div>
                         </div>
                     </ItemTemplate>
@@ -105,11 +102,12 @@
             <asp:Panel ID="pnlSinMascotasHome" runat="server" Visible="false" CssClass="no-pets-message">
                 <p>Próximamente tendremos mascotas disponibles. ¡Vuelve pronto!</p>
             </asp:Panel>
+            </div>
         </section>
 
         <!-- Allied Shelters Section -->
         <section id="aliados" class="allied-shelters">
-            <div class="container">
+            <div class="container" style="text-align: center; max-width: 1200px; margin: 0 auto;">
                 <h2 class="section-title">Nuestros Aliados</h2>
                 <asp:Repeater ID="rptAliados" runat="server">
                     <HeaderTemplate>
@@ -130,10 +128,8 @@
                             data-facebook='<%# HttpUtility.HtmlAttributeEncode(Convert.ToString(Eval("FacebookUrl"))) %>'
                             data-instagram='<%# HttpUtility.HtmlAttributeEncode(Convert.ToString(Eval("InstagramUrl"))) %>'
                             data-horario='<%# HttpUtility.HtmlAttributeEncode(Convert.ToString(Eval("HorarioAtencion"))) %>'
-                            data-donacion='<%# HttpUtility.HtmlAttributeEncode(Convert.ToString(Eval("CuentaDonacion"))) %>'
-                            style="background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: transform 0.3s; width: 180px; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; cursor: pointer;">
+                            data-donacion='<%# HttpUtility.HtmlAttributeEncode(Convert.ToString(Eval("CuentaDonacion"))) %>'>
                             <img src='<%# ResolveUrl(Convert.ToString(Eval("LogoUrl"))) %>' alt='<%# Eval("Nombre") %>'
-                                style="width: 80px; height: 80px; object-fit: contain; border-radius: 50%; background: #f9f9f9;"
                                 onerror="this.src='../Images/Default/default-shelter.png'" />
                             <h4>
                                 <%# Eval("Nombre") %>
@@ -154,6 +150,57 @@
             </div>
         </section>
 
+        <!-- Campañas de Refugios Section -->
+        <section class="campaigns scroll-animate fade-in-up" id="campanas">
+            <div class="campaigns-container">
+                <h2 class="section-title">Campañas de Refugios</h2>
+                <p class="campaigns-intro">Apoya las campañas activas de nuestros refugios aliados y ayuda a más mascotas a encontrar un hogar.</p>
+                <asp:Repeater ID="rptCampanas" runat="server">
+                    <HeaderTemplate>
+                        <div class="campaigns-grid">
+                    </HeaderTemplate>
+                    <ItemTemplate>
+                        <div class="campaign-card" style="cursor: pointer;" onclick="showCampaniaModal(this)"
+                             data-id='<%# Eval("IdCampania") %>'
+                             data-refugioid='<%# Eval("IdRefugio") %>'
+                             data-titulo='<%# HttpUtility.HtmlAttributeEncode(Convert.ToString(Eval("Titulo"))) %>'
+                             data-refugio='<%# HttpUtility.HtmlAttributeEncode(Convert.ToString(Eval("NombreRefugio"))) %>'
+                             data-desc='<%# HttpUtility.HtmlAttributeEncode(Convert.ToString(Eval("Descripcion"))) %>'
+                             data-tipo='<%# HttpUtility.HtmlAttributeEncode(Convert.ToString(Eval("TipoCampania"))) %>'
+                             data-ubicacion='<%# HttpUtility.HtmlAttributeEncode(Convert.ToString(Eval("Ubicacion"))) %>'
+                             data-inicio='<%# Eval("FechaInicio", "{0:dd MMM yyyy}") %>'
+                             data-fin='<%# Eval("FechaFin", "{0:dd MMM yyyy}") %>'
+                             data-imagen='<%# Eval("ImagenUrlFallback") %>'>
+                            <div class="campaign-card-image">
+                                <img src='<%# Eval("ImagenUrlFallback") %>' 
+                                     alt='<%# Eval("Titulo") %>'
+                                     onerror="this.src='../Images/Default/default-campaign.png'" />
+                                <span class="campaign-badge active">Activa</span>
+                            </div>
+                            <div class="campaign-card-body">
+                                <span class="campaign-shelter-name">🏠 <%# Eval("NombreRefugio") %></span>
+                                <h3 class="campaign-name"><%# Eval("Titulo") %></h3>
+                                <p class="campaign-description">
+                                    <%# Eval("Descripcion") %>
+                                </p>
+                                <span class="btn-view-profile">Ver Campaña</span>
+                            </div>
+                        </div>
+                    </ItemTemplate>
+                    <FooterTemplate>
+                        </div>
+                    </FooterTemplate>
+                </asp:Repeater>
+
+                <!-- Panel para cuando no hay campañas activas -->
+                <asp:Panel ID="pnlSinCampanas" runat="server" Visible="false" CssClass="no-pets-message" style="grid-column: 1 / -1; text-align: center; padding: 3rem;">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">📢</div>
+                    <h3 style="color: var(--secondary-color); margin-bottom: 0.5rem;">No hay campañas activas en este momento</h3>
+                    <p style="color: var(--text-light);">Vuelve pronto para ver nuevas formas de ayudar a nuestros refugios aliados.</p>
+                </asp:Panel>
+            </div>
+        </section>
+
         <!-- Shelter Detail Modal (Premium Design) -->
         <!-- Estilos movidos a public-pages.css -->
 
@@ -166,7 +213,7 @@
 
                 <!-- Header -->
                 <div class="ally-modal-header">
-                    <img id="modalLogo" src="" alt="Logo" class="ally-modal-logo" />
+                    <img id="modalLogo" src="#" alt="Logo" class="ally-modal-logo" />
                     <h2 id="modalName" class="ally-modal-name">Nombre Refugio</h2>
                     <span id="modalCity" class="ally-modal-city">📍 Ciudad</span>
                     <span id="modalYear" class="ally-modal-year">🏛️ Desde 2026</span>
@@ -204,7 +251,7 @@
                         </div>
                         <div id="emailRow" class="ally-info-row" style="display: none;">
                             <span class="ally-info-icon">✉️</span>
-                            <a id="modalEmail" href="">email</a>
+                            <a id="modalEmail" href="javascript:void(0);">email</a>
                         </div>
                         <div id="horarioRow" class="ally-info-row" style="display: none;">
                             <span class="ally-info-icon">🕐</span>
@@ -519,6 +566,7 @@
                             Únete a nuestro equipo y ayuda a cuidar, pasear y socializar a las
                             mascotas en espera de un hogar.
                         </p>
+                        <button type="button" class="btn btn-primary" style="margin-top: 1rem; width: 100%;" onclick="openCustomModal('voluntarioModal')">Quiero ser Voluntario</button>
                     </div>
                     <div class="help-card">
                         <div class="help-icon">💝</div>
@@ -527,6 +575,7 @@
                             Tu donación ayuda a cubrir gastos médicos, alimento y cuidados
                             esenciales para las mascotas.
                         </p>
+                        <button type="button" class="btn btn-primary" style="margin-top: 1rem; width: 100%;" onclick="openCustomModal('donarModal')">Hacer una Donación</button>
                     </div>
                     <div class="help-card">
                         <div class="help-icon">📢</div>
@@ -535,15 +584,17 @@
                             Comparte nuestras publicaciones en redes sociales y ayuda a que más
                             mascotas encuentren hogar.
                         </p>
+                        <button type="button" class="btn btn-primary" style="margin-top: 1rem; width: 100%;" onclick="openCustomModal('difundirModal')">Ver Material / Compartir</button>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Final CTA Section -->
-        <section class="final-cta">
+        <section class="final-cta scroll-animate fade-in-up">
             <div class="cta-container">
                 <h2 class="cta-title">¿Listo para Cambiar una Vida?</h2>
+                <h4 class="cta-emotional" style="color: white; font-weight: 600; font-size: 1.2rem; margin-top: -0.5rem; margin-bottom: 1rem;">Tal vez la mascota que buscas también te está buscando.</h4>
                 <p class="cta-subtitle">Miles de mascotas esperan encontrar una familia. Tú puedes ser esa
                     familia.</p>
                 <div class="cta-actions">
@@ -560,36 +611,244 @@
             </div>
         </section>
 
-        <!-- Shelter Detail Modal -->
-        <div id="allyModal" class="modal-overlay"
-            style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 9999; align-items: center; justify-content: center;">
-            <div class="modal-content"
-                style="background: white; border-radius: 16px; width: 90%; max-width: 500px; padding: 2rem; position: relative; animation: slideIn 0.3s ease; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
-                <button type="button" onclick="closeAllyModal()"
-                    style="position: absolute; top: 1rem; right: 1rem; background: none; border: none; font-size: 1.5rem; cursor: pointer;">&times;</button>
-
-                <div style="text-align: center; margin-bottom: 1.5rem;">
-                    <img id="modalLogo" src="" alt="Logo"
-                        style="width: 100px; height: 100px; border-radius: 50%; object-fit: contain; background: #f9f9f9; margin-bottom: 1rem;" />
-                    <h2 id="modalName" style="color: #4A3B32; margin-bottom: 0.5rem;">Nombre Refugio</h2>
-                    <span id="modalCity" style="color: #FF8C42; font-weight: 600;">Ciudad</span>
+        <!-- Help Modals (Voluntariado, Donar, Difundir) -->
+        <!-- Modal Voluntariado -->
+        <div id="voluntarioModal" class="ally-modal-overlay" role="dialog" aria-modal="true" aria-hidden="true" style="display: none;">
+            <div class="ally-modal-content">
+                <button type="button" onclick="closeCustomModal('voluntarioModal')" class="ally-modal-close" aria-label="Cerrar modal">&times;</button>
+                <div class="ally-modal-header">
+                    <h2 class="ally-modal-name">Sé un Voluntario</h2>
                 </div>
-
-                <div style="margin-bottom: 2rem;">
-                    <p id="modalDesc" style="color: #666; line-height: 1.6; margin-bottom: 1rem;">Descripción...</p>
-                    <div style="display: flex; gap: 0.5rem; color: #444; margin-bottom: 0.5rem;">
-                        <strong>📍 Dirección:</strong> <span id="modalAddress">Dirección...</span>
-                    </div>
-                    <div style="display: flex; gap: 0.5rem; color: #444;">
-                        <strong>📞 Teléfono:</strong> <span id="modalPhone">099...</span>
+                <div class="ally-modal-body">
+                    <p class="ally-modal-desc">
+                        ¡Gracias por tu interés en ayudar! Para ser voluntario, envíanos un correo con tus datos y disponibilidad.
+                    </p>
+                    <div class="ally-info-card">
+                        <div class="ally-info-row">
+                            <span class="ally-info-icon">✉️</span>
+                            <a href="mailto:voluntariado@redpatitas.com">voluntariado@redpatitas.com</a>
+                        </div>
                     </div>
                 </div>
-
-                <a id="btnMaps" href="#" target="_blank" class="btn-primary"
-                    style="display: block; width: 100%; text-align: center; padding: 1rem; background: #27AE60; color: white; text-decoration: none; border-radius: 8px; font-weight: 600;">
-                    🗺️ Cómo llegar (Google Maps)
-                </a>
             </div>
         </div>
+
+        <!-- Modal Donar -->
+        <div id="donarModal" class="ally-modal-overlay" role="dialog" aria-modal="true" aria-hidden="true" style="display: none;">
+            <div class="ally-modal-content">
+                <button type="button" onclick="closeCustomModal('donarModal')" class="ally-modal-close" aria-label="Cerrar modal">&times;</button>
+                <div class="ally-modal-header">
+                    <h2 class="ally-modal-name">Hacer una Donación</h2>
+                </div>
+                <div class="ally-modal-body">
+                    <p class="ally-modal-desc">
+                        Tus aportes nos ayudan a salvar más vidas. Puedes realizar tus donaciones a la siguiente cuenta bancaria.
+                    </p>
+                    <div class="ally-info-card">
+                        <div class="ally-info-row">
+                            <span class="ally-info-icon">🏦</span>
+                            <span>Banco Pichincha - Cuenta de Ahorros: 2200000000</span>
+                        </div>
+                        <div class="ally-info-row">
+                            <span class="ally-info-icon">👤</span>
+                            <span>A nombre de: Fundación RedPatitas</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Difundir -->
+        <div id="difundirModal" class="ally-modal-overlay" role="dialog" aria-modal="true" aria-hidden="true" style="display: none;">
+            <div class="ally-modal-content">
+                <button type="button" onclick="closeCustomModal('difundirModal')" class="ally-modal-close" aria-label="Cerrar modal">&times;</button>
+                <div class="ally-modal-header">
+                    <h2 class="ally-modal-name">Ayúdanos a Difundir</h2>
+                </div>
+                <div class="ally-modal-body">
+                    <p class="ally-modal-desc">
+                        Comparte nuestra plataforma en tus redes sociales para llegar a más personas y conectar más corazones.
+                    </p>
+                    <div class="ally-action-buttons" style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                        <a href="https://www.facebook.com/sharer/sharer.php?u=https://redpatitas.com" target="_blank" class="ally-action-btn primary" style="background: #1877F2; border: none; flex: 1; text-align: center;">Compartir en Facebook</a>
+                        <a href="https://api.whatsapp.com/send?text=¡Conoce RedPatitas y ayuda a salvar mascotas! https://redpatitas.com" target="_blank" class="ally-action-btn secondary" style="background: #25D366; color: white; border: none; flex: 1; text-align: center;">Compartir en WhatsApp</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Campania -->
+        <div id="campaniaModal" class="ally-modal-overlay" role="dialog" aria-modal="true" aria-hidden="true" style="display: none;">
+            <div class="ally-modal-content" style="max-width: 600px; padding: 0; overflow: hidden; position: relative; border-radius: 12px;">
+                <button type="button" onclick="closeCustomModal('campaniaModal')" class="ally-modal-close" aria-label="Cerrar modal" style="position: absolute; top: 10px; right: 10px; background: rgba(255,255,255,0.8); border: none; border-radius: 50%; width: 32px; height: 32px; font-size: 1.5rem; line-height: 1; display: flex; align-items: center; justify-content: center; cursor: pointer; color: #333; z-index: 10; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">&times;</button>
+                
+                <img id="modalCampaniaImg" src="#" alt="Campaña" style="width: 100%; height: 300px; object-fit: cover; display: block; border-radius: 12px 12px 0 0;" />
+                
+                <div style="padding: 2rem;">
+                    <div class="ally-modal-header" style="margin-top: 0; border-bottom: none; padding-bottom: 0;">
+                        <span id="modalCampaniaRefugio" style="color: #0D9488; font-weight: 600; font-size: 0.9rem; letter-spacing: 0.5px; display: block; text-align: center;">🏠 Refugio</span>
+                        <h2 id="modalCampaniaTitulo" class="ally-modal-name" style="margin-top: 0.5rem; margin-bottom: 0; text-align: center;">Título de la Campaña</h2>
+                        <div style="text-align: center; margin-top: 0.5rem; margin-bottom: 1.5rem;">
+                            <span id="modalCampaniaTipo" style="display: inline-block; background: #DBEAFE; color: #1D4ED8; padding: 0.2rem 0.6rem; border-radius: 1rem; font-size: 0.8rem;">Campaña</span>
+                        </div>
+                    </div>
+                    <div class="ally-modal-body">
+                        <p id="modalCampaniaDesc" class="ally-modal-desc" style="white-space: pre-wrap; margin-bottom: 1.5rem; line-height: 1.6; color: #4B5563; font-size: 1.05rem;"></p>
+                        
+                        <div class="ally-info-card" style="background: #F9FAFB; border: 1px solid #F3F4F6; border-radius: 8px; padding: 1rem;">
+                            <div class="ally-info-row" style="margin-bottom: 0.5rem;">
+                                <span class="ally-info-icon" style="color: #DC2626; font-size: 1.2rem;">📍</span>
+                                <span id="modalCampaniaUbicacion" style="flex:1; color: #374151;">Ubicación</span>
+                            </div>
+                            <div class="ally-info-row">
+                                <span class="ally-info-icon" style="color: #059669; font-size: 1.2rem;">📅</span>
+                                <span id="modalCampaniaFechas" style="flex:1; color: #374151;">Fechas</span>
+                            </div>
+                        </div>
+
+                        <div class="ally-action-buttons" style="margin-top: 1.5rem; display: flex; flex-direction: column; gap: 0.75rem;">
+                           <a id="btnLlegarCampania" href="#" target="_blank" class="ally-action-btn secondary" style="width: 100%; text-align: center; background: #fff; border: 2px solid #0D9488; color: #0D9488; text-decoration: none; font-weight: 600; padding: 0.75rem; border-radius: 8px; display: none;">📍 Ver cómo llegar en el mapa</a>
+                           <a id="btnMascotasRef" href="#" class="ally-action-btn primary" style="width: 100%; text-align: center; background: #FF7052; color: white; border: none; text-decoration: none; font-weight: 600; padding: 0.75rem; border-radius: 8px;">🏠 Ver mascotas del refugio</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Javascript para Modales de Ayuda -->
+        <script type="text/javascript">
+            function openCustomModal(modalId) {
+                const modal = document.getElementById(modalId);
+                if (modal) {
+                    modal.style.setProperty('display', 'flex', 'important');
+                    modal.setAttribute('aria-hidden', 'false');
+                    document.body.style.overflow = 'hidden';
+                }
+            }
+
+            function closeCustomModal(modalId) {
+                const modal = document.getElementById(modalId);
+                if (modal) {
+                    modal.style.display = 'none';
+                    modal.setAttribute('aria-hidden', 'true');
+                    document.body.style.overflow = '';
+                }
+            }
+
+            // Cerrar modales si se hace clic afuera
+            document.addEventListener('click', function (event) {
+                const modals = ['voluntarioModal', 'donarModal', 'difundirModal', 'campaniaModal'];
+                modals.forEach(id => {
+                    const modal = document.getElementById(id);
+                    if (event.target === modal) {
+                        closeCustomModal(id);
+                    }
+                });
+            });
+
+            // Cerrar modales con Escape
+            document.addEventListener('keydown', function (event) {
+                if (event.key === 'Escape') {
+                    closeCustomModal('voluntarioModal');
+                    closeCustomModal('donarModal');
+                    closeCustomModal('difundirModal');
+                    closeCustomModal('campaniaModal');
+                }
+            });
+
+            window.showCampaniaModal = function (card) {
+                try {
+                    const modal = document.getElementById('campaniaModal');
+                    if (!modal) return;
+
+                    document.getElementById('modalCampaniaImg').src = card.dataset.imagen || '../Images/Default/default-campaign.png';
+                    document.getElementById('modalCampaniaTitulo').innerText = card.dataset.titulo || 'Campaña';
+                    document.getElementById('modalCampaniaRefugio').innerText = '🏠 ' + (card.dataset.refugio || 'Refugio');
+                    document.getElementById('modalCampaniaTipo').innerText = card.dataset.tipo || 'Campaña';
+                    document.getElementById('modalCampaniaDesc').innerText = card.dataset.desc || 'Sin descripción detallada.';
+                    
+                    let ubicacion = card.dataset.ubicacion;
+                    document.getElementById('modalCampaniaUbicacion').innerText = (ubicacion && ubicacion.trim() !== '') ? ubicacion : 'Ubicación no especificada';
+
+                    let fechaStr = '';
+                    if (card.dataset.inicio) fechaStr += card.dataset.inicio;
+                    if (card.dataset.fin) fechaStr += ' - ' + card.dataset.fin;
+                    document.getElementById('modalCampaniaFechas').innerText = fechaStr !== '' ? fechaStr : 'Fechas no definidas';
+
+                    let refugioId = card.dataset.refugioid;
+                    let btnRefugio = document.getElementById('btnMascotasRef');
+                    if (refugioId && refugioId !== '0') {
+                        btnRefugio.href = 'Adopta.aspx?refugio=' + refugioId;
+                        btnRefugio.style.display = 'block';
+                    } else {
+                        btnRefugio.style.display = 'none';
+                    }
+
+                    let btnLlegar = document.getElementById('btnLlegarCampania');
+                    if (ubicacion && ubicacion.trim() !== '') {
+                        btnLlegar.href = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(ubicacion + ', Ecuador');
+                        btnLlegar.style.display = 'block';
+                    } else {
+                        btnLlegar.style.display = 'none';
+                    }
+
+                    modal.style.setProperty('display', 'flex', 'important');
+                    modal.setAttribute('aria-hidden', 'false');
+                    document.body.style.overflow = 'hidden'; 
+                } catch (e) {
+                    console.error('Error showing campania modal:', e);
+                }
+            }
+            // Scroll Reveal Animation Initialization
+            document.addEventListener('DOMContentLoaded', function() {
+                const animateElements = document.querySelectorAll('.scroll-animate');
+                
+                const observerOptions = {
+                    root: null,
+                    rootMargin: '0px',
+                    threshold: 0.15
+                };
+                
+                const observer = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, observerOptions);
+                
+                animateElements.forEach(el => observer.observe(el));
+
+                // Counter Animation
+                const counters = document.querySelectorAll('.counter');
+                const speed = 50; // Ajusta este valor para hacer la animación más rápida o lenta
+
+                const counterObserver = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const counter = entry.target;
+                            const target = +counter.getAttribute('data-target');
+                            
+                            const updateCount = () => {
+                                const count = +counter.innerText.replace(/,/g, '');
+                                const inc = target / speed;
+
+                                if (count < target) {
+                                    counter.innerText = Math.ceil(count + inc).toLocaleString('en-US');
+                                    setTimeout(updateCount, 25);
+                                } else {
+                                    counter.innerText = target.toLocaleString('en-US');
+                                }
+                            };
+                            updateCount();
+                            observer.unobserve(counter);
+                        }
+                    });
+                }, { threshold: 0.5 });
+
+                counters.forEach(counter => counterObserver.observe(counter));
+            });
+        </script>
 
     </asp:Content>
