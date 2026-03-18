@@ -122,11 +122,10 @@
                                 OnClientClick="return confirm('¿Aprobar sin revisar? Se recomienda revisar la solicitud primero.');">
                                 <i class="fas fa-check"></i>
                             </asp:LinkButton>
-                            <asp:LinkButton ID="btnRechazar" runat="server" CommandName="Rechazar"
-                                CommandArgument='<%# Eval("sol_IdSolicitud") %>' CssClass="table-action-btn reject"
-                                ToolTip="Rechazar">
+                            <button type="button" class="table-action-btn reject" title="Rechazar"
+                                onclick='mostrarModalRechazo(<%# Eval("sol_IdSolicitud") %>);'>
                                 <i class="fas fa-times"></i>
-                            </asp:LinkButton>
+                            </button>
                         </div>
                     </div>
                 </ItemTemplate>
@@ -139,14 +138,14 @@
             </asp:Repeater>
         </div>
 
-        <!-- Modal Rechazo -->
-        <asp:Panel ID="pnlModalRechazo" runat="server" Visible="false" CssClass="modal-overlay">
+        <!-- Modal Rechazo (div HTML puro, controlado por JS) -->
+        <div id="modalRechazoDiv" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.5); z-index:1000; align-items:center; justify-content:center;">
             <div class="modal-content">
                 <h3 style="margin-bottom: 1rem;">Motivo del Rechazo</h3>
                 <p style="color: #666; margin-bottom: 1rem;">Por favor indica por qué se rechaza esta solicitud. Este
                     mensaje podrá ser visto por el adoptante.</p>
 
-                <asp:HiddenField ID="hfIdSolicitudRechazo" runat="server" />
+                <asp:HiddenField ID="hfIdSolicitudRechazo" runat="server" ClientIDMode="Static" />
 
                 <div class="form-group">
                     <asp:TextBox ID="txtMotivoRechazo" runat="server" TextMode="MultiLine" Rows="4"
@@ -157,15 +156,25 @@
                 </div>
 
                 <div style="margin-top: 1.5rem; display: flex; justify-content: flex-end; gap: 1rem;">
-                    <asp:Button ID="btnCancelarRechazo" runat="server" Text="Cancelar"
-                        OnClick="btnCancelarRechazo_Click"
-                        style="background: none; border: none; cursor: pointer; color: #666;" />
+                    <button type="button" onclick="cerrarModalRechazo();" style="background: none; border: none; cursor: pointer; color: #666; font-weight: bold; padding: 0.5rem 1rem;">Cancelar</button>
                     <asp:Button ID="btnConfirmarRechazo" runat="server" Text="Rechazar Solicitud"
                         OnClick="btnConfirmarRechazo_Click" CssClass="quick-action-btn"
                         style="background-color: #EF4444;" ValidationGroup="Rechazo" />
                 </div>
             </div>
-        </asp:Panel>
+        </div>
+
+        <script>
+            function mostrarModalRechazo(idSolicitud) {
+                document.getElementById('hfIdSolicitudRechazo').value = idSolicitud;
+                var m = document.getElementById('modalRechazoDiv');
+                m.style.display = 'flex';
+            }
+            function cerrarModalRechazo() {
+                var m = document.getElementById('modalRechazoDiv');
+                m.style.display = 'none';
+            }
+        </script>
 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
         <style>

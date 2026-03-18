@@ -23,6 +23,9 @@
       <Column Name="avi_Descripcion" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="avi_FechaAvistamiento" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="avi_FechaReporte" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="avi_Latitud" Type="System.Decimal" DbType="Decimal(10,8)" CanBeNull="true" />
+      <Column Name="avi_Longitud" Type="System.Decimal" DbType="Decimal(11,8)" CanBeNull="true" />
+      <Column Name="avi_FotoUrl" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
       <Association Name="tbl_ReportesMascotas_tbl_Avistamientos" Member="tbl_ReportesMascotas" ThisKey="avi_IdReporte" OtherKey="rep_IdReporte" Type="tbl_ReportesMascotas" IsForeignKey="true" />
       <Association Name="tbl_Usuarios_tbl_Avistamientos" Member="tbl_Usuarios" ThisKey="avi_IdUsuario" OtherKey="usu_IdUsuario" Type="tbl_Usuarios" IsForeignKey="true" />
     </Type>
@@ -41,6 +44,22 @@
       <Column Name="cam_Estado" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
       <Column Name="cam_FechaCreacion" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Association Name="tbl_Refugios_tbl_Campanias" Member="tbl_Refugios" ThisKey="cam_IdRefugio" OtherKey="ref_IdRefugio" Type="tbl_Refugios" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_CertificadosAdopcion" Member="tbl_CertificadosAdopcion">
+    <Type Name="tbl_CertificadosAdopcion">
+      <Column Name="cer_IdCertificado" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="cer_IdSolicitud" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="cer_CodigoCertificado" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="cer_FechaEmision" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="cer_NombreAdoptante" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="cer_CedulaAdoptante" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="cer_NombreMascota" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="cer_EspecieMascota" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="cer_RazaMascota" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="cer_NombreRefugio" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="cer_Estado" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Association Name="tbl_SolicitudesAdopcion_tbl_CertificadosAdopcion" Member="tbl_SolicitudesAdopcion" ThisKey="cer_IdSolicitud" OtherKey="sol_IdSolicitud" Type="tbl_SolicitudesAdopcion" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.tbl_CriteriosEvaluacion" Member="tbl_CriteriosEvaluacion">
@@ -107,6 +126,17 @@
       <Column Name="fore_Orden" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="fore_FechaSubida" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Association Name="tbl_ReportesMascotas_tbl_FotosReportes" Member="tbl_ReportesMascotas" ThisKey="fore_IdReporte" OtherKey="rep_IdReporte" Type="tbl_ReportesMascotas" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_FotosSolicitud" Member="tbl_FotosSolicitud">
+    <Type Name="tbl_FotosSolicitud">
+      <Column Name="fos_IdFoto" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="fos_IdSolicitud" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="fos_Url" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="fos_TipoFoto" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="fos_Descripcion" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="fos_FechaSubida" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="tbl_SolicitudesAdopcion_tbl_FotosSolicitud" Member="tbl_SolicitudesAdopcion" ThisKey="fos_IdSolicitud" OtherKey="sol_IdSolicitud" Type="tbl_SolicitudesAdopcion" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.tbl_Mascotas" Member="tbl_Mascotas">
@@ -232,6 +262,28 @@
       <Association Name="tbl_Roles_tbl_Usuarios" Member="tbl_Usuarios" ThisKey="rol_IdRol" OtherKey="usu_IdRol" Type="tbl_Usuarios" />
     </Type>
   </Table>
+  <Table Name="dbo.tbl_SeguimientosAdopcion" Member="tbl_SeguimientosAdopcion">
+    <Type Name="tbl_SeguimientosAdopcion">
+      <Column Name="seg_IdSeguimiento" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="seg_IdSolicitud" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="seg_NumeroEtapa" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="seg_TituloEtapa" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="seg_FechaProgramada" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="seg_Latitud" Type="System.Decimal" DbType="Decimal(10,8)" CanBeNull="true" />
+      <Column Name="seg_Longitud" Type="System.Decimal" DbType="Decimal(11,8)" CanBeNull="true" />
+      <Column Name="seg_FotoUrlEnVivo" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="seg_ArchivoAdjuntoUrl" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="seg_RespuestasJSON" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="seg_Estado" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="seg_FechaEnvio" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="seg_FechaRevision" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="seg_IdUsuarioRevision" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="seg_ComentariosRevision" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="seg_FechaCreacion" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="tbl_SolicitudesAdopcion_tbl_SeguimientosAdopcion" Member="tbl_SolicitudesAdopcion" ThisKey="seg_IdSolicitud" OtherKey="sol_IdSolicitud" Type="tbl_SolicitudesAdopcion" IsForeignKey="true" />
+      <Association Name="tbl_Usuarios_tbl_SeguimientosAdopcion" Member="tbl_Usuarios" ThisKey="seg_IdUsuarioRevision" OtherKey="usu_IdUsuario" Type="tbl_Usuarios" IsForeignKey="true" />
+    </Type>
+  </Table>
   <Table Name="dbo.tbl_SolicitudesAdopcion" Member="tbl_SolicitudesAdopcion">
     <Type Name="tbl_SolicitudesAdopcion">
       <Column Name="sol_IdSolicitud" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -255,7 +307,9 @@
       <Column Name="sol_ComentariosRevision" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="sol_FechaSolicitud" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="sol_FechaRevision" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="tbl_SolicitudesAdopcion_tbl_CertificadosAdopcion" Member="tbl_CertificadosAdopcion" ThisKey="sol_IdSolicitud" OtherKey="cer_IdSolicitud" Type="tbl_CertificadosAdopcion" />
       <Association Name="tbl_SolicitudesAdopcion_tbl_DetalleEvaluacion" Member="tbl_DetalleEvaluacion" ThisKey="sol_IdSolicitud" OtherKey="det_IdSolicitud" Type="tbl_DetalleEvaluacion" />
+      <Association Name="tbl_SolicitudesAdopcion_tbl_FotosSolicitud" Member="tbl_FotosSolicitud" ThisKey="sol_IdSolicitud" OtherKey="fos_IdSolicitud" Type="tbl_FotosSolicitud" />
       <Association Name="tbl_SolicitudesAdopcion_tbl_SeguimientosAdopcion" Member="tbl_SeguimientosAdopcion" ThisKey="sol_IdSolicitud" OtherKey="seg_IdSolicitud" Type="tbl_SeguimientosAdopcion" />
       <Association Name="tbl_Mascotas_tbl_SolicitudesAdopcion" Member="tbl_Mascotas" ThisKey="sol_IdMascota" OtherKey="mas_IdMascota" Type="tbl_Mascotas" IsForeignKey="true" />
       <Association Name="tbl_Usuarios_tbl_SolicitudesAdopcion" Member="tbl_Usuarios" ThisKey="sol_IdUsuario" OtherKey="usu_IdUsuario" Type="tbl_Usuarios" IsForeignKey="true" />
@@ -302,44 +356,29 @@
       <Association Name="tbl_Usuarios_tbl_Mascotas" Member="tbl_Mascotas" ThisKey="usu_IdUsuario" OtherKey="mas_IdUsuarioRegistro" Type="tbl_Mascotas" />
       <Association Name="tbl_Usuarios_tbl_Notificaciones" Member="tbl_Notificaciones" ThisKey="usu_IdUsuario" OtherKey="not_IdUsuario" Type="tbl_Notificaciones" />
       <Association Name="tbl_Usuarios_tbl_ReportesMascotas" Member="tbl_ReportesMascotas" ThisKey="usu_IdUsuario" OtherKey="rep_IdUsuario" Type="tbl_ReportesMascotas" />
+      <Association Name="tbl_Usuarios_tbl_SeguimientosAdopcion" Member="tbl_SeguimientosAdopcion" ThisKey="usu_IdUsuario" OtherKey="seg_IdUsuarioRevision" Type="tbl_SeguimientosAdopcion" />
       <Association Name="tbl_Usuarios_tbl_SolicitudesAdopcion" Member="tbl_SolicitudesAdopcion" ThisKey="usu_IdUsuario" OtherKey="sol_IdUsuario" Type="tbl_SolicitudesAdopcion" />
       <Association Name="tbl_Usuarios_tbl_SolicitudesAdopcion1" Member="tbl_SolicitudesAdopcion1" ThisKey="usu_IdUsuario" OtherKey="sol_IdUsuarioRevision" Type="tbl_SolicitudesAdopcion" />
       <Association Name="tbl_Usuarios_tbl_TokensRecuperacion" Member="tbl_TokensRecuperacion" ThisKey="usu_IdUsuario" OtherKey="tok_IdUsuario" Type="tbl_TokensRecuperacion" />
-      <Association Name="tbl_Usuarios_tbl_SeguimientosAdopcion" Member="tbl_SeguimientosAdopcion" ThisKey="usu_IdUsuario" OtherKey="seg_IdUsuarioRevision" Type="tbl_SeguimientosAdopcion" />
       <Association Name="tbl_Roles_tbl_Usuarios" Member="tbl_Roles" ThisKey="usu_IdRol" OtherKey="rol_IdRol" Type="tbl_Roles" IsForeignKey="true" />
       <Association Name="tbl_Refugios_tbl_Usuarios" Member="tbl_Refugios" ThisKey="usu_IdRefugio" OtherKey="ref_IdRefugio" Type="tbl_Refugios" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.vw_AdopcionesMensuales" Member="vw_AdopcionesMensuales">
-    <Type Name="vw_AdopcionesMensuales">
-      <Column Name="Anio" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Mes" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="TotalAdopciones" Type="System.Int32" DbType="Int" CanBeNull="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.vw_EstadisticasGenerales" Member="vw_EstadisticasGenerales">
-    <Type Name="vw_EstadisticasGenerales">
-      <Column Name="TotalUsuarios" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="TotalAdoptantes" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="TotalRefugios" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="RefugiosVerificados" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="TotalMascotas" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="MascotasDisponibles" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="MascotasAdoptadas" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="SolicitudesPendientes" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="ReportesActivos" Type="System.Int32" DbType="Int" CanBeNull="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.vw_EstadisticasPorRefugio" Member="vw_EstadisticasPorRefugio">
-    <Type Name="vw_EstadisticasPorRefugio">
+  <Table Name="dbo.vw_SolicitudesCompleta" Member="vw_SolicitudesCompleta">
+    <Type Name="vw_SolicitudesCompleta">
+      <Column Name="sol_IdSolicitud" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="sol_FechaSolicitud" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="sol_Estado" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="sol_PuntajeTotal" Type="System.Decimal" DbType="Decimal(5,2)" CanBeNull="true" />
+      <Column Name="IdAdoptante" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="NombreAdoptante" Type="System.String" DbType="VarChar(201) NOT NULL" CanBeNull="false" />
+      <Column Name="EmailAdoptante" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="usu_Cedula" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="TelefonoAdoptante" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="mas_IdMascota" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="NombreMascota" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
       <Column Name="ref_IdRefugio" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="NombreRefugio" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
-      <Column Name="ref_Verificado" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="TotalMascotas" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Disponibles" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Adoptadas" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="EnProceso" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="TotalUsuarios" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.vw_MascotasCompleta" Member="vw_MascotasCompleta">
@@ -362,50 +401,63 @@
       <Column Name="mas_FechaRegistro" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
     </Type>
   </Table>
-  <Table Name="dbo.vw_SolicitudesCompleta" Member="vw_SolicitudesCompleta">
-    <Type Name="vw_SolicitudesCompleta">
-      <Column Name="sol_IdSolicitud" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="sol_FechaSolicitud" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="sol_Estado" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
-      <Column Name="sol_PuntajeTotal" Type="System.Decimal" DbType="Decimal(5,2)" CanBeNull="true" />
-      <Column Name="IdAdoptante" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="NombreAdoptante" Type="System.String" DbType="VarChar(201) NOT NULL" CanBeNull="false" />
-      <Column Name="EmailAdoptante" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
-      <Column Name="usu_Cedula" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
-      <Column Name="TelefonoAdoptante" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
-      <Column Name="mas_IdMascota" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="NombreMascota" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+  <Table Name="dbo.vw_EstadisticasPorRefugio" Member="vw_EstadisticasPorRefugio">
+    <Type Name="vw_EstadisticasPorRefugio">
       <Column Name="ref_IdRefugio" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="NombreRefugio" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="ref_Verificado" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="TotalMascotas" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Disponibles" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Adoptadas" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="EnProceso" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TotalUsuarios" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </Type>
   </Table>
-  <Table Name="dbo.tbl_SeguimientosAdopcion" Member="tbl_SeguimientosAdopcion">
-    <Type Name="tbl_SeguimientosAdopcion">
-      <Column Name="seg_IdSeguimiento" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="seg_IdSolicitud" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="seg_NumeroEtapa" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="seg_TituloEtapa" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
-      <Column Name="seg_FechaProgramada" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="seg_Latitud" Type="System.Decimal" DbType="Decimal(10,8)" CanBeNull="true" />
-      <Column Name="seg_Longitud" Type="System.Decimal" DbType="Decimal(11,8)" CanBeNull="true" />
-      <Column Name="seg_FotoUrlEnVivo" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
-      <Column Name="seg_ArchivoAdjuntoUrl" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
-      <Column Name="seg_RespuestasJSON" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
-      <Column Name="seg_Estado" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
-      <Column Name="seg_FechaEnvio" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="seg_FechaRevision" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="seg_IdUsuarioRevision" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="seg_ComentariosRevision" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
-      <Column Name="seg_FechaCreacion" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Association Name="tbl_SolicitudesAdopcion_tbl_SeguimientosAdopcion" Member="tbl_SolicitudesAdopcion" ThisKey="seg_IdSolicitud" OtherKey="sol_IdSolicitud" Type="tbl_SolicitudesAdopcion" IsForeignKey="true" />
-      <Association Name="tbl_Usuarios_tbl_SeguimientosAdopcion" Member="tbl_Usuarios" ThisKey="seg_IdUsuarioRevision" OtherKey="usu_IdUsuario" Type="tbl_Usuarios" IsForeignKey="true" />
+  <Table Name="dbo.vw_EstadisticasGenerales" Member="vw_EstadisticasGenerales">
+    <Type Name="vw_EstadisticasGenerales">
+      <Column Name="TotalUsuarios" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TotalAdoptantes" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TotalRefugios" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="RefugiosVerificados" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TotalMascotas" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="MascotasDisponibles" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="MascotasAdoptadas" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="SolicitudesPendientes" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ReportesActivos" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </Type>
   </Table>
-  <Function Name="dbo.sp_ProgramarSeguimientosAdopcion" Method="sp_ProgramarSeguimientosAdopcion">
+  <Table Name="dbo.vw_AdopcionesMensuales" Member="vw_AdopcionesMensuales">
+    <Type Name="vw_AdopcionesMensuales">
+      <Column Name="Anio" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Mes" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TotalAdopciones" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Function Name="dbo.sp_CalcularEvaluacionAdopcion" Method="sp_CalcularEvaluacionAdopcion">
     <Parameter Name="IdSolicitud" Parameter="idSolicitud" Type="System.Int32" DbType="Int" />
-    <ElementType Name="sp_ProgramarSeguimientosAdopcionResult">
+    <ElementType Name="sp_CalcularEvaluacionAdopcionResult">
+      <Column Name="IdSolicitud" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PuntajeTotal" Type="System.Decimal" DbType="Decimal(5,2)" CanBeNull="true" />
+      <Column Name="Resultado" Type="System.String" DbType="VarChar(17) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_ConfirmarDevolucionRetorno" Method="sp_ConfirmarDevolucionRetorno">
+    <Parameter Name="IdSolicitud" Parameter="idSolicitud" Type="System.Int32" DbType="Int" />
+    <Parameter Name="IdMascota" Parameter="idMascota" Type="System.Int32" DbType="Int" />
+    <Parameter Name="IdUsuarioAdmin" Parameter="idUsuarioAdmin" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ComentariosFinales" Parameter="comentariosFinales" Type="System.String" DbType="Text" />
+    <Parameter Name="EsMaltrato" Parameter="esMaltrato" Type="System.Boolean" DbType="Bit" />
+    <ElementType Name="sp_ConfirmarDevolucionRetornoResult">
       <Column Name="Exito" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Mensaje" Type="System.String" DbType="VarChar(46) NOT NULL" CanBeNull="false" />
+      <Column Name="Mensaje" Type="System.String" DbType="VarChar(62) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_DesbloquearCuenta" Method="sp_DesbloquearCuenta">
+    <Parameter Name="IdUsuario" Parameter="idUsuario" Type="System.Int32" DbType="Int" />
+    <Parameter Name="IdAdminUsuario" Parameter="idAdminUsuario" Type="System.Int32" DbType="Int" />
+    <ElementType Name="sp_DesbloquearCuentaResult">
+      <Column Name="Exito" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Mensaje" Type="System.String" DbType="VarChar(33) NOT NULL" CanBeNull="false" />
     </ElementType>
   </Function>
   <Function Name="dbo.sp_EnviarSeguimiento" Method="sp_EnviarSeguimiento">
@@ -418,6 +470,47 @@
     <ElementType Name="sp_EnviarSeguimientoResult">
       <Column Name="FilasActualizadas" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
     </ElementType>
+  </Function>
+  <Function Name="dbo.sp_GenerarCertificadoAdopcion" Method="sp_GenerarCertificadoAdopcion">
+    <Parameter Name="IdSolicitud" Parameter="idSolicitud" Type="System.Int32" DbType="Int" />
+    <ElementType Name="sp_GenerarCertificadoAdopcionResult">
+      <Column Name="Exito" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Mensaje" Type="System.String" DbType="VarChar(60) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_GenerarTokenRecuperacion" Method="sp_GenerarTokenRecuperacion">
+    <Parameter Name="Email" Parameter="email" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="Token" Parameter="token" Type="System.String" DbType="VarChar(255)" Direction="InOut" />
+    <ElementType Name="sp_GenerarTokenRecuperacionResult">
+      <Column Name="Token" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="IdUsuario" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_ObtenerEstadisticasDashboard" Method="sp_ObtenerEstadisticasDashboard">
+    <Parameter Name="IdRefugio" Parameter="idRefugio" Type="System.Int32" DbType="Int" />
+    <ElementType Name="sp_ObtenerEstadisticasDashboardResult">
+      <Column Name="TotalMascotas" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Disponibles" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="EnProceso" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Adoptadas" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_ProgramarSeguimientosAdopcion" Method="sp_ProgramarSeguimientosAdopcion">
+    <Parameter Name="IdSolicitud" Parameter="idSolicitud" Type="System.Int32" DbType="Int" />
+    <ElementType Name="sp_ProgramarSeguimientosAdopcionResult">
+      <Column Name="Exito" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Mensaje" Type="System.String" DbType="VarChar(46) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_RegistrarAuditoria" Method="sp_RegistrarAuditoria">
+    <Parameter Name="IdUsuario" Parameter="idUsuario" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Accion" Parameter="accion" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="Tabla" Parameter="tabla" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="IdRegistro" Parameter="idRegistro" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ValorAnterior" Parameter="valorAnterior" Type="System.String" DbType="Text" />
+    <Parameter Name="ValorNuevo" Parameter="valorNuevo" Type="System.String" DbType="Text" />
+    <Parameter Name="DireccionIP" Parameter="direccionIP" Type="System.String" DbType="VarChar(50)" />
+    <Return Type="System.Int32" />
   </Function>
   <Function Name="dbo.sp_RevisarSeguimiento" Method="sp_RevisarSeguimiento">
     <Parameter Name="IdSeguimiento" Parameter="idSeguimiento" Type="System.Int32" DbType="Int" />
@@ -437,15 +530,29 @@
       <Column Name="Mensaje" Type="System.String" DbType="VarChar(67) NOT NULL" CanBeNull="false" />
     </ElementType>
   </Function>
-  <Function Name="dbo.sp_ConfirmarDevolucionRetorno" Method="sp_ConfirmarDevolucionRetorno">
-    <Parameter Name="IdSolicitud" Parameter="idSolicitud" Type="System.Int32" DbType="Int" />
-    <Parameter Name="IdMascota" Parameter="idMascota" Type="System.Int32" DbType="Int" />
-    <Parameter Name="IdUsuarioAdmin" Parameter="idUsuarioAdmin" Type="System.Int32" DbType="Int" />
-    <Parameter Name="ComentariosFinales" Parameter="comentariosFinales" Type="System.String" DbType="Text" />
-    <Parameter Name="EsMaltrato" Parameter="esMaltrato" Type="System.Boolean" DbType="Bit" />
-    <ElementType Name="sp_ConfirmarDevolucionRetornoResult">
+  <Function Name="dbo.sp_ValidarLogin" Method="sp_ValidarLogin">
+    <Parameter Name="Email" Parameter="email" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="Contrasena" Parameter="contrasena" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="DireccionIP" Parameter="direccionIP" Type="System.String" DbType="VarChar(50)" />
+    <ElementType Name="sp_ValidarLoginResult">
       <Column Name="Exito" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Mensaje" Type="System.String" DbType="VarChar(62) NOT NULL" CanBeNull="false" />
+      <Column Name="Mensaje" Type="System.String" DbType="VarChar(22) NOT NULL" CanBeNull="false" />
+      <Column Name="IdUsuario" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_ValidarTokenRecuperacion" Method="sp_ValidarTokenRecuperacion">
+    <Parameter Name="Token" Parameter="token" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="NuevaContrasena" Parameter="nuevaContrasena" Type="System.String" DbType="VarChar(255)" />
+    <ElementType Name="sp_ValidarTokenRecuperacionResult">
+      <Column Name="Exito" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Mensaje" Type="System.String" DbType="VarChar(25) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_GenerarCertificadoAdopcion" Method="sp_GenerarCertificadoAdopcion1">
+    <Parameter Name="IdSolicitud" Parameter="idSolicitud" Type="System.Int32" DbType="Int" />
+    <ElementType Name="sp_GenerarCertificadoAdopcionResult1">
+      <Column Name="Exito" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Mensaje" Type="System.String" DbType="VarChar(60) NOT NULL" CanBeNull="false" />
     </ElementType>
   </Function>
 </Database>

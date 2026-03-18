@@ -715,6 +715,11 @@
                 radioItems.forEach(function (item) {
                     var radio = item.querySelector('input[type="radio"]');
                     if (radio) {
+                        // Init seleccion si ya viene checkeado (modo edicion)
+                        if (radio.checked) {
+                            item.classList.add('selected');
+                        }
+                        
                         radio.addEventListener('change', function () {
                             // Quitar clase selected de todos
                             document.querySelectorAll('.radio-item').forEach(function (r) {
@@ -727,9 +732,29 @@
                         });
                     }
                 });
+
+                // Cambiar titulo y breadcrumb si es edicion
+                const urlParams = new URLSearchParams(window.location.search);
+                if(urlParams.has('edit')) {
+                    const titleTitle = document.querySelector('.page-title');
+                    if(titleTitle) titleTitle.innerHTML = '✏️ Editar Solicitud';
+                    
+                    const breadcrumb = document.querySelector('.breadcrumb');
+                    if(breadcrumb) breadcrumb.innerHTML = breadcrumb.innerHTML.replace(/\/ Solicitar Adopción/g, '/ Editar Solicitud');
+                }
             });
 
             // Funciones para preview de fotos
+            function showExistingPhoto(num, url) {
+                var preview = document.getElementById('preview' + num);
+                var previewImg = document.getElementById('previewImg' + num);
+                var placeholder = document.getElementById('placeholder' + num);
+
+                previewImg.src = url;
+                preview.style.display = 'block';
+                placeholder.style.display = 'none';
+            }
+
             function previewImage(input, num) {
                 var preview = document.getElementById('preview' + num);
                 var previewImg = document.getElementById('previewImg' + num);

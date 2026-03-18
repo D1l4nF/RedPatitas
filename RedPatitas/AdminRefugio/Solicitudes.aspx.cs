@@ -60,18 +60,12 @@ namespace RedPatitas.AdminRefugio
             }
             else if (e.CommandName == "Rechazar")
             {
-                // Abrir modal de rechazo
-                string idSolicitud = e.CommandArgument.ToString();
-                hfIdSolicitudRechazo.Value = idSolicitud;
-                txtMotivoRechazo.Text = "";
-                pnlModalRechazo.Visible = true;
+                // El modal se abre desde JS, nada que hacer en servidor
+                // El ID de solicitud lo setea la función mostrarModalRechazo() en el cliente
             }
         }
 
-        protected void btnCancelarRechazo_Click(object sender, EventArgs e)
-        {
-            pnlModalRechazo.Visible = false;
-        }
+
 
         protected void btnConfirmarRechazo_Click(object sender, EventArgs e)
         {
@@ -82,8 +76,8 @@ namespace RedPatitas.AdminRefugio
 
                 CN_AdopcionService.Rechazar(idSolicitud, motivo);
 
-                pnlModalRechazo.Visible = false;
-                string script = "Swal.fire({ title: 'Rechazada', text: 'Solicitud rechazada.', icon: 'info', confirmButtonColor: '#0D9488' });";
+                // Ocultar modal via JS y mostrar confirmacion
+                string script = "document.getElementById('modalRechazoDiv').style.display='none'; Swal.fire({ title: 'Rechazada', text: 'Solicitud rechazada.', icon: 'info', confirmButtonColor: '#0D9488' });";
                 ScriptManager.RegisterStartupScript(this, GetType(), "swal-rej", script, true);
                 CargarSolicitudes();
             }

@@ -55,8 +55,8 @@ namespace RedPatitas.Adoptante
 
                 // Imagen Principal y Miniatura
                 string imgUrl = string.IsNullOrEmpty(mascota.FotoPrincipal) ? "~/Images/pepery.jpg" : mascota.FotoPrincipal;
-                string imgTagMain = $"<img src='{ResolveUrl(imgUrl)}' style='width: 100%; height: 100%; object-fit: cover; border-radius: 50%;' alt='Foto mascota' />";
-                string imgTagThumb = $"<img src='{ResolveUrl(imgUrl)}' style='width: 100%; height: 100%; object-fit: cover; border-radius: 8px;' alt='Miniatura mascota' />";
+                string imgTagMain = $"<img src='{ResolveUrl(imgUrl)}' style='width: 100%; height: 100%; object-fit: cover; border-radius: 16px;' alt='Foto mascota' />";
+                string imgTagThumb = $"<img src='{ResolveUrl(imgUrl)}' style='width: 100%; height: 100%; object-fit: cover; border-radius: 12px;' alt='Miniatura mascota' />";
 
                 litEmoji.Text = imgTagMain;
                 litThumb1.Text = imgTagThumb;

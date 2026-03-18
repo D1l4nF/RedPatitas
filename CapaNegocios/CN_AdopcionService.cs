@@ -38,7 +38,35 @@ namespace CapaNegocios
                 mascota.mas_EstadoAdopcion = "EnProceso";
 
                 db.SubmitChanges();
+                
+                // NOTIFICACIÓN: Nueva solicitud para el refugio (Avisar a todos los admins del refugio)
+                var usuariosRefugio = CN_NotificacionService.ObtenerUsuariosRefugio(mascota.mas_IdRefugio);
+                foreach (int adminId in usuariosRefugio)
+                {
+                    CN_NotificacionService.Crear(adminId, "Nueva Solicitud", $"Has recibido una nueva solicitud de adopción para la mascota {mascota.mas_Nombre}.", "Adopcion", "/Refugio/RevisarSolicitud.aspx?id=" + solicitud.sol_IdSolicitud, "fas fa-envelope");
+                }
+
                 return true;
+            }
+        }
+
+        // OBTENER SOLICITUD POR ID
+        public static SolicitudDTO ObtenerSolicitudPorId(int idSolicitud)
+        {
+            using (var db = new DataClasses1DataContext())
+            {
+                var s = db.tbl_SolicitudesAdopcion.FirstOrDefault(x => x.sol_IdSolicitud == idSolicitud);
+                if (s == null) return null;
+
+                return new SolicitudDTO
+                {
+                    IdSolicitud = s.sol_IdSolicitud,
+                    IdMascota = s.sol_IdMascota,
+                    IdAdoptante = s.sol_IdUsuario,
+                    sol_FechaSolicitud = s.sol_FechaSolicitud,
+                    Estado = s.sol_Estado,
+                    Comentarios = s.sol_ComentariosRevision
+                };
             }
         }
 
@@ -69,27 +97,37 @@ namespace CapaNegocios
         {
             using (var db = new DataClasses1DataContext())
             {
-                return (from s in db.tbl_SolicitudesAdopcion
+                var q = (from s in db.tbl_SolicitudesAdopcion
                         join m in db.tbl_Mascotas on s.sol_IdMascota equals m.mas_IdMascota
                         join u in db.tbl_Usuarios on s.sol_IdUsuario equals u.usu_IdUsuario
                         where m.mas_IdRefugio == idRefugio && s.sol_Estado == "Pendiente"
-                        select new SolicitudDTO
+                        select new 
                         {
-                            sol_IdSolicitud = s.sol_IdSolicitud,
-                            IdSolicitud = s.sol_IdSolicitud,
-                            IdMascota = s.sol_IdMascota,
-                            NombreMascota = m.mas_Nombre,
-                            FotoMascota = m.tbl_FotosMascotas
-                                .Where(f => f.fot_EsPrincipal == true)
-                                .Select(f => f.fot_Url)
-                                .FirstOrDefault() ?? "https://via.placeholder.com/80?text=🐾",
-                            IdAdoptante = s.sol_IdUsuario,
-                            NombreAdoptante = u.usu_Nombre,
-                            ApellidoAdoptante = u.usu_Apellido ?? "",
-                            sol_FechaSolicitud = s.sol_FechaSolicitud,
-                            Estado = s.sol_Estado,
-                            ref_IdRefugio = idRefugio
+                            s.sol_IdSolicitud,
+                            s.sol_IdMascota,
+                            m.mas_Nombre,
+                            Foto = (from f in db.tbl_FotosMascotas where f.fot_IdMascota == m.mas_IdMascota && f.fot_EsPrincipal == true select f.fot_Url).FirstOrDefault(),
+                            s.sol_IdUsuario,
+                            u.usu_Nombre,
+                            u.usu_Apellido,
+                            s.sol_FechaSolicitud,
+                            s.sol_Estado
                         }).ToList();
+
+                return q.Select(x => new SolicitudDTO
+                {
+                    sol_IdSolicitud = x.sol_IdSolicitud,
+                    IdSolicitud = x.sol_IdSolicitud,
+                    IdMascota = x.sol_IdMascota,
+                    NombreMascota = x.mas_Nombre,
+                    FotoMascota = x.Foto ?? "https://placehold.co/80x80/eeeeee/999999?text=Sin+Foto",
+                    IdAdoptante = x.sol_IdUsuario,
+                    NombreAdoptante = x.usu_Nombre,
+                    ApellidoAdoptante = x.usu_Apellido ?? "",
+                    sol_FechaSolicitud = x.sol_FechaSolicitud,
+                    Estado = x.sol_Estado,
+                    ref_IdRefugio = idRefugio
+                }).ToList();
             }
         }
 
@@ -109,25 +147,35 @@ namespace CapaNegocios
                     query = query.Where(x => x.s.sol_Estado == filtroEstado);
                 }
 
-                return (from x in query
+                var qFinal = (from x in query
                         orderby x.s.sol_FechaSolicitud descending
-                        select new SolicitudDTO
+                        select new 
                         {
-                            sol_IdSolicitud = x.s.sol_IdSolicitud,
-                            IdSolicitud = x.s.sol_IdSolicitud,
-                            IdMascota = x.s.sol_IdMascota,
-                            NombreMascota = x.m.mas_Nombre,
-                            FotoMascota = x.m.tbl_FotosMascotas
-                                .Where(f => f.fot_EsPrincipal == true)
-                                .Select(f => f.fot_Url)
-                                .FirstOrDefault() ?? "https://via.placeholder.com/80?text=🐾",
-                            IdAdoptante = x.s.sol_IdUsuario,
-                            NombreAdoptante = x.u.usu_Nombre,
-                            ApellidoAdoptante = x.u.usu_Apellido ?? "",
-                            sol_FechaSolicitud = x.s.sol_FechaSolicitud,
-                            Estado = x.s.sol_Estado,
-                            ref_IdRefugio = idRefugio
+                            x.s.sol_IdSolicitud,
+                            x.s.sol_IdMascota,
+                            x.m.mas_Nombre,
+                            Foto = (from f in db.tbl_FotosMascotas where f.fot_IdMascota == x.m.mas_IdMascota && f.fot_EsPrincipal == true select f.fot_Url).FirstOrDefault(),
+                            x.s.sol_IdUsuario,
+                            x.u.usu_Nombre,
+                            x.u.usu_Apellido,
+                            x.s.sol_FechaSolicitud,
+                            x.s.sol_Estado
                         }).ToList();
+
+                return qFinal.Select(x => new SolicitudDTO
+                {
+                    sol_IdSolicitud = x.sol_IdSolicitud,
+                    IdSolicitud = x.sol_IdSolicitud,
+                    IdMascota = x.sol_IdMascota,
+                    NombreMascota = x.mas_Nombre,
+                    FotoMascota = x.Foto ?? "https://placehold.co/80x80/eeeeee/999999?text=Sin+Foto",
+                    IdAdoptante = x.sol_IdUsuario,
+                    NombreAdoptante = x.usu_Nombre,
+                    ApellidoAdoptante = x.usu_Apellido ?? "",
+                    sol_FechaSolicitud = x.sol_FechaSolicitud,
+                    Estado = x.sol_Estado,
+                    ref_IdRefugio = idRefugio
+                }).ToList();
             }
         }
 
@@ -181,8 +229,19 @@ namespace CapaNegocios
                 // NUEVO: Generar los cronogramas automáticos (Timeline) después de guardar
                 db.sp_ProgramarSeguimientosAdopcion(idSolicitud);
 
-                // Auditoría
+                // Auditar y Notificar
                 CN_AuditoriaService.RegistrarAccion(null, "UPDATE", "tbl_SolicitudesAdopcion", idSolicitud, "Estado: Pendiente", "Estado: Aprobada");
+                CN_NotificacionService.Crear(solicitud.sol_IdUsuario, "Solicitud Aprobada", $"Tu solicitud de adopción para {mascota.mas_Nombre} ha sido aprobada. ¡Felicidades! Ya puedes descargar tu certificado.", "Adopcion", "/Adoptante/MiCertificado.aspx?id=" + solicitud.sol_IdSolicitud, "fas fa-check-circle");
+                
+                // Generar Certificado
+                try 
+                {
+                    CN_CertificadoService.GenerarCertificado(idSolicitud);
+                }
+                catch (Exception exCert)
+                {
+                    System.Diagnostics.Debug.WriteLine("Error al generar certificado: " + exCert.Message);
+                }
             }
         }
 
@@ -206,6 +265,9 @@ namespace CapaNegocios
 
                 // Auditoría
                 CN_AuditoriaService.RegistrarAccion(null, "UPDATE", "tbl_SolicitudesAdopcion", idSolicitud, "Estado: Pendiente", "Estado: Rechazada");
+                
+                // NOTIFICACIÓN: Solicitud Rechazada para el adoptante
+                CN_NotificacionService.Crear(solicitud.sol_IdUsuario, "Solicitud Rechazada", $"Tu solicitud de adopción para {mascota.mas_Nombre} ha sido rechazada.", "Adopcion", "/Adoptante/Solicitudes.aspx", "fas fa-times-circle");
             }
         }
 

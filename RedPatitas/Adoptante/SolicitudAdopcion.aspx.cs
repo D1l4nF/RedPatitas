@@ -33,6 +33,15 @@ namespace RedPatitas.Adoptante
                 VerificarPerfilCompleto();
                 VerificarSolicitudExistente();
                 CargarDatosMascota();
+                
+                if (!string.IsNullOrEmpty(Request.QueryString["edit"]))
+                {
+                    int idEdit;
+                    if (int.TryParse(Request.QueryString["edit"], out idEdit))
+                    {
+                        CargarSolicitudParaEditar(idEdit);
+                    }
+                }
             }
         }
 
@@ -75,6 +84,9 @@ namespace RedPatitas.Adoptante
         /// </summary>
         private void VerificarSolicitudExistente()
         {
+            if (!string.IsNullOrEmpty(Request.QueryString["edit"]))
+                return;
+
             try
             {
                 using (var db = new DataClasses1DataContext())
@@ -94,6 +106,92 @@ namespace RedPatitas.Adoptante
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine("Error verificando solicitud: " + ex.Message);
+            }
+        }
+
+        private void CargarSolicitudParaEditar(int idSolicitud)
+        {
+            try
+            {
+                using (var db = new DataClasses1DataContext())
+                {
+                    var solicitud = db.tbl_SolicitudesAdopcion.FirstOrDefault(s => s.sol_IdSolicitud == idSolicitud);
+
+                    if (solicitud == null || solicitud.sol_IdUsuario != IdUsuario || solicitud.sol_IdMascota != IdMascota)
+                    {
+                        MostrarError("La solicitud no existe o no tienes permiso para editarla.");
+                        pnlFormulario.Visible = false;
+                        return;
+                    }
+
+                    if (solicitud.sol_Estado != "Pendiente")
+                    {
+                        MostrarError("Solo se pueden editar solicitudes en estado Pendiente.");
+                        pnlFormulario.Visible = false;
+                        return;
+                    }
+
+                    txtMotivo.Text = solicitud.sol_MotivoAdopcion;
+                    txtExperiencia.Text = string.IsNullOrEmpty(solicitud.sol_ExperienciaMascotas) ? "" : solicitud.sol_ExperienciaMascotas;
+                    
+                    if (solicitud.sol_TipoVivienda == "Casa") rbCasa.Checked = true;
+                    else if (solicitud.sol_TipoVivienda == "Apartamento") rbApartamento.Checked = true;
+                    else if (solicitud.sol_TipoVivienda == "Finca") rbFinca.Checked = true;
+
+                    chkPatioJardin.Checked = solicitud.sol_TienePatioJardin ?? false;
+                    
+                    chkOtrasMascotas.Checked = solicitud.sol_OtrasMascotas ?? false;
+                    if (solicitud.sol_OtrasMascotas == true)
+                    {
+                        txtOtrasMascotas.Text = solicitud.sol_DetalleOtrasMascotas;
+                        pnlOtrasMascotas.Style["display"] = "block";
+                    }
+
+                    chkNinos.Checked = solicitud.sol_TieneNinos ?? false;
+                    if (solicitud.sol_TieneNinos == true)
+                    {
+                        txtEdadesNinos.Text = solicitud.sol_EdadesNinos;
+                        pnlNinos.Style["display"] = "block";
+                    }
+
+                    if (ddlHorasEnCasa.Items.FindByValue(solicitud.sol_HorasEnCasa?.ToString()) != null)
+                        ddlHorasEnCasa.SelectedValue = solicitud.sol_HorasEnCasa?.ToString();
+
+                    if (ddlIngresos.Items.FindByValue(solicitud.sol_IngresosMensuales) != null)
+                        ddlIngresos.SelectedValue = solicitud.sol_IngresosMensuales;
+
+                    chkAceptaVisita.Checked = solicitud.sol_AceptaVisita ?? false;
+                    txtComentarios.Text = solicitud.sol_Comentarios;
+
+                    btnEnviar.Text = "✏️ Actualizar Solicitud";
+
+                    // Prellenar fotos
+                    var fotos = db.tbl_FotosSolicitud.Where(f => f.fos_IdSolicitud == idSolicitud).ToList();
+                    string scriptFotos = "";
+                    foreach (var f in fotos)
+                    {
+                        int num = 0;
+                        if (f.fos_TipoFoto == "Frontal") num = 1;
+                        else if (f.fos_TipoFoto == "Interior") num = 2;
+                        else if (f.fos_TipoFoto == "Patio") num = 3;
+
+                        if (num > 0 && !string.IsNullOrEmpty(f.fos_Url))
+                        {
+                            scriptFotos += $"showExistingPhoto({num}, '{ResolveUrl(f.fos_Url)}');\n";
+                        }
+                    }
+
+                    if (!string.IsNullOrEmpty(scriptFotos))
+                    {
+                        ClientScript.RegisterStartupScript(this.GetType(), "LoadPhotos", "document.addEventListener('DOMContentLoaded', function() { " + scriptFotos + " });", true);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Error al cargar solicitud para editar: " + ex.Message);
+                MostrarError("Error al cargar los datos de la solicitud.");
+                pnlFormulario.Visible = false;
             }
         }
 
@@ -180,56 +278,120 @@ namespace RedPatitas.Adoptante
 
                 using (var db = new DataClasses1DataContext())
                 {
-                    // Verificar nuevamente que no exista solicitud pendiente
-                    bool existeSolicitud = db.tbl_SolicitudesAdopcion
-                        .Any(s => s.sol_IdMascota == IdMascota &&
-                                  s.sol_IdUsuario == IdUsuario &&
-                                  (s.sol_Estado == "Pendiente" || s.sol_Estado == "EnRevision"));
-
-                    if (existeSolicitud)
+                    int? idEdit = null;
+                    if (!string.IsNullOrEmpty(Request.QueryString["edit"]))
                     {
-                        MostrarError("Ya tienes una solicitud pendiente para esta mascota.");
-                        return;
+                        int parsed;
+                        if (int.TryParse(Request.QueryString["edit"], out parsed))
+                        {
+                            idEdit = parsed;
+                        }
                     }
 
-                    // Crear la solicitud
-                    var nuevaSolicitud = new tbl_SolicitudesAdopcion
+                    if (!idEdit.HasValue)
                     {
-                        sol_IdMascota = IdMascota,
-                        sol_IdUsuario = IdUsuario,
-                        sol_MotivoAdopcion = txtMotivo.Text.Trim(),
-                        sol_ExperienciaMascotas = txtExperiencia.Text.Trim(),
-                        sol_TipoVivienda = tipoVivienda,
-                        sol_TienePatioJardin = chkPatioJardin.Checked,
-                        sol_OtrasMascotas = chkOtrasMascotas.Checked,
-                        sol_DetalleOtrasMascotas = chkOtrasMascotas.Checked ? txtOtrasMascotas.Text.Trim() : null,
-                        sol_TieneNinos = chkNinos.Checked,
-                        sol_EdadesNinos = chkNinos.Checked ? txtEdadesNinos.Text.Trim() : null,
-                        sol_HorasEnCasa = horasEnCasa,
-                        sol_IngresosMensuales = ddlIngresos.SelectedValue,
-                        sol_AceptaVisita = chkAceptaVisita.Checked,
-                        sol_Comentarios = txtComentarios.Text.Trim(),
-                        sol_Estado = "Pendiente",
-                        sol_FechaSolicitud = DateTime.Now
-                    };
+                        // Verificar nuevamente que no exista solicitud pendiente
+                        bool existeSolicitud = db.tbl_SolicitudesAdopcion
+                            .Any(s => s.sol_IdMascota == IdMascota &&
+                                      s.sol_IdUsuario == IdUsuario &&
+                                      (s.sol_Estado == "Pendiente" || s.sol_Estado == "EnRevision"));
 
-                    db.tbl_SolicitudesAdopcion.InsertOnSubmit(nuevaSolicitud);
+                        if (existeSolicitud)
+                        {
+                            MostrarError("Ya tienes una solicitud pendiente para esta mascota.");
+                            return;
+                        }
 
-                    // Actualizar estado de la mascota a "EnProceso"
-                    var mascota = db.tbl_Mascotas.FirstOrDefault(m => m.mas_IdMascota == IdMascota);
-                    if (mascota != null && mascota.mas_EstadoAdopcion == "Disponible")
-                    {
-                        mascota.mas_EstadoAdopcion = "EnProceso";
+                        // Crear la solicitud
+                        var nuevaSolicitud = new tbl_SolicitudesAdopcion
+                        {
+                            sol_IdMascota = IdMascota,
+                            sol_IdUsuario = IdUsuario,
+                            sol_MotivoAdopcion = txtMotivo.Text.Trim(),
+                            sol_ExperienciaMascotas = txtExperiencia.Text.Trim(),
+                            sol_TipoVivienda = tipoVivienda,
+                            sol_TienePatioJardin = chkPatioJardin.Checked,
+                            sol_OtrasMascotas = chkOtrasMascotas.Checked,
+                            sol_DetalleOtrasMascotas = chkOtrasMascotas.Checked ? txtOtrasMascotas.Text.Trim() : null,
+                            sol_TieneNinos = chkNinos.Checked,
+                            sol_EdadesNinos = chkNinos.Checked ? txtEdadesNinos.Text.Trim() : null,
+                            sol_HorasEnCasa = horasEnCasa,
+                            sol_IngresosMensuales = ddlIngresos.SelectedValue,
+                            sol_AceptaVisita = chkAceptaVisita.Checked,
+                            sol_Comentarios = txtComentarios.Text.Trim(),
+                            sol_Estado = "Pendiente",
+                            sol_FechaSolicitud = DateTime.Now
+                        };
+
+                        db.tbl_SolicitudesAdopcion.InsertOnSubmit(nuevaSolicitud);
+
+                        // Actualizar estado de la mascota a "EnProceso"
+                        var mascota = db.tbl_Mascotas.FirstOrDefault(m => m.mas_IdMascota == IdMascota);
+                        if (mascota != null && mascota.mas_EstadoAdopcion == "Disponible")
+                        {
+                            mascota.mas_EstadoAdopcion = "EnProceso";
+                        }
+
+                        db.SubmitChanges();
+
+                        // Guardar fotos de vivienda
+                        GuardarFotosVivienda(db, nuevaSolicitud.sol_IdSolicitud);
+
+                        // NOTIFICACIÓN: Nueva solicitud para el refugio (Avisar a todos los admins del refugio)
+                        try
+                        {
+                            var usuariosRefugio = CN_NotificacionService.ObtenerUsuariosRefugio(mascota.mas_IdRefugio);
+                            foreach (int adminId in usuariosRefugio)
+                            {
+                                CN_NotificacionService.Crear(
+                                    adminId, 
+                                    "Nueva Solicitud", 
+                                    $"Has recibido una nueva solicitud de adopción para la mascota {mascota.mas_Nombre}.", 
+                                    "Adopcion", 
+                                    "/AdminRefugio/RevisarSolicitud.aspx?id=" + nuevaSolicitud.sol_IdSolicitud, 
+                                    "fas fa-envelope"
+                                );
+                            }
+                        }
+                        catch (Exception exNotif)
+                        {
+                            System.Diagnostics.Debug.WriteLine("Error al notificar al refugio: " + exNotif.Message);
+                        }
+
+                        // Redirigir a página de éxito o a mis solicitudes
+                        Response.Redirect("~/Adoptante/Solicitudes.aspx?success=1");
                     }
+                    else
+                    {
+                        var solicitudExitente = db.tbl_SolicitudesAdopcion.FirstOrDefault(s => s.sol_IdSolicitud == idEdit.Value);
+                        if (solicitudExitente == null || solicitudExitente.sol_IdUsuario != IdUsuario || solicitudExitente.sol_Estado != "Pendiente")
+                        {
+                            MostrarError("No puedes editar esta solicitud porque no está en estado Pendiente o no te pertenece.");
+                            return;
+                        }
 
-                    db.SubmitChanges();
+                        // Actualizar
+                        solicitudExitente.sol_MotivoAdopcion = txtMotivo.Text.Trim();
+                        solicitudExitente.sol_ExperienciaMascotas = txtExperiencia.Text.Trim();
+                        solicitudExitente.sol_TipoVivienda = tipoVivienda;
+                        solicitudExitente.sol_TienePatioJardin = chkPatioJardin.Checked;
+                        solicitudExitente.sol_OtrasMascotas = chkOtrasMascotas.Checked;
+                        solicitudExitente.sol_DetalleOtrasMascotas = chkOtrasMascotas.Checked ? txtOtrasMascotas.Text.Trim() : null;
+                        solicitudExitente.sol_TieneNinos = chkNinos.Checked;
+                        solicitudExitente.sol_EdadesNinos = chkNinos.Checked ? txtEdadesNinos.Text.Trim() : null;
+                        solicitudExitente.sol_HorasEnCasa = horasEnCasa;
+                        solicitudExitente.sol_IngresosMensuales = ddlIngresos.SelectedValue;
+                        solicitudExitente.sol_AceptaVisita = chkAceptaVisita.Checked;
+                        solicitudExitente.sol_Comentarios = txtComentarios.Text.Trim();
+                        // Nota: El estado ya venía de ser "Pendiente", así que lo mantenemos. No es necesario re-setear la fecha a menos que se desee.
+                        
+                        db.SubmitChanges();
+                        
+                        // Guardar fotos de vivienda (añade nuevas que se subieron)
+                        GuardarFotosVivienda(db, solicitudExitente.sol_IdSolicitud);
 
-                    // Guardar fotos de vivienda
-                    int idSolicitud = nuevaSolicitud.sol_IdSolicitud;
-                    GuardarFotosVivienda(db, idSolicitud);
-
-                    // Redirigir a página de éxito o a mis solicitudes
-                    Response.Redirect("~/Adoptante/Solicitudes.aspx?success=1");
+                        Response.Redirect("~/Adoptante/Solicitudes.aspx?success=2");
+                    }
                 }
             }
             catch (Exception ex)
@@ -269,7 +431,10 @@ namespace RedPatitas.Adoptante
 
                             if (!string.IsNullOrEmpty(urlFoto))
                             {
-                                // Guardar en BD usando SQL directo (ya que la tabla puede no estar en LINQ)
+                                // Eliminar foto anterior del mismo tipo si existe para no duplicar
+                                db.ExecuteCommand("DELETE FROM tbl_FotosSolicitud WHERE fos_IdSolicitud = {0} AND fos_TipoFoto = {1}", idSolicitud, tiposFoto[i]);
+
+                                // Guardar en BD usando SQL directo
                                 db.ExecuteCommand(
                                     @"INSERT INTO tbl_FotosSolicitud (fos_IdSolicitud, fos_Url, fos_TipoFoto, fos_FechaSubida) 
                                       VALUES ({0}, {1}, {2}, {3})",

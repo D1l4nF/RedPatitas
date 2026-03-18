@@ -73,6 +73,7 @@
   <ItemGroup>
     <Content Include="AdminRefugio\Campanias.aspx" />
     <Content Include="AdminRefugio\Dashboard.aspx" />
+    <Content Include="AdminRefugio\Certificados.aspx" />
     <Content Include="AdminRefugio\Estadisticas.aspx" />
     <Content Include="AdminRefugio\Mascotas.aspx" />
     <Content Include="AdminRefugio\Perfil.aspx" />
@@ -128,12 +129,17 @@
     <Content Include="Refugio\Solicitudes.aspx" />
     <Content Include="Refugio\RevisarSolicitud.aspx" />
     <Content Include="Refugio\Perfil.aspx" />
+    <Content Include="Refugio\Certificados.aspx" />
+    <Content Include="Adoptante\MiCertificado.aspx" />
     <Content Include="Adoptante\MisSeguimientos.aspx" />
     <Content Include="Adoptante\CompletarSeguimiento.aspx" />
     <Content Include="AdminRefugio\AuditoriaSeguimientos.aspx" />
     <Content Include="AdminRefugio\HistorialSolicitudes.aspx" />
     <Content Include="AdminRefugio\Actividad.aspx" />
     <Content Include="AdminRefugio\VerSeguimiento.aspx" />
+    <Content Include="Adoptante\Notificaciones.aspx" />
+    <Content Include="Refugio\Notificaciones.aspx" />
+    <Content Include="AdminRefugio\Notificaciones.aspx" />
     <Content Include="Style\estilos-base.css" />
     <Content Include="Style\estilos-publicos.css" />
     <Content Include="Style\estilos-paneles.css" />
@@ -153,8 +159,16 @@
     <Content Include="Public\RegistrarAvistamiento.aspx" />
     <Content Include="Js\mapas-reportes.js" />
     <Content Include="Web.config" />
+    <Content Include="VerCertificado.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="VerCertificado.aspx.cs">
+      <DependentUpon>VerCertificado.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="VerCertificado.aspx.designer.cs">
+      <DependentUpon>VerCertificado.aspx</DependentUpon>
+    </Compile>
     <Compile Include="AdminRefugio\AdminRefugio.Master.cs">
       <DependentUpon>AdminRefugio.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -182,6 +196,13 @@
     </Compile>
     <Compile Include="AdminRefugio\Campanias.aspx.designer.cs">
       <DependentUpon>Campanias.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminRefugio\Certificados.aspx.cs">
+      <DependentUpon>Certificados.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminRefugio\Certificados.aspx.designer.cs">
+      <DependentUpon>Certificados.aspx</DependentUpon>
     </Compile>
     <Compile Include="AdminRefugio\Estadisticas.aspx.cs">
       <DependentUpon>Estadisticas.aspx</DependentUpon>
@@ -503,6 +524,13 @@
     <Compile Include="Refugio\RevisarSolicitud.aspx.designer.cs">
       <DependentUpon>RevisarSolicitud.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Refugio\Certificados.aspx.cs">
+      <DependentUpon>Certificados.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Refugio\Certificados.aspx.designer.cs">
+      <DependentUpon>Certificados.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Adoptante\MisReportes.aspx.cs">
       <DependentUpon>MisReportes.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -538,6 +566,13 @@
     <Compile Include="Public\RegistrarAvistamiento.aspx.designer.cs">
       <DependentUpon>RegistrarAvistamiento.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Adoptante\MiCertificado.aspx.cs">
+      <DependentUpon>MiCertificado.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Adoptante\MiCertificado.aspx.designer.cs">
+      <DependentUpon>MiCertificado.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Adoptante\MisSeguimientos.aspx.cs">
       <DependentUpon>MisSeguimientos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -572,6 +607,27 @@
     </Compile>
     <Compile Include="AdminRefugio\VerSeguimiento.aspx.designer.cs">
       <DependentUpon>VerSeguimiento.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Adoptante\Notificaciones.aspx.cs">
+      <DependentUpon>Notificaciones.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Adoptante\Notificaciones.aspx.designer.cs">
+      <DependentUpon>Notificaciones.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Refugio\Notificaciones.aspx.cs">
+      <DependentUpon>Notificaciones.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Refugio\Notificaciones.aspx.designer.cs">
+      <DependentUpon>Notificaciones.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminRefugio\Notificaciones.aspx.cs">
+      <DependentUpon>Notificaciones.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminRefugio\Notificaciones.aspx.designer.cs">
+      <DependentUpon>Notificaciones.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

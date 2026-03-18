@@ -1,4 +1,4 @@
-﻿using CapaDatos;
+using CapaDatos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +18,7 @@ namespace RedPatitas.Adoptante
                 return;
             }
             int rolId = Convert.ToInt32(Session["RolId"]);
-            if (rolId != 4) 
+            if (rolId != 4 && !Request.Url.AbsolutePath.Contains("MiCertificado.aspx")) 
             {
                 Response.Redirect("~/Login/Login.aspx");
                 return;
@@ -27,6 +27,32 @@ namespace RedPatitas.Adoptante
             if (!IsPostBack)
             {
                 CargarDatosPerfil();
+                CargarNotificaciones();
+            }
+        }
+
+        private void CargarNotificaciones()
+        {
+            try
+            {
+                int idUsuario = Convert.ToInt32(Session["UsuarioId"]);
+                // Generar si hay pendientes
+                CapaNegocios.CN_NotificacionService.GenerarNotificacionesSeguimientoPendientes(idUsuario);
+                
+                int noLeidas = CapaNegocios.CN_NotificacionService.ContarNoLeidas(idUsuario);
+                if (noLeidas > 0)
+                {
+                    lblBadgeNotificaciones.Text = noLeidas > 9 ? "9+" : noLeidas.ToString();
+                    lblBadgeNotificaciones.Visible = true;
+                }
+                else
+                {
+                    lblBadgeNotificaciones.Visible = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Error al cargar notificaciones: " + ex.Message);
             }
         }
         private void CargarDatosPerfil()
