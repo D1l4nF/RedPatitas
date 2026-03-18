@@ -9,8 +9,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="Registro en el Sistema de Adopción de Mascotas">
         <title>Registrarse - RedPatitas</title>
-        <link rel="stylesheet" href="~/Style/auth.css">
-        <link rel="stylesheet" href="~/Style/ux-components.css">
+        <link rel="stylesheet" href="../Style/auth.css">
+        <link rel="stylesheet" href="../Style/ux-components.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"

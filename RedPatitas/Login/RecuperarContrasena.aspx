@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="RecuperarContrasena.aspx.cs"
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="RecuperarContrasena.aspx.cs"
     Inherits="RedPatitas.Login.RecuperarContrasena" %>
 
     <!DOCTYPE html>
@@ -11,8 +11,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="Recuperar contraseña del Sistema de Adopción de Mascotas">
         <title>Recuperar Contraseña - RedPatitas</title>
-        <link rel="stylesheet" href="~/Style/auth.css">
-        <link rel="stylesheet" href="~/Style/ux-components.css">
+        <link rel="stylesheet" href="../Style/auth.css">
+        <link rel="stylesheet" href="../Style/ux-components.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"

@@ -7,6 +7,11 @@
 
 PRINT 'Iniciando configuración de Base de Datos RedPatitas...';
 
+CREATE DATABASE RedPatitas
+GO
+
+USE RedPatitas
+
 -- ============================================================
 -- MÓDULO 1: SEGURIDAD Y USUARIOS
 -- ============================================================

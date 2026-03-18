@@ -101,18 +101,13 @@
     <Content Include="Adoptante\Solicitudes.aspx" />
     <Content Include="Adoptante\ReportarMascota.aspx" />
     <Content Include="Adoptante\Perfil.aspx" />
-    <Content Include="Images\img_jaime.jpg" />
-    <Content Include="Images\jaime.png" />
-    <Content Include="Images\Mascotas\32fc94fc-8ddf-4614-82ad-291cf5a5479f.jpg" />
-    <Content Include="Images\Mascotas\638369a6-f2bf-4cb7-bd96-8794d05a18d4.jpg" />
-    <Content Include="Images\Mascotas\82ebf029-6555-4f99-b697-021a91a90d74.jpg" />
-    <Content Include="Images\Mascotas\mascota_1_639046401366125153.png" />
-    <Content Include="Images\Mascotas\mascota_1_639046409115864164.png" />
-    <Content Include="Images\Mascotas\mascota_2_639046396990558136.jpg" />
-    <Content Include="Images\Mascotas\mascota_3_639073690541047452.jpg" />
-    <Content Include="Images\Reportes\reporte_9_639073647879568960.jpg" />
-    <Content Include="Images\Reportes\rep_20_1_794f9d9952c3491986712bdd5604be71.jpg" />
-    <Content Include="Images\Reportes\rep_5_1_edbf60683c1c4650804e4f680dc8833b.jpg" />
+    <Content Include="Images\Default\default-campaign.png" />
+    <Content Include="Images\Default\default-pet.png" />
+    <Content Include="Images\Default\default-refugio.png" />
+    <Content Include="Images\Default\default-shelter.png" />
+    <Content Include="Images\Default\default-user.png" />
+    <Content Include="Images\Default\hero-pets.png" />
+    <Content Include="Images\Default\placeholder-pet.png" />
     <Content Include="Login\Login.aspx" />
     <Content Include="Login\RecuperarContrasena.aspx" />
     <Content Include="Login\CambiarContrasena.aspx" />
@@ -128,7 +123,6 @@
     <Content Include="Refugio\Perfil.aspx" />
     <Content Include="Refugio\Solicitudes.aspx" />
     <Content Include="Refugio\RevisarSolicitud.aspx" />
-    <Content Include="Refugio\Perfil.aspx" />
     <Content Include="Refugio\Certificados.aspx" />
     <Content Include="Adoptante\MiCertificado.aspx" />
     <Content Include="Adoptante\MisSeguimientos.aspx" />
@@ -140,16 +134,13 @@
     <Content Include="Adoptante\Notificaciones.aspx" />
     <Content Include="Refugio\Notificaciones.aspx" />
     <Content Include="AdminRefugio\Notificaciones.aspx" />
+    <Content Include="Style\auth.css" />
     <Content Include="Style\estilos-base.css" />
     <Content Include="Style\estilos-publicos.css" />
     <Content Include="Style\estilos-paneles.css" />
     <Content Include="Public\ComponentesUI.html" />
     <Content Include="Js\ux-components.js" />
     <Content Include="Adoptante\FavoritosHandler.ashx" />
-    <Content Include="Uploads\Reportes\2fa21ec8-1761-48c1-a84f-d8a9f986a825.jpg" />
-    <Content Include="Uploads\Reportes\446d4f3e-6010-4d1e-8a7a-d59074aa73a8.png" />
-    <Content Include="Uploads\Reportes\ae8d6c10-93f3-4396-a672-2832bb7985b4.png" />
-    <Content Include="Uploads\Reportes\d19f0740-eddd-4b44-aa09-680cc170ac9d.png" />
     <Content Include="Web.config" />
     <Content Include="Adoptante\MisReportes.aspx" />
     <Content Include="Adoptante\DetalleReporte.aspx" />
@@ -158,7 +149,6 @@
     <Content Include="Public\DetalleReporte.aspx" />
     <Content Include="Public\RegistrarAvistamiento.aspx" />
     <Content Include="Js\mapas-reportes.js" />
-    <Content Include="Web.config" />
     <Content Include="VerCertificado.aspx" />
   </ItemGroup>
   <ItemGroup>
@@ -634,7 +624,6 @@
     <Content Include="Admin\Admin.Master" />
     <Content Include="AdminRefugio\AdminRefugio.Master" />
     <Content Include="Adoptante\Adoptante.Master" />
-    <Content Include="Images\Mascotas\d5c1652c-5132-40c8-b108-5b7e13e9e8dd.webp" />
     <None Include="packages.config" />
     <Content Include="Refugio\Refugio.Master" />
     <Content Include="Public\Public.Master" />

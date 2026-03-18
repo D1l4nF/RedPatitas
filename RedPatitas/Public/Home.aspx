@@ -32,7 +32,7 @@
                     </div>
                 </div>
                 <div class="hero-image scroll-animate fade-in-right">
-                    <img src="../Images/Default/hero-pets.png" 
+                    <img runat="server" src="../Images/Default/hero-pets.png" 
                          alt="Perro y gato felices esperando adopción"
                          class="hero-pets-image" />
                 </div>
