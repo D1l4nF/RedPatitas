@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Public/Public.Master" AutoEventWireup="true"
+<%@ Page Title="" Language="C#" MasterPageFile="~/Public/Public.Master" AutoEventWireup="true"
     CodeBehind="PerfilMascota.aspx.cs" Inherits="RedPatitas.Public.PerfilMascota" %>
 
     <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
@@ -41,9 +41,10 @@
                                     <span class="status-chip">
                                         <asp:Literal ID="litEstado" runat="server">Disponible</asp:Literal>
                                     </span>
-                                    <div class="pet-emoji">
+                                    <asp:Image ID="imgMascota" runat="server" CssClass="pet-main-image" Visible="false" />
+                                    <asp:Panel ID="pnlEmoji" runat="server" CssClass="pet-emoji">
                                         <asp:Literal ID="litEmoji" runat="server">🐕</asp:Literal>
-                                    </div>
+                                    </asp:Panel>
                                     <button class="favorite-btn" id="favoriteBtn" type="button">
                                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                             width="24" height="24">

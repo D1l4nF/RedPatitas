@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -42,9 +42,23 @@ namespace RedPatitas.Public
                 // Título de la página
                 litTitulo.Text = mascota.Nombre + " - Perfil de Mascota";
 
-                // Emoji principal
-                litEmoji.Text = mascota.EmojiEspecie;
-                litThumb1.Text = mascota.EmojiEspecie;
+                // Foto / Emoji principal
+                if (!string.IsNullOrEmpty(mascota.FotoPrincipal))
+                {
+                    imgMascota.ImageUrl = ResolveUrl(mascota.FotoPrincipal);
+                    imgMascota.Visible = true;
+                    pnlEmoji.Visible = false;
+                    
+                    // Thumbnail (simplificado para MVP)
+                    litThumb1.Text = $"<img src='{ResolveUrl(mascota.FotoPrincipal)}' style='width:100%; height:100%; object-fit:cover; border-radius:8px;' />";
+                }
+                else
+                {
+                    imgMascota.Visible = false;
+                    pnlEmoji.Visible = true;
+                    litEmoji.Text = mascota.EmojiEspecie;
+                    litThumb1.Text = mascota.EmojiEspecie;
+                }
 
                 // Estado
                 litEstado.Text = mascota.EstadoAdopcion ?? "Disponible";

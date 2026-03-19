@@ -1,4 +1,4 @@
-﻿//------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 // <generado automáticamente>
 //     Este código fue generado por una herramienta.
 //
@@ -30,6 +30,16 @@ namespace RedPatitas.Public
         /// Control litEstado.
         /// </summary>
         protected global::System.Web.UI.WebControls.Literal litEstado;
+        
+        /// <summary>
+        /// Control imgMascota.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.Image imgMascota;
+
+        /// <summary>
+        /// Control pnlEmoji.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.Panel pnlEmoji;
 
         /// <summary>
         /// Control litEmoji.

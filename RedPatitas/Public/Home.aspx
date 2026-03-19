@@ -677,9 +677,8 @@
             </div>
         </div>
 
-        <!-- Modal Campania -->
         <div id="campaniaModal" class="ally-modal-overlay" role="dialog" aria-modal="true" aria-hidden="true" style="display: none;">
-            <div class="ally-modal-content" style="max-width: 600px; padding: 0; overflow: hidden; position: relative; border-radius: 12px;">
+            <div class="ally-modal-content" style="max-width: 600px; padding: 0; overflow-y: auto; position: relative; border-radius: 12px; max-height: 90vh;">
                 <button type="button" onclick="closeCustomModal('campaniaModal')" class="ally-modal-close" aria-label="Cerrar modal" style="position: absolute; top: 10px; right: 10px; background: rgba(255,255,255,0.8); border: none; border-radius: 50%; width: 32px; height: 32px; font-size: 1.5rem; line-height: 1; display: flex; align-items: center; justify-content: center; cursor: pointer; color: #333; z-index: 10; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">&times;</button>
                 
                 <img id="modalCampaniaImg" src="#" alt="Campaña" style="width: 100%; height: 300px; object-fit: cover; display: block; border-radius: 12px 12px 0 0;" />
